@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = () => {
+const CheckboxMenu = () => {
     return (
         <StyledWrapper>
             <label className="hamburger">
@@ -56,4 +56,4 @@ const StyledWrapper = styled.div`
         stroke-dashoffset: -32.42;
     }`;
 
-export default Checkbox;
+export default CheckboxMenu;

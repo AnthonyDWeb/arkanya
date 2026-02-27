@@ -11,11 +11,12 @@ export default function NavLinks() {
                         href={item.href}
                         className="
                             relative
-                            hover:text-[#809877]
+                            hover:text-[#d9ad45]
+                            hover:-translate-y-1/6
                             transition-all duration-200
                             pb-1
                             after:absolute after:left-0 after:bottom-0 after:h-[2px]
-                            after:w-0 after:bg-[#809877]
+                            after:w-0 after:bg-[#d9ad45]
                             hover:after:w-full
                             after:transition-all after:duration-300
                         "

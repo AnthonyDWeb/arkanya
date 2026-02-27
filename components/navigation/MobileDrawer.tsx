@@ -3,7 +3,7 @@
 import {Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTrigger,} from "@/components/ui/drawer";
 import {siteConfig} from "@/configs/navigation";
 import Link from "next/link";
-import {MenuIcon} from "lucide-react";
+import {MenuIcon, X} from "lucide-react";
 import LogoBrand from "./LogoBrand";
 
 export default function MobileDrawer() {
@@ -17,6 +17,11 @@ export default function MobileDrawer() {
 
             <DrawerContent>
                 <DrawerHeader>
+                    <div className="p-5 self-end">
+                        <DrawerClose>
+                            <X color={"red"}/>
+                        </DrawerClose>
+                    </div>
                     <div className="flex flex-col items-center pb-4">
                         <LogoBrand/>
                     </div>
@@ -28,7 +33,16 @@ export default function MobileDrawer() {
                             <DrawerClose asChild key={item.href}>
                                 <Link
                                     href={item.href}
-                                    className="text-center hover:text-[#809877] transition-colors text-xl"
+                                    className="text-center relative
+                            hover:text-[#d9ad45]
+                            hover:-translate-y-1/6
+                            transition-all duration-200
+                            pb-1
+                            after:absolute after:left-0 after:bottom-0 after:h-[2px]
+                            after:w-0 after:bg-[#d9ad45]
+                            hover:after:w-[80%]
+                            hover:after:left-[10%]
+                            after:transition-all after:duration-300"
                                 >
                                     {item.label}
                                 </Link>

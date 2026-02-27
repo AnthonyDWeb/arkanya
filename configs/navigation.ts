@@ -4,52 +4,51 @@ const navList = [
     {
         label: "Accueil",
         href: "/",
-        title: "Les Services de Mathilde - Ménage professionnel & garde d’enfants à domicile",
+        title: "Arkanya - Studio digital spécialisé en solutions web sur mesure pour PME",
         description:
-            "Découvrez les prestations de ménage et garde d’enfants proposées par Les Services de Mathilde.",
+            "Arkanya accompagne les PME dans la conception, la modernisation et l’évolution de solutions web et applications sur mesure.",
     },
     {
-        label: "Services",
-        href: "/services",
-        title: "Les Services de Mathilde - Prestations de ménage et garde d’enfants",
+        label: "Solutions",
+        href: "/solutions",
+        title: "Arkanya - Solutions web et applications sur mesure",
         description:
-            "Détail des services de ménage, entretien du domicile et garde d’enfants proposés par Les Services de Mathilde.",
+            "Découvrez les solutions proposées par Arkanya : création et refonte de sites web, e-commerce, applications métier et accompagnement technique.",
     },
     {
-        label: "Tarifs",
-        href: "/tarifs",
-        title: "Les Services de Mathilde - Tarifs des prestations de ménage et garde d’enfants",
+        label: "Réalisations",
+        href: "/realisations",
+        title: "Arkanya - Réalisations et projets digitaux",
         description:
-            "Consultez les tarifs transparents et accessibles des prestations de ménage et de garde d’enfants.",
+            "Explorez les réalisations d’Arkanya : refontes de sites, projets sur mesure et solutions digitales pour PME.",
+    },
+    {
+        label: "À propos",
+        href: "/a-propos",
+        title: "Arkanya - Studio digital fondé par Anthony Delforge",
+        description:
+            "Découvrez la vision d’Arkanya et l’approche adoptée pour accompagner durablement les PME dans leurs projets digitaux.",
     },
     {
         label: "Contact",
         href: "/contact",
-        title: "Les Services de Mathilde - Prendre contact",
+        title: "Arkanya - Discuter de votre projet digital",
         description:
-            "Besoin d’un devis ou d’informations pour un service de ménage ou de garde d’enfants ? Contactez-moi facilement.",
-    },
-
-    // ⭐ FAQ déplacée après Contact
-    {
-        label: "FAQ",
-        href: "/faq-credit-impot",
-        title: "Les Services de Mathilde - Comprendre le crédit d’impôt de 50%",
-        description:
-            "Toutes les explications sur le crédit d’impôt de 50% applicable aux services de ménage et de garde d’enfants.",
+            "Besoin d’un site web, d’une refonte ou d’une application sur mesure ? Contactez Arkanya pour échanger sur votre projet.",
     },
 ];
 
 export const siteConfig = {
-    name: "Les Services de Mathilde",
-    description: "Ménage professionnel et garde d’enfants à domicile en Seine-et-Marne.",
+    name: "Arkanya",
+    description:
+        "Studio digital spécialisé en solutions web et applications sur mesure pour PME ambitieuses.",
     navItems: navList,
     navMenuItems: navList,
 
     links: {
-        website: "https://lesservicesdemathilde.fr",
-        email: "mailto:contact@lesservicesdemathilde.fr",
-        phone: "tel:+33600000000",
-        instagram: "https://instagram.com/lesservicesdemathilde",
+        website: "https://arkanya.fr",
+        email: "mailto:contact@arkanya.fr",
+        phone: "tel:+33600000000", // à remplacer
+        linkedin: "https://linkedin.com/in/anthony-delforge",
     },
 };
