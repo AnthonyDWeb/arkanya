@@ -33,16 +33,7 @@ export default function MobileDrawer() {
                             <DrawerClose asChild key={item.href}>
                                 <Link
                                     href={item.href}
-                                    className="text-center relative
-                            hover:text-[#d9ad45]
-                            hover:-translate-y-1/6
-                            transition-all duration-200
-                            pb-1
-                            after:absolute after:left-0 after:bottom-0 after:h-[2px]
-                            after:w-0 after:bg-[#d9ad45]
-                            hover:after:w-[80%]
-                            hover:after:left-[10%]
-                            after:transition-all after:duration-300"
+                                    className="mobilegoldenhover"
                                 >
                                     {item.label}
                                 </Link>
