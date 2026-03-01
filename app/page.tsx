@@ -1,3 +1,4 @@
+import Image from "next/image";
 import FadeUp from "@/components/animations/fadeup";
 import StaggerContainer from "@/components/animations/staggercontainer";
 import AnimatedCard from "@/components/animations/animatedcard";
@@ -10,26 +11,31 @@ export default function Home() {
             {/* HERO */}
             <section className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
 
-                {/* Background */}
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/hero-office.png')"}}
+                {/* Image optimisée Next */}
+                <Image
+                    src="/hero-office.png"
+                    alt="Modern office environment"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
                 />
 
-                {/* Overlay doux */}
-                <div className="absolute inset-0 bg-gradient-to-r from-deep/75 via-deep/60 to-transparent"/>
+                {/* Overlay plus contrasté pour lisibilité */}
+                <div className="absolute inset-0 bg-gradient-to-r from-deep/85 via-deep/70 to-deep/40"/>
 
+                {/* Contenu */}
                 <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">
 
                     <FadeUp>
-                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-3xl">
+                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-3xl drop-shadow-md">
                             Structurer aujourd’hui les outils
                             qui soutiendront votre croissance.
                         </h1>
                     </FadeUp>
 
                     <FadeUp delay={0.1}>
-                        <p className="text-xl mt-6 text-white/90 max-w-2xl">
+                        <p className="text-xl mt-6 text-white/95 max-w-2xl drop-shadow-sm">
                             Modernisation digitale, développement sur mesure
                             et structuration stratégique.
                         </p>
@@ -47,7 +53,7 @@ export default function Home() {
 
                             <MotionButton
                                 href="/realisations"
-                                className="px-8 py-4 border border-white/40 text-white rounded-md hover:bg-white/10 transition"
+                                className="px-8 py-4 border border-white/50 text-white rounded-md hover:bg-white/10 transition"
                             >
                                 Voir nos réalisations
                             </MotionButton>
@@ -57,7 +63,6 @@ export default function Home() {
 
                 </div>
             </section>
-
 
             {/* INTRO */}
             <section className="py-20">
@@ -80,7 +85,6 @@ export default function Home() {
 
                 </div>
             </section>
-
 
             {/* SERVICES */}
             <section className="py-20">
@@ -131,7 +135,6 @@ export default function Home() {
                 </div>
             </section>
 
-
             {/* DIFFERENCIATION */}
             <section className="py-20">
                 <div className="w-[90%] xl:w-[60%] mx-auto text-center">
@@ -153,8 +156,7 @@ export default function Home() {
                 </div>
             </section>
 
-
-            {/* CTA FINAL — ANCRAGE VISUEL */}
+            {/* CTA FINAL */}
             <section className="py-20 bg-deep text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
