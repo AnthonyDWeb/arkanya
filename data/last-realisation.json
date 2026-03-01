@@ -1,0 +1,46 @@
+{
+  "slug": "refonte-saas-2026",
+  "title": "Refonte complète d’une plateforme SaaS",
+  "description": "Modernisation complète d’une architecture existante avec optimisation des performances, refonte UX stratégique et mise en place d’une infrastructure scalable.",
+  "image": "/realisations/fakeit.png",
+  "site": "https://example.com",
+  "type": "refonte",
+  "context": "La plateforme existante présentait une architecture vieillissante, des temps de chargement élevés et une expérience utilisateur peu optimisée.",
+  "challenge": "Moderniser l’ensemble sans interruption de service tout en améliorant significativement les performances et la conversion.",
+  "approach": [
+    "Audit technique approfondi de l’architecture existante",
+    "Refonte UX orientée parcours utilisateur et conversion",
+    "Optimisation des performances front-end et back-end",
+    "Migration progressive et sécurisée de l’infrastructure"
+  ],
+  "results": "Temps de chargement réduit de 42%, amélioration du taux de conversion de 18% et meilleure stabilité globale.",
+  "technologies": [
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "PostgreSQL",
+    "Vercel"
+  ],
+  "beforeImage": "/realisations/fakeit.png",
+  "afterImage": "/realisations/fakeit.png",
+  "gallery": [
+    "/realisations/fakeit.png",
+    "/realisations/fakeit.png"
+  ],
+  "testimonial": {
+    "author": "Jean Dupont",
+    "role": "CEO",
+    "company": "SaaS Corp",
+    "content": "Une collaboration structurée et efficace. Les résultats ont dépassé nos attentes."
+  },
+  "seo": {
+    "title": "Refonte SaaS 2026 | Étude de cas | Arkanya",
+    "description": "Étude de cas détaillée d’une refonte SaaS avec optimisation des performances et amélioration de la conversion.",
+    "keywords": [
+      "refonte SaaS",
+      "modernisation plateforme",
+      "Next.js SaaS",
+      "optimisation performance"
+    ]
+  }
+}

@@ -81,3 +81,7 @@ body {
         }
     }
 }
+
+.redborder {
+    border-color: red;
+}

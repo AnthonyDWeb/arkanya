@@ -1,0 +1,76 @@
+[
+  {
+    "slug": "application-metier",
+    "title": "Application métier interne",
+    "description": "Développement d’un outil personnalisé visant à automatiser et structurer les processus internes.",
+    "image": "/realisations/fakeit.png",
+    "site": "https://example.com",
+    "type": "application",
+    "context": "L’entreprise gérait ses processus internes via des outils disparates peu adaptés à ses besoins.",
+    "challenge": "Créer une solution centralisée, intuitive et évolutive adaptée aux équipes.",
+    "approach": [
+      "Analyse des besoins métier",
+      "Conception d’une architecture modulaire",
+      "Développement d’interfaces adaptées aux utilisateurs",
+      "Déploiement progressif et formation des équipes"
+    ],
+    "results": "Réduction de 35% du temps de traitement des opérations internes.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL"
+    ],
+    "gallery": [
+      "/realisations/fakeit.png",
+      "/realisations/fakeit.png"
+    ],
+    "seo": {
+      "title": "Application métier sur mesure | Arkanya",
+      "description": "Conception et développement d’un outil métier personnalisé pour optimiser les processus internes.",
+      "keywords": [
+        "application métier",
+        "outil interne",
+        "développement sur mesure"
+      ]
+    }
+  },
+  {
+    "slug": "refonte-ecommerce",
+    "title": "Refonte e-commerce",
+    "description": "Optimisation complète de l’expérience utilisateur et des performances d’une plateforme e-commerce.",
+    "image": "/realisations/fakeit.png",
+    "site": "https://example.com",
+    "type": "refonte",
+    "context": "La boutique en ligne souffrait d’un faible taux de conversion et de problèmes de performance.",
+    "challenge": "Améliorer l’expérience utilisateur tout en augmentant les performances et le référencement.",
+    "approach": [
+      "Audit UX complet",
+      "Refonte du parcours client",
+      "Optimisation SEO technique",
+      "Amélioration des performances front-end"
+    ],
+    "results": "Augmentation du taux de conversion de 22% et amélioration du score Core Web Vitals.",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Stripe",
+      "SEO technique"
+    ],
+    "beforeImage": "/realisations/fakeit.png",
+    "afterImage": "/realisations/fakeit.png",
+    "gallery": [
+      "/realisations/fakeit.png",
+      "/realisations/fakeit.png"
+    ],
+    "seo": {
+      "title": "Refonte e-commerce | Étude de cas | Arkanya",
+      "description": "Refonte UX et optimisation performance d’une plateforme e-commerce.",
+      "keywords": [
+        "refonte e-commerce",
+        "optimisation UX",
+        "performance web"
+      ]
+    }
+  }
+]
