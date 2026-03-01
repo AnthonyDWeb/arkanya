@@ -10,13 +10,6 @@
     --color-foreground: var(--foreground);
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
-    }
-}
-
 @layer utilities {
     .bg-hero-radial {
         background: radial-gradient(
