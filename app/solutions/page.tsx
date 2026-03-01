@@ -1,26 +1,31 @@
 import Card from "@/components/ui/card";
 import SlideIn from "@/components/animations/slidein";
+import FadeIn from "@/components/animations/fadein";
 
 export default function Solutions() {
     return (
         <main
-            className="bg-[radial-gradient(circle_at_50%_10%,rgba(217,173,69,0.04),transparent_60%)] bg-white text-neutral-900">
+            className="bg-hero-radial text-neutral-900">
 
             {/* HERO */}
             <section className="px-6 md:px-12 py-24 text-center max-w-5xl mx-auto">
-                <h1 className="text-4xl md:text-5xl font-semibold mb-6">
-                    <span style={{color: "#d9ad45"}}>Nos Solutions</span>
-                </h1>
-
-                <p className="text-xl md:text-2xl font-light mb-10">
-                    Pensées pour la performance et la durabilité.
-                </p>
-
-                <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-                    Modernisation, développement sur mesure et accompagnement technique :
-                    des solutions conçues pour structurer, optimiser et faire évoluer
-                    vos outils digitaux dans le temps.
-                </p>
+                <FadeIn>
+                    <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
+                        Nos Solutions
+                    </h1>
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <p className="text-xl md:text-2xl font-light mb-10">
+                        Pensées pour la performance et la durabilité.
+                    </p>
+                </FadeIn>
+                <FadeIn delay={0.2}>
+                    <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+                        Modernisation, développement sur mesure et accompagnement technique :
+                        des solutions conçues pour structurer, optimiser et faire évoluer
+                        vos outils digitaux dans le temps.
+                    </p>
+                </FadeIn>
             </section>
 
 

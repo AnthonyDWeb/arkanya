@@ -2,14 +2,14 @@ import FadeIn from "@/components/animations/fadein";
 
 export default function APropos() {
     return (
-        <main className="bg-white text-neutral-900">
+        <main className="bg-hero-radial text-neutral-900">
 
             <section className="w-[90%] xl:w-[70%] mx-auto py-24 space-y-28">
 
                 {/* HERO */}
                 <FadeIn>
                     <header className="space-y-6 text-center">
-                        <h1 className="text-4xl font-semibold">
+                        <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
                             À propos
                         </h1>
 

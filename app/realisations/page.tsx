@@ -5,26 +5,27 @@ import Reveal from "@/components/animations/reveal";
 import StaggerContainer from "@/components/animations/staggercontainer";
 import AnimatedCard from "@/components/animations/animatedcard";
 
-import lastRealisation from "@/data/last-realisation.json";
-import realisations from "@/data/realisations.json";
+import lastRealisationData from "@/data/last-realisation.json";
+import realisationsData from "@/data/realisations.json";
 
 import type {Realisation} from "@/types/realisations";
 
-export default function Realisations() {
-    const lastRealisationData = lastRealisation as Realisation;
-    const realisationsData = realisations as Realisation[];
+const lastRealisation: Realisation = lastRealisationData;
+const realisations: Realisation[] = realisationsData;
 
-    const hasOtherRealisations = realisationsData.length > 0;
+export default function Realisations() {
+
+    const hasOtherRealisations = realisations.length > 0;
 
     return (
-        <main className="bg-white text-neutral-900">
+        <main className="bg-hero-radial text-neutral-900">
 
             {/* HERO */}
             <section className="px-6 md:px-12 py-24 text-center max-w-5xl mx-auto">
 
                 <FadeUp>
-                    <h1 className="text-4xl md:text-5xl font-semibold mb-6">
-                        <span style={{color: "#d9ad45"}}>Réalisations</span>
+                    <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
+                        Réalisations
                     </h1>
                 </FadeUp>
 
@@ -57,12 +58,12 @@ export default function Realisations() {
 
                     <Reveal>
                         <a
-                            href={`/realisations/${lastRealisationData.slug}`}
+                            href={`/realisations/${lastRealisation.slug}`}
                             className="relative overflow-hidden rounded-2xl group block"
                         >
                             <Image
-                                src={lastRealisationData.image}
-                                alt={lastRealisationData.title}
+                                src={lastRealisation.image}
+                                alt={lastRealisation.title}
                                 width={1600}
                                 height={1000}
                                 className="object-cover w-full h-[400px] transition-transform duration-700 group-hover:scale-105"
@@ -75,24 +76,25 @@ export default function Realisations() {
                     <Reveal delay={0.2}>
                         <div>
                             <h3 className="text-3xl font-semibold mb-6">
-                                {lastRealisationData.title}
+                                {lastRealisation.title}
                             </h3>
 
                             <p className="text-neutral-600 leading-relaxed mb-6">
-                                {lastRealisationData.description}
+                                {lastRealisation.description}
                             </p>
 
-                            {lastRealisationData.details && (
+                            {/* Remplacement de details par approach */}
+                            {lastRealisation.approach && (
                                 <ul className="space-y-3 text-neutral-700 mb-6">
-                                    {lastRealisationData.details.map((detail, index) => (
-                                        <li key={index}>• {detail}</li>
+                                    {lastRealisation.approach.slice(0, 3).map((step, index) => (
+                                        <li key={index}>• {step}</li>
                                     ))}
                                 </ul>
                             )}
 
-                            {lastRealisationData.site && (
+                            {lastRealisation.site && (
                                 <a
-                                    href={lastRealisationData.site}
+                                    href={lastRealisation.site}
                                     target="_blank"
                                     className="text-sm font-medium text-[#d9ad45] hover:underline"
                                 >
@@ -119,7 +121,7 @@ export default function Realisations() {
                     <StaggerContainer>
                         <div className="grid gap-16 md:grid-cols-2 xl:grid-cols-3">
 
-                            {realisationsData.map((project, index) => (
+                            {realisations.map((project, index) => (
                                 <AnimatedCard key={index}>
                                     <div className="group">
 

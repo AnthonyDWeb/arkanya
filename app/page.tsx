@@ -6,14 +6,14 @@ import MotionButton from "@/components/animations/motionbutton";
 
 export default function Home() {
     return (
-        <main className="min-h-screen bg-[radial-gradient(circle_at_50%_20%,rgba(217,173,69,0.05),transparent_60%)]">
+        <main className="min-h-screen bg-hero-radial">
 
             {/* HERO */}
             <section className="px-6 md:px-12 py-24 text-center max-w-5xl mx-auto">
 
                 <FadeUp>
-                    <h1 className="text-4xl md:text-5xl font-semibold mb-6">
-                        <span style={{color: "#d9ad45"}}>Arkanya</span>
+                    <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
+                        Arkanya
                     </h1>
                 </FadeUp>
 

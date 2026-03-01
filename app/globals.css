@@ -17,6 +17,16 @@
     }
 }
 
+@layer utilities {
+    .bg-hero-radial {
+        background: radial-gradient(
+                circle at 50% 20%,
+                rgba(217, 173, 69, 0.05),
+                transparent 60%
+        );
+    }
+}
+
 body {
     background: var(--background);
     color: var(--foreground);
@@ -80,8 +90,4 @@ body {
             left: 10%;
         }
     }
-}
-
-.redborder {
-    border-color: red;
 }
