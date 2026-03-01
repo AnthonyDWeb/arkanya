@@ -1,86 +1,119 @@
 @import "tailwindcss";
 
+/* ============================= */
+/* 🎨 ARKANYA — BASE CONTINUE TECH PREMIUM */
+/* ============================= */
+
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
+
+    /* Fond principal gris bleuté clair (Direction B) */
+    --background: #F3F6F9;
+
+    /* Texte principal */
+    --foreground: #0F172A;
+
+    /* Couleurs profondes */
+    --color-deep: #1E293B;
+    --color-deep-soft: #2E3A4B;
+
+    /* Accent doré (plus discret, moins criard) */
+    --color-gold: #E8B75C;
+    --color-gold-soft: #F3D18B;
+
+    /* Texte secondaire */
+    --color-text-medium: #475569;
+    --color-text-soft: #64748B;
+
+    /* Surfaces */
+    --color-surface: #FFFFFF;
+    --color-border-subtle: rgba(15, 23, 42, 0.06);
 }
+
+/* ============================= */
+/* 🌗 TAILWIND THEME INLINE */
+/* ============================= */
 
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 }
 
+/* ============================= */
+/* 🎨 UTILITIES */
+/* ============================= */
+
 @layer utilities {
-    .bg-hero-radial {
-        background: radial-gradient(
-                circle at 50% 20%,
-                rgba(217, 173, 69, 0.05),
-                transparent 60%
-        );
+
+    .bg-deep {
+        background-color: var(--color-deep);
+    }
+
+    .bg-deep-soft {
+        background-color: var(--color-deep-soft);
+    }
+
+    .bg-gold {
+        background-color: var(--color-gold);
+    }
+
+    .text-gold {
+        color: var(--color-gold);
+    }
+
+    .bg-surface {
+        background-color: var(--color-surface);
+    }
+
+    .border-subtle {
+        border: 1px solid var(--color-border-subtle);
+    }
+
+    .shadow-soft {
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .shadow-soft-lg {
+        box-shadow: 0 8px 40px rgba(15, 23, 42, 0.08);
     }
 }
+
+/* ============================= */
+/* 🖋 BASE BODY */
+/* ============================= */
 
 body {
     background: var(--background);
     color: var(--foreground);
     font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.goldenborderbottom {
-    border-bottom: 1px solid #d9ad45;
-}
+/* ============================= */
+/* ✨ GOLD HOVER (plus discret) */
+/* ============================= */
 
 .goldenhover {
     position: relative;
     padding-bottom: 0.25rem;
     transition: all 200ms ease;
-
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 0;
-        height: 2px;
-        background-color: #d9ad45;
-        transition: all 300ms ease;
-    }
-
-    &:hover {
-        color: #d9ad45;
-        transform: translateY(-16.66%);
-
-        &::after {
-            width: 100%;
-        }
-    }
 }
 
+.goldenhover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-gold);
+    transition: width 300ms ease;
+}
 
-.mobilegoldenhover {
-    position: relative;
-    text-align: center;
-    padding-bottom: 0.25rem; /* pb-1 */
-    transition: all 200ms ease;
+.goldenhover:hover {
+    color: var(--color-gold);
+}
 
-    &::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 2px;
-        width: 0;
-        background-color: #d9ad45;
-        transition: all 300ms ease;
-    }
-
-    &:hover {
-        color: #d9ad45;
-        transform: translateY(-16.66%);
-
-        &::after {
-            width: 80%;
-            left: 10%;
-        }
-    }
+.goldenhover:hover::after {
+    width: 100%;
 }

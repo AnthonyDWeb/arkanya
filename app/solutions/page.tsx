@@ -1,113 +1,188 @@
-import Card from "@/components/ui/card";
 import SlideIn from "@/components/animations/slidein";
 import FadeIn from "@/components/animations/fadein";
+import MotionButton from "@/components/animations/motionbutton";
 
 export default function Solutions() {
     return (
-        <main
-            className="bg-hero-radial text-neutral-900">
+        <main className="bg-background text-foreground">
 
             {/* HERO */}
-            <section className="px-6 md:px-12 py-24 text-center max-w-5xl mx-auto">
-                <FadeIn>
-                    <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
-                        Nos Solutions
-                    </h1>
-                </FadeIn>
-                <FadeIn delay={0.1}>
-                    <p className="text-xl md:text-2xl font-light mb-10">
-                        Pensées pour la performance et la durabilité.
-                    </p>
-                </FadeIn>
-                <FadeIn delay={0.2}>
-                    <p className="text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-                        Modernisation, développement sur mesure et accompagnement technique :
-                        des solutions conçues pour structurer, optimiser et faire évoluer
-                        vos outils digitaux dans le temps.
-                    </p>
-                </FadeIn>
+            <section className="relative w-full min-h-[70vh] flex items-center overflow-hidden">
+
+                {/* Image */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{backgroundImage: "url('/solutions-hero.png')"}}
+                />
+
+                {/* Assombrissement global léger */}
+                <div className="absolute inset-0 bg-black/40"/>
+
+                {/* Bande sombre structurée côté gauche */}
+                <div
+                    className="absolute inset-y-0 left-0 w-[60%] bg-gradient-to-r from-deep via-deep/90 to-transparent"/>
+
+                {/* Content */}
+                <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">
+
+                    <FadeIn>
+                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-2xl">
+                            Des solutions digitales structurées
+                            pour bâtir solidement.
+                        </h1>
+                    </FadeIn>
+
+                    <FadeIn delay={0.1}>
+                        <p className="text-xl mt-6 text-white/90 max-w-xl">
+                            Modernisation, structuration et développement sur mesure,
+                            adaptés à la réalité de votre organisation.
+                        </p>
+                    </FadeIn>
+
+                </div>
             </section>
 
 
-            {/* SOLUTIONS */}
-            <section>
-                <div className="w-[90%] xl:w-[85%] mx-auto space-y-12">
+            {/* INTRO */}
+            <section className="py-20">
+                <div className="w-[90%] xl:w-[60%] mx-auto text-center">
+
+                    <FadeIn>
+                        <h2 className="text-3xl font-semibold mb-6">
+                            Une approche orientée clarté et performance
+                        </h2>
+                    </FadeIn>
+
+                    <FadeIn delay={0.1}>
+                        <p className="text-text-medium leading-relaxed">
+                            Chaque intervention repose sur une analyse précise de votre
+                            structure actuelle. L’objectif : concevoir des solutions
+                            fiables, évolutives et cohérentes avec votre développement.
+                        </p>
+                    </FadeIn>
+
+                </div>
+            </section>
 
 
-                    {/* 1 */}
-                    <div className="grid md:grid-cols-2 items-center">
+            {/* SOLUTIONS LISTE CONTINUE */}
+            <section className="py-32">
+                <div className="w-[90%] xl:w-[75%] mx-auto space-y-32">
+
+                    {/* SOLUTION 1 */}
+                    <div className="grid md:grid-cols-2 gap-16 items-center">
+
                         <SlideIn direction="left">
-                            <Card
-                                title="Modernisation & refonte"
-                                description="Transformation complète de plateformes existantes vers des standards modernes, performants et évolutifs."
-                                details={[
-                                    "Audit technique et structurel",
-                                    "Refonte UX / UI stratégique",
-                                    "Optimisation performance & SEO",
-                                    "Migration sécurisée",
-                                ]}
-                            />
+                            <div>
+                                <h3 className="text-2xl font-semibold mb-6">
+                                    Modernisation Digitale
+                                </h3>
+
+                                <p className="text-text-medium mb-6 leading-relaxed">
+                                    Transformation complète de plateformes existantes vers
+                                    des standards modernes, performants et optimisés.
+                                </p>
+
+                                <ul className="space-y-3 text-text-medium">
+                                    <li>• Audit technique et structurel</li>
+                                    <li>• Refonte UX / UI stratégique</li>
+                                    <li>• Optimisation performance & SEO</li>
+                                    <li>• Migration sécurisée</li>
+                                </ul>
+                            </div>
                         </SlideIn>
-                        <div/>
+
+                        <div className="bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
+
                     </div>
 
 
-                    {/* 2 */}
-                    <div className="grid md:grid-cols-2 items-center">
-                        <div className="order-1 md:order-none"/>
+                    {/* SOLUTION 2 */}
+                    <div className="grid md:grid-cols-2 gap-16 items-center">
+
+                        <div className="order-2 md:order-1 bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
+
                         <SlideIn direction="right">
-                            <Card
-                                title="Applications sur mesure"
-                                description="Conception d’outils digitaux spécifiques à votre organisation et à vos enjeux."
-                                details={[
-                                    "Outils métiers personnalisés",
-                                    "Automatisation de processus",
-                                    "Interfaces adaptées aux équipes",
-                                    "Architecture scalable",
-                                ]}
-                            />
+                            <div className="order-1 md:order-2">
+                                <h3 className="text-2xl font-semibold mb-6">
+                                    Développement sur Mesure
+                                </h3>
+
+                                <p className="text-text-medium mb-6 leading-relaxed">
+                                    Conception d’outils digitaux spécifiquement adaptés
+                                    à votre organisation et à vos enjeux métier.
+                                </p>
+
+                                <ul className="space-y-3 text-text-medium">
+                                    <li>• Outils métiers personnalisés</li>
+                                    <li>• Automatisation de processus</li>
+                                    <li>• Interfaces adaptées aux équipes</li>
+                                    <li>• Architecture scalable</li>
+                                </ul>
+                            </div>
                         </SlideIn>
+
                     </div>
 
 
-                    {/* 3 */}
-                    <div className="grid md:grid-cols-2 items-center">
+                    {/* SOLUTION 3 */}
+                    <div className="grid md:grid-cols-2 gap-16 items-center">
+
                         <SlideIn direction="left">
-                            <Card
-                                title="Accompagnement technique"
-                                description="Suivi structuré et continu pour garantir stabilité et évolution."
-                                details={[
-                                    "Maintenance proactive",
-                                    "Support prioritaire",
-                                    "Optimisations régulières",
-                                    "Conseil stratégique",
-                                ]}
-                            />
+                            <div>
+                                <h3 className="text-2xl font-semibold mb-6">
+                                    Accompagnement & Évolution
+                                </h3>
+
+                                <p className="text-text-medium mb-6 leading-relaxed">
+                                    Un suivi structuré pour garantir stabilité,
+                                    optimisation continue et cohérence technique.
+                                </p>
+
+                                <ul className="space-y-3 text-text-medium">
+                                    <li>• Maintenance proactive</li>
+                                    <li>• Support prioritaire</li>
+                                    <li>• Optimisations régulières</li>
+                                    <li>• Conseil stratégique</li>
+                                </ul>
+                            </div>
                         </SlideIn>
-                        <div/>
+
+                        <div className="bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
+
                     </div>
 
                 </div>
             </section>
 
 
-            {/* CTA */}
-            <section className="px-6 md:px-12 py-32 text-center">
-                <SlideIn direction="left">
-                    <h2 className="text-3xl font-semibold mb-6">
-                        Parlons de votre projet
-                    </h2>
-                </SlideIn>
+            {/* CTA FINAL */}
+            <section className="py-32 bg-deep text-white text-center">
+                <div className="w-[90%] xl:w-[60%] mx-auto">
 
-                <SlideIn direction="right">
-                    <a
-                        href="/contact"
-                        className="px-10 py-4 rounded-md text-white transition-colors duration-300 hover:opacity-90"
-                        style={{backgroundColor: "#d9ad45"}}
-                    >
-                        Planifier un échange
-                    </a>
-                </SlideIn>
+                    <FadeIn>
+                        <h2 className="text-3xl font-semibold mb-6">
+                            Planifions un échange
+                        </h2>
+                    </FadeIn>
+
+                    <FadeIn delay={0.1}>
+                        <p className="text-white/80 mb-10">
+                            Discutons de vos objectifs et identifions
+                            la solution adaptée à votre structure.
+                        </p>
+                    </FadeIn>
+
+                    <FadeIn delay={0.2}>
+                        <MotionButton
+                            href="/contact"
+                            className="px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition"
+                        >
+                            Planifier un échange
+                        </MotionButton>
+                    </FadeIn>
+
+                </div>
             </section>
 
         </main>

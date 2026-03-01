@@ -1,4 +1,3 @@
-import Card from "@/components/ui/card";
 import FadeUp from "@/components/animations/fadeup";
 import StaggerContainer from "@/components/animations/staggercontainer";
 import AnimatedCard from "@/components/animations/animatedcard";
@@ -6,79 +5,125 @@ import MotionButton from "@/components/animations/motionbutton";
 
 export default function Home() {
     return (
-        <main className="min-h-screen bg-hero-radial">
+        <main className="min-h-screen bg-background text-foreground">
 
             {/* HERO */}
-            <section className="px-6 md:px-12 py-24 text-center max-w-5xl mx-auto">
+            <section className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
 
-                <FadeUp>
-                    <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
-                        Arkanya
-                    </h1>
-                </FadeUp>
+                {/* Background */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{backgroundImage: "url('/hero-office.png')"}}
+                />
 
-                <FadeUp delay={0.1}>
-                    <p className="text-xl md:text-2xl font-light mb-6">
-                        Solutions digitales pour entreprises.
-                    </p>
-                </FadeUp>
+                {/* Overlay doux */}
+                <div className="absolute inset-0 bg-gradient-to-r from-deep/75 via-deep/60 to-transparent"/>
 
-                <FadeUp delay={0.2}>
-                    <p className="text-lg text-neutral-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-                        Nous concevons, modernisons et faisons évoluer
-                        des solutions web performantes et adaptées à vos besoins réels.
-                    </p>
-                </FadeUp>
+                <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">
 
-                <FadeUp delay={0.3}>
-                    <div className="flex justify-center gap-4 flex-wrap">
-                        <MotionButton
-                            href="/contact"
-                            className="px-8 py-4 bg-black text-white rounded-md"
-                        >
-                            Discuter d’un projet
-                        </MotionButton>
+                    <FadeUp>
+                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-3xl">
+                            Structurer aujourd’hui les outils
+                            qui soutiendront votre croissance.
+                        </h1>
+                    </FadeUp>
 
-                        <MotionButton
-                            href="/solutions"
-                            className="px-8 py-4 border rounded-md"
-                            style={{borderColor: "#d9ad45", color: "#d9ad45"}}
-                        >
-                            Découvrir nos solutions
-                        </MotionButton>
-                    </div>
-                </FadeUp>
+                    <FadeUp delay={0.1}>
+                        <p className="text-xl mt-6 text-white/90 max-w-2xl">
+                            Modernisation digitale, développement sur mesure
+                            et structuration stratégique.
+                        </p>
+                    </FadeUp>
 
+                    <FadeUp delay={0.2}>
+                        <div className="flex gap-4 mt-10 flex-wrap">
+
+                            <MotionButton
+                                href="/contact"
+                                className="px-8 py-4 bg-gold text-black rounded-md font-medium shadow-soft-lg hover:shadow-xl transition"
+                            >
+                                Discuter de votre projet
+                            </MotionButton>
+
+                            <MotionButton
+                                href="/realisations"
+                                className="px-8 py-4 border border-white/40 text-white rounded-md hover:bg-white/10 transition"
+                            >
+                                Voir nos réalisations
+                            </MotionButton>
+
+                        </div>
+                    </FadeUp>
+
+                </div>
             </section>
 
 
-            {/* SOLUTIONS */}
-            <section className="mb-32">
-                <div className="w-[90%] xl:w-[85%] mx-auto">
+            {/* INTRO */}
+            <section className="py-20">
+                <div className="w-[90%] xl:w-[65%] mx-auto text-center">
+
+                    <FadeUp>
+                        <h2 className="text-3xl md:text-4xl font-semibold mb-8">
+                            Une approche orientée clarté et impact.
+                        </h2>
+                    </FadeUp>
+
+                    <FadeUp delay={0.1}>
+                        <p className="text-text-medium leading-relaxed max-w-3xl mx-auto">
+                            Chaque projet est conçu comme un système structuré,
+                            capable d’évoluer avec votre organisation.
+                            Nous privilégions performance, cohérence
+                            et vision stratégique.
+                        </p>
+                    </FadeUp>
+
+                </div>
+            </section>
+
+
+            {/* SERVICES */}
+            <section className="py-20">
+                <div className="w-[90%] xl:w-[75%] mx-auto">
+
+                    <FadeUp>
+                        <h2 className="text-3xl font-semibold mb-20 text-center">
+                            Nos expertises
+                        </h2>
+                    </FadeUp>
 
                     <StaggerContainer>
-                        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-3">
+                        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-12">
 
-                            <AnimatedCard>
-                                <Card
-                                    title="Modernisation & refonte"
-                                    description="Refonte complète de sites web avec une architecture moderne, rapide et optimisée pour la performance."
-                                />
-                            </AnimatedCard>
+                            {[
+                                {
+                                    title: "Modernisation Digitale",
+                                    desc: "Refonte stratégique et optimisation technique."
+                                },
+                                {
+                                    title: "Développement sur Mesure",
+                                    desc: "Applications et outils adaptés à votre réalité métier."
+                                },
+                                {
+                                    title: "Structuration & Performance",
+                                    desc: "Architecture pensée pour évoluer durablement."
+                                }
+                            ].map((item, index) => (
+                                <AnimatedCard key={index}>
+                                    <div
+                                        className="bg-surface p-10 rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition duration-300">
 
-                            <AnimatedCard>
-                                <Card
-                                    title="Applications sur mesure"
-                                    description="Conception d’outils digitaux adaptés à votre organisation et à vos besoins spécifiques."
-                                />
-                            </AnimatedCard>
+                                        <h3 className="text-xl font-semibold mb-4">
+                                            {item.title}
+                                        </h3>
 
-                            <AnimatedCard>
-                                <Card
-                                    title="Accompagnement technique"
-                                    description="Un partenaire fiable pour assurer l’évolution et la stabilité de vos solutions dans le temps."
-                                />
-                            </AnimatedCard>
+                                        <p className="text-text-medium leading-relaxed">
+                                            {item.desc}
+                                        </p>
+
+                                    </div>
+                                </AnimatedCard>
+                            ))}
 
                         </div>
                     </StaggerContainer>
@@ -87,45 +132,55 @@ export default function Home() {
             </section>
 
 
-            {/* APPROCHE */}
-            <section className="px-6 md:px-12 mb-32 text-center max-w-4xl mx-auto">
+            {/* DIFFERENCIATION */}
+            <section className="py-20">
+                <div className="w-[90%] xl:w-[60%] mx-auto text-center">
 
-                <FadeUp>
-                    <h2 className="text-2xl font-semibold mb-6">
-                        Une approche claire et structurée
-                    </h2>
-                </FadeUp>
+                    <FadeUp>
+                        <h2 className="text-3xl font-semibold mb-10">
+                            Plus qu’un site, une base stratégique.
+                        </h2>
+                    </FadeUp>
 
-                <FadeUp delay={0.1}>
-                    <p className="text-neutral-600 leading-relaxed">
-                        Chaque projet débute par une compréhension précise de votre activité.
-                        Nous concevons ensuite une solution performante, évolutive
-                        et alignée avec vos objectifs.
-                    </p>
-                </FadeUp>
+                    <FadeUp delay={0.1}>
+                        <p className="text-text-medium leading-relaxed">
+                            Nous ne livrons pas simplement une interface.
+                            Nous concevons une architecture durable,
+                            pensée pour accompagner votre développement.
+                        </p>
+                    </FadeUp>
 
+                </div>
             </section>
 
 
-            {/* CTA FINAL */}
-            <section className="px-6 md:px-12 pb-24 text-center">
+            {/* CTA FINAL — ANCRAGE VISUEL */}
+            <section className="py-20 bg-deep text-white text-center">
+                <div className="w-[90%] xl:w-[60%] mx-auto">
 
-                <FadeUp>
-                    <h2 className="text-2xl font-semibold mb-6">
-                        Parlons de votre projet
-                    </h2>
-                </FadeUp>
+                    <FadeUp>
+                        <h2 className="text-3xl font-semibold mb-6">
+                            Construisons un projet solide.
+                        </h2>
+                    </FadeUp>
 
-                <FadeUp delay={0.1}>
-                    <MotionButton
-                        href="/contact"
-                        className="px-10 py-4 rounded-md text-white"
-                        style={{backgroundColor: "#d9ad45"}}
-                    >
-                        Prendre rendez-vous
-                    </MotionButton>
-                </FadeUp>
+                    <FadeUp delay={0.1}>
+                        <p className="text-white/80 mb-10">
+                            Discutons de vos objectifs et identifions
+                            la meilleure stratégie digitale.
+                        </p>
+                    </FadeUp>
 
+                    <FadeUp delay={0.2}>
+                        <MotionButton
+                            href="/contact"
+                            className="px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition"
+                        >
+                            Planifier un échange
+                        </MotionButton>
+                    </FadeUp>
+
+                </div>
             </section>
 
         </main>
