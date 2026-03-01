@@ -13,7 +13,7 @@ export default function Home() {
 
                 {/* Image optimisée Next */}
                 <Image
-                    src="/hero-office.png"
+                    src="/hero-office.webp"
                     alt="Modern office environment"
                     fill
                     priority
