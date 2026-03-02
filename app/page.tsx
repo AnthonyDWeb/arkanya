@@ -1,4 +1,3 @@
-import Image from "next/image";
 import FadeUp from "@/components/animations/fadeup";
 import StaggerContainer from "@/components/animations/staggercontainer";
 import AnimatedCard from "@/components/animations/animatedcard";
@@ -6,66 +5,34 @@ import MotionButton from "@/components/animations/motionbutton";
 import Hero from "@/components/ui/hero";
 
 export default function Home() {
+    const herotitle = "Structurer aujourd’hui les outils qui soutiendront votre croissance.";
+    const herosubtitle = "Modernisation digitale, développement sur mesure et structuration stratégique."
+    
     return (
         <main className="min-h-screen bg-background text-foreground">
 
             {/* HERO */}
-            <section className="relative w-full min-h-[85vh] flex items-center overflow-hidden">
+            <Hero image="/hero-office.avif" title={herotitle} subtitle={herosubtitle}>
+                <FadeUp delay={0.3}>
+                    <div className="flex gap-4 mt-10 flex-wrap">
 
-                {/* Image optimisée Next */}
-                <Image
-                    src="/hero-office.avif"
-                    alt="Modern office environment"
-                    fill
-                    priority
-                    sizes="100vw"
-                    className={"object-cover opacity-0 animate-heroFade"}
-                />
+                        <MotionButton
+                            href="/contact"
+                            className="px-8 py-4 bg-gold text-black rounded-md font-medium shadow-soft-lg hover:shadow-xl transition"
+                        >
+                            Discuter de votre projet
+                        </MotionButton>
 
+                        <MotionButton
+                            href="/realisations"
+                            className="px-8 py-4 border border-white/50 text-white rounded-md hover:bg-white/10 transition"
+                        >
+                            Voir nos réalisations
+                        </MotionButton>
 
-                {/* Overlay plus contrasté pour lisibilité */}
-                <div className="absolute inset-0 bg-gradient-to-r from-deep/85 via-deep/70 to-deep/40"/>
-
-                {/* Contenu */}
-                <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">
-
-                    <FadeUp>
-                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-3xl drop-shadow-md">
-                            Structurer aujourd’hui les outils
-                            qui soutiendront votre croissance.
-                        </h1>
-                    </FadeUp>
-
-                    <FadeUp delay={0.1}>
-                        <p className="text-xl mt-6 text-white/95 max-w-2xl drop-shadow-sm">
-                            Modernisation digitale, développement sur mesure
-                            et structuration stratégique.
-                        </p>
-                    </FadeUp>
-
-                    <FadeUp delay={0.2}>
-                        <div className="flex gap-4 mt-10 flex-wrap">
-
-                            <MotionButton
-                                href="/contact"
-                                className="px-8 py-4 bg-gold text-black rounded-md font-medium shadow-soft-lg hover:shadow-xl transition"
-                            >
-                                Discuter de votre projet
-                            </MotionButton>
-
-                            <MotionButton
-                                href="/realisations"
-                                className="px-8 py-4 border border-white/50 text-white rounded-md hover:bg-white/10 transition"
-                            >
-                                Voir nos réalisations
-                            </MotionButton>
-
-                        </div>
-                    </FadeUp>
-
-                </div>
-            </section>
-            <Hero image="hero-office.avif"/>
+                    </div>
+                </FadeUp>
+            </Hero>
             {/* INTRO */}
             <section className="py-20">
                 <div className="w-[90%] xl:w-[65%] mx-auto text-center">

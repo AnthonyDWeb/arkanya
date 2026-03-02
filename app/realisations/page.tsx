@@ -10,49 +10,21 @@ import lastRealisationData from "@/data/last-realisation.json";
 import realisationsData from "@/data/realisations.json";
 
 import type {Realisation} from "@/types/realisations";
+import Hero from "@/components/ui/hero";
 
 const lastRealisation: Realisation = lastRealisationData;
 const realisations: Realisation[] = realisationsData;
 
 export default function Realisations() {
-
+    const herotitle = "Des réalisations concrètes, pensées pour durer.";
+    const herosubtitle = "Chaque projet est structuré autour d’objectifs clairs, d’une architecture maîtrisée et d’un impact mesurable.";
     const hasOtherRealisations = realisations.length > 0;
 
     return (
         <main className="bg-background text-foreground">
 
-            {/* HERO */}
-            <section className="relative w-full min-h-[60vh] flex items-center overflow-hidden">
+            <Hero image="/realisations-hero.avif" title={herotitle} subtitle={herosubtitle}/>
 
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/realisations-hero.avif')"}}
-                />
-
-                {/* Assombrissement global léger */}
-                <div className="absolute inset-0 bg-black/40"/>
-
-                <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">
-
-                    <FadeUp>
-                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-2xl">
-                            Des réalisations concrètes,
-                            pensées pour durer.
-                        </h1>
-                    </FadeUp>
-
-                    <FadeUp delay={0.1}>
-                        <p className="text-xl mt-6 text-white/90 max-w-xl">
-                            Chaque projet est structuré autour d’objectifs clairs,
-                            d’une architecture maîtrisée et d’un impact mesurable.
-                        </p>
-                    </FadeUp>
-
-                </div>
-            </section>
-
-
-            {/* ÉTUDE DE CAS */}
             <section className="py-20">
                 <div className="w-[90%] xl:w-[75%] mx-auto">
 
@@ -112,8 +84,6 @@ export default function Realisations() {
                 </div>
             </section>
 
-
-            {/* AUTRES PROJETS */}
             {hasOtherRealisations && (
                 <section className="py-20">
                     <div className="w-[90%] xl:w-[75%] mx-auto">
@@ -163,8 +133,6 @@ export default function Realisations() {
                 </section>
             )}
 
-
-            {/* CTA FINAL */}
             <section className="py-20 bg-deep text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
@@ -192,8 +160,6 @@ export default function Realisations() {
 
                 </div>
             </section>
-
-
         </main>
     );
 }

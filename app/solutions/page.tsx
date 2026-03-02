@@ -1,52 +1,17 @@
 import SlideIn from "@/components/animations/slidein";
 import FadeIn from "@/components/animations/fadein";
 import MotionButton from "@/components/animations/motionbutton";
+import Hero from "@/components/ui/hero";
 
 export default function Solutions() {
+    const herotitle = "Des solutions digitales structurées pour bâtir solidement.";
+    const herosubtitle = "Modernisation, structuration et développement sur mesure, adaptés à la réalité de votre organisation.";
     return (
         <main className="bg-background text-foreground">
+            <Hero image="/solutions-hero.avif" title={herotitle} subtitle={herosubtitle}/>
 
-            {/* HERO */}
-            <section className="relative w-full min-h-[70vh] flex items-center overflow-hidden">
-
-                {/* Image */}
-                <div
-                    className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/solutions-hero.avif')"}}
-                />
-
-                {/* Assombrissement global léger */}
-                <div className="absolute inset-0 bg-black/40"/>
-
-                {/* Bande sombre structurée côté gauche */}
-                <div
-                    className="absolute inset-y-0 left-0 w-[60%] bg-gradient-to-r from-deep via-deep/90 to-transparent"/>
-
-                {/* Content */}
-                <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">
-
-                    <FadeIn>
-                        <h1 className="text-4xl md:text-6xl font-semibold leading-tight max-w-2xl">
-                            Des solutions digitales structurées
-                            pour bâtir solidement.
-                        </h1>
-                    </FadeIn>
-
-                    <FadeIn delay={0.1}>
-                        <p className="text-xl mt-6 text-white/90 max-w-xl">
-                            Modernisation, structuration et développement sur mesure,
-                            adaptés à la réalité de votre organisation.
-                        </p>
-                    </FadeIn>
-
-                </div>
-            </section>
-
-
-            {/* INTRO */}
             <section className="py-20">
                 <div className="w-[90%] xl:w-[60%] mx-auto text-center">
-
                     <FadeIn>
                         <h2 className="text-3xl font-semibold mb-6">
                             Une approche orientée clarté et performance
@@ -64,14 +29,10 @@ export default function Solutions() {
                 </div>
             </section>
 
-
-            {/* SOLUTIONS LISTE CONTINUE */}
             <section className="py-32">
                 <div className="w-[90%] xl:w-[75%] mx-auto space-y-32">
 
-                    {/* SOLUTION 1 */}
                     <div className="grid md:grid-cols-2 gap-16 items-center">
-
                         <SlideIn direction="left">
                             <div>
                                 <h3 className="text-2xl font-semibold mb-6">
@@ -93,15 +54,10 @@ export default function Solutions() {
                         </SlideIn>
 
                         <div className="bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
-
                     </div>
 
-
-                    {/* SOLUTION 2 */}
                     <div className="grid md:grid-cols-2 gap-16 items-center">
-
                         <div className="order-2 md:order-1 bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
-
                         <SlideIn direction="right">
                             <div className="order-1 md:order-2">
                                 <h3 className="text-2xl font-semibold mb-6">
@@ -124,10 +80,7 @@ export default function Solutions() {
 
                     </div>
 
-
-                    {/* SOLUTION 3 */}
                     <div className="grid md:grid-cols-2 gap-16 items-center">
-
                         <SlideIn direction="left">
                             <div>
                                 <h3 className="text-2xl font-semibold mb-6">
