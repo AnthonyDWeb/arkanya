@@ -10,7 +10,7 @@ export default function APropos() {
 
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/apropos-hero.png')"}}
+                    style={{backgroundImage: "url('/apropos-hero.avif')"}}
                 />
 
                 {/* Assombrissement global léger */}

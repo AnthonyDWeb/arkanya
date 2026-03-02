@@ -26,7 +26,7 @@ export default function Realisations() {
 
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/realisations-hero.png')"}}
+                    style={{backgroundImage: "url('/realisations-hero.avif')"}}
                 />
 
                 {/* Assombrissement global léger */}

@@ -3,6 +3,7 @@ import FadeUp from "@/components/animations/fadeup";
 import StaggerContainer from "@/components/animations/staggercontainer";
 import AnimatedCard from "@/components/animations/animatedcard";
 import MotionButton from "@/components/animations/motionbutton";
+import Hero from "@/components/ui/hero";
 
 export default function Home() {
     return (
@@ -18,8 +19,9 @@ export default function Home() {
                     fill
                     priority
                     sizes="100vw"
-                    className="object-cover"
+                    className={"object-cover opacity-0 animate-heroFade"}
                 />
+
 
                 {/* Overlay plus contrasté pour lisibilité */}
                 <div className="absolute inset-0 bg-gradient-to-r from-deep/85 via-deep/70 to-deep/40"/>
@@ -63,7 +65,7 @@ export default function Home() {
 
                 </div>
             </section>
-
+            <Hero image="hero-office.avif"/>
             {/* INTRO */}
             <section className="py-20">
                 <div className="w-[90%] xl:w-[65%] mx-auto text-center">

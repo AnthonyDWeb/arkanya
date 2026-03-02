@@ -12,7 +12,7 @@ export default function Solutions() {
                 {/* Image */}
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/solutions-hero.png')"}}
+                    style={{backgroundImage: "url('/solutions-hero.avif')"}}
                 />
 
                 {/* Assombrissement global léger */}

@@ -10,7 +10,7 @@ export default function Contact() {
 
                 <div
                     className="absolute inset-0 bg-cover bg-center"
-                    style={{backgroundImage: "url('/contact-hero.png')"}}
+                    style={{backgroundImage: "url('/contact-hero.avif')"}}
                 />
 
                 {/* Assombrissement global léger */}
