@@ -16,15 +16,27 @@ const lastRealisation: Realisation = lastRealisationData;
 const realisations: Realisation[] = realisationsData;
 
 export default function Realisations() {
+
     const herotitle = "Des réalisations concrètes, pensées pour durer.";
     const herosubtitle = "Chaque projet est structuré autour d’objectifs clairs, d’une architecture maîtrisée et d’un impact mesurable.";
-    const hasOtherRealisations = realisations.length > 0;
+
+    // Exclure le projet principal + limiter à 3
+    const otherRealisations = realisations
+        .filter((project) => project.slug !== lastRealisation.slug)
+        .slice(0, 3);
+
+    const hasOtherRealisations = otherRealisations.length > 0;
 
     return (
         <main className="bg-background text-foreground">
 
-            <Hero image="/realisations-hero.avif" title={herotitle} subtitle={herosubtitle}/>
+            <Hero
+                image="/realisations-hero.avif"
+                title={herotitle}
+                subtitle={herosubtitle}
+            />
 
+            {/* ÉTUDE DE CAS RÉCENTE */}
             <section className="py-20">
                 <div className="w-[90%] xl:w-[75%] mx-auto">
 
@@ -84,6 +96,7 @@ export default function Realisations() {
                 </div>
             </section>
 
+            {/* AUTRES PROJETS */}
             {hasOtherRealisations && (
                 <section className="py-20">
                     <div className="w-[90%] xl:w-[75%] mx-auto">
@@ -97,13 +110,16 @@ export default function Realisations() {
                         <StaggerContainer>
                             <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
 
-                                {realisations.map((project, index) => (
+                                {otherRealisations.map((project, index) => (
                                     <AnimatedCard key={index}>
-                                        <a
-                                            href={`/realisations/${project.slug}`}
-                                            className="group block bg-surface rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition duration-300 overflow-hidden"
-                                        >
-                                            <div className="relative overflow-hidden">
+                                        <div
+                                            className="flex flex-col h-full bg-surface rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition duration-300 overflow-hidden">
+
+                                            {/* Image */}
+                                            <a
+                                                href={`/realisations/${project.slug}`}
+                                                className="relative overflow-hidden group"
+                                            >
                                                 <Image
                                                     src={project.image}
                                                     alt={project.title}
@@ -111,18 +127,29 @@ export default function Realisations() {
                                                     height={800}
                                                     className="object-cover w-full h-[240px] transition-transform duration-500 group-hover:scale-105"
                                                 />
-                                            </div>
+                                            </a>
 
-                                            <div className="p-6">
+                                            {/* Contenu */}
+                                            <div className="p-6 flex flex-col flex-grow">
+
                                                 <h3 className="text-lg font-semibold mb-3">
                                                     {project.title}
                                                 </h3>
 
-                                                <p className="text-text-medium text-sm leading-relaxed">
+                                                <p className="text-text-medium text-sm leading-relaxed mb-6 flex-grow">
                                                     {project.description}
                                                 </p>
+
+                                                {/* Bouton */}
+                                                <a
+                                                    href={`/realisations/${project.slug}`}
+                                                    className="inline-block text-sm font-medium text-gold hover:underline"
+                                                >
+                                                    Voir le projet →
+                                                </a>
+
                                             </div>
-                                        </a>
+                                        </div>
                                     </AnimatedCard>
                                 ))}
 
@@ -133,6 +160,7 @@ export default function Realisations() {
                 </section>
             )}
 
+            {/* CTA FINAL */}
             <section className="py-20 bg-deep text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
@@ -160,6 +188,7 @@ export default function Realisations() {
 
                 </div>
             </section>
+
         </main>
     );
 }

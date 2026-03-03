@@ -1,46 +1,62 @@
 {
-  "slug": "refonte-saas-2026",
-  "title": "Refonte complète d’une plateforme SaaS",
-  "description": "Modernisation complète d’une architecture existante avec optimisation des performances, refonte UX stratégique et mise en place d’une infrastructure scalable.",
-  "image": "/realisations/fakeit.png",
-  "site": "https://example.com",
+  "slug": "refonte-aide-a-la-personne",
+  "title": "Refonte stratégique d’un site d’aide à la personne",
+  "description": "Repositionnement complet d’un site initialement dédié au baby-sitting vers une plateforme multi-services d’aide à la personne, avec nouveau domaine, nouvelle identité et optimisation de la conversion.",
+  "image": "/realisations/aide-personne-cover.png",
+  "site": "https://nouveaudomaine.fr",
   "type": "refonte",
-  "context": "La plateforme existante présentait une architecture vieillissante, des temps de chargement élevés et une expérience utilisateur peu optimisée.",
-  "challenge": "Moderniser l’ensemble sans interruption de service tout en améliorant significativement les performances et la conversion.",
+  "context": "La cliente proposait initialement des services de baby-sitting à travers un site vitrine simple, conçu à une période où son activité était encore ciblée et limitée. Avec le temps, son offre s’est naturellement élargie vers différents services d’aide à la personne : ménage, accompagnement quotidien, assistance administrative et garde ponctuelle. Le site existant ne reflétait plus cette évolution et continuait de véhiculer une image partielle de son expertise. Ce décalage entre la réalité de l’activité et sa présence digitale freinait la perception de professionnalisme et limitait l’élargissement de sa clientèle. L’objectif était donc de structurer une plateforme capable d’incarner cette montée en maturité, de clarifier l’offre multi-services et d’accompagner la croissance future de l’entreprise.",
+  "challenge": "Le projet impliquait un repositionnement stratégique complet sans perturber la clientèle existante. Il fallait redéfinir la proposition de valeur, clarifier les services et structurer un discours plus professionnel tout en restant accessible. Le changement de nom de domaine nécessitait une transition maîtrisée afin de préserver la visibilité et la cohérence de la communication. L’intégration du nouveau logo fourni par la cliente demandait une direction artistique cohérente et élégante, capable de renforcer la crédibilité perçue. Enfin, le site devait être plus lisible, plus rassurant et davantage orienté vers la génération de demandes qualifiées.",
   "approach": [
-    "Audit technique approfondi de l’architecture existante",
-    "Refonte UX orientée parcours utilisateur et conversion",
-    "Optimisation des performances front-end et back-end",
-    "Migration progressive et sécurisée de l’infrastructure"
+    "Analyse du positionnement initial et définition d’une nouvelle proposition de valeur",
+    "Restructuration complète de l’arborescence pour intégrer les différents services",
+    "Refonte du parcours utilisateur orienté clarté et conversion",
+    "Intégration du nouveau nom de domaine et optimisation SEO locale",
+    "Adaptation du design autour du nouveau logo avec une direction sobre et élégante",
+    "Optimisation des performances et de l’expérience mobile"
   ],
-  "results": "Temps de chargement réduit de 42%, amélioration du taux de conversion de 18% et meilleure stabilité globale.",
+  "results": "La nouvelle plateforme reflète désormais une image plus professionnelle et cohérente avec l’évolution de l’activité. L’offre multi-services est clairement structurée, permettant aux visiteurs d’identifier rapidement le service correspondant à leur besoin. Le parcours utilisateur a été simplifié afin de faciliter la prise de contact et de réduire les frictions. La transition vers le nouveau domaine s’est effectuée sans rupture notable de visibilité. L’ensemble du site transmet une impression de sérieux et de fiabilité renforcée, contribuant à améliorer la qualité des demandes reçues. Le digital devient ainsi un véritable outil de développement commercial et non plus uniquement un support informatif.",
+  "conclusion": "Cette refonte a permis d’aligner la présence digitale avec la maturité réelle de l’activité. Le site constitue désormais un socle structurant pour le développement futur, capable d’évoluer avec l’entreprise et ses ambitions.",
+  "metrics": [
+    {
+      "label": "Positionnement",
+      "value": "Multi-services clarifié"
+    },
+    {
+      "label": "Image perçue",
+      "value": "Plus professionnelle"
+    },
+    {
+      "label": "Structure",
+      "value": "Optimisée pour conversion"
+    }
+  ],
   "technologies": [
     "Next.js",
     "TypeScript",
-    "Node.js",
-    "PostgreSQL",
-    "Vercel"
+    "Optimisation SEO locale",
+    "Responsive Design"
   ],
-  "beforeImage": "/realisations/fakeit.png",
-  "afterImage": "/realisations/fakeit.png",
+  "beforeImage": "/realisations/aide-personne-before.png",
+  "afterImage": "/realisations/aide-personne-after.png",
   "gallery": [
-    "/realisations/fakeit.png",
-    "/realisations/fakeit.png"
+    "/realisations/aide-personne-1.png",
+    "/realisations/aide-personne-2.png"
   ],
   "testimonial": {
-    "author": "Jean Dupont",
-    "role": "CEO",
-    "company": "SaaS Corp",
-    "content": "Une collaboration structurée et efficace. Les résultats ont dépassé nos attentes."
+    "author": "Fondatrice",
+    "role": "Dirigeante",
+    "company": "Entreprise d’aide à la personne",
+    "content": "Le nouveau site reflète parfaitement l’évolution de mon activité. Il est plus clair, plus professionnel et correspond pleinement à l’image que je souhaitais transmettre."
   },
   "seo": {
-    "title": "Refonte SaaS 2026 | Étude de cas | Arkanya",
-    "description": "Étude de cas détaillée d’une refonte SaaS avec optimisation des performances et amélioration de la conversion.",
+    "title": "Refonte site aide à la personne | Étude de cas | Arkanya",
+    "description": "Étude de cas d’une refonte stratégique avec repositionnement d’activité, nouveau domaine et optimisation de la conversion.",
     "keywords": [
-      "refonte SaaS",
-      "modernisation plateforme",
-      "Next.js SaaS",
-      "optimisation performance"
+      "refonte site web",
+      "aide à la personne",
+      "repositionnement digital",
+      "optimisation conversion"
     ]
   }
 }

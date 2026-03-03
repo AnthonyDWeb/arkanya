@@ -47,7 +47,7 @@ export async function generateMetadata({
             images: [project.image],
         },
         alternates: {
-            canonical: `https://tonsite.fr/realisations/${project.slug}`,
+            canonical: `https://www.arkanya.fr/realisations/${project.slug}`,
         },
         robots: {
             index: true,
@@ -85,7 +85,7 @@ export default async function RealisationDetail({
                 {/* HEADER */}
                 <FadeIn>
                     <header className="space-y-6">
-                        <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-[#d9ad45]">
+                        <h1 className="text-4xl md:text-5xl font-semibold text-[#d9ad45]">
                             {project.title}
                         </h1>
 
@@ -112,7 +112,9 @@ export default async function RealisationDetail({
                 {project.context && (
                     <FadeIn>
                         <section className="space-y-6">
-                            <h2 className="text-2xl font-semibold">Contexte</h2>
+                            <h2 className="text-2xl font-semibold">
+                                Contexte & Objectifs
+                            </h2>
                             <p className="text-neutral-700 leading-relaxed">
                                 {project.context}
                             </p>
@@ -120,11 +122,13 @@ export default async function RealisationDetail({
                     </FadeIn>
                 )}
 
-                {/* ENJEU */}
+                {/* PROBLÉMATIQUE */}
                 {project.challenge && (
                     <FadeIn>
                         <section className="space-y-6">
-                            <h2 className="text-2xl font-semibold">Enjeu</h2>
+                            <h2 className="text-2xl font-semibold">
+                                Problématique stratégique
+                            </h2>
                             <p className="text-neutral-700 leading-relaxed">
                                 {project.challenge}
                             </p>
@@ -162,13 +166,42 @@ export default async function RealisationDetail({
                     </section>
                 )}
 
+                {/* MÉTRIQUES */}
+                {project.metrics && project.metrics.length > 0 && (
+                    <FadeIn>
+                        <section className="space-y-8">
+                            <h2 className="text-2xl font-semibold">
+                                Indicateurs clés
+                            </h2>
+
+                            <div className="grid md:grid-cols-3 gap-8">
+                                {project.metrics.map((metric, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-white rounded-xl p-8 text-center border border-neutral-200 shadow-sm"
+                                    >
+                                        <p className="text-3xl font-semibold text-[#d9ad45]">
+                                            {metric.value}
+                                        </p>
+                                        <p className="text-sm text-neutral-600 mt-2">
+                                            {metric.label}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    </FadeIn>
+                )}
+
                 {/* AVANT / APRÈS */}
                 {project.type === "refonte" &&
                     project.beforeImage &&
                     project.afterImage && (
                         <FadeIn>
                             <section className="space-y-8">
-                                <h2 className="text-2xl font-semibold">Évolution</h2>
+                                <h2 className="text-2xl font-semibold">
+                                    Évolution
+                                </h2>
 
                                 <div className="grid md:grid-cols-2 gap-10">
                                     <div className="space-y-4">
@@ -205,9 +238,25 @@ export default async function RealisationDetail({
                 {project.results && (
                     <FadeIn>
                         <section className="space-y-6">
-                            <h2 className="text-2xl font-semibold">Résultats</h2>
+                            <h2 className="text-2xl font-semibold">
+                                Résultats & Impacts
+                            </h2>
                             <p className="text-neutral-700 leading-relaxed">
                                 {project.results}
+                            </p>
+                        </section>
+                    </FadeIn>
+                )}
+
+                {/* CONCLUSION */}
+                {project.conclusion && (
+                    <FadeIn>
+                        <section className="space-y-6">
+                            <h2 className="text-2xl font-semibold">
+                                Conclusion
+                            </h2>
+                            <p className="text-neutral-700 leading-relaxed">
+                                {project.conclusion}
                             </p>
                         </section>
                     </FadeIn>
@@ -242,16 +291,23 @@ export default async function RealisationDetail({
                 {project.technologies && (
                     <FadeIn>
                         <section className="space-y-6">
-                            <h2 className="text-2xl font-semibold">Technologies</h2>
+                            <h2 className="text-2xl font-semibold">
+                                Technologies
+                            </h2>
 
                             <div className="flex flex-wrap gap-3">
                                 {project.technologies.map((tech, index) => (
                                     <span
                                         key={index}
-                                        className="px-4 py-2 text-sm rounded-full bg-neutral-100"
+                                        className="px-5 py-2 text-sm font-medium rounded-full
+                                                   border border-[#d9ad45]/40
+                                                   bg-[#d9ad45]/10
+                                                   text-[#b8892d]
+                                                   hover:bg-[#d9ad45]/20
+                                                   transition"
                                     >
-                    {tech}
-                  </span>
+                                        {tech}
+                                    </span>
                                 ))}
                             </div>
                         </section>
@@ -267,9 +323,11 @@ export default async function RealisationDetail({
                             </p>
 
                             <p className="text-sm text-neutral-600">
-                                {project.testimonial.author} —{" "}
-                                {project.testimonial.role},{" "}
-                                {project.testimonial.company}
+                                {project.testimonial.author}
+                                {project.testimonial.role &&
+                                    ` — ${project.testimonial.role}`}
+                                {project.testimonial.company &&
+                                    `, ${project.testimonial.company}`}
                             </p>
                         </section>
                     </FadeIn>
@@ -282,7 +340,7 @@ export default async function RealisationDetail({
                             <a
                                 href={project.site}
                                 target="_blank"
-                                className="inline-block px-8 py-4 rounded-md text-white transition-transform duration-300 hover:-translate-y-1"
+                                className="inline-block px-8 py-4 rounded-md text-white transition-transform duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg"
                                 style={{backgroundColor: "#d9ad45"}}
                             >
                                 Voir le site
@@ -290,7 +348,6 @@ export default async function RealisationDetail({
                         </section>
                     </FadeIn>
                 )}
-
             </section>
         </main>
     );
