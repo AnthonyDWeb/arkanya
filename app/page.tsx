@@ -7,14 +7,14 @@ import Hero from "@/components/ui/hero";
 export default function Home() {
     const herotitle = "Structurer aujourd’hui les outils qui soutiendront votre croissance.";
     const herosubtitle = "Modernisation digitale, développement sur mesure et structuration stratégique."
-    
+
     return (
         <main className="min-h-screen bg-background text-foreground">
 
             {/* HERO */}
             <Hero image="/hero-office.avif" title={herotitle} subtitle={herosubtitle}>
                 <FadeUp delay={0.3}>
-                    <div className="flex gap-4 mt-10 flex-wrap">
+                    <div className="flex gap-4 my-10 flex-wrap">
 
                         <MotionButton
                             href="/contact"

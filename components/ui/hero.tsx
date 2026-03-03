@@ -15,7 +15,7 @@ export default function Hero({image, title, subtitle, height = "60vh", children}
     const heroclassname = "object-cover opacity-0 animate-heroFade";
 
     return (
-        <section className={sectionstyle} style={{height}}>
+        <section className={sectionstyle} style={{minHeight: height}}>
             <Image src={image} alt={title ?? ""} fill priority sizes="100vw" className={heroclassname}/>
             <div className="absolute inset-0 bg-black/40"/>
             <div className="relative z-10 w-[90%] xl:w-[75%] mx-auto text-left text-white">

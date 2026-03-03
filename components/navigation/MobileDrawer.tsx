@@ -15,9 +15,9 @@ export default function MobileDrawer() {
                 </div>
             </DrawerTrigger>
 
-            <DrawerContent>
-                <DrawerHeader>
-                    <div className="p-5 self-end">
+            <DrawerContent className={"items-center"}>
+                <DrawerHeader className="w-full">
+                    <div className="px-5 self-end">
                         <DrawerClose>
                             <X color={"red"}/>
                         </DrawerClose>
@@ -27,13 +27,13 @@ export default function MobileDrawer() {
                     </div>
                 </DrawerHeader>
 
-                <div className="px-4 flex flex-col gap-6 pb-10 text-lg">
+                <div className="flex flex-col gap-6 pb-10 text-lg w-full">
                     {siteConfig.navItems.map((item) =>
                         item.label !== "Services" ? (
-                            <DrawerClose asChild key={item.href}>
+                            <DrawerClose asChild key={item.href} className="text-center px-5">
                                 <Link
                                     href={item.href}
-                                    className="mobilegoldenhover"
+                                    className={"goldenhover mobilegoldenhover w-full"}
                                 >
                                     {item.label}
                                 </Link>

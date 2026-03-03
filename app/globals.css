@@ -108,6 +108,7 @@ body {
     height: 2px;
     background-color: var(--color-gold);
     transition: width 300ms ease;
+
 }
 
 .goldenhover:hover {
@@ -116,6 +117,13 @@ body {
 
 .goldenhover:hover::after {
     width: 100%;
+}
+
+.mobilegoldenhover:hover::after {
+    left: 5%;
+    width: 90%;
+    transition: width 300ms ease;
+    background-color: var(--color-gold);
 }
 
 @keyframes heroFade {

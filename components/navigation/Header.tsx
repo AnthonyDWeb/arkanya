@@ -18,7 +18,8 @@ export default function Header() {
             </nav>
         </header>
     ) : (
-        <header className={"w-full flex justify-between items-center px-4 py-3 goldenborderbottom"}>
+        <header className={"w-full flex justify-between items-center px-4 py-3 goldenborderbottom" +
+            ""}>
             <LogoBrand/>
             <MobileDrawer/>
         </header>
