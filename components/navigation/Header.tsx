@@ -10,7 +10,7 @@ export default function Header() {
 
     return isDesktop ? (
         <header
-            className={"w-full h-14 flex items-center px-8 shadow-sm bg-white/80 backdrop-blur-md goldenborderbottom"}>
+            className="w-full h-16 flex items-center px-6 lg:px-10 xl:px-16 bg-white/80 backdrop-blur-md goldenborderbottom">
             <LogoBrand/>
 
             <nav className="flex-1 flex justify-center">
@@ -18,8 +18,7 @@ export default function Header() {
             </nav>
         </header>
     ) : (
-        <header className={"w-full flex justify-between items-center px-4 py-3 goldenborderbottom" +
-            ""}>
+        <header className="w-full flex justify-between items-center px-4 py-3 goldenborderbottom">
             <LogoBrand/>
             <MobileDrawer/>
         </header>

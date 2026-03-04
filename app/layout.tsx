@@ -44,24 +44,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
                                        children,
-                                   }: Readonly<{ children: React.ReactNode; }>) {
+                                   }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="fr">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-
+        <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        >
         {/* HEADER GLOBAL */}
         <header>
             <Header/>
         </header>
 
         {/* CONTENU DES PAGES */}
-        <main>
+        <main className="flex-1 w-full mx-auto">
             {children}
         </main>
 
         {/* FOOTER GLOBAL */}
-        <footer></footer>
-
+        <footer/>
         </body>
         </html>
     );
