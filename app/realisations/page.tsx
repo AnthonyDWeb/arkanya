@@ -54,7 +54,7 @@ export default function Realisations() {
                                 className="relative overflow-hidden rounded-2xl group block border-subtle shadow-soft-lg"
                             >
                                 <Image
-                                    src={lastRealisation.image}
+                                    src={"/realisations/fakeit.png"}
                                     alt={lastRealisation.title}
                                     width={1600}
                                     height={1000}
@@ -121,7 +121,7 @@ export default function Realisations() {
                                                 className="relative overflow-hidden group"
                                             >
                                                 <Image
-                                                    src={project.image}
+                                                    src={"/realisations/fakeit.png"}
                                                     alt={project.title}
                                                     width={1200}
                                                     height={800}

@@ -10,7 +10,7 @@ export default function Header() {
 
     return isDesktop ? (
         <header
-            className="w-full h-16 flex items-center px-6 lg:px-10 xl:px-16 bg-white/80 backdrop-blur-md goldenborderbottom">
+            className="w-full h-16 flex items-center px-6 lg:px-10 xl:px-16 bg-white backdrop-blur-md goldenborderbottom">
             <LogoBrand/>
 
             <nav className="flex-1 flex justify-center">

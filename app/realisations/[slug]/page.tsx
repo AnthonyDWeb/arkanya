@@ -99,7 +99,7 @@ export default async function RealisationDetail({
                 <FadeIn>
                     <div className="relative overflow-hidden rounded-2xl">
                         <Image
-                            src={project.image}
+                            src={"/realisations/fakeit.png"}
                             alt={project.title}
                             width={1600}
                             height={1000}
@@ -209,7 +209,7 @@ export default async function RealisationDetail({
                                             Avant
                                         </p>
                                         <Image
-                                            src={project.beforeImage}
+                                            src={"/realisations/fakeit.png"}
                                             alt="Avant"
                                             width={1200}
                                             height={800}
@@ -222,7 +222,7 @@ export default async function RealisationDetail({
                                             Après
                                         </p>
                                         <Image
-                                            src={project.afterImage}
+                                            src={"/realisations/fakeit.png"}
                                             alt="Après"
                                             width={1200}
                                             height={800}
@@ -274,7 +274,7 @@ export default async function RealisationDetail({
                                 <FadeIn key={index} delay={index * 0.1}>
                                     <div className="overflow-hidden rounded-xl">
                                         <Image
-                                            src={img}
+                                            src={"/realisations/fakeit.png"}
                                             alt={`Screenshot ${index + 1}`}
                                             width={1200}
                                             height={800}
