@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import FadeUp from "@/components/animations/fadeup";
-import Reveal from "@/components/animations/reveal";
-import StaggerContainer from "@/components/animations/staggercontainer";
-import AnimatedCard from "@/components/animations/animatedcard";
+import ScrollTitle from "@/components/animations/scrolltitle";
+import ScrollReveal from "@/components/animations/ScrollReveal";
+import ScrollCard from "@/components/animations/scrollcard";
+
 import MotionButton from "@/components/animations/motionbutton";
 
 import lastRealisationData from "@/data/last-realisation.json";
@@ -20,7 +20,6 @@ export default function Realisations() {
     const herotitle = "Des réalisations concrètes, pensées pour durer.";
     const herosubtitle = "Chaque projet est structuré autour d’objectifs clairs, d’une architecture maîtrisée et d’un impact mesurable.";
 
-    // Exclure le projet principal + limiter à 3
     const otherRealisations = realisations
         .filter((project) => project.slug !== lastRealisation.slug)
         .slice(0, 3);
@@ -40,15 +39,15 @@ export default function Realisations() {
             <section className="py-20">
                 <div className="w-[90%] xl:w-[75%] mx-auto">
 
-                    <FadeUp>
+                    <ScrollTitle>
                         <h2 className="text-3xl font-semibold mb-12">
                             Étude de cas récente
                         </h2>
-                    </FadeUp>
+                    </ScrollTitle>
 
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-                        <Reveal>
+                        <ScrollReveal>
                             <a
                                 href={`/realisations/${lastRealisation.slug}`}
                                 className="relative overflow-hidden rounded-2xl group block border-subtle shadow-soft-lg"
@@ -61,9 +60,9 @@ export default function Realisations() {
                                     className="object-cover w-full h-[420px] transition-transform duration-700 group-hover:scale-105"
                                 />
                             </a>
-                        </Reveal>
+                        </ScrollReveal>
 
-                        <Reveal delay={0.2}>
+                        <ScrollReveal>
                             <div>
 
                                 <h3 className="text-2xl font-semibold mb-6">
@@ -90,7 +89,7 @@ export default function Realisations() {
                                 </MotionButton>
 
                             </div>
-                        </Reveal>
+                        </ScrollReveal>
 
                     </div>
                 </div>
@@ -101,60 +100,55 @@ export default function Realisations() {
                 <section className="py-20">
                     <div className="w-[90%] xl:w-[75%] mx-auto">
 
-                        <FadeUp>
+                        <ScrollTitle>
                             <h2 className="text-3xl font-semibold mb-12 text-center">
                                 Autres projets
                             </h2>
-                        </FadeUp>
+                        </ScrollTitle>
 
-                        <StaggerContainer>
-                            <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
+                        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
 
-                                {otherRealisations.map((project, index) => (
-                                    <AnimatedCard key={index}>
-                                        <div
-                                            className="flex flex-col h-full bg-surface rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition duration-300 overflow-hidden">
+                            {otherRealisations.map((project, index) => (
+                                <ScrollCard key={index}>
+                                    <div
+                                        className="flex flex-col h-full bg-surface rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition duration-300 overflow-hidden">
 
-                                            {/* Image */}
+                                        <a
+                                            href={`/realisations/${project.slug}`}
+                                            className="relative overflow-hidden group"
+                                        >
+                                            <Image
+                                                src={"/realisations/fakeit.png"}
+                                                alt={project.title}
+                                                width={1200}
+                                                height={800}
+                                                className="object-cover w-full h-[240px] transition-transform duration-500 group-hover:scale-105"
+                                            />
+                                        </a>
+
+                                        <div className="p-6 flex flex-col flex-grow">
+
+                                            <h3 className="text-lg font-semibold mb-3">
+                                                {project.title}
+                                            </h3>
+
+                                            <p className="text-text-medium text-sm leading-relaxed mb-6 flex-grow">
+                                                {project.description}
+                                            </p>
+
                                             <a
                                                 href={`/realisations/${project.slug}`}
-                                                className="relative overflow-hidden group"
+                                                className="inline-block text-sm font-medium text-gold hover:underline"
                                             >
-                                                <Image
-                                                    src={"/realisations/fakeit.png"}
-                                                    alt={project.title}
-                                                    width={1200}
-                                                    height={800}
-                                                    className="object-cover w-full h-[240px] transition-transform duration-500 group-hover:scale-105"
-                                                />
+                                                Voir le projet →
                                             </a>
 
-                                            {/* Contenu */}
-                                            <div className="p-6 flex flex-col flex-grow">
-
-                                                <h3 className="text-lg font-semibold mb-3">
-                                                    {project.title}
-                                                </h3>
-
-                                                <p className="text-text-medium text-sm leading-relaxed mb-6 flex-grow">
-                                                    {project.description}
-                                                </p>
-
-                                                {/* Bouton */}
-                                                <a
-                                                    href={`/realisations/${project.slug}`}
-                                                    className="inline-block text-sm font-medium text-gold hover:underline"
-                                                >
-                                                    Voir le projet →
-                                                </a>
-
-                                            </div>
                                         </div>
-                                    </AnimatedCard>
-                                ))}
+                                    </div>
+                                </ScrollCard>
+                            ))}
 
-                            </div>
-                        </StaggerContainer>
+                        </div>
 
                     </div>
                 </section>
@@ -164,27 +158,25 @@ export default function Realisations() {
             <section className="py-20 bg-deep text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
-                    <FadeUp>
+                    <ScrollTitle>
                         <h2 className="text-3xl font-semibold mb-6">
                             Et si le prochain projet était le vôtre ?
                         </h2>
-                    </FadeUp>
+                    </ScrollTitle>
 
-                    <FadeUp delay={0.1}>
+                    <ScrollReveal>
                         <p className="text-white/80 mb-8">
                             Discutons de vos objectifs et construisons
                             une solution adaptée à votre structure.
                         </p>
-                    </FadeUp>
+                    </ScrollReveal>
 
-                    <FadeUp delay={0.2}>
-                        <MotionButton
-                            href="/contact"
-                            className="px-10 py-3 rounded-md bg-gold text-black font-medium shadow-soft hover:shadow-soft-lg transition"
-                        >
-                            Planifier un échange
-                        </MotionButton>
-                    </FadeUp>
+                    <MotionButton
+                        href="/contact"
+                        className="px-10 py-3 rounded-md bg-gold text-black font-medium shadow-soft hover:shadow-soft-lg transition"
+                    >
+                        Planifier un échange
+                    </MotionButton>
 
                 </div>
             </section>

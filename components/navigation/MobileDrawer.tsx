@@ -4,14 +4,13 @@ import {Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerTrigger,} from "
 import {siteConfig} from "@/configs/navigation";
 import Link from "next/link";
 import {MenuIcon, X} from "lucide-react";
-import LogoBrand from "./LogoBrand";
 
 export default function MobileDrawer() {
     return (
         <Drawer direction="right">
             <DrawerTrigger>
                 <div className="p-5">
-                    <MenuIcon/>
+                    <MenuIcon color="white"/>
                 </div>
             </DrawerTrigger>
 
@@ -21,9 +20,6 @@ export default function MobileDrawer() {
                         <DrawerClose>
                             <X color={"red"}/>
                         </DrawerClose>
-                    </div>
-                    <div className="flex flex-col items-center pb-4">
-                        <LogoBrand/>
                     </div>
                 </DrawerHeader>
 

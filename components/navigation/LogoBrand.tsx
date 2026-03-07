@@ -2,23 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function LogoBrand() {
-    return (
-        <Link
-            href="/"
-            className="flex items-center gap-3 flex-none"
-        >
-            <Image
-                src="/logo/logo_transparent_v2.png"
-                alt="Arkanya"
-                width={42}
-                height={42}
-                className="object-contain"
-                priority
-            />
+    const logstyle = `text-lg font-medium tracking-[0.08em] uppercase text-white`;
+    const logimg = "/logo/logo_white_black_v2.png";
+    const imgstyle = "object-contain rounded-4xl";
 
-            <span className="text-lg font-medium tracking-[0.08em] uppercase text-neutral-900">
-                Arkanya
-            </span>
+    return (
+        <Link href="/" className="flex items-center gap-3 flex-none">
+            <Image src={logimg} alt="Arkanya" width={42} height={42} className={imgstyle} priority/>
+            <span className={logstyle}>Arkanya</span>
         </Link>
     );
 }

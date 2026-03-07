@@ -5,17 +5,15 @@ import realisationsData from "@/data/realisations.json";
 import lastRealisationData from "@/data/last-realisation.json";
 
 import type {Realisation} from "@/types/realisations";
-import FadeIn from "@/components/animations/fadein";
 
-/* ========================= */
-/*      TYPAGE PROPRE       */
-/* ========================= */
+import ScrollTitle from "@/components/animations/scrolltitle";
+import ScrollReveal from "@/components/animations/ScrollReveal";
 
 const realisations: Realisation[] = realisationsData;
 const lastRealisation: Realisation = lastRealisationData;
 
 /* ========================= */
-/*       SEO DYNAMIQUE      */
+/*       SEO DYNAMIQUE       */
 
 /* ========================= */
 
@@ -26,10 +24,7 @@ export async function generateMetadata({
 }) {
     const {slug} = await params;
 
-    const allProjects: Realisation[] = [
-        lastRealisation,
-        ...realisations,
-    ];
+    const allProjects: Realisation[] = [lastRealisation, ...realisations];
 
     const project = allProjects.find(
         (p) => p.slug.toLowerCase() === slug.toLowerCase()
@@ -57,7 +52,7 @@ export async function generateMetadata({
 }
 
 /* ========================= */
-/*          PAGE            */
+/*           PAGE            */
 /* ========================= */
 
 export default async function RealisationDetail({
@@ -65,12 +60,10 @@ export default async function RealisationDetail({
                                                 }: {
     params: Promise<{ slug: string }>;
 }) {
+
     const {slug} = await params;
 
-    const allProjects: Realisation[] = [
-        lastRealisation,
-        ...realisations,
-    ];
+    const allProjects: Realisation[] = [lastRealisation, ...realisations];
 
     const project = allProjects.find(
         (p) => p.slug.toLowerCase() === slug.toLowerCase()
@@ -80,23 +73,28 @@ export default async function RealisationDetail({
 
     return (
         <main className="bg-hero-radial text-neutral-900">
+
             <section className="w-[90%] xl:w-[70%] mx-auto py-24 space-y-24">
 
                 {/* HEADER */}
-                <FadeIn>
-                    <header className="space-y-6">
+                <header className="space-y-6">
+
+                    <ScrollTitle>
                         <h1 className="text-4xl md:text-5xl font-semibold text-[#d9ad45]">
                             {project.title}
                         </h1>
+                    </ScrollTitle>
 
+                    <ScrollReveal>
                         <p className="text-lg text-neutral-700 leading-relaxed max-w-3xl">
                             {project.description}
                         </p>
-                    </header>
-                </FadeIn>
+                    </ScrollReveal>
+
+                </header>
 
                 {/* IMAGE PRINCIPALE */}
-                <FadeIn>
+                <ScrollReveal>
                     <div className="relative overflow-hidden rounded-2xl">
                         <Image
                             src={"/realisations/fakeit.png"}
@@ -106,50 +104,65 @@ export default async function RealisationDetail({
                             className="object-cover w-full h-[500px] transition-transform duration-[2000ms] hover:scale-[1.02]"
                         />
                     </div>
-                </FadeIn>
+                </ScrollReveal>
 
                 {/* CONTEXTE */}
                 {project.context && (
-                    <FadeIn>
-                        <section className="space-y-6">
+                    <section className="space-y-6">
+
+                        <ScrollTitle>
                             <h2 className="text-2xl font-semibold">
                                 Contexte & Objectifs
                             </h2>
+                        </ScrollTitle>
+
+                        <ScrollReveal>
                             <p className="text-neutral-700 leading-relaxed">
                                 {project.context}
                             </p>
-                        </section>
-                    </FadeIn>
+                        </ScrollReveal>
+
+                    </section>
                 )}
 
                 {/* PROBLÉMATIQUE */}
                 {project.challenge && (
-                    <FadeIn>
-                        <section className="space-y-6">
+                    <section className="space-y-6">
+
+                        <ScrollTitle>
                             <h2 className="text-2xl font-semibold">
                                 Problématique stratégique
                             </h2>
+                        </ScrollTitle>
+
+                        <ScrollReveal>
                             <p className="text-neutral-700 leading-relaxed">
                                 {project.challenge}
                             </p>
-                        </section>
-                    </FadeIn>
+                        </ScrollReveal>
+
+                    </section>
                 )}
 
                 {/* DÉMARCHE */}
                 {project.approach && (
                     <section className="space-y-10">
-                        <FadeIn>
-                            <h2 className="text-2xl font-semibold">Démarche</h2>
-                        </FadeIn>
+
+                        <ScrollTitle>
+                            <h2 className="text-2xl font-semibold">
+                                Démarche
+                            </h2>
+                        </ScrollTitle>
 
                         <div className="relative">
                             <div className="absolute left-3 top-0 bottom-0 w-px bg-neutral-200"/>
 
                             <div className="space-y-12">
+
                                 {project.approach.map((step, index) => (
-                                    <FadeIn key={index} delay={index * 0.1}>
+                                    <ScrollReveal key={index}>
                                         <div className="relative pl-12">
+
                                             <div
                                                 className="absolute left-0 top-1 w-6 h-6 bg-white border border-neutral-300 rounded-full flex items-center justify-center text-xs font-medium">
                                                 {index + 1}
@@ -158,121 +171,69 @@ export default async function RealisationDetail({
                                             <p className="text-neutral-700 leading-relaxed">
                                                 {step}
                                             </p>
+
                                         </div>
-                                    </FadeIn>
+                                    </ScrollReveal>
                                 ))}
+
                             </div>
                         </div>
+
                     </section>
                 )}
 
                 {/* MÉTRIQUES */}
                 {project.metrics && project.metrics.length > 0 && (
-                    <FadeIn>
-                        <section className="space-y-8">
+                    <section className="space-y-8">
+
+                        <ScrollTitle>
                             <h2 className="text-2xl font-semibold">
                                 Indicateurs clés
                             </h2>
+                        </ScrollTitle>
 
-                            <div className="grid md:grid-cols-3 gap-8">
-                                {project.metrics.map((metric, index) => (
+                        <div className="grid md:grid-cols-3 gap-8 items-stretch">
+
+                            {project.metrics.map((metric, index) => (
+                                <ScrollReveal key={index}>
+
                                     <div
-                                        key={index}
-                                        className="bg-white rounded-xl p-8 text-center border border-neutral-200 shadow-sm"
-                                    >
+                                        className="bg-white rounded-xl p-8 border border-neutral-200 shadow-sm h-full flex flex-col justify-center items-center text-center">
+
                                         <p className="text-3xl font-semibold text-[#d9ad45]">
                                             {metric.value}
                                         </p>
-                                        <p className="text-sm text-neutral-600 mt-2">
+
+                                        <p className="text-sm text-neutral-600 mt-2 max-w-[200px]">
                                             {metric.label}
                                         </p>
-                                    </div>
-                                ))}
-                            </div>
-                        </section>
-                    </FadeIn>
-                )}
 
-                {/* AVANT / APRÈS */}
-                {project.type === "refonte" &&
-                    project.beforeImage &&
-                    project.afterImage && (
-                        <FadeIn>
-                            <section className="space-y-8">
-                                <h2 className="text-2xl font-semibold">
-                                    Évolution
-                                </h2>
-
-                                <div className="grid md:grid-cols-2 gap-10">
-                                    <div className="space-y-4">
-                                        <p className="text-sm uppercase tracking-wide text-neutral-500">
-                                            Avant
-                                        </p>
-                                        <Image
-                                            src={"/realisations/fakeit.png"}
-                                            alt="Avant"
-                                            width={1200}
-                                            height={800}
-                                            className="rounded-xl border border-neutral-200"
-                                        />
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <p className="text-sm uppercase tracking-wide text-neutral-500">
-                                            Après
-                                        </p>
-                                        <Image
-                                            src={"/realisations/fakeit.png"}
-                                            alt="Après"
-                                            width={1200}
-                                            height={800}
-                                            className="rounded-xl border border-neutral-200"
-                                        />
-                                    </div>
-                                </div>
-                            </section>
-                        </FadeIn>
-                    )}
+                                </ScrollReveal>
+                            ))}
 
-                {/* RÉSULTATS */}
-                {project.results && (
-                    <FadeIn>
-                        <section className="space-y-6">
-                            <h2 className="text-2xl font-semibold">
-                                Résultats & Impacts
-                            </h2>
-                            <p className="text-neutral-700 leading-relaxed">
-                                {project.results}
-                            </p>
-                        </section>
-                    </FadeIn>
-                )}
+                        </div>
 
-                {/* CONCLUSION */}
-                {project.conclusion && (
-                    <FadeIn>
-                        <section className="space-y-6">
-                            <h2 className="text-2xl font-semibold">
-                                Conclusion
-                            </h2>
-                            <p className="text-neutral-700 leading-relaxed">
-                                {project.conclusion}
-                            </p>
-                        </section>
-                    </FadeIn>
+                    </section>
                 )}
 
                 {/* GALERIE */}
                 {project.gallery && project.gallery.length > 0 && (
                     <section className="space-y-8">
-                        <FadeIn>
-                            <h2 className="text-2xl font-semibold">Galerie</h2>
-                        </FadeIn>
+
+                        <ScrollTitle>
+                            <h2 className="text-2xl font-semibold">
+                                Galerie
+                            </h2>
+                        </ScrollTitle>
 
                         <div className="grid gap-8 md:grid-cols-2">
+
                             {project.gallery.map((img, index) => (
-                                <FadeIn key={index} delay={index * 0.1}>
+                                <ScrollReveal key={index}>
                                     <div className="overflow-hidden rounded-xl">
+
                                         <Image
                                             src={"/realisations/fakeit.png"}
                                             alt={`Screenshot ${index + 1}`}
@@ -280,63 +241,54 @@ export default async function RealisationDetail({
                                             height={800}
                                             className="rounded-xl transition-transform duration-700 hover:scale-[1.03]"
                                         />
+
                                     </div>
-                                </FadeIn>
+                                </ScrollReveal>
                             ))}
+
                         </div>
+
                     </section>
                 )}
 
                 {/* TECHNOLOGIES */}
                 {project.technologies && (
-                    <FadeIn>
-                        <section className="space-y-6">
+                    <section className="space-y-6">
+
+                        <ScrollTitle>
                             <h2 className="text-2xl font-semibold">
                                 Technologies
                             </h2>
+                        </ScrollTitle>
 
+                        <ScrollReveal>
                             <div className="flex flex-wrap gap-3">
+
                                 {project.technologies.map((tech, index) => (
                                     <span
                                         key={index}
                                         className="px-5 py-2 text-sm font-medium rounded-full
-                                                   border border-[#d9ad45]/40
-                                                   bg-[#d9ad45]/10
-                                                   text-[#b8892d]
-                                                   hover:bg-[#d9ad45]/20
-                                                   transition"
+                    border border-[#d9ad45]/40
+                    bg-[#d9ad45]/10
+                    text-[#b8892d]
+                    hover:bg-[#d9ad45]/20
+                    transition"
                                     >
-                                        {tech}
-                                    </span>
+                    {tech}
+                  </span>
                                 ))}
+
                             </div>
-                        </section>
-                    </FadeIn>
-                )}
+                        </ScrollReveal>
 
-                {/* TÉMOIGNAGE */}
-                {project.testimonial && (
-                    <FadeIn>
-                        <section className="bg-neutral-50 p-12 rounded-2xl space-y-6">
-                            <p className="text-xl italic text-neutral-800 leading-relaxed">
-                                “{project.testimonial.content}”
-                            </p>
-
-                            <p className="text-sm text-neutral-600">
-                                {project.testimonial.author}
-                                {project.testimonial.role &&
-                                    ` — ${project.testimonial.role}`}
-                                {project.testimonial.company &&
-                                    `, ${project.testimonial.company}`}
-                            </p>
-                        </section>
-                    </FadeIn>
+                    </section>
                 )}
 
                 {/* CTA */}
                 {project.site && (
-                    <FadeIn>
+                    <ScrollReveal>
                         <section>
+
                             <a
                                 href={project.site}
                                 target="_blank"
@@ -345,10 +297,13 @@ export default async function RealisationDetail({
                             >
                                 Voir le site
                             </a>
+
                         </section>
-                    </FadeIn>
+                    </ScrollReveal>
                 )}
+
             </section>
+
         </main>
     );
 }

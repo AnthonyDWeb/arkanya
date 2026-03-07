@@ -15,26 +15,26 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: "Arkanya | Studio digital – Solutions web sur mesure pour PME",
+        default: "Arkanya | Développement web et solutions sur mesure pour entreprises",
         template: "%s | Arkanya",
     },
     description:
-        "Arkanya est un studio digital spécialisé dans la conception, la modernisation et l’évolution de solutions web et applications sur mesure pour PME ambitieuses.",
+        "Arkanya accompagne les entreprises dans la conception, la modernisation et le développement de sites web et d’applications sur mesure.",
     keywords: [
-        "studio digital",
         "développement web",
-        "refonte site web",
-        "application sur mesure",
-        "PME",
         "création site internet",
+        "refonte site web",
+        "application web sur mesure",
+        "développeur web indépendant",
+        "solutions web pour entreprises",
     ],
     authors: [{name: "Anthony Delforge"}],
     creator: "Arkanya",
     metadataBase: new URL("https://arkanya.fr"),
     openGraph: {
-        title: "Arkanya | Studio digital – Solutions web sur mesure",
+        title: "Arkanya | Développement web et solutions sur mesure",
         description:
-            "Studio digital spécialisé dans les solutions web sur mesure pour PME.",
+            "Conception, modernisation et développement de solutions web pour entreprises.",
         url: "https://arkanya.fr",
         siteName: "Arkanya",
         locale: "fr_FR",
@@ -42,27 +42,19 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
+
     return (
         <html lang="fr">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
-        >
-        {/* HEADER GLOBAL */}
-        <header>
-            <Header/>
-        </header>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
 
-        {/* CONTENU DES PAGES */}
-        <main className="flex-1 w-full mx-auto">
+        <Header/>
+
+        <main className="flex-1">
             {children}
         </main>
-
-        {/* FOOTER GLOBAL */}
         <footer/>
         </body>
         </html>
-    );
+    )
 }
