@@ -8,14 +8,10 @@ import type {Realisation} from "@/types/realisations";
 
 import ScrollTitle from "@/components/animations/scrolltitle";
 import ScrollReveal from "@/components/animations/ScrollReveal";
+import Hero from "@/components/ui/hero";
 
 const realisations: Realisation[] = realisationsData;
 const lastRealisation: Realisation = lastRealisationData;
-
-/* ========================= */
-/*       SEO DYNAMIQUE       */
-
-/* ========================= */
 
 export async function generateMetadata({
                                            params,
@@ -51,16 +47,11 @@ export async function generateMetadata({
     };
 }
 
-/* ========================= */
-/*           PAGE            */
-/* ========================= */
-
 export default async function RealisationDetail({
                                                     params,
                                                 }: {
     params: Promise<{ slug: string }>;
 }) {
-
     const {slug} = await params;
 
     const allProjects: Realisation[] = [lastRealisation, ...realisations];
@@ -71,42 +62,21 @@ export default async function RealisationDetail({
 
     if (!project) return notFound();
 
+    const beforeImages = project.gallery?.before ?? [];
+    const afterImages = project.gallery?.after ?? [];
+    const hasBefore = beforeImages.length > 0;
+
     return (
-        <main className="bg-hero-radial text-neutral-900">
+        <main className="bg-background text-foreground">
+
+            <Hero
+                image={project.image}
+                title={project.title}
+                subtitle={project.description}
+            />
 
             <section className="w-[90%] xl:w-[70%] mx-auto py-24 space-y-24">
 
-                {/* HEADER */}
-                <header className="space-y-6">
-
-                    <ScrollTitle>
-                        <h1 className="text-4xl md:text-5xl font-semibold text-[#d9ad45]">
-                            {project.title}
-                        </h1>
-                    </ScrollTitle>
-
-                    <ScrollReveal>
-                        <p className="text-lg text-neutral-700 leading-relaxed max-w-3xl">
-                            {project.description}
-                        </p>
-                    </ScrollReveal>
-
-                </header>
-
-                {/* IMAGE PRINCIPALE */}
-                <ScrollReveal>
-                    <div className="relative overflow-hidden rounded-2xl">
-                        <Image
-                            src={"/realisations/fakeit.png"}
-                            alt={project.title}
-                            width={1600}
-                            height={1000}
-                            className="object-cover w-full h-[500px] transition-transform duration-[2000ms] hover:scale-[1.02]"
-                        />
-                    </div>
-                </ScrollReveal>
-
-                {/* CONTEXTE */}
                 {project.context && (
                     <section className="space-y-6">
 
@@ -117,7 +87,7 @@ export default async function RealisationDetail({
                         </ScrollTitle>
 
                         <ScrollReveal>
-                            <p className="text-neutral-700 leading-relaxed">
+                            <p className="text-text-medium leading-relaxed">
                                 {project.context}
                             </p>
                         </ScrollReveal>
@@ -125,7 +95,6 @@ export default async function RealisationDetail({
                     </section>
                 )}
 
-                {/* PROBLÉMATIQUE */}
                 {project.challenge && (
                     <section className="space-y-6">
 
@@ -136,7 +105,7 @@ export default async function RealisationDetail({
                         </ScrollTitle>
 
                         <ScrollReveal>
-                            <p className="text-neutral-700 leading-relaxed">
+                            <p className="text-text-medium leading-relaxed">
                                 {project.challenge}
                             </p>
                         </ScrollReveal>
@@ -144,7 +113,6 @@ export default async function RealisationDetail({
                     </section>
                 )}
 
-                {/* DÉMARCHE */}
                 {project.approach && (
                     <section className="space-y-10">
 
@@ -155,34 +123,37 @@ export default async function RealisationDetail({
                         </ScrollTitle>
 
                         <div className="relative">
-                            <div className="absolute left-3 top-0 bottom-0 w-px bg-neutral-200"/>
+
+                            <div className="absolute left-3 top-0 bottom-0 w-px bg-border-subtle"/>
 
                             <div className="space-y-12">
 
                                 {project.approach.map((step, index) => (
                                     <ScrollReveal key={index}>
+
                                         <div className="relative pl-12">
 
                                             <div
-                                                className="absolute left-0 top-1 w-6 h-6 bg-white border border-neutral-300 rounded-full flex items-center justify-center text-xs font-medium">
+                                                className="absolute left-0 top-1 w-6 h-6 bg-surface border border-border-subtle rounded-full flex items-center justify-center text-xs font-medium">
                                                 {index + 1}
                                             </div>
 
-                                            <p className="text-neutral-700 leading-relaxed">
+                                            <p className="text-text-medium leading-relaxed">
                                                 {step}
                                             </p>
 
                                         </div>
+
                                     </ScrollReveal>
                                 ))}
 
                             </div>
+
                         </div>
 
                     </section>
                 )}
 
-                {/* MÉTRIQUES */}
                 {project.metrics && project.metrics.length > 0 && (
                     <section className="space-y-8">
 
@@ -198,13 +169,13 @@ export default async function RealisationDetail({
                                 <ScrollReveal key={index}>
 
                                     <div
-                                        className="bg-white rounded-xl p-8 border border-neutral-200 shadow-sm h-full flex flex-col justify-center items-center text-center">
+                                        className="bg-surface rounded-xl p-8 border border-border-subtle shadow-soft h-full flex flex-col justify-center items-center text-center">
 
-                                        <p className="text-3xl font-semibold text-[#d9ad45]">
+                                        <p className="text-3xl font-semibold text-gold">
                                             {metric.value}
                                         </p>
 
-                                        <p className="text-sm text-neutral-600 mt-2 max-w-[200px]">
+                                        <p className="text-sm text-text-medium mt-2 max-w-[200px]">
                                             {metric.label}
                                         </p>
 
@@ -218,9 +189,8 @@ export default async function RealisationDetail({
                     </section>
                 )}
 
-                {/* GALERIE */}
-                {project.gallery && project.gallery.length > 0 && (
-                    <section className="space-y-8">
+                {(beforeImages.length > 0 || afterImages.length > 0) && (
+                    <section className="space-y-12">
 
                         <ScrollTitle>
                             <h2 className="text-2xl font-semibold">
@@ -228,30 +198,97 @@ export default async function RealisationDetail({
                             </h2>
                         </ScrollTitle>
 
-                        <div className="grid gap-8 md:grid-cols-2">
+                        {hasBefore ? (
+                            <>
+                                <div className="space-y-6">
 
-                            {project.gallery.map((img, index) => (
-                                <ScrollReveal key={index}>
-                                    <div className="overflow-hidden rounded-xl">
+                                    <h3 className="text-lg font-medium text-text-medium">
+                                        Avant
+                                    </h3>
 
-                                        <Image
-                                            src={"/realisations/fakeit.png"}
-                                            alt={`Screenshot ${index + 1}`}
-                                            width={1200}
-                                            height={800}
-                                            className="rounded-xl transition-transform duration-700 hover:scale-[1.03]"
-                                        />
+                                    <div className="grid gap-8 md:grid-cols-2">
+
+                                        {beforeImages.map((img, index) => (
+                                            <ScrollReveal key={index}>
+
+                                                <div className="overflow-hidden rounded-xl">
+
+                                                    <Image
+                                                        src={img}
+                                                        alt={`Avant ${index + 1}`}
+                                                        width={1200}
+                                                        height={800}
+                                                        className="rounded-xl transition-transform duration-700 hover:scale-[1.03]"
+                                                    />
+
+                                                </div>
+
+                                            </ScrollReveal>
+                                        ))}
 
                                     </div>
-                                </ScrollReveal>
-                            ))}
 
-                        </div>
+                                </div>
+
+                                {afterImages.length > 0 && (
+                                    <div className="space-y-6">
+
+                                        <h3 className="text-lg font-medium text-text-medium">
+                                            Après
+                                        </h3>
+
+                                        <div className="grid gap-8 md:grid-cols-2">
+
+                                            {afterImages.map((img, index) => (
+                                                <ScrollReveal key={index}>
+
+                                                    <div className="overflow-hidden rounded-xl">
+
+                                                        <Image
+                                                            src={img}
+                                                            alt={`Après ${index + 1}`}
+                                                            width={1200}
+                                                            height={800}
+                                                            className="rounded-xl transition-transform duration-700 hover:scale-[1.03]"
+                                                        />
+
+                                                    </div>
+
+                                                </ScrollReveal>
+                                            ))}
+
+                                        </div>
+
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div className="grid gap-8 md:grid-cols-2">
+
+                                {afterImages.map((img, index) => (
+                                    <ScrollReveal key={index}>
+
+                                        <div className="overflow-hidden rounded-xl">
+
+                                            <Image
+                                                src={img}
+                                                alt={`Screenshot ${index + 1}`}
+                                                width={1200}
+                                                height={800}
+                                                className="rounded-xl transition-transform duration-700 hover:scale-[1.03]"
+                                            />
+
+                                        </div>
+
+                                    </ScrollReveal>
+                                ))}
+
+                            </div>
+                        )}
 
                     </section>
                 )}
 
-                {/* TECHNOLOGIES */}
                 {project.technologies && (
                     <section className="space-y-6">
 
@@ -262,43 +299,40 @@ export default async function RealisationDetail({
                         </ScrollTitle>
 
                         <ScrollReveal>
+
                             <div className="flex flex-wrap gap-3">
 
                                 {project.technologies.map((tech, index) => (
                                     <span
                                         key={index}
-                                        className="px-5 py-2 text-sm font-medium rounded-full
-                    border border-[#d9ad45]/40
-                    bg-[#d9ad45]/10
-                    text-[#b8892d]
-                    hover:bg-[#d9ad45]/20
-                    transition"
+                                        className="px-5 py-2 text-sm font-medium rounded-full border border-gold/40 bg-gold/10 text-gold hover:bg-gold/20 transition"
                                     >
                     {tech}
                   </span>
                                 ))}
 
                             </div>
+
                         </ScrollReveal>
 
                     </section>
                 )}
 
-                {/* CTA */}
                 {project.site && (
                     <ScrollReveal>
+
                         <section>
 
                             <a
                                 href={project.site}
                                 target="_blank"
-                                className="inline-block px-8 py-4 rounded-md text-white transition-transform duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg"
-                                style={{backgroundColor: "#d9ad45"}}
+                                className="inline-block px-8 py-4 rounded-md bg-gold text-black font-medium shadow-soft hover:shadow-soft-lg transition hover:-translate-y-1"
                             >
                                 Voir le site
                             </a>
 
                         </section>
+
                     </ScrollReveal>
                 )}
 
