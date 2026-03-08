@@ -46,9 +46,11 @@
     ],
     "after": [
       "/realisations/refonte-aide-a-la-personne/after/homepage.png",
-      "/realisations/refonte-aide-a-la-personne/before/services.png",
-      "/realisations/refonte-aide-a-la-personne/before/pricings.png",
-      "/realisations/refonte-aide-a-la-personne/before/contact.png"
+      "/realisations/refonte-aide-a-la-personne/after/pricings.png",
+      "/realisations/refonte-aide-a-la-personne/after/reservation.png",
+      "/realisations/refonte-aide-a-la-personne/after/contact.png",
+      "/realisations/refonte-aide-a-la-personne/after/faq.png",
+      "/realisations/refonte-aide-a-la-personne/after/faq2.png"
     ]
   },
   "testimonial": {
