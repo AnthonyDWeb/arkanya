@@ -1,141 +1,190 @@
-import SlideIn from "@/components/animations/slidein";
 import FadeIn from "@/components/animations/fadein";
 import MotionButton from "@/components/animations/motionbutton";
 import Hero from "@/components/ui/hero";
+import Link from "next/link";
 
 export default function Solutions() {
-    const herotitle = "Des solutions digitales structurées pour bâtir solidement.";
-    const herosubtitle = "Modernisation, structuration et développement sur mesure, adaptés à la réalité de votre organisation.";
+
+    const herotitle =
+        "Des solutions digitales structurées pour bâtir durablement.";
+
+    const herosubtitle =
+        "Création, modernisation et développement de solutions web fiables et évolutives pour les entreprises.";
+
     return (
         <main className="bg-background text-foreground">
-            <Hero image="/solutions-hero.avif" title={herotitle} subtitle={herosubtitle}/>
 
-            <section className="py-20">
+            <Hero
+                image="/solutions-hero.avif"
+                title={herotitle}
+                subtitle={herosubtitle}
+            />
+
+            {/* INTRO */}
+            <section className="py-24">
                 <div className="w-[90%] xl:w-[60%] mx-auto text-center">
+
                     <FadeIn>
                         <h2 className="text-3xl font-semibold mb-6">
-                            Une approche orientée clarté et performance
+                            Des solutions pensées pour soutenir votre activité
                         </h2>
                     </FadeIn>
 
                     <FadeIn delay={0.1}>
                         <p className="text-text-medium leading-relaxed">
-                            Chaque intervention repose sur une analyse précise de votre
-                            structure actuelle. L’objectif : concevoir des solutions
-                            fiables, évolutives et cohérentes avec votre développement.
+                            Chaque projet est conçu comme un système digital structuré,
+                            capable d’évoluer avec votre organisation et vos objectifs.
                         </p>
                     </FadeIn>
 
                 </div>
             </section>
 
-            <section className="py-32">
-                <div className="w-[90%] xl:w-[75%] mx-auto space-y-32">
+            {/* SERVICES */}
+            <section className="pb-32">
 
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <SlideIn direction="left">
-                            <div>
-                                <h3 className="text-2xl font-semibold mb-6">
-                                    Modernisation Digitale
-                                </h3>
+                <div className="w-[90%] xl:w-[70%] mx-auto grid md:grid-cols-2 gap-10">
 
-                                <p className="text-text-medium mb-6 leading-relaxed">
-                                    Transformation complète de plateformes existantes vers
-                                    des standards modernes, performants et optimisés.
-                                </p>
+                    {/* CREATION SITE */}
+                    <FadeIn>
+                        <Link
+                            href="/services/creation-site-web"
+                            className="group block p-10 rounded-2xl bg-surface border-subtle shadow-soft hover:shadow-soft-lg transition"
+                        >
+                            <h3 className="text-xl font-semibold mb-4">
+                                Création de site web
+                            </h3>
 
-                                <ul className="space-y-3 text-text-medium">
-                                    <li>• Audit technique et structurel</li>
-                                    <li>• Refonte UX / UI stratégique</li>
-                                    <li>• Optimisation performance & SEO</li>
-                                    <li>• Migration sécurisée</li>
-                                </ul>
-                            </div>
-                        </SlideIn>
+                            <p className="text-text-medium mb-4">
+                                Conception de sites modernes et performants.
+                            </p>
 
-                        <div className="bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
-                    </div>
+                            <p className="text-text-medium leading-relaxed mb-6">
+                                Un site professionnel qui renforce votre crédibilité,
+                                améliore votre visibilité et soutient
+                                le développement de votre activité.
+                            </p>
 
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <div className="order-2 md:order-1 bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
-                        <SlideIn direction="right">
-                            <div className="order-1 md:order-2">
-                                <h3 className="text-2xl font-semibold mb-6">
-                                    Développement sur Mesure
-                                </h3>
+                            <p className="text-sm text-gold font-medium">
+                                À partir de 1000 €
+                            </p>
 
-                                <p className="text-text-medium mb-6 leading-relaxed">
-                                    Conception d’outils digitaux spécifiquement adaptés
-                                    à votre organisation et à vos enjeux métier.
-                                </p>
+                        </Link>
+                    </FadeIn>
 
-                                <ul className="space-y-3 text-text-medium">
-                                    <li>• Outils métiers personnalisés</li>
-                                    <li>• Automatisation de processus</li>
-                                    <li>• Interfaces adaptées aux équipes</li>
-                                    <li>• Architecture scalable</li>
-                                </ul>
-                            </div>
-                        </SlideIn>
 
-                    </div>
+                    {/* MODERNISATION */}
+                    <FadeIn delay={0.05}>
+                        <Link
+                            href="/services/refonte-site-web"
+                            className="group block p-10 rounded-2xl bg-surface border-subtle shadow-soft hover:shadow-soft-lg transition"
+                        >
+                            <h3 className="text-xl font-semibold mb-4">
+                                Modernisation digitale
+                            </h3>
 
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <SlideIn direction="left">
-                            <div>
-                                <h3 className="text-2xl font-semibold mb-6">
-                                    Accompagnement & Évolution
-                                </h3>
+                            <p className="text-text-medium mb-4">
+                                Refonte et transformation de plateformes existantes.
+                            </p>
 
-                                <p className="text-text-medium mb-6 leading-relaxed">
-                                    Un suivi structuré pour garantir stabilité,
-                                    optimisation continue et cohérence technique.
-                                </p>
+                            <p className="text-text-medium leading-relaxed mb-6">
+                                Transformez un site vieillissant en un outil
+                                rapide, fiable et adapté aux standards actuels.
+                            </p>
 
-                                <ul className="space-y-3 text-text-medium">
-                                    <li>• Maintenance proactive</li>
-                                    <li>• Support prioritaire</li>
-                                    <li>• Optimisations régulières</li>
-                                    <li>• Conseil stratégique</li>
-                                </ul>
-                            </div>
-                        </SlideIn>
+                            <p className="text-sm text-gold font-medium">
+                                À partir de 2500 €
+                            </p>
 
-                        <div className="bg-surface rounded-2xl border-subtle shadow-soft-lg h-80"/>
+                        </Link>
+                    </FadeIn>
 
-                    </div>
+
+                    {/* DEVELOPPEMENT */}
+                    <FadeIn delay={0.1}>
+                        <Link
+                            href="/services/developpement-sur-mesure"
+                            className="group block p-10 rounded-2xl bg-surface border-subtle shadow-soft hover:shadow-soft-lg transition"
+                        >
+                            <h3 className="text-xl font-semibold mb-4">
+                                Développement sur mesure
+                            </h3>
+
+                            <p className="text-text-medium mb-4">
+                                Création d’applications et d’outils digitaux adaptés.
+                            </p>
+
+                            <p className="text-text-medium leading-relaxed mb-6">
+                                Des solutions conçues pour automatiser,
+                                structurer et faire évoluer vos processus internes.
+                            </p>
+
+                            <p className="text-sm text-gold font-medium">
+                                À partir de 4000 €
+                            </p>
+
+                        </Link>
+                    </FadeIn>
+
+
+                    {/* ACCOMPAGNEMENT */}
+                    <FadeIn delay={0.15}>
+                        <Link
+                            href="/services/accompagnement"
+                            className="group block p-10 rounded-2xl bg-surface border-subtle shadow-soft hover:shadow-soft-lg transition"
+                        >
+                            <h3 className="text-xl font-semibold mb-4">
+                                Accompagnement technique
+                            </h3>
+
+                            <p className="text-text-medium mb-4">
+                                Suivi et optimisation continue de vos outils digitaux.
+                            </p>
+
+                            <p className="text-text-medium leading-relaxed mb-6">
+                                Un accompagnement durable pour maintenir
+                                la performance et l’évolution de votre infrastructure.
+                            </p>
+
+                            <p className="text-sm text-gold font-medium">
+                                À partir de 250 € / mois
+                            </p>
+
+                        </Link>
+                    </FadeIn>
 
                 </div>
+
             </section>
 
 
-            {/* CTA FINAL */}
-            <section className="py-32 bg-deep text-white text-center">
+            {/* CTA */}
+            <section className="py-28 bg-deep text-white text-center">
+
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
                     <FadeIn>
                         <h2 className="text-3xl font-semibold mb-6">
-                            Planifions un échange
+                            Discutons de votre projet
                         </h2>
                     </FadeIn>
 
                     <FadeIn delay={0.1}>
                         <p className="text-white/80 mb-10">
-                            Discutons de vos objectifs et identifions
-                            la solution adaptée à votre structure.
+                            Un échange permet d’identifier rapidement
+                            la solution adaptée à votre organisation.
                         </p>
                     </FadeIn>
 
-                    <FadeIn delay={0.2}>
-                        <MotionButton
-                            href="/contact"
-                            className="px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition"
-                        >
-                            Planifier un échange
-                        </MotionButton>
-                    </FadeIn>
+                    <MotionButton
+                        href="/contact"
+                        className="px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition"
+                    >
+                        Planifier un échange
+                    </MotionButton>
 
                 </div>
+
             </section>
 
         </main>
