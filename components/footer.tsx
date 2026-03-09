@@ -20,8 +20,8 @@ export default function Footer() {
                                 height={120}
                                 className="object-contain"
                             />
+                            <h2>Arkanya</h2>
                         </Link>
-
                         <p className="text-sm text-neutral-600 leading-relaxed max-w-xs">
                             Développement web sur mesure, modernisation digitale
                             et accompagnement technique pour les entreprises
