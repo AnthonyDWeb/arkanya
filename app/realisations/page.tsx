@@ -5,26 +5,17 @@ import ScrollReveal from "@/components/animations/ScrollReveal";
 import ScrollCard from "@/components/animations/scrollcard";
 
 import MotionButton from "@/components/animations/motionbutton";
-
-import lastRealisationData from "@/data/last-realisation.json";
 import realisationsData from "@/data/realisations.json";
 
 import type {Realisation} from "@/types/realisations";
 import Hero from "@/components/ui/hero";
 
-const lastRealisation: Realisation = lastRealisationData;
 const realisations: Realisation[] = realisationsData;
-
+const realisationslength = realisations.length;
+const lastRealisation: Realisation = realisations[realisationslength - 1];
 export default function Realisations() {
-
     const herotitle = "Des réalisations concrètes, pensées pour durer.";
     const herosubtitle = "Chaque projet est structuré autour d’objectifs clairs, d’une architecture maîtrisée et d’un impact mesurable.";
-
-    const otherRealisations = realisations
-        .filter((project) => project.slug !== lastRealisation.slug)
-        .slice(0, 3);
-
-    const hasOtherRealisations = otherRealisations.length > 0;
 
     return (
         <main className="bg-background text-foreground">
@@ -53,7 +44,7 @@ export default function Realisations() {
                                 className="relative overflow-hidden rounded-2xl group block border-subtle shadow-soft-lg"
                             >
                                 <Image
-                                    src={`/realisations/${lastRealisation.slug}/after/homepage.png`}
+                                    src={lastRealisation.image}
                                     alt={lastRealisation.title}
                                     width={1600}
                                     height={1000}
@@ -96,19 +87,23 @@ export default function Realisations() {
             </section>
 
             {/* AUTRES PROJETS */}
-            {hasOtherRealisations && (
-                <section className="py-20">
-                    <div className="w-[90%] xl:w-[75%] mx-auto">
+            (
+            <section className="py-20">
+                <div className="w-[90%] xl:w-[75%] mx-auto">
 
-                        <ScrollTitle>
-                            <h2 className="text-3xl font-semibold mb-12 text-center">
-                                Autres projets
-                            </h2>
-                        </ScrollTitle>
+                    <ScrollTitle>
+                        <h2 className="text-3xl font-semibold mb-12 text-center">
+                            Autres projets
+                        </h2>
+                    </ScrollTitle>
 
-                        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3">
 
-                            {otherRealisations.map((project, index) => (
+                        {realisations.map((project, index) => {
+                            const notlast = project.slug !== lastRealisation.slug;
+                            const checkImg = project.image.includes(".png");
+                            const projectImg = checkImg ? project.image : "/realisations/fakeit.png";
+                            return notlast && (
                                 <ScrollCard key={index}>
                                     <div
                                         className="flex flex-col h-full bg-surface rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition duration-300 overflow-hidden">
@@ -118,7 +113,7 @@ export default function Realisations() {
                                             className="relative overflow-hidden group"
                                         >
                                             <Image
-                                                src={"/realisations/fakeit.png"}
+                                                src={projectImg}
                                                 alt={project.title}
                                                 width={1200}
                                                 height={800}
@@ -146,13 +141,14 @@ export default function Realisations() {
                                         </div>
                                     </div>
                                 </ScrollCard>
-                            ))}
-
-                        </div>
+                            )
+                        })}
 
                     </div>
-                </section>
-            )}
+
+                </div>
+            </section>
+            )
 
             {/* CTA FINAL */}
             <section className="py-20 bg-deep text-white text-center">

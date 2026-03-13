@@ -1,9 +1,9 @@
 {
   "slug": "refonte-aide-a-la-personne",
-  "title": "Refonte stratégique d’un site d’aide à la personne",
+  "title": "Les Services de Mathilde - Refonte stratégique d’un site d’aide à la personne",
   "description": "Repositionnement complet d’un site initialement dédié au baby-sitting vers une plateforme multi-services d’aide à la personne, avec nouveau domaine, nouvelle identité et optimisation de la conversion.",
-  "image": "/realisations/refonte-aide-a-la-personne/after/homepage.png",
-  "site": "https://nouveaudomaine.fr",
+  "image": "/realisations/refonte/lesservicesdemathilde/after/homepage.png",
+  "site": "https://lesservicesdemathilde.fr",
   "type": "refonte",
   "context": "La cliente proposait initialement des services de baby-sitting à travers un site vitrine simple, conçu à une période où son activité était encore ciblée et limitée. Avec le temps, son offre s’est naturellement élargie vers différents services d’aide à la personne : ménage, accompagnement quotidien, assistance administrative et garde ponctuelle. Le site existant ne reflétait plus cette évolution et continuait de véhiculer une image partielle de son expertise. Ce décalage entre la réalité de l’activité et sa présence digitale freinait la perception de professionnalisme et limitait l’élargissement de sa clientèle. L’objectif était donc de structurer une plateforme capable d’incarner cette montée en maturité, de clarifier l’offre multi-services et d’accompagner la croissance future de l’entreprise.",
   "challenge": "Le projet impliquait un repositionnement stratégique complet sans perturber la clientèle existante. Il fallait redéfinir la proposition de valeur, clarifier les services et structurer un discours plus professionnel tout en restant accessible. Le changement de nom de domaine nécessitait une transition maîtrisée afin de préserver la visibilité et la cohérence de la communication. L’intégration du nouveau logo fourni par la cliente demandait une direction artistique cohérente et élégante, capable de renforcer la crédibilité perçue. Enfin, le site devait être plus lisible, plus rassurant et davantage orienté vers la génération de demandes qualifiées.",
@@ -39,19 +39,19 @@
   ],
   "gallery": {
     "before": [
-      "/realisations/refonte-aide-a-la-personne/before/homepage.png",
-      "/realisations/refonte-aide-a-la-personne/before/services.png",
-      "/realisations/refonte-aide-a-la-personne/before/pricings.png",
-      "/realisations/refonte-aide-a-la-personne/before/contact.png"
+      "/realisations/refonte/lesservicesdemathilde/before/homepage.png",
+      "/realisations/refonte/lesservicesdemathilde/before/services.png",
+      "/realisations/refonte/lesservicesdemathilde/before/pricings.png",
+      "/realisations/refonte/lesservicesdemathilde/before/contact.png"
     ],
     "after": [
-      "/realisations/refonte-aide-a-la-personne/after/homepage.png",
-      "/realisations/refonte-aide-a-la-personne/after/pricings.png",
-      "/realisations/refonte-aide-a-la-personne/after/pricings2.png",
-      "/realisations/refonte-aide-a-la-personne/after/reservation.png",
-      "/realisations/refonte-aide-a-la-personne/after/contact.png",
-      "/realisations/refonte-aide-a-la-personne/after/faq.png",
-      "/realisations/refonte-aide-a-la-personne/after/faq2.png"
+      "/realisations/refonte/lesservicesdemathilde/after/homepage.png",
+      "/realisations/refonte/lesservicesdemathilde/after/pricings.png",
+      "/realisations/refonte/lesservicesdemathilde/after/pricings2.png",
+      "/realisations/refonte/lesservicesdemathilde/after/reservation.png",
+      "/realisations/refonte/lesservicesdemathilde/after/contact.png",
+      "/realisations/refonte/lesservicesdemathilde/after/faq.png",
+      "/realisations/refonte/lesservicesdemathilde/after/faq2.png"
     ]
   },
   "testimonial": {
