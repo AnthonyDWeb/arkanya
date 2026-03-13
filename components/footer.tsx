@@ -8,8 +8,6 @@ export default function Footer() {
 
                 <div className="grid md:grid-cols-4 gap-12">
 
-                    {/* Brand */}
-                    {/* Brand */}
                     <div className="space-y-6 flex flex-col items-center text-center">
 
                         <Link href="/">
@@ -31,7 +29,6 @@ export default function Footer() {
                     </div>
 
 
-                    {/* Navigation */}
                     <div className="space-y-4">
                         <h4 className="font-semibold text-sm uppercase tracking-wide">
                             Navigation
@@ -79,7 +76,6 @@ export default function Footer() {
                     </div>
 
 
-                    {/* Services */}
                     <div className="space-y-4">
                         <h4 className="font-semibold text-sm uppercase tracking-wide">
                             Services
@@ -116,7 +112,6 @@ export default function Footer() {
                     </div>
 
 
-                    {/* Contact */}
                     <div className="space-y-4">
                         <h4 className="font-semibold text-sm uppercase tracking-wide">
                             Contact
@@ -141,7 +136,6 @@ export default function Footer() {
                 </div>
 
 
-                {/* Bottom */}
                 <div
                     className="border-t border-neutral-200 mt-12 pt-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-neutral-500">
 
