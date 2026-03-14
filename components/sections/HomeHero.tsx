@@ -12,7 +12,7 @@ export default function HomeHero() {
 
     return (
         <HeroParallax
-            image="/hero-office.avif"
+            image="/page/home-hero.webp"
             title={title}
             subtitle={subtitle}
         >

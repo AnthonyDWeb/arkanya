@@ -7,7 +7,7 @@ export default function Contact() {
     const herosubtitle = "Un échange clair et structuré pour comprendre vos objectifs et identifier la solution adaptée.";
     return (
         <main className="bg-background text-foreground">
-            <Hero image="/contact-hero.avif" title={herotitle} subtitle={herosubtitle}/>
+            <Hero image="/page/contact-hero.webp" title={herotitle} subtitle={herosubtitle}/>
 
             <section className="py-20">
                 <div className="w-[90%] xl:w-[65%] mx-auto grid lg:grid-cols-2 gap-16 items-start">

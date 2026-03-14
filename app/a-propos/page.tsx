@@ -7,7 +7,7 @@ export default function APropos() {
     const herosubtitle = "Concevoir des systèmes fiables, évolutifs et cohérents avec la réalité de votre organisation.";
     return (
         <main className="bg-background text-foreground">
-            <Hero image="/apropos-hero.avif" title={herotitle} subtitle={herosubtitle}/>
+            <Hero image="/page/apropos-hero.webp" title={herotitle} subtitle={herosubtitle}/>
 
             <section className="py-20">
                 <div className="w-[90%] xl:w-[55%] mx-auto text-center">

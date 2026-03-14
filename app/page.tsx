@@ -11,15 +11,10 @@ export default function Home() {
 
     return (
         <main className="min-h-screen bg-background text-foreground">
-
-            {/* HERO */}
             <HomeHero/>
 
-            {/* APPROCHE */}
             <section className="pb-24 bg-background -mt-10">
-
                 <Container className="xl:w-[65%] text-center">
-
                     <ScrollTitle>
                         <h2 className="text-3xl md:text-4xl font-semibold mb-8">
                             Une approche claire et structurée.
@@ -34,19 +29,13 @@ export default function Home() {
                             et vision stratégique.
                         </p>
                     </ScrollReveal>
-
                 </Container>
-
             </section>
 
-            {/* EXPERTISES */}
             <HomeExpertise/>
 
-            {/* ARGUMENT */}
             <section className="py-24 bg-background">
-
                 <Container className="xl:w-[60%] text-center">
-
                     <ScrollTitle>
                         <h2 className="text-3xl font-semibold mb-10">
                             Plus qu’un site, une base durable.
@@ -60,14 +49,10 @@ export default function Home() {
                             pensée pour accompagner votre développement.
                         </p>
                     </ScrollReveal>
-
                 </Container>
-
             </section>
 
-            {/* CTA */}
             <HomeCTA/>
-
         </main>
     )
 }

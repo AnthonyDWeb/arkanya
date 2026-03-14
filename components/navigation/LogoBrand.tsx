@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function LogoBrand() {
     const logstyle = `text-lg font-medium tracking-[0.08em] uppercase text-white`;
-    const logimg = "/logo/logo_transparent.png";
+    const logimg = "/arkanya.webp";
     const imgstyle = "object-contain rounded-4xl";
 
     return (

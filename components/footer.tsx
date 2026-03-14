@@ -12,7 +12,7 @@ export default function Footer() {
 
                         <Link href="/">
                             <Image
-                                src="/logo/logo_transparent.png"
+                                src="/arkanya.webp"
                                 alt="Arkanya"
                                 width={120}
                                 height={120}
