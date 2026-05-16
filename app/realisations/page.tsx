@@ -18,7 +18,7 @@ export default function Realisations() {
     const herotitle = "Des réalisations concrètes, pensées pour durer.";
     const herosubtitle = "Chaque projet est structuré autour d’objectifs clairs, d’une architecture maîtrisée et d’un impact mesurable.";
 
-    const baselink = "relative overflow-hidden rounded-xl group block border-subtle shadow-soft-lg transition-all duration-300 ease-out w-[630px] min-h-[336px]"
+    const baselink = "relative overflow-hidden rounded-xl group block border-subtle shadow-soft-lg transition-all duration-300 ease-out w-full max-w-[630px]"
     const hoverlink = "hover:scale-[1.035] hover:shadow-[0_0_35px_rgba(232,183,92,0.35)] hover:border-[#E8B75C]/40";
     const linkStyle = `${baselink} ${hoverlink}`;
 
@@ -26,7 +26,7 @@ export default function Realisations() {
     const hoverlink2 = "hover:scale-[1.035] hover:shadow-[0_0_35px_rgba(232,183,92,0.35)] hover:border-[#E8B75C]/40";
     const linkStyle2 = `${baselink2} ${hoverlink2}`;
 
-    const imgStyle = "object-cover h-[336px] w-auto transition-transform duration-700 group-hover:scale-105";
+    const imgStyle = "object-cover h-[240px] sm:h-[336px] w-full transition-transform duration-700 group-hover:scale-105";
     const btnStyle = "px-8 py-3 bg-gold text-black rounded-md font-medium shadow-soft hover:shadow-soft-lg transition w-fit mx-auto";
     const btnStyle2 = "px-10 py-3 rounded-md bg-gold text-black font-medium shadow-soft hover:shadow-soft-lg transition";
     return (
@@ -39,15 +39,15 @@ export default function Realisations() {
                         <h2 className="text-3xl font-semibold mb-12">Étude de cas récente</h2>
                     </ScrollTitle>
 
-                    <div className="flex flex-wrap lg:flex-nowrap justify-around items-center gap-12">
+                    <div className="flex flex-wrap lg:flex-nowrap justify-around items-center gap-12 min-w-0">
                         <ScrollReveal>
                             <a href={`/realisations/${last.slug}`} className={linkStyle}>
-                                <Image src={last.image} alt={last.title} width={160} height={100} className={imgStyle}/>
+                                <Image src={last.image} alt={last.title} width={1200} height={800} className={imgStyle}/>
                             </a>
                         </ScrollReveal>
 
                         <ScrollReveal>
-                            <div className="max-w-[630px] flex flex-col">
+                            <div className="w-full max-w-[630px] min-w-0 flex flex-col">
                                 <h3 className="text-2xl font-semibold mb-6 text-center">{last.title}</h3>
                                 <p className="text-text-medium leading-relaxed mb-6 max-w-[90%] text-center mx-auto">{last.description}</p>
 
@@ -88,7 +88,7 @@ export default function Realisations() {
 
                             return notlast && (
                                 <ScrollCard key={index}>
-                                    <div className={linkStyle2}>
+                                    <div className={`${linkStyle2} min-w-0`}>
                                         <a href={projectSlug} className={linkStyle}>
                                             <Image src={pimg} alt={pt} width={1200} height={800} className={imgClass}/>
                                         </a>

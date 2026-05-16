@@ -54,7 +54,7 @@
     "slug": "app1",
     "title": "Développement d’une application métier interne",
     "description": "Conception d’un outil sur mesure pour structurer et automatiser les processus internes d’une PME.",
-    "image": "/realisations/application-metier-interne",
+    "image": "/realisations/application-metier-interne/interne.png",
     "type": "application",
     "context": "L’entreprise gérait ses opérations quotidiennes via une multitude d’outils dispersés : tableurs, échanges d’emails, documents partagés et suivis manuels. Cette organisation fragmentée limitait la visibilité globale sur les processus et rendait difficile la prise de décision stratégique. Les équipes perdaient du temps dans des tâches répétitives ou dans la recherche d’informations. La direction souhaitait structurer ses opérations afin d’améliorer la coordination interne et d’optimiser la performance globale. L’objectif était de créer un outil centralisé capable de soutenir la croissance de l’entreprise et d’apporter plus de clarté dans la gestion quotidienne.",
     "challenge": "Le principal défi consistait à concevoir une solution parfaitement adaptée aux besoins spécifiques de l’entreprise sans complexifier l’usage pour les équipes. L’outil devait être intuitif, évolutif et capable d’intégrer progressivement de nouvelles fonctionnalités. Il fallait également accompagner le changement auprès des utilisateurs afin d’assurer une adoption fluide. Enfin, l’architecture devait être suffisamment robuste pour supporter la montée en charge future tout en restant simple à maintenir.",
@@ -103,7 +103,7 @@
     "slug": "modernisation-site-pme",
     "title": "Modernisation digitale d’un site PME",
     "description": "Refonte technique et UX d’un site vieillissant afin d’améliorer performance, clarté et crédibilité.",
-    "image": "/realisations/modernisation/",
+    "image": "/realisations/modernisation/refonte.png",
     "type": "refonte",
     "context": "Le site existant présentait une architecture technique obsolète et une expérience utilisateur peu optimisée. Les temps de chargement étaient élevés et l’interface ne reflétait plus le niveau réel de professionnalisme de l’entreprise. Cette situation impactait la crédibilité perçue auprès des prospects et limitait l’efficacité commerciale du site. La direction souhaitait moderniser son image digitale et aligner sa présence en ligne avec la qualité de ses prestations. L’objectif était de renforcer la confiance des visiteurs tout en améliorant la performance technique globale.",
     "challenge": "Il fallait moderniser l’architecture et l’expérience utilisateur sans perturber la visibilité existante ni affecter le référencement acquis. Le projet nécessitait une refonte progressive et maîtrisée afin d’éviter toute interruption de service. La simplification du message et la clarification de l’offre devaient également être réalisées sans perdre l’identité de l’entreprise. L’enjeu était d’améliorer à la fois la performance technique et la perception stratégique de la marque.",
@@ -146,58 +146,10 @@
     }
   },
   {
-    "slug": "conversion",
-    "title": "Création d’une landing page optimisée conversion",
-    "description": "Conception d’une page stratégique dédiée à la génération de leads pour une offre spécifique.",
-    "image": "/realisations/landing-page/",
-    "type": "site",
-    "context": "L’entreprise lançait une nouvelle offre stratégique et avait besoin d’un support digital dédié capable de transformer les visiteurs en prospects qualifiés. Le site principal ne permettait pas de mettre suffisamment en avant cette nouvelle proposition de valeur. Il était nécessaire de structurer un message clair et centré sur un objectif unique : la conversion. La direction souhaitait une page à la fois performante, rassurante et cohérente avec son identité de marque.",
-    "challenge": "Le défi consistait à simplifier le message sans appauvrir l’argumentaire commercial. Il fallait structurer un parcours utilisateur fluide et orienté action tout en maintenant une esthétique sobre et professionnelle. La performance technique devait également être optimisée afin d’éviter toute friction lors du chargement. Enfin, la page devait être facilement mesurable afin d’analyser les performances et d’ajuster les campagnes marketing.",
-    "approach": [
-      "Clarification de la proposition de valeur",
-      "Structuration du parcours utilisateur orienté conversion",
-      "Création d’un design sobre et impactant",
-      "Optimisation des appels à l’action",
-      "Intégration d’un système de suivi des conversions"
-    ],
-    "results": "La landing page offre désormais un message structuré et centré sur un objectif précis. Les visiteurs identifient rapidement la valeur de l’offre et les actions à entreprendre. Le parcours est fluide et réduit les frictions potentielles. La structure permet un suivi clair des performances et facilite l’optimisation des campagnes marketing. La page devient un levier stratégique pour soutenir la croissance commerciale.",
-    "conclusion": "Une landing page dédiée permet de concentrer les efforts marketing et d’optimiser l’efficacité des campagnes en orientant clairement l’utilisateur vers l’action.",
-    "metrics": [
-      {
-        "label": "Objectif",
-        "value": "Génération de leads"
-      },
-      {
-        "label": "Structure",
-        "value": "Orientée conversion"
-      }
-    ],
-    "technologies": [
-      "Next.js",
-      "TypeScript",
-      "Optimisation UX"
-    ],
-    "gallery": {
-      "before": [],
-      "after": [
-        "/realisations/landing-page-1.png"
-      ]
-    },
-    "seo": {
-      "title": "Landing page optimisée conversion | Arkanya",
-      "description": "Création de page stratégique orientée génération de prospects.",
-      "keywords": [
-        "landing page",
-        "conversion",
-        "génération de leads"
-      ]
-    }
-  },
-  {
     "slug": "lesservicesdemathilde",
     "title": "Les Services de Mathilde - Refonte stratégique d’un site d’aide à la personne",
     "description": "Repositionnement complet d’un site initialement dédié au baby-sitting vers une plateforme multi-services d’aide à la personne, avec nouveau domaine, nouvelle identité et optimisation de la conversion.",
-    "image": "/realisations/refonte/lesservicesdemathilde/after/homepage.png",
+    "image": "/realisations/refonte/lesservicesdemathilde/img.png",
     "site": "https://lesservicesdemathilde.fr",
     "type": "refonte",
     "context": "La cliente proposait initialement des services de baby-sitting à travers un site vitrine simple, conçu à une période où son activité était encore ciblée et limitée. Avec le temps, son offre s’est naturellement élargie vers différents services d’aide à la personne : ménage, accompagnement quotidien, assistance administrative et garde ponctuelle. Le site existant ne reflétait plus cette évolution et continuait de véhiculer une image partielle de son expertise. Ce décalage entre la réalité de l’activité et sa présence digitale freinait la perception de professionnalisme et limitait l’élargissement de sa clientèle. L’objectif était donc de structurer une plateforme capable d’incarner cette montée en maturité, de clarifier l’offre multi-services et d’accompagner la croissance future de l’entreprise.",
