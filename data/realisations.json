@@ -36,7 +36,7 @@
     "gallery": {
       "before": [],
       "after": [
-        "/realisations/landing-page/anthony-delforge.png"
+        "/realisations/landing-page/anthony-delforge.webp"
       ]
     },
     "seo": {
@@ -86,7 +86,7 @@
     "gallery": {
       "before": [],
       "after": [
-        "/realisations/application-metier-interne/app1.png"
+        "/realisations/application-metier-interne/app1.webp"
       ]
     },
     "seo": {
@@ -133,7 +133,7 @@
     "gallery": {
       "before": [],
       "after": [
-        "/realisations/modernisation/pme-1.png"
+        "/realisations/modernisation/pme-1.webp"
       ]
     },
     "seo": {
@@ -186,19 +186,19 @@
     ],
     "gallery": {
       "before": [
-        "/realisations/refonte/lesservicesdemathilde/before/homepage.png",
-        "/realisations/refonte/lesservicesdemathilde/before/services.png",
-        "/realisations/refonte/lesservicesdemathilde/before/pricings.png",
-        "/realisations/refonte/lesservicesdemathilde/before/contact.png"
+        "/realisations/refonte/lesservicesdemathilde/before/homepage.webp",
+        "/realisations/refonte/lesservicesdemathilde/before/services.webp",
+        "/realisations/refonte/lesservicesdemathilde/before/pricings.webp",
+        "/realisations/refonte/lesservicesdemathilde/before/contact.webp"
       ],
       "after": [
-        "/realisations/refonte/lesservicesdemathilde/after/homepage.png",
-        "/realisations/refonte/lesservicesdemathilde/after/pricings.png",
-        "/realisations/refonte/lesservicesdemathilde/after/pricings2.png",
-        "/realisations/refonte/lesservicesdemathilde/after/reservation.png",
-        "/realisations/refonte/lesservicesdemathilde/after/contact.png",
-        "/realisations/refonte/lesservicesdemathilde/after/faq.png",
-        "/realisations/refonte/lesservicesdemathilde/after/faq2.png"
+        "/realisations/refonte/lesservicesdemathilde/after/homepage.webp",
+        "/realisations/refonte/lesservicesdemathilde/after/pricings.webp",
+        "/realisations/refonte/lesservicesdemathilde/after/pricings2.webp",
+        "/realisations/refonte/lesservicesdemathilde/after/reservation.webp",
+        "/realisations/refonte/lesservicesdemathilde/after/contact.webp",
+        "/realisations/refonte/lesservicesdemathilde/after/faq.webp",
+        "/realisations/refonte/lesservicesdemathilde/after/faq2.webp"
       ]
     },
     "testimonial": {

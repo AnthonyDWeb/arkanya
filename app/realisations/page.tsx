@@ -80,10 +80,10 @@ export default function Realisations() {
                             const projectSlug = `/realisations/${project.slug}`;
                             const linkStyle = "relative overflow-hidden group block";
                             const pt = project.title;
-                            const checkImg = project.image.includes(".png");
+                            const checkImg = project.image.includes(".webp");
                             const pimg = checkImg
                                 ? project.image
-                                : "/realisations/fakeit.png";
+                                : "/realisations/fakeit.webp";
                             const imgClass = "object-cover w-full h-[240px] transition-transform duration-500 group-hover:scale-105";
 
                             return notlast && (

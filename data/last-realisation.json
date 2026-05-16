@@ -2,7 +2,7 @@
   "slug": "refonte-aide-a-la-personne",
   "title": "Les Services de Mathilde - Refonte stratégique d’un site d’aide à la personne",
   "description": "Repositionnement complet d’un site initialement dédié au baby-sitting vers une plateforme multi-services d’aide à la personne, avec nouveau domaine, nouvelle identité et optimisation de la conversion.",
-  "image": "/realisations/refonte/lesservicesdemathilde/after/homepage.png",
+  "image": "/realisations/refonte/lesservicesdemathilde/after/homepage.webp",
   "site": "https://lesservicesdemathilde.fr",
   "type": "refonte",
   "context": "La cliente proposait initialement des services de baby-sitting à travers un site vitrine simple, conçu à une période où son activité était encore ciblée et limitée. Avec le temps, son offre s’est naturellement élargie vers différents services d’aide à la personne : ménage, accompagnement quotidien, assistance administrative et garde ponctuelle. Le site existant ne reflétait plus cette évolution et continuait de véhiculer une image partielle de son expertise. Ce décalage entre la réalité de l’activité et sa présence digitale freinait la perception de professionnalisme et limitait l’élargissement de sa clientèle. L’objectif était donc de structurer une plateforme capable d’incarner cette montée en maturité, de clarifier l’offre multi-services et d’accompagner la croissance future de l’entreprise.",
@@ -39,19 +39,19 @@
   ],
   "gallery": {
     "before": [
-      "/realisations/refonte/lesservicesdemathilde/before/homepage.png",
-      "/realisations/refonte/lesservicesdemathilde/before/services.png",
-      "/realisations/refonte/lesservicesdemathilde/before/pricings.png",
-      "/realisations/refonte/lesservicesdemathilde/before/contact.png"
+      "/realisations/refonte/lesservicesdemathilde/before/homepage.webp",
+      "/realisations/refonte/lesservicesdemathilde/before/services.webp",
+      "/realisations/refonte/lesservicesdemathilde/before/pricings.webp",
+      "/realisations/refonte/lesservicesdemathilde/before/contact.webp"
     ],
     "after": [
-      "/realisations/refonte/lesservicesdemathilde/after/homepage.png",
-      "/realisations/refonte/lesservicesdemathilde/after/pricings.png",
-      "/realisations/refonte/lesservicesdemathilde/after/pricings2.png",
-      "/realisations/refonte/lesservicesdemathilde/after/reservation.png",
-      "/realisations/refonte/lesservicesdemathilde/after/contact.png",
-      "/realisations/refonte/lesservicesdemathilde/after/faq.png",
-      "/realisations/refonte/lesservicesdemathilde/after/faq2.png"
+      "/realisations/refonte/lesservicesdemathilde/after/homepage.webp",
+      "/realisations/refonte/lesservicesdemathilde/after/pricings.webp",
+      "/realisations/refonte/lesservicesdemathilde/after/pricings2.webp",
+      "/realisations/refonte/lesservicesdemathilde/after/reservation.webp",
+      "/realisations/refonte/lesservicesdemathilde/after/contact.webp",
+      "/realisations/refonte/lesservicesdemathilde/after/faq.webp",
+      "/realisations/refonte/lesservicesdemathilde/after/faq2.webp"
     ]
   },
   "testimonial": {
