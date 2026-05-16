@@ -2,7 +2,7 @@
   {
     "slug": "creation-site-web",
     "hero": {
-      "image": "/services/creation-site-web/website.png",
+      "image": "/services/creation-site-web/website.webp",
       "title": "Création de sites web professionnels",
       "subtitle": "Des plateformes modernes, performantes et structurées pour soutenir le développement de votre activité."
     },
@@ -53,7 +53,7 @@
   {
     "slug": "refonte-site-web",
     "hero": {
-      "image": "/services/refonte-site-web/refonte.png",
+      "image": "/services/refonte-site-web/refonte.webp",
       "title": "Refonte et modernisation de sites web",
       "subtitle": "Transformez un site vieillissant en un outil moderne, rapide et performant."
     },
@@ -115,7 +115,7 @@
   {
     "slug": "developpement-sur-mesure",
     "hero": {
-      "image": "/services/developpement-sur-mesure/unique.png",
+      "image": "/services/developpement-sur-mesure/unique.webp",
       "title": "Développement de solutions digitales sur mesure",
       "subtitle": "Applications web, outils métier et plateformes conçues pour répondre précisément aux besoins de votre organisation."
     },
@@ -177,7 +177,7 @@
   {
     "slug": "accompagnement",
     "hero": {
-      "image": "/services/accompagnements/suivi.png",
+      "image": "/services/accompagnements/suivi.webp",
       "title": "Accompagnement et suivi technique",
       "subtitle": "Un suivi durable pour maintenir la performance et l’évolution de vos outils digitaux."
     },
