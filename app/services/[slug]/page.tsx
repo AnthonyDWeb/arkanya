@@ -73,13 +73,13 @@ export default async function ServicePage({params}: Params) {
                         {service.sections.map((section, index) => (
                             <FadeIn key={section.title} delay={index * 0.1}>
                                 <Card>
-                                    <h3 className="text-2xl font-semibold mb-4 text-center transition-colors group-hover:text-white"> {section.title} </h3>
+                                    <h3 className="text-2xl font-semibold mb-4 text-center transition-colors group-hover:text-white group-active:text-white group-focus-visible:text-white"> {section.title} </h3>
                                     <p className="text-text-medium mb-6 leading-relaxed"> {section.description} </p>
                                     <ul className="space-y-2 text-text-medium text-sm">
                                         {section.features.map((feature) => (<li key={feature}>• {feature}</li>))}
                                     </ul>
                                     {section.price &&
-                                        <p className="text-gold font-medium mt-auto pt-6 transition-colors group-hover:text-white group-hover:font-bold">{section.price} </p>
+                                        <p className="text-gold font-medium mt-auto pt-6 transition-colors group-hover:text-white group-active:text-white group-focus-visible:text-white group-hover:font-bold group-active:font-bold group-focus-visible:font-bold">{section.price} </p>
                                     }
                                 </Card>
                             </FadeIn>

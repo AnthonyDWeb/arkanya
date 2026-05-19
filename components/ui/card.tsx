@@ -9,7 +9,7 @@ type CardProps = {
 const cardBaseClassName = "group bg-surface h-full flex flex-col p-10 shadow-soft";
 const cardBorderClassName = "border-subtle rounded-2xl";
 const cardTransitionClassName = "transition-all duration-300 ease-out";
-const cardHoverClassName = "cardgoldhover hover:scale-[1.1]";
+const cardHoverClassName = "cardgoldhover hover:scale-[1.1] active:scale-[1.1] focus-visible:scale-[1.1]";
 
 const cardClassName = [
     cardBaseClassName,

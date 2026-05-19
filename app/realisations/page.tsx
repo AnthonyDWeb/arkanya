@@ -88,9 +88,9 @@ export default function Realisations() {
                                         <Image src={pimg} alt={pt} width={1200} height={800} className={imgClass}/>
 
                                         <div className="flex flex-col flex-grow mt-6">
-                                            <h3 className="text-lg font-semibold mb-3 transition-colors group-hover:text-white">{project.title}</h3>
+                                            <h3 className="text-lg font-semibold mb-3 transition-colors group-hover:text-white group-active:text-white group-focus-visible:text-white">{project.title}</h3>
                                             <p className="text-text-medium text-sm leading-relaxed mb-6 flex-grow">{project.description}</p>
-                                            <span className="inline-block text-sm font-medium text-gold transition-colors group-hover:text-white group-hover:font-bold group-hover:underline">
+                                            <span className="inline-block text-sm font-medium text-gold transition-colors group-hover:text-white group-active:text-white group-focus-visible:text-white group-hover:font-bold group-active:font-bold group-focus-visible:font-bold group-hover:underline group-active:underline group-focus-visible:underline">
                                                 Voir le projet →
                                             </span>
                                         </div>

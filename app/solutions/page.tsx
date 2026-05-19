@@ -38,10 +38,10 @@ export default function Solutions() {
                         {solutions.map((solution, index) => (
                             <FadeIn key={solution.title} delay={index * 0.05}>
                                 <Card href={solution.slug}>
-                                    <h3 className="text-xl font-semibold mb-4 text-center transition-colors group-hover:text-white">{solution.title}</h3>
+                                    <h3 className="text-xl font-semibold mb-4 text-center transition-colors group-hover:text-white group-active:text-white group-focus-visible:text-white">{solution.title}</h3>
                                     <p className="text-text-medium mb-4">{solution.tagline}</p>
                                     <p className="text-text-medium leading-relaxed mb-6">{solution.description}</p>
-                                    <p className="text-sm text-gold font-medium mt-auto transition-colors group-hover:text-white group-hover:font-bold group-hover:underline">
+                                    <p className="text-sm text-gold font-medium mt-auto transition-colors group-hover:text-white group-active:text-white group-focus-visible:text-white group-hover:font-bold group-active:font-bold group-focus-visible:font-bold group-hover:underline group-active:underline group-focus-visible:underline">
                                         {solution.price} →
                                     </p>
                                 </Card>

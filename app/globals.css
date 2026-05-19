@@ -129,7 +129,9 @@ body {
     background-color: var(--color-gold);
 }
 
-.cardgoldhover:hover {
+.cardgoldhover:hover,
+.cardgoldhover:active,
+.cardgoldhover:focus-visible {
     background-color: var(--color-card-gold);
     background-image: var(--color-card-gold-hover-gradient);
 }
