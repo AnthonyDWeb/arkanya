@@ -11,7 +11,6 @@ export default function NavLinks() {
 
             {siteConfig.navItems.map((item) => {
 
-                // Dropdown Services
                 if (item.label === "Services") {
                     return (
                         <Dropdown
@@ -26,24 +25,13 @@ export default function NavLinks() {
                     );
                 }
 
-                // Bouton Contact
-                const navstyle =
-                    item.label === "Contact"
-                        ? navbutt
-                        : "goldenhover";
-
-                const navlabel =
-                    item.label === "Contact"
-                        ? "Prendre contact"
-                        : item.label;
-
                 return (
                     <Link
                         key={item.href}
                         href={item.href}
-                        className={navstyle}
+                        className="goldenhover"
                     >
-                        {navlabel}
+                        {item.label}
                     </Link>
                 );
             })}
@@ -51,6 +39,3 @@ export default function NavLinks() {
         </div>
     );
 }
-
-const navbutt =
-    "shine-button px-4 py-1.5 rounded-3xl bg-gold text-white font-medium shadow-soft hover:shadow-soft-xl transition-all duration-500";

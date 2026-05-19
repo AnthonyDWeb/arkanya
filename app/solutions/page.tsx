@@ -1,7 +1,7 @@
 import FadeIn from "@/components/animations/fadein";
 import MotionButton from "@/components/animations/motionbutton";
+import Card from "@/components/ui/card";
 import Hero from "@/components/ui/hero";
-import Link from "next/link";
 
 import solutions from "@/data/solutions.json";
 
@@ -9,10 +9,6 @@ export default function Solutions() {
 
     const herotitle = "Des solutions digitales structurées pour bâtir durablement.";
     const herosubtitle = "Création, modernisation et développement de solutions web fiables et évolutives pour les entreprises.";
-
-    const baselink = "group block p-10 rounded-2xl bg-surface border-subtle shadow-soft transition-all duration-300 ease-out h-full flex flex-col"
-    const hoverlink = "hover:scale-[1.035] hover:shadow-[0_0_35px_rgba(232,183,92,0.35)] hover:border-[#E8B75C]/40";
-    const linkStyle = `${baselink} ${hoverlink}`;
 
     const buttonStyle = "px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition";
     return (
@@ -41,12 +37,14 @@ export default function Solutions() {
                     <div className="grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(270px,1fr))] mx-auto">
                         {solutions.map((solution, index) => (
                             <FadeIn key={solution.title} delay={index * 0.05}>
-                                <Link href={solution.slug} className={linkStyle}>
-                                    <h3 className="text-xl font-semibold mb-4 text-center">{solution.title}</h3>
+                                <Card href={solution.slug}>
+                                    <h3 className="text-xl font-semibold mb-4 text-center transition-colors group-hover:text-white">{solution.title}</h3>
                                     <p className="text-text-medium mb-4">{solution.tagline}</p>
                                     <p className="text-text-medium leading-relaxed mb-6">{solution.description}</p>
-                                    <p className="text-sm text-gold font-medium mt-auto">{solution.price}</p>
-                                </Link>
+                                    <p className="text-sm text-gold font-medium mt-auto transition-colors group-hover:text-white group-hover:font-bold group-hover:underline">
+                                        {solution.price} →
+                                    </p>
+                                </Card>
                             </FadeIn>
                         ))}
                     </div>

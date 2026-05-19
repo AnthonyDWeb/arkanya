@@ -17,8 +17,10 @@
     --color-deep-soft: #2E3A4B;
 
     /* Accent doré (plus discret, moins criard) */
-    --color-gold: #E8B75C;
-    --color-gold-soft: #F3D18B;
+    --color-gold: #D4AF37;
+    --color-gold-soft: #F1D27A;
+    --color-card-gold: #EFBF04;
+    --color-card-gold-hover-gradient: linear-gradient(135deg, #C99A02 0%, #F4D34A 50%, #C99A02 100%);
 
     /* Texte secondaire */
     --color-text-medium: #475569;
@@ -125,6 +127,11 @@ body {
     width: 90%;
     transition: width 300ms ease;
     background-color: var(--color-gold);
+}
+
+.cardgoldhover:hover {
+    background-color: var(--color-card-gold);
+    background-image: var(--color-card-gold-hover-gradient);
 }
 
 .shine-button {
