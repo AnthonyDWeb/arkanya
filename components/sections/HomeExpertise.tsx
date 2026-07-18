@@ -34,22 +34,24 @@ export default function HomeExpertise() {
     const card: Variants = {
         hidden: {
             opacity: 0,
-            y: 60,
-            scale: 0.95
+            y: 28,
+            scale: 0.985,
+            filter: "blur(6px)"
         },
         visible: {
             opacity: 1,
             y: 0,
             scale: 1,
+            filter: "blur(0px)",
             transition: {
-                duration: 0.7,
+                duration: 0.85,
                 ease: [0.22, 1, 0.36, 1] as const
             }
         }
     }
 
     return (
-        <section className="py-24 bg-surface">
+        <section className="py-28 bg-surface">
 
             <Container className="xl:w-[75%]">
 
@@ -63,7 +65,7 @@ export default function HomeExpertise() {
                     variants={container}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{once: false, margin: "-120px"}}
+                    viewport={{once: true, margin: "-120px"}}
                     className="grid md:grid-cols-2 xl:grid-cols-3 gap-12"
                 >
 
@@ -75,8 +77,10 @@ export default function HomeExpertise() {
                             className="h-full"
                         >
 
-                            <div
-                                className="h-full bg-background p-10 rounded-2xl border-subtle shadow-soft hover:shadow-soft-lg transition flex flex-col justify-between">
+                            <motion.div
+                                whileHover={{y: -6, scale: 1.01}}
+                                transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1]}}
+                                className="premium-card h-full p-10 flex flex-col justify-between">
 
                                 <div>
 
@@ -90,7 +94,7 @@ export default function HomeExpertise() {
 
                                 </div>
 
-                            </div>
+                            </motion.div>
 
                         </motion.div>
 

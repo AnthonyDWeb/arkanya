@@ -49,7 +49,7 @@ export default async function ServicePage({params}: Params) {
 
     return (
         <main className="bg-background text-foreground">
-            <Hero image={service.hero.image} title={service.hero.title} subtitle={service.hero.subtitle}/>
+            <Hero image={service.hero.image} title={service.hero.title} subtitle={service.hero.subtitle} variant="services"/>
 
             <section className="py-24">
                 <div className="w-[90%] xl:w-[60%] mx-auto text-center space-y-10">
@@ -88,14 +88,14 @@ export default async function ServicePage({params}: Params) {
                 </div>
             </section>
 
-            <section className="py-28 bg-deep text-white text-center">
+            <section className="premium-final-cta text-white text-center">
                 <FadeIn>
                     <h2 className="text-3xl font-semibold mb-6">
                         {service.cta.title}
                     </h2>
                 </FadeIn>
 
-                <MotionButton href="/contact" className="px-10 py-4 rounded-md bg-gold text-black">
+                <MotionButton href="/contact" className="cta-button px-10 py-4">
                     {service.cta.button}
                 </MotionButton>
             </section>

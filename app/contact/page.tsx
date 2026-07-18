@@ -1,5 +1,6 @@
 import FadeIn from "@/components/animations/fadein";
 import MotionButton from "@/components/animations/motionbutton";
+import ContactForm from "@/components/contact/ContactForm";
 import Hero from "@/components/ui/hero";
 
 export default function Contact() {
@@ -7,7 +8,7 @@ export default function Contact() {
     const herosubtitle = "Un échange clair et structuré pour comprendre vos objectifs et identifier la solution adaptée.";
     return (
         <main className="bg-background text-foreground">
-            <Hero image="/page/contact-hero.webp" title={herotitle} subtitle={herosubtitle}/>
+            <Hero image="/page/contact-hero.webp" title={herotitle} subtitle={herosubtitle} variant="contact"/>
 
             <section className="py-20">
                 <div className="w-[90%] xl:w-[65%] mx-auto grid lg:grid-cols-2 gap-16 items-start">
@@ -62,75 +63,12 @@ export default function Contact() {
                     </FadeIn>
 
                     <FadeIn delay={0.1}>
-                        <form className="space-y-6 border border-subtle shadow-soft-lg p-10 rounded-2xl">
-
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Nom</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-white border border-neutral-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition"
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">Email</label>
-                                <input
-                                    type="email"
-                                    className="w-full bg-white border border-neutral-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition"
-                                />
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">
-                                    Type de projet
-                                </label>
-                                <select
-                                    className="w-full bg-white border border-neutral-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition"
-                                >
-                                    <option>Modernisation / Refonte</option>
-                                    <option>Création site</option>
-                                    <option>Outil métier / Web app</option>
-                                    <option>Accompagnement technique</option>
-                                </select>
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">
-                                    Budget estimatif
-                                </label>
-                                <select
-                                    className="w-full bg-white border border-neutral-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition"
-                                >
-                                    <option>1 000 – 2 500 €</option>
-                                    <option>2 500 – 5 000 €</option>
-                                    <option>5 000 – 10 000 €</option>
-                                    <option>10 000 € +</option>
-                                </select>
-                            </div>
-
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">
-                                    Message
-                                </label>
-                                <textarea
-                                    rows={5}
-                                    className="w-full bg-white border border-neutral-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gold focus:border-gold transition"
-                                />
-                            </div>
-
-                            <MotionButton
-                                href="#"
-                                className="w-full px-8 py-3 rounded-md bg-gold text-black font-medium shadow-soft hover:shadow-soft-lg transition"
-                            >
-                                Envoyer la demande
-                            </MotionButton>
-
-                        </form>
+                        <ContactForm/>
                     </FadeIn>
                 </div>
             </section>
 
-            <section className="py-20 bg-deep text-white text-center">
+            <section className="premium-final-cta text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
                     <FadeIn>
@@ -148,7 +86,7 @@ export default function Contact() {
 
                     <MotionButton
                         href="/solutions"
-                        className="px-10 py-3 rounded-md bg-gold text-black font-medium transition"
+                        className="cta-button px-10 py-3"
                     >
                         Découvrir nos solutions
                     </MotionButton>

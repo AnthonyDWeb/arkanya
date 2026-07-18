@@ -11,7 +11,7 @@ export default function FadeLeft({children}: Props) {
         <motion.div
             initial={{
                 opacity: 0,
-                x: -60,
+                x: -24,
                 filter: "blur(6px)"
             }}
             whileInView={{
@@ -21,7 +21,7 @@ export default function FadeLeft({children}: Props) {
             }}
             viewport={{once: true, margin: "-80px"}}
             transition={{
-                duration: 0.7,
+                duration: 0.85,
                 ease: [0.22, 1, 0.36, 1]
             }}
         >

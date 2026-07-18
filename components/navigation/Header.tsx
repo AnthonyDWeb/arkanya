@@ -1,6 +1,5 @@
 "use client";
 
-import {useMediaQuery} from "@/hooks/use-media-query";
 import {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 
@@ -10,7 +9,6 @@ import MobileDrawer from "./MobileDrawer";
 
 export default function Header() {
 
-    const isDesktop = useMediaQuery("(min-width: 1000px)");
     const pathname = usePathname();
 
     const [scrolled, setScrolled] = useState(false);
@@ -37,28 +35,21 @@ export default function Header() {
 
     const isLegalPage = legalPages.includes(pathname);
 
-    const base =
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300";
+    const base = "fixed top-0 left-0 w-full z-50 bg-transparent transition-all duration-500";
+    const elevated = scrolled || isLegalPage;
 
-    const state =
-        scrolled || isLegalPage
-            ? "bg-black/80 backdrop-blur-md shadow-soft"
-            : "bg-transparent";
+    return (
+        <header className={`${base} flex items-center justify-between px-4 py-4 min-[1000px]:h-20 min-[1000px]:px-6 min-[1000px]:py-0 lg:px-10 xl:px-16`}>
 
-    return isDesktop ? (
-        <header className={`${base} ${state} h-16 flex items-center px-6 lg:px-10 xl:px-16`}>
+            <LogoBrand elevated={elevated}/>
 
-            <LogoBrand/>
-
-            <nav className="flex-1 flex justify-end mr-10">
+            <nav className="hidden flex-1 justify-end min-[1000px]:flex">
                 <NavLinks/>
             </nav>
 
-        </header>
-    ) : (
-        <header className={`${base} ${state} flex justify-between items-center px-4 py-3`}>
-            <LogoBrand/>
-            <MobileDrawer/>
+            <div className="min-[1000px]:hidden">
+                <MobileDrawer/>
+            </div>
         </header>
     );
 }

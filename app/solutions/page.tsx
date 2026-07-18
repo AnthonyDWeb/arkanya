@@ -10,10 +10,10 @@ export default function Solutions() {
     const herotitle = "Des solutions digitales structurées pour bâtir durablement.";
     const herosubtitle = "Création, modernisation et développement de solutions web fiables et évolutives pour les entreprises.";
 
-    const buttonStyle = "px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition";
+    const buttonStyle = "cta-button px-10 py-4";
     return (
         <main className="bg-background text-foreground">
-            <Hero image="/page/solutions-hero.webp" title={herotitle} subtitle={herosubtitle}/>
+            <Hero image="/page/solutions-hero.webp" title={herotitle} subtitle={herosubtitle} variant="solutions"/>
 
             <section className="py-24">
                 <div className="w-[90%] xl:w-[60%] mx-auto text-center">
@@ -51,7 +51,7 @@ export default function Solutions() {
                 </div>
             </section>
 
-            <section className="py-28 bg-deep text-white text-center">
+            <section className="premium-final-cta text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
                     <FadeIn>
                         <h2 className="text-3xl font-semibold mb-6">

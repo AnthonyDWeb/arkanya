@@ -117,7 +117,7 @@
     "hero": {
       "image": "/services/developpement-sur-mesure/unique.webp",
       "title": "Développement de solutions digitales sur mesure",
-      "subtitle": "Applications web, outils métier et plateformes conçues pour répondre précisément aux besoins de votre organisation."
+      "subtitle": "Applications web et mobiles, outils métier et plateformes conçues pour répondre précisément aux besoins de votre organisation."
     },
     "intro": {
       "title": "Des solutions conçues pour vos besoins spécifiques",
@@ -125,13 +125,13 @@
     },
     "sections": [
       {
-        "title": "Applications web",
-        "description": "Applications accessibles via navigateur pour gérer données et processus.",
+        "title": "Applications web et mobiles",
+        "description": "Applications accessibles via navigateur ou adaptées aux usages mobiles pour gérer données et processus.",
         "features": [
           "Tableaux de bord",
           "Interfaces de gestion",
           "Espaces clients",
-          "Applications SaaS"
+          "Applications mobiles sur mesure"
         ],
         "price": "À partir de 4000 €"
       },

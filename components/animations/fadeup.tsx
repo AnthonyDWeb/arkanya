@@ -12,9 +12,9 @@ export default function FadeUp({children, delay = 0}: Props) {
         <motion.div
             initial={{
                 opacity: 0,
-                y: 50,
-                scale: 0.96,
-                filter: "blur(6px)"
+                y: 24,
+                scale: 0.985,
+                filter: "blur(8px)"
             }}
             whileInView={{
                 opacity: 1,
@@ -24,7 +24,7 @@ export default function FadeUp({children, delay = 0}: Props) {
             }}
             viewport={{once: true, margin: "-80px"}}
             transition={{
-                duration: 0.75,
+                duration: 0.9,
                 delay,
                 ease: [0.22, 1, 0.36, 1]
             }}

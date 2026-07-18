@@ -1,36 +1,40 @@
+"use client";
+
 import Link from "next/link";
 import type {ReactNode} from "react";
+import {motion} from "framer-motion";
 
 type CardProps = {
     children: ReactNode;
     href?: string;
 };
 
-const cardBaseClassName = "group bg-surface h-full flex flex-col p-10 shadow-soft";
-const cardBorderClassName = "border-subtle rounded-2xl";
-const cardTransitionClassName = "transition-all duration-300 ease-out";
-const cardHoverClassName = "cardgoldhover hover:scale-[1.1] active:scale-[1.1] focus-visible:scale-[1.1]";
-
-const cardClassName = [
-    cardBaseClassName,
-    cardBorderClassName,
-    cardTransitionClassName,
-    cardHoverClassName,
-].join(" ");
+const cardClassName = "premium-card group h-full flex flex-col p-8 sm:p-10";
 
 export default function Card({children, href}: CardProps) {
 
     if (href) {
         return (
-            <Link href={href} className={cardClassName}>
-                {children}
-            </Link>
+            <motion.div
+                className="h-full"
+                whileHover={{y: -6, scale: 1.012}}
+                whileTap={{scale: 0.992}}
+                transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1]}}
+            >
+                <Link href={href} className={cardClassName}>
+                    {children}
+                </Link>
+            </motion.div>
         );
     }
 
     return (
-        <div className={cardClassName}>
+        <motion.div
+            className={cardClassName}
+            whileHover={{y: -6, scale: 1.012}}
+            transition={{duration: 0.55, ease: [0.22, 1, 0.36, 1]}}
+        >
             {children}
-        </div>
+        </motion.div>
     );
 }

@@ -2,6 +2,7 @@
 
 import {ReactNode, useState} from "react";
 import Link from "next/link";
+import {AnimatePresence, motion} from "framer-motion";
 
 type DropdownItem = {
     label: string;
@@ -19,54 +20,38 @@ export default function Dropdown({label, items}: DropdownProps) {
 
     return (
         <div
-            className="relative"
+            className="relative flex items-center"
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}
         >
 
-            {/* Trigger */}
-            <div className="cursor-pointer">
+            <div className="flex cursor-pointer items-center">
                 {label}
             </div>
 
+            <AnimatePresence>
             {open && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-4 z-50">
+                <motion.div
+                    initial={{opacity: 0, y: 8, scale: 0.98, filter: "blur(4px)"}}
+                    animate={{opacity: 1, y: 0, scale: 1, filter: "blur(0px)"}}
+                    exit={{opacity: 0, y: 6, scale: 0.98, filter: "blur(4px)"}}
+                    transition={{duration: 0.28, ease: [0.22, 1, 0.36, 1]}}
+                    className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-4"
+                >
 
-                    {/* Pointe */}
                     <div className="flex justify-center">
-                        <div className="
-                            w-3 h-3
-                            bg-white dark:bg-neutral-900
-                            rotate-45
-                            -mb-2
-                        "/>
+                        <div className="h-3 w-3 -mb-2 rotate-45 border-l border-t border-[#ebe4ca]/12 bg-[#10141c]"/>
                     </div>
 
-                    {/* Menu */}
-                    <div className="
-                        w-60
-                        bg-white dark:bg-neutral-900
-                        border border-neutral-200 dark:border-neutral-800
-                        rounded-md
-                        shadow-lg
-                        py-2
-                    ">
+                    <div
+                        className="w-72 rounded-xl border border-[#ebe4ca]/12 bg-[#10141c]/94 p-2 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl"
+                    >
 
                         {items.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className="
-                                block
-                                px-4 py-2.5
-                                text-sm
-                                text-neutral-700 dark:text-neutral-300
-                                hover:bg-neutral-200
-                                dark:hover:bg-neutral-700
-                                hover:text-neutral-900
-                                dark:hover:text-white
-                                transition
-                                "
+                                className="block rounded-lg px-4 py-3 text-sm text-white/72 transition duration-300 hover:bg-[#ebe4ca]/8 hover:text-white focus-visible:bg-[#ebe4ca]/10 focus-visible:text-white focus-visible:outline-none"
                             >
                                 {item.label}
                             </Link>
@@ -74,8 +59,9 @@ export default function Dropdown({label, items}: DropdownProps) {
 
                     </div>
 
-                </div>
+                </motion.div>
             )}
+            </AnimatePresence>
 
         </div>
     );

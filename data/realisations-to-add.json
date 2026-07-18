@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "site-vitrine-artisan",
+    "service": "creation-site-web",
+    "serviceType": "site-vitrine",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Création d’un site vitrine pour artisan local",
+    "description": "Conception d’un site professionnel destiné à présenter les services et réalisations d’un artisan.",
+    "image": "/realisations/creation-site-web/site-vitrine.png",
+    "type": "site-vitrine",
+    "context": "L’artisan disposait uniquement d’une présence via réseaux sociaux et bouche-à-oreille.",
+    "challenge": "Créer une présence digitale professionnelle capable de rassurer les prospects et de présenter clairement les prestations.",
+    "approach": [
+      "Création d’une identité visuelle cohérente",
+      "Structuration des services",
+      "Optimisation mobile",
+      "Ajout de formulaires de contact"
+    ],
+    "results": "Le site apporte désormais une image plus crédible et facilite les demandes de devis.",
+    "conclusion": "Le site vitrine devient un véritable outil commercial local.",
+    "metrics": [
+      {
+        "label": "Objectif",
+        "value": "Visibilité locale"
+      }
+    ],
+    "technologies": [
+      "Next.js",
+      "Responsive Design"
+    ],
+    "display": "image"
+  }
+]

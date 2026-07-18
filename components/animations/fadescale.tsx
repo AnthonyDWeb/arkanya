@@ -11,7 +11,7 @@ export default function FadeScale({children}: Props) {
         <motion.div
             initial={{
                 opacity: 0,
-                scale: 0.92,
+                scale: 0.975,
                 filter: "blur(6px)"
             }}
             whileInView={{
@@ -21,7 +21,7 @@ export default function FadeScale({children}: Props) {
             }}
             viewport={{once: true, margin: "-80px"}}
             transition={{
-                duration: 0.8,
+                duration: 0.9,
                 ease: [0.22, 1, 0.36, 1]
             }}
         >

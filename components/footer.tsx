@@ -3,8 +3,9 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className="border-t border-neutral-200 bg-background text-foreground">
-            <div className="w-[90%] max-w-7xl mx-auto py-16">
+        <footer className="relative border-t border-[#ebe4ca]/10 bg-[#0E1117] text-white overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_0%,rgba(235,228,202,0.12),transparent_28rem),radial-gradient(circle_at_88%_18%,rgba(235,228,202,0.06),transparent_24rem)]"/>
+            <div className="relative w-[90%] max-w-7xl mx-auto py-20">
 
                 <div className="grid md:grid-cols-4 gap-12">
 
@@ -20,7 +21,7 @@ export default function Footer() {
                             />
                             <h2>Arkanya</h2>
                         </Link>
-                        <p className="text-sm text-neutral-600 leading-relaxed max-w-xs">
+                        <p className="text-sm text-white/58 leading-relaxed max-w-xs">
                             Développement web sur mesure, modernisation digitale
                             et accompagnement technique pour les entreprises
                             souhaitant structurer leurs outils numériques.
@@ -30,44 +31,44 @@ export default function Footer() {
 
 
                     <div className="space-y-4">
-                        <h4 className="font-semibold text-sm uppercase tracking-wide">
+                        <h4 className="font-semibold text-sm uppercase tracking-[0.16em] text-[#ebe4ca]">
                             Navigation
                         </h4>
 
-                        <ul className="space-y-2 text-sm text-neutral-600">
+                        <ul className="space-y-2 text-sm text-white/56">
 
                             <li>
-                                <Link href="/" className="hover:text-foreground transition">
+                                <Link href="/" className="hover:text-[#ebe4ca] transition">
                                     Accueil
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/solutions" className="hover:text-foreground transition">
+                                <Link href="/solutions" className="hover:text-[#ebe4ca] transition">
                                     Solutions
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/services" className="hover:text-foreground transition">
+                                <Link href="/services" className="hover:text-[#ebe4ca] transition">
                                     Services
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/realisations" className="hover:text-foreground transition">
+                                <Link href="/realisations" className="hover:text-[#ebe4ca] transition">
                                     Réalisations
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/a-propos" className="hover:text-foreground transition">
+                                <Link href="/a-propos" className="hover:text-[#ebe4ca] transition">
                                     À propos
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/contact" className="hover:text-foreground transition">
+                                <Link href="/contact" className="hover:text-[#ebe4ca] transition">
                                     Contact
                                 </Link>
                             </li>
@@ -77,33 +78,33 @@ export default function Footer() {
 
 
                     <div className="space-y-4">
-                        <h4 className="font-semibold text-sm uppercase tracking-wide">
+                        <h4 className="font-semibold text-sm uppercase tracking-[0.16em] text-[#ebe4ca]">
                             Services
                         </h4>
 
-                        <ul className="space-y-2 text-sm text-neutral-600">
+                        <ul className="space-y-2 text-sm text-white/56">
 
                             <li>
-                                <Link href="/services/creation-site-web" className="hover:text-foreground transition">
+                                <Link href="/services/creation-site-web" className="hover:text-[#ebe4ca] transition">
                                     Création de site web
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/services/refonte-site-web" className="hover:text-foreground transition">
+                                <Link href="/services/refonte-site-web" className="hover:text-[#ebe4ca] transition">
                                     Refonte de site web
                                 </Link>
                             </li>
 
                             <li>
                                 <Link href="/services/developpement-sur-mesure"
-                                      className="hover:text-foreground transition">
+                                      className="hover:text-[#ebe4ca] transition">
                                     Développement sur mesure
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="/services/accompagnement" className="hover:text-foreground transition">
+                                <Link href="/services/accompagnement" className="hover:text-[#ebe4ca] transition">
                                     Accompagnement
                                 </Link>
                             </li>
@@ -113,16 +114,16 @@ export default function Footer() {
 
 
                     <div className="space-y-4">
-                        <h4 className="font-semibold text-sm uppercase tracking-wide">
+                        <h4 className="font-semibold text-sm uppercase tracking-[0.16em] text-[#ebe4ca]">
                             Contact
                         </h4>
 
-                        <ul className="space-y-2 text-sm text-neutral-600">
+                        <ul className="space-y-2 text-sm text-white/56">
 
                             <li>
                                 <a
                                     href="mailto:contact@arkanya.fr"
-                                    className="hover:text-foreground transition"
+                                    className="hover:text-[#ebe4ca] transition"
                                 >
                                     contact@arkanya.fr
                                 </a>
@@ -137,7 +138,7 @@ export default function Footer() {
 
 
                 <div
-                    className="border-t border-neutral-200 mt-12 pt-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-neutral-500">
+                    className="border-t border-[#ebe4ca]/10 mt-12 pt-8 flex flex-col md:flex-row justify-between gap-4 text-sm text-white/44">
 
                     <p>
                         © {new Date().getFullYear()} Arkanya — Tous droits réservés
@@ -147,21 +148,21 @@ export default function Footer() {
 
                         <Link
                             href="/mentions-legales"
-                            className="hover:text-foreground transition"
+                            className="hover:text-[#ebe4ca] transition"
                         >
                             Mentions légales
                         </Link>
 
                         <Link
                             href="/politique-confidentialite"
-                            className="hover:text-foreground transition"
+                            className="hover:text-[#ebe4ca] transition"
                         >
                             Politique de confidentialité
                         </Link>
 
                         <Link
                             href="/cgv"
-                            className="hover:text-foreground transition"
+                            className="hover:text-[#ebe4ca] transition"
                         >
                             CGV
                         </Link>

@@ -1,51 +1,31 @@
 "use client"
 
-import {motion, useScroll, useTransform} from "framer-motion"
-import {useRef} from "react"
+import {motion} from "framer-motion"
 
 interface Props {
     children: React.ReactNode
     index?: number
+    variant?: "fade" | "left" | "right"
 }
 
-export default function ScrollCard({children, index = 0}: Props) {
-
-    const ref = useRef(null)
-
-    const {scrollYProgress} = useScroll({
-        target: ref,
-        offset: ["start 0.9", "end 0.3"]
-    })
-
-    const opacity = useTransform(
-        scrollYProgress,
-        [0, 0.3],
-        [0, 1]
-    )
-
-    const y = useTransform(
-        scrollYProgress,
-        [0, 1],
-        [80 - index * 20, -40]
-    )
-
-    const scale = useTransform(
-        scrollYProgress,
-        [0, 0.3],
-        [0.95, 1]
-    )
+export default function ScrollCard({children, index = 0, variant = "fade"}: Props) {
+    const x = variant === "left" ? -62 : variant === "right" ? 62 : 0
 
     return (
         <motion.div
-            ref={ref}
-            style={{
-                opacity,
-                y,
-                scale
+            initial={{
+                opacity: 0,
+                x
             }}
+            whileInView={{
+                opacity: 1,
+                x: 0
+            }}
+            viewport={{once: true, amount: 0.22}}
             transition={{
-                duration: 0.5,
-                delay: index * 0.15
+                duration: 0.78,
+                delay: index * 0.15,
+                ease: [0.22, 1, 0.36, 1]
             }}
         >
             {children}

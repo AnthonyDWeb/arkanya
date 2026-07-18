@@ -10,14 +10,17 @@ import ScrollTitle from "@/components/animations/scrolltitle";
 import ScrollReveal from "@/components/animations/ScrollReveal";
 import Hero from "@/components/ui/hero";
 
-const realisations: Realisation[] = realisationsData;
-const lastRealisation: Realisation = lastRealisationData;
+const realisations = realisationsData as Realisation[];
+const lastRealisation = lastRealisationData as Realisation;
+const fallbackImage = "/page/realisations-hero.webp";
 
 export async function generateMetadata({params}: { params: Promise<{ slug: string }> }) {
     const {slug} = await params;
     const allProjects: Realisation[] = [lastRealisation, ...realisations];
     const project = allProjects.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
     if (!project) return {};
+
+    const projectImage = project.image ?? fallbackImage;
 
     return {
         title: project.seo?.title ?? project.title,
@@ -26,7 +29,7 @@ export async function generateMetadata({params}: { params: Promise<{ slug: strin
         openGraph: {
             title: project.seo?.title ?? project.title,
             description: project.seo?.description ?? project.description,
-            images: [project.image],
+            images: [projectImage],
         },
         alternates: {
             canonical: `https://www.arkanya.fr/realisations/${project.slug}`,
@@ -44,6 +47,7 @@ export default async function RealisationDetail({params}: { params: Promise<{ sl
     const project = allProjects.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
     if (!project) return notFound();
 
+    const projectImage = project.image ?? fallbackImage;
     const beforeImages = project.gallery?.before ?? [];
     const afterImages = project.gallery?.after ?? [];
     const hasBefore = beforeImages.length > 0;
@@ -51,11 +55,11 @@ export default async function RealisationDetail({params}: { params: Promise<{ sl
     const aproachStyle = "absolute left-0 top-1 w-6 h-6 bg-surface border border-border-subtle rounded-full flex items-center justify-center text-xs font-medium";
     const metricStyle = "bg-surface rounded-xl p-8 border border-border-subtle shadow-soft h-full flex flex-col justify-center items-center text-center";
     const stackStyle = "px-5 py-2 text-sm font-medium rounded-full border border-gold/40 bg-gold/10 text-gold hover:bg-gold/20 transition";
-    const siteStyle = "inline-block px-8 py-4 rounded-md bg-gold text-black font-medium shadow-soft hover:shadow-soft-lg transition hover:-translate-y-1";
+    const siteStyle = "cta-button inline-block px-8 py-4";
 
     return (
         <main className="bg-background text-foreground">
-            <Hero image={project.image} title={project.title} subtitle={project.description}/>
+            <Hero image={projectImage} title={project.title} subtitle={project.description} variant="realisations"/>
 
             <section className="w-[90%] xl:w-[70%] mx-auto py-24 space-y-24">
                 {project.context && (<section className="space-y-6">

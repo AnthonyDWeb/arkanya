@@ -11,19 +11,21 @@ export default function ScrollReveal({children}: Props) {
         <motion.div
             initial={{
                 opacity: 0,
-                y: 40
+                y: 24,
+                filter: "blur(5px)"
             }}
             whileInView={{
                 opacity: 1,
-                y: 0
+                y: 0,
+                filter: "blur(0px)"
             }}
             viewport={{
-                once: false,
+                once: true,
                 margin: "-80px"
             }}
             transition={{
-                duration: 0.6,
-                ease: "easeOut"
+                duration: 0.82,
+                ease: [0.22, 1, 0.36, 1]
             }}
             style={{position: "relative"}}
         >

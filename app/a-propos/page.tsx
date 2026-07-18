@@ -7,7 +7,7 @@ export default function APropos() {
     const herosubtitle = "Concevoir des systèmes fiables, évolutifs et cohérents avec la réalité de votre organisation.";
     return (
         <main className="bg-background text-foreground">
-            <Hero image="/page/apropos-hero.webp" title={herotitle} subtitle={herosubtitle}/>
+            <Hero image="/page/apropos-hero.webp" title={herotitle} subtitle={herosubtitle} variant="about"/>
 
             <section className="py-20">
                 <div className="w-[90%] xl:w-[55%] mx-auto text-center">
@@ -126,7 +126,7 @@ export default function APropos() {
                 </div>
             </section>
 
-            <section className="py-20 bg-deep text-white text-center">
+            <section className="premium-final-cta text-white text-center">
                 <div className="w-[90%] xl:w-[60%] mx-auto">
 
                     <FadeIn>
@@ -144,7 +144,7 @@ export default function APropos() {
                     <FadeIn delay={0.2}>
                         <MotionButton
                             href="/contact"
-                            className="px-10 py-3 rounded-md bg-gold text-black font-medium transition"
+                            className="cta-button px-10 py-3"
                         >
                             Discuter de votre projet
                         </MotionButton>

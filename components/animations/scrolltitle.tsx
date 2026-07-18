@@ -11,9 +11,9 @@ export default function ScrollTitle({children}: Props) {
         <motion.div
             initial={{
                 opacity: 0,
-                y: 60,
-                scale: 0.95,
-                filter: "blur(6px)"
+                y: 30,
+                scale: 0.985,
+                filter: "blur(8px)"
             }}
             whileInView={{
                 opacity: 1,
@@ -22,11 +22,11 @@ export default function ScrollTitle({children}: Props) {
                 filter: "blur(0px)"
             }}
             viewport={{
-                once: false,
+                once: true,
                 margin: "-100px"
             }}
             transition={{
-                duration: 0.8,
+                duration: 0.95,
                 ease: [0.22, 1, 0.36, 1]
             }}
             style={{position: "relative"}}

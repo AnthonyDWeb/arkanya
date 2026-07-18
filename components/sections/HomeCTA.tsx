@@ -1,16 +1,13 @@
-import MotionButton from "@/components/animations/motionbutton"
-import Container from "@/components/ui/container"
+import MotionButton from "@/components/animations/motionbutton";
+import Container from "@/components/ui/container";
 
-import ScrollReveal from "@/components/animations/ScrollReveal"
-import ScrollTitle from "@/components/animations/scrolltitle"
+import ScrollReveal from "@/components/animations/ScrollReveal";
+import ScrollTitle from "@/components/animations/scrolltitle";
 
 export default function HomeCTA() {
-
     return (
-        <section className="py-28 bg-deep text-white text-center">
-
-            <Container className="xl:w-[60%] space-y-6">
-
+        <section className="premium-final-cta text-center text-white">
+            <Container className="space-y-6 xl:w-[60%]">
                 <ScrollTitle>
                     <h2 className="text-3xl font-semibold">
                         Construisons un projet solide.
@@ -18,7 +15,7 @@ export default function HomeCTA() {
                 </ScrollTitle>
 
                 <ScrollReveal>
-                    <p className="text-white/80 max-w-2xl mx-auto">
+                    <p className="mx-auto max-w-2xl text-white/80">
                         Discutons de vos objectifs et identifions
                         la meilleure stratégie digitale.
                     </p>
@@ -27,14 +24,12 @@ export default function HomeCTA() {
                 <div className="pt-4">
                     <MotionButton
                         href="/contact"
-                        className="px-10 py-4 rounded-md bg-gold text-black font-medium shadow-soft-lg hover:shadow-xl transition"
+                        className="cta-button px-10 py-4"
                     >
                         Planifier un échange
                     </MotionButton>
                 </div>
-
             </Container>
-
         </section>
-    )
+    );
 }

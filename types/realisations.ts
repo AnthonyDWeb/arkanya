@@ -1,20 +1,37 @@
+export type RealisationDisplay =
+    | "image"
+    | "icon"
+    | "metrics"
+    | "text";
+
 export type Realisation = {
     slug: string
     title: string
     description: string
-    image: string
+
+    image?: string
+
+    display?: RealisationDisplay
+
+    icon?: string
+    quote?: string
+
+    service?: string
+    serviceType?: string
+
+    visible?: boolean
+    highlight?: boolean
+    draft?: boolean
 
     site?: string
     type?: string
 
-    // --- Étude de cas ---
     context?: string
     challenge?: string
     approach?: string[]
     results?: string
     conclusion?: string
 
-    // --- Données complémentaires ---
     technologies?: string[]
 
     gallery?: {
