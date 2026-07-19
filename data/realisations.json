@@ -569,5 +569,62 @@
     ],
     "display": "text",
     "quote": "Accompagnement évolutif et amélioration continue sur le long terme."
+  },
+  {
+    "slug": "meditrack",
+    "service": "developpement-sur-mesure",
+    "serviceType": "applications-mobile",
+    "visible": true,
+    "highlight": true,
+    "draft": false,
+    "title": "MediTrack – Application mobile de suivi des traitements",
+    "description": "Développement d’une application dédiée au suivi des doses, traitements et rappels médicaux.",
+    "image": "/realisations/developpement-sur-mesure/meditrack/meditrack.webp",
+    "type": "application",
+    "display": "image",
+    "context": "Le besoin était de proposer une solution claire, fiable et accessible pour accompagner la gestion quotidienne des traitements, faciliter le suivi des doses et renforcer la régularité des prises. L’objectif était de transformer un suivi encore souvent manuel en une expérience digitale plus fluide, rassurante et adaptée aux usages réels des utilisateurs.",
+    "challenge": "Le défi consistait à créer une expérience intuitive, simple à utiliser au quotidien, tout en répondant à des besoins concrets de suivi, de mémorisation et d’organisation. Il fallait également intégrer des rappels efficaces et une navigation claire entre les différents éléments essentiels de l’application, afin d’en garantir une adoption naturelle.",
+    "approach": [
+      "Analyse des besoins autour du suivi des traitements",
+      "Conception d’une expérience utilisateur claire, ergonomique et rassurante",
+      "Développement d’un tableau de bord dédié au suivi des doses à venir",
+      "Mise en place d’un historique de prises et d’un système de rappels",
+      "Déploiement d’une solution numérique accessible et facilement intégrable au quotidien"
+    ],
+    "results": "Le projet offre aujourd’hui une expérience pratique et rassurante pour accompagner les utilisateurs dans la gestion de leurs traitements. Les informations essentielles sont visibles rapidement, le suivi est simplifié et les rappels contribuent à une meilleure régularité au quotidien.",
+    "conclusion": "MediTrack incarne une solution digitale pensée pour apporter simplicité, fiabilité et accompagnement au quotidien dans la gestion des traitements.",
+    "metrics": [
+      {
+        "label": "Usage",
+        "value": "Quotidien"
+      },
+      {
+        "label": "Valeur",
+        "value": "Simplicité et confiance"
+      }
+    ],
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Capacitor",
+      "PWA",
+      "Notifications"
+    ],
+    "gallery": {
+      "before": [],
+      "after": [
+        "/realisations/developpement-sur-mesure/meditrack/meditrack.webp"
+      ]
+    },
+    "seo": {
+      "title": "MediTrack | Application de suivi des traitements | Arkanya",
+      "description": "Développement d’une application mobile-first pour suivre les traitements, doses et rappels médicaux.",
+      "keywords": [
+        "application suivi traitement",
+        "application médicale",
+        "PWA santé",
+        "suivi doses"
+      ]
+    }
   }
 ]

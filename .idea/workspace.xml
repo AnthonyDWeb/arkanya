@@ -4,59 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5d34b77-0679-4877-ab76-804dd4cfbac1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Arkanya.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Arkanya.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/a-propos/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/a-propos/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/contact/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/contact/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/realisations/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/realisations/[slug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/realisations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/realisations/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/[slug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/solutions/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/solutions/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/ScrollReveal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/ScrollReveal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/fadein.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/fadein.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/fadeleft.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/fadeleft.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/fadescale.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/fadescale.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/fadeup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/fadeup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/motionbutton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/motionbutton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/scrollcard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/scrollcard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/animations/scrolltitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/animations/scrolltitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/navigation/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/navigation/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/navigation/LogoBrand.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/navigation/LogoBrand.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/navigation/MobileDrawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/navigation/MobileDrawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/navigation/NavLinks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/navigation/NavLinks.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/parallax/HeroParallax.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/parallax/HeroParallax.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/sections/HomeCTA.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sections/HomeCTA.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/sections/HomeExpertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sections/HomeExpertise.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/sections/HomeHero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/sections/HomeHero.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/Dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/Dropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/hero.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/last-realisation.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/last-realisation.json" afterDir="false" />
+    <list default="true" id="b5d34b77-0679-4877-ab76-804dd4cfbac1" name="Changes" comment="add resend email">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/realisations.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/realisations.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/services.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/services.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/application-metier-interne/interne.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/developpement-sur-mesure/application-metier-interne/interne.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/landing-page/anthony-delforge.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/creation-site-web/landing-page/anthony-delforge.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/modernisation/refonte.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/modernisation/refonte.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/contact.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/contact.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/faq.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/faq.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/faq2.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/faq2.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/homepage.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/homepage.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/pricings.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/pricings.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/pricings2.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/pricings2.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/after/reservation.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/after/reservation.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/before/contact.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/before/contact.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/before/homepage.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/before/homepage.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/before/pricings.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/before/pricings.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/before/services.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/before/services.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/realisations/refonte/lesservicesdemathilde/img.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/realisations/refonte-site-web/lesservicesdemathilde/img.webp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/realisations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/realisations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/page/home-hero.webp" beforeDir="false" afterPath="$PROJECT_DIR$/public/page/home-hero.webp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="106" />
+    <option name="cachedIndexableFilesCount" value="109" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,6 +39,9 @@
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -97,31 +51,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.general",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "C:\\dev\\Arkanya\\01_Entreprise\\Portfolio\\arkanya\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\dev\\Arkanya\\01_Entreprise\\Portfolio\\arkanya\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.Next.js: server-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
@@ -157,11 +111,25 @@
       <workItem from="1784394988502" duration="393000" />
       <workItem from="1784395398617" duration="229000" />
       <workItem from="1784395646471" duration="1809000" />
-      <workItem from="1784402760065" duration="8054000" />
+      <workItem from="1784402760065" duration="8998000" />
+      <workItem from="1784451373095" duration="414000" />
     </task>
+    <task id="LOCAL-00001" summary="add resend email">
+      <option name="closed" value="true" />
+      <created>1784412649392</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1784412649392</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add resend email" />
+    <option name="LAST_COMMIT_MESSAGE" value="add resend email" />
   </component>
 </project>
