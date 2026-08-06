@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import type { Job, Project } from "@prisma/client"
+import type { Job, Project } from "@arkanya/database"
 
 type JobWithProject = Job & { project: Project }
 

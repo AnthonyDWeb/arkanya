@@ -34,16 +34,16 @@ function normalizeSegment(seg: string): string | null {
   if (!seg) return null
 
   const optionalCatchAll = seg.match(/^\[\[\.\.\.([A-Za-z_][A-Za-z0-9_]*)\]\]$/)
-  if (optionalCatchAll) return `[[...${optionalCatchAll[1].toLowerCase()}]]`
+  if (optionalCatchAll?.[1]) return `[[...${optionalCatchAll[1].toLowerCase()}]]`
 
   const catchAll = seg.match(/^\[\.\.\.([A-Za-z_][A-Za-z0-9_]*)\]$/)
-  if (catchAll) return `[...${catchAll[1].toLowerCase()}]`
+  if (catchAll?.[1]) return `[...${catchAll[1].toLowerCase()}]`
 
   const dynamic = seg.match(/^\[([A-Za-z_][A-Za-z0-9_]*)\]$/)
-  if (dynamic) return `[${dynamic[1].toLowerCase()}]`
+  if (dynamic?.[1]) return `[${dynamic[1].toLowerCase()}]`
 
   const group = seg.match(/^\(([A-Za-z0-9_-]+)\)$/)
-  if (group) return `(${group[1].toLowerCase()})`
+  if (group?.[1]) return `(${group[1].toLowerCase()})`
 
   if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(seg)) return seg.toLowerCase()
 

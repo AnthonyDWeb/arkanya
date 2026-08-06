@@ -1,6 +1,6 @@
 "use client"
 
-import type { Client, Job, JobEvent, JobTiming, Project } from "@prisma/client"
+import type { Client, Job, JobEvent, JobTiming, Project } from "@arkanya/database"
 import { useState } from "react"
 import { DeleteProjectButton } from "./delete-project-button"
 

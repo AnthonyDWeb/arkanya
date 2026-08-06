@@ -1,4 +1,4 @@
-import type { Project } from "@prisma/client"
+import type { Project } from "@arkanya/database"
 import Link from "next/link"
 
 type ProjectCardProps = {

@@ -39,6 +39,7 @@ pnpm-debug.log*
 
 # Prisma generated (régénéré au postinstall)
 packages/database/node_modules/.prisma/
+packages/database/src/generated/
 
 # Local scratch
 *.local

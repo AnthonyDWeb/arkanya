@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import type { Project, ProjectStatus } from "@prisma/client"
+import type { Project, ProjectStatus } from "@arkanya/database"
 import { ChevronDown } from "lucide-react"
 import { ProjectCard } from "./project-card"
 

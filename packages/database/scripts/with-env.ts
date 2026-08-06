@@ -7,7 +7,7 @@
  */
 
 import { execSync } from "node:child_process"
-import { cpSync, existsSync, readFileSync, readdirSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import { resolve } from "node:path"
 
 function parseDotenv(content: string): Record<string, string> {
@@ -24,30 +24,18 @@ function parseDotenv(content: string): Record<string, string> {
   return vars
 }
 
-// Priorité : platform .env → local .env → env déjà défini
 const candidates = [
   resolve(process.cwd(), "../../apps/platform/.env"),
   resolve(process.cwd(), ".env"),
 ]
 
-let loaded = false
-for (const candidate of candidates) {
-  if (existsSync(candidate)) {
-    const vars = parseDotenv(readFileSync(candidate, "utf-8"))
-    for (const [key, val] of Object.entries(vars)) {
-      process.env[key] ??= val
-    }
-    loaded = true
-    break
+for (const envPath of candidates) {
+  if (!existsSync(envPath)) continue
+  const vars = parseDotenv(readFileSync(envPath, "utf-8"))
+  for (const [key, value] of Object.entries(vars)) {
+    if (process.env[key] === undefined) process.env[key] = value
   }
-}
-
-if (!loaded && !process.env["DATABASE_URL"]) {
-  console.error(
-    "Erreur : DATABASE_URL introuvable.\n" +
-      "Créer apps/platform/.env ou packages/database/.env avec DATABASE_URL.",
-  )
-  process.exit(1)
+  break
 }
 
 const cmd = process.argv.slice(2).join(" ")
@@ -57,29 +45,3 @@ if (!cmd) {
 }
 
 execSync(cmd, { stdio: "inherit", shell: true })
-
-// Après prisma generate ou migrate : synchronise le client vers le store pnpm.
-// Sans ça, @prisma/client dans le store charge un client stale (sans les nouveaux modèles).
-if (cmd.includes("prisma generate") || cmd.includes("prisma migrate")) {
-  syncPrismaClientToStore()
-}
-
-function syncPrismaClientToStore() {
-  const generatedClient = resolve(process.cwd(), "node_modules/.prisma/client")
-  if (!existsSync(generatedClient)) return
-
-  // Trouve le répertoire @prisma/client dans le store pnpm
-  const pnpmStore = resolve(process.cwd(), "../../node_modules/.pnpm")
-  if (!existsSync(pnpmStore)) return
-
-  const storeEntries = readdirSync(pnpmStore).filter((d) =>
-    d.startsWith("@prisma+client@"),
-  )
-
-  for (const entry of storeEntries) {
-    const storeClient = resolve(pnpmStore, entry, "node_modules/.prisma/client")
-    if (existsSync(storeClient)) {
-      cpSync(generatedClient, storeClient, { recursive: true, force: true })
-    }
-  }
-}

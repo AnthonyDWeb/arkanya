@@ -17,6 +17,7 @@ export const projects = {
     paths: [
       "apps/platform",
       "packages/database",
+      "packages/better-auth",
       "packages/contracts",
       "packages/ui",
       "packages/config",

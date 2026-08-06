@@ -61,7 +61,7 @@ async function deleteVercelProject(projectName: string): Promise<DeletionResult>
 
 function deleteLocalDir(destination: string): DeletionResult {
   try {
-    const localPath = path.join(MONOREPO_ROOT, destination)
+    const localPath = path.join(/* turbopackIgnore: true */ MONOREPO_ROOT, destination)
     if (fs.existsSync(localPath)) {
       fs.rmSync(localPath, { recursive: true, force: true })
     }

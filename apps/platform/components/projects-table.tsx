@@ -1,6 +1,6 @@
 "use client"
 
-import type { Client, Project } from "@prisma/client"
+import type { Client, Project } from "@arkanya/database"
 import Link from "next/link"
 import { DeleteProjectButton } from "./delete-project-button"
 
