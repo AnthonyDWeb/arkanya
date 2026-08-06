@@ -1,4 +1,6 @@
 [build]
+builder = "NIXPACKS"
+buildCommand = "pnpm install --frozen-lockfile && pnpm --filter @arkanya/worker build"
 watchPatterns = [
   "services/worker/**",
   "packages/contracts/**",
@@ -9,3 +11,9 @@ watchPatterns = [
   "pnpm-workspace.yaml",
   "package.json",
 ]
+
+[deploy]
+startCommand = "pnpm --filter @arkanya/worker start"
+restartPolicyType = "on_failure"
+healthcheckPath = "/health"
+healthcheckTimeout = 30

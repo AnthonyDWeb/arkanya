@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import type { JobProgress } from "@/app/api/worker/progress/types"
+import { getWorkerUrl, workerHeaders } from "@/lib/worker"
 
-const WORKER_URL = process.env["WORKER_URL"] ?? "http://127.0.0.1:4000"
+const WORKER_URL = getWorkerUrl()
 
 export async function GET(
   _req: NextRequest,
@@ -11,6 +12,7 @@ export async function GET(
 
   try {
     const res = await fetch(`${WORKER_URL}/v1/jobs/${jobId}/progress`, {
+      headers: workerHeaders(),
       signal: AbortSignal.timeout(3_000),
     })
 

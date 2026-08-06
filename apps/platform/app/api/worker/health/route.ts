@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server"
+import { getWorkerUrl } from "@/lib/worker"
 
 export async function GET() {
-  const workerUrl = process.env["WORKER_URL"] ?? "http://127.0.0.1:4000"
+  const workerUrl = getWorkerUrl()
 
   try {
     const res = await fetch(`${workerUrl}/health`, {

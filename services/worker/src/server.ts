@@ -15,20 +15,35 @@ function readBody(req: http.IncomingMessage): Promise<string> {
   })
 }
 
-function json(res: http.ServerResponse, status: number, body: unknown) {
+function corsOrigin(req: http.IncomingMessage): string {
+  const origin = req.headers["origin"]
+  if (typeof origin === "string" && origin.length > 0) return origin
+  return config.mode === "remote" ? "https://platform.arkanya.fr" : "http://localhost:3000"
+}
+
+function json(res: http.ServerResponse, req: http.IncomingMessage, status: number, body: unknown) {
   res.writeHead(status, {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "http://localhost:3000",
+    "Access-Control-Allow-Origin": corsOrigin(req),
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
   })
   res.end(JSON.stringify(body))
 }
 
+/** Auth Bearer requise dès qu'une WORKER_API_KEY est configurée (/health exclus). */
+function isAuthorized(req: http.IncomingMessage): boolean {
+  if (!config.apiKey) return true
+  const header = req.headers["authorization"]
+  if (typeof header !== "string") return false
+  const [scheme, token] = header.split(" ")
+  return scheme === "Bearer" && token === config.apiKey
+}
+
 const server = http.createServer(async (req, res) => {
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Access-Control-Allow-Origin": corsOrigin(req),
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
     })
@@ -37,7 +52,12 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (req.method === "GET" && req.url === "/health") {
-    json(res, 200, { status: "ok", mode: config.mode })
+    json(res, req, 200, { status: "ok", mode: config.mode })
+    return
+  }
+
+  if (!isAuthorized(req)) {
+    json(res, req, 401, { error: "Unauthorized" })
     return
   }
 
@@ -46,10 +66,10 @@ const server = http.createServer(async (req, res) => {
     const jobId = progressMatch[1]
     const progress = jobId ? jobStore.get(jobId) : undefined
     if (!progress) {
-      json(res, 404, { error: "Job introuvable" })
+      json(res, req, 404, { error: "Job introuvable" })
       return
     }
-    json(res, 200, progress)
+    json(res, req, 200, progress)
     return
   }
 
@@ -66,16 +86,16 @@ const server = http.createServer(async (req, res) => {
 
       console.log(`[worker] Pipeline terminé — ${report.state} en ${report.durationMs}ms`)
 
-      json(res, report.state === "SUCCESS" ? 200 : 422, report)
+      json(res, req, report.state === "SUCCESS" ? 200 : 422, report)
     } catch (err) {
       const message = err instanceof Error ? err.message : "Erreur inconnue"
       console.error(`[worker] Erreur :`, message)
-      json(res, 400, { error: message })
+      json(res, req, 400, { error: message })
     }
     return
   }
 
-  json(res, 404, { error: "Not Found" })
+  json(res, req, 404, { error: "Not Found" })
 })
 
 server.listen(config.port, config.host, () => {

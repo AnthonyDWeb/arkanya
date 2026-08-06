@@ -5,8 +5,9 @@ import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@arkanya/database/client"
 import { auth } from "@/lib/auth"
 import type { WorkerProjectPayload, WorkerReport, TimingEntry } from "@arkanya/contracts/worker"
+import { getWorkerUrl, workerHeaders } from "@/lib/worker"
 
-const WORKER_URL = process.env["WORKER_URL"] ?? "http://127.0.0.1:4000"
+const WORKER_URL = getWorkerUrl()
 const MONOREPO_ROOT = path.resolve(process.cwd(), "../..")
 const TEMPLATES_DIR = path.join(MONOREPO_ROOT, "templates")
 
@@ -96,7 +97,7 @@ export async function POST(req: NextRequest) {
     try {
       const workerRes = await fetch(`${WORKER_URL}/v1/steps`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: workerHeaders({ "Content-Type": "application/json" }),
         body: JSON.stringify({ jobId, projectSlug, projectName, projectKind, clientId, clientCompany, description, template, pages, config, features, delivery }),
         signal: AbortSignal.timeout(600_000),
       })

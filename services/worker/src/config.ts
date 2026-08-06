@@ -14,7 +14,7 @@ try {
     }
   }
 } catch {
-  // Pas de .env local — on utilise les variables d'environnement système (Railway/CI)
+  // Pas de .env local — variables système (Railway/CI)
 }
 
 const mode = process.env["WORKER_MODE"] ?? "local"
@@ -22,10 +22,17 @@ if (mode !== "local" && mode !== "remote") {
   throw new Error(`Invalid WORKER_MODE: ${mode}. Expected "local" or "remote".`)
 }
 
+const apiKey = process.env["WORKER_API_KEY"] ?? ""
+if (mode === "remote" && !apiKey) {
+  throw new Error("WORKER_API_KEY is required when WORKER_MODE=remote")
+}
+
 export const config = {
   port: parseInt(process.env["WORKER_PORT"] ?? "4000", 10),
-  host: "127.0.0.1",
+  /** Localhost en local ; 0.0.0.0 sur Railway pour accepter le trafic entrant. */
+  host: mode === "remote" ? "0.0.0.0" : "127.0.0.1",
   mode: mode as "local" | "remote",
+  apiKey,
   github: {
     token: process.env["GITHUB_TOKEN"] ?? "",
     owner: process.env["GITHUB_OWNER"] ?? "",
