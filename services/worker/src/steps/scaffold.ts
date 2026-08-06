@@ -54,16 +54,20 @@ function normalizeRouteSegment(seg: string): string | null {
   if (!seg) return null
 
   const optionalCatchAll = seg.match(/^\[\[\.\.\.([A-Za-z_][A-Za-z0-9_]*)\]\]$/)
-  if (optionalCatchAll) return `[[...${optionalCatchAll[1].toLowerCase()}]]`
+  const optionalCatchAllName = optionalCatchAll?.[1]
+  if (optionalCatchAllName) return `[[...${optionalCatchAllName.toLowerCase()}]]`
 
   const catchAll = seg.match(/^\[\.\.\.([A-Za-z_][A-Za-z0-9_]*)\]$/)
-  if (catchAll) return `[...${catchAll[1].toLowerCase()}]`
+  const catchAllName = catchAll?.[1]
+  if (catchAllName) return `[...${catchAllName.toLowerCase()}]`
 
   const dynamic = seg.match(/^\[([A-Za-z_][A-Za-z0-9_]*)\]$/)
-  if (dynamic) return `[${dynamic[1].toLowerCase()}]`
+  const dynamicName = dynamic?.[1]
+  if (dynamicName) return `[${dynamicName.toLowerCase()}]`
 
   const group = seg.match(/^\(([A-Za-z0-9_-]+)\)$/)
-  if (group) return `(${group[1].toLowerCase()})`
+  const groupName = group?.[1]
+  if (groupName) return `(${groupName.toLowerCase()})`
 
   if (/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(seg)) return seg.toLowerCase()
 
@@ -92,18 +96,21 @@ function extractRouteParams(routePath: string): RouteParam[] {
   const params: RouteParam[] = []
   for (const seg of routePath.split("/")) {
     const optionalCatchAll = seg.match(/^\[\[\.\.\.(\w+)\]\]$/)
-    if (optionalCatchAll) {
-      params.push({ name: optionalCatchAll[1], kind: "optionalCatchAll" })
+    const optionalCatchAllName = optionalCatchAll?.[1]
+    if (optionalCatchAllName) {
+      params.push({ name: optionalCatchAllName, kind: "optionalCatchAll" })
       continue
     }
     const catchAll = seg.match(/^\[\.\.\.(\w+)\]$/)
-    if (catchAll) {
-      params.push({ name: catchAll[1], kind: "catchAll" })
+    const catchAllName = catchAll?.[1]
+    if (catchAllName) {
+      params.push({ name: catchAllName, kind: "catchAll" })
       continue
     }
     const dynamic = seg.match(/^\[(\w+)\]$/)
-    if (dynamic) {
-      params.push({ name: dynamic[1], kind: "dynamic" })
+    const dynamicName = dynamic?.[1]
+    if (dynamicName) {
+      params.push({ name: dynamicName, kind: "dynamic" })
     }
   }
   return params
