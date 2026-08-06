@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Build / caches
+.next/
+.turbo/
+dist/
+out/
+build/
+coverage/
+*.tsbuildinfo
+
+# Parking (ancien dump local, hors déploiement)
+parking/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Capacitor / mobile local
+**/android/.gradle/
+**/android/app/build/
+**/ios/Pods/
+**/ios/build/
+
+# Prisma generated (régénéré au postinstall)
+packages/database/node_modules/.prisma/
+
+# Local scratch
+*.local
+.vercel

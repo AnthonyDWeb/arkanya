@@ -1,0 +1,42 @@
+{
+  "name": "@arkanya/marketing-arkanya",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 6101",
+    "build": "next build",
+    "start": "next start --port 6101",
+    "lint": "eslint",
+    "check-types": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@arkanya/brand": "workspace:*",
+    "@arkanya/email": "workspace:*",
+    "@arkanya/icons": "workspace:*",
+    "@arkanya/ui": "workspace:*",
+    "@radix-ui/react-visually-hidden": "^1.2.4",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.34.3",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "styled-components": "^6.3.11",
+    "tailwind-merge": "^3.5.0",
+    "vaul": "^1.1.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "catalog:",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "catalog:",
+    "tailwindcss": "^4",
+    "typescript": "catalog:"
+  },
+  "overrides": {
+    "postcss": "8.5.19"
+  },
+  "engines": { "node": "24.x" }
+}

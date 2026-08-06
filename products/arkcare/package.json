@@ -1,0 +1,43 @@
+{
+  "name": "@arkanya/product-arkcare",
+  "version": "1.0.13",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 5001",
+    "build": "next build",
+    "start": "next start --port 5001",
+    "lint": "eslint",
+    "check-types": "tsc --noEmit",
+    "test": "node --test lib/**/*.test.mjs",
+    "cap:sync": "next build && cap sync",
+    "cap:android": "next build && cap sync android && cap open android",
+    "cap:android:release": "powershell -ExecutionPolicy Bypass -File scripts/build-android-release.ps1",
+    "android:icons": "powershell -ExecutionPolicy Bypass -File scripts/generate-android-icons.ps1"
+  },
+  "dependencies": {
+    "@arkanya/auth-client": "workspace:*",
+    "@arkanya/capacitor": "workspace:*",
+    "@arkanya/codes": "workspace:*",
+    "@arkanya/icons": "workspace:*",
+    "@arkanya/ui": "workspace:*",
+    "@capacitor/android": "^8.4.2",
+    "@capacitor/cli": "^7.6.8",
+    "@capacitor/core": "^8.4.2",
+    "@capacitor/local-notifications": "^8.2.1",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "catalog:",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "catalog:",
+    "tailwindcss": "^4",
+    "typescript": "catalog:"
+  },
+  "engines": { "node": "24.x" }
+}

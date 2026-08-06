@@ -1,0 +1,7 @@
+{
+  "extends": "@arkanya/config/tsconfig",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["src"]
+}

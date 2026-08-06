@@ -1,0 +1,60 @@
+.arknest-back-link {
+  color: var(--ark-color-brand);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.arknest-goal-detail-hero {
+  display: grid;
+  gap: 1rem;
+}
+.arknest-goal-detail-hero h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.arknest-goal-detail-metrics {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.arknest-goal-detail-metrics > div {
+  background: var(--ark-color-surface-subtle);
+  border-radius: 0.8rem;
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.75rem;
+}
+.arknest-goal-detail-metrics span {
+  color: var(--ark-color-text-muted);
+  font-size: 0.72rem;
+}
+.arknest-goal-detail-metrics strong {
+  font-size: 0.95rem;
+}
+.arknest-goal-detail-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.arknest-goal-detail-history {
+  display: grid;
+  gap: 0.55rem;
+}
+.arknest-goal-detail-history li {
+  align-items: center;
+  background: var(--ark-color-surface-subtle);
+  border-radius: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0.75rem;
+}
+.arknest-goal-detail-history li > span {
+  display: grid;
+  gap: 0.15rem;
+}
+.arknest-goal-detail-history small {
+  color: var(--ark-color-text-muted);
+  font-size: 0.7rem;
+}
+

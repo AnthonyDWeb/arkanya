@@ -1,0 +1,180 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        String    @id @default(cuid())
+  name      String
+  company   String
+  status    String
+  contact   String
+  createdAt DateTime  @default(now())
+  projects  Project[]
+}
+
+model Project {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  name         String
+  owner        String
+  type         String
+  status       ProjectStatus @default(TO_QUALIFY)
+  port         Int?
+  url          String?
+  nextAction   String?
+  image        String?
+  destination  String
+  description  String
+  technologies String[]
+  generated    Boolean       @default(false)
+  clientId     String?
+  client       Client?       @relation(fields: [clientId], references: [id])
+  jobs         Job[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Job {
+  id          String       @id @default(cuid())
+  externalId  String       @unique
+  projectSlug String
+  project     Project      @relation(fields: [projectSlug], references: [slug])
+  action      String
+  state       JobState     @default(PENDING)
+  startedAt   DateTime?
+  finishedAt  DateTime?
+  events      JobEvent[]
+  timings     JobTiming[]
+  createdAt   DateTime     @default(now())
+}
+
+model JobTiming {
+  id         String   @id @default(cuid())
+  jobId      String
+  job        Job      @relation(fields: [jobId], references: [id])
+  key        String
+  label      String
+  category   String
+  durationMs Int
+  createdAt  DateTime @default(now())
+}
+
+model TimingBenchmark {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  label       String
+  category    String
+  avgMs       Float
+  minMs       Float
+  maxMs       Float
+  sampleCount Int      @default(1)
+  updatedAt   DateTime @updatedAt
+}
+
+model FormerClient {
+  id String @id @default(cuid())
+
+  // Snapshot client
+  clientName    String
+  clientCompany String
+  clientContact String
+  clientStatus  String
+
+  // Snapshot projet supprimé
+  projectSlug        String
+  projectName        String
+  projectType        String
+  projectTechnologies String[]
+  projectUrl         String?
+  projectDestination String
+  projectDescription String
+  projectCreatedAt   DateTime
+
+  // GitHub / Vercel
+  githubRepo    String?
+  vercelProject String?
+
+  archivedAt DateTime @default(now())
+}
+
+model JobEvent {
+  id         String    @id @default(cuid())
+  jobId      String
+  job        Job       @relation(fields: [jobId], references: [id])
+  stepId     String
+  stepType   String
+  state      String
+  message    String?
+  startedAt  DateTime
+  finishedAt DateTime?
+  durationMs Int?
+}
+
+enum ProjectStatus {
+  TO_QUALIFY
+  IN_PROGRESS
+  IN_REVIEW
+}
+
+enum JobState {
+  PENDING
+  RUNNING
+  SUCCESS
+  ERROR
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+}

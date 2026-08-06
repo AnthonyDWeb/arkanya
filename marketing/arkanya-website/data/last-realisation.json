@@ -1,0 +1,68 @@
+{
+  "slug": "refonte-aide-a-la-personne",
+  "title": "Les Services de Mathilde - Refonte stratégique d’un site d’aide à la personne",
+  "description": "Repositionnement complet d’un site initialement dédié au baby-sitting vers une plateforme multi-services d’aide à la personne, avec nouveau domaine, nouvelle identité et optimisation de la conversion.",
+  "image": "/realisations/refonte-site-web/lesservicesdemathilde/after/homepage.webp",
+  "site": "https://lesservicesdemathilde.fr",
+  "type": "refonte",
+  "context": "La cliente proposait initialement des services de baby-sitting à travers un site vitrine simple, conçu à une période où son activité était encore ciblée et limitée. Avec le temps, son offre s’est naturellement élargie vers différents services d’aide à la personne : ménage, accompagnement quotidien, assistance administrative et garde ponctuelle. Le site existant ne reflétait plus cette évolution et continuait de véhiculer une image partielle de son expertise. Ce décalage entre la réalité de l’activité et sa présence digitale freinait la perception de professionnalisme et limitait l’élargissement de sa clientèle. L’objectif était donc de structurer une plateforme capable d’incarner cette montée en maturité, de clarifier l’offre multi-services et d’accompagner la croissance future de l’entreprise.",
+  "challenge": "Le projet impliquait un repositionnement stratégique complet sans perturber la clientèle existante. Il fallait redéfinir la proposition de valeur, clarifier les services et structurer un discours plus professionnel tout en restant accessible. Le changement de nom de domaine nécessitait une transition maîtrisée afin de préserver la visibilité et la cohérence de la communication. L’intégration du nouveau logo fourni par la cliente demandait une direction artistique cohérente et élégante, capable de renforcer la crédibilité perçue. Enfin, le site devait être plus lisible, plus rassurant et davantage orienté vers la génération de demandes qualifiées.",
+  "approach": [
+    "Analyse du positionnement initial et définition d’une nouvelle proposition de valeur",
+    "Restructuration complète de l’arborescence pour intégrer les différents services",
+    "Refonte du parcours utilisateur orienté clarté et conversion",
+    "Intégration du nouveau nom de domaine et optimisation SEO locale",
+    "Adaptation du design autour du nouveau logo avec une direction sobre et élégante",
+    "Optimisation des performances et de l’expérience mobile"
+  ],
+  "results": "La nouvelle plateforme reflète désormais une image plus professionnelle et cohérente avec l’évolution de l’activité. L’offre multi-services est clairement structurée, permettant aux visiteurs d’identifier rapidement le service correspondant à leur besoin. Le parcours utilisateur a été simplifié afin de faciliter la prise de contact et de réduire les frictions. La transition vers le nouveau domaine s’est effectuée sans rupture notable de visibilité. L’ensemble du site transmet une impression de sérieux et de fiabilité renforcée, contribuant à améliorer la qualité des demandes reçues. Le digital devient ainsi un véritable outil de développement commercial et non plus uniquement un support informatif.",
+  "conclusion": "Cette refonte a permis d’aligner la présence digitale avec la maturité réelle de l’activité. Le site constitue désormais un socle structurant pour le développement futur, capable d’évoluer avec l’entreprise et ses ambitions.",
+  "metrics": [
+    {
+      "label": "Positionnement",
+      "value": "Multi-services clarifié"
+    },
+    {
+      "label": "Image perçue",
+      "value": "Plus professionnelle"
+    },
+    {
+      "label": "Structure",
+      "value": "Optimisée pour conversion"
+    }
+  ],
+  "technologies": ["Next.js", "TypeScript", "Optimisation SEO locale", "Responsive Design"],
+  "gallery": {
+    "before": [
+      "/realisations/refonte-site-web/lesservicesdemathilde/before/homepage.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/before/services.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/before/pricings.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/before/contact.webp"
+    ],
+    "after": [
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/homepage.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/pricings.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/pricings2.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/reservation.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/contact.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/faq.webp",
+      "/realisations/refonte-site-web/lesservicesdemathilde/after/faq2.webp"
+    ]
+  },
+  "testimonial": {
+    "author": "Fondatrice",
+    "role": "Dirigeante",
+    "company": "Entreprise d’aide à la personne",
+    "content": "Le nouveau site reflète parfaitement l’évolution de mon activité. Il est plus clair, plus professionnel et correspond pleinement à l’image que je souhaitais transmettre."
+  },
+  "seo": {
+    "title": "Refonte site aide à la personne | Étude de cas | Arkanya",
+    "description": "Étude de cas d’une refonte stratégique avec repositionnement d’activité, nouveau domaine et optimisation de la conversion.",
+    "keywords": [
+      "refonte site web",
+      "aide à la personne",
+      "repositionnement digital",
+      "optimisation conversion"
+    ]
+  }
+}

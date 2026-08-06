@@ -1,0 +1,73 @@
+.arknest-table-wrap {
+  background: var(--ark-color-surface);
+  border: 1px solid var(--ark-color-border-muted);
+  border-radius: 1rem;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 6%);
+}
+
+.arknest-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 34rem;
+  width: 100%;
+}
+
+.arknest-table th,
+.arknest-table td {
+  border-bottom: 1px solid var(--ark-color-border-muted);
+  color: var(--ark-color-text);
+  padding: 0.72rem 0.75rem;
+  text-align: center;
+}
+
+.arknest-table th {
+  background: color-mix(in srgb, var(--ark-color-surface-subtle) 82%, var(--ark-color-brand) 18%);
+  font-size: 0.78rem;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.arknest-table tbody tr:not(.arknest-table-section):nth-child(even) td {
+  background-color: color-mix(in srgb, var(--ark-color-surface-subtle) 55%, transparent);
+}
+
+.arknest-table tbody tr:not(.arknest-table-section):hover td {
+  background-color: color-mix(in srgb, var(--ark-color-brand) 8%, var(--ark-color-surface));
+}
+
+.arknest-table td:first-child,
+.arknest-table th:first-child {
+  background: var(--ark-color-surface);
+  font-size: 0.76rem;
+  left: 0;
+  max-width: 8rem;
+  position: sticky;
+  text-align: left;
+  width: 8rem;
+  z-index: 3;
+}
+
+.arknest-table td:not(:first-child),
+.arknest-table th:not(:first-child) {
+  min-width: 6.25rem;
+}
+
+.arknest-table-section td {
+  background: linear-gradient(110deg, var(--ark-color-brand), color-mix(in srgb, var(--ark-color-brand) 72%, #4338ca));
+  color: var(--ark-color-brand-contrast);
+  font-weight: 700;
+}
+
+.arknest-table-title-short {
+  display: none;
+}
+
+.arknest-table-section td:first-child {
+  background: var(--ark-color-brand);
+}
+

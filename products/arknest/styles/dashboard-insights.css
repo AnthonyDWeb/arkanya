@@ -1,0 +1,36 @@
+.arknest-dashboard-links {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.arknest-dashboard-links a {
+  align-items: center;
+  background: var(--ark-color-surface);
+  border: 1px solid var(--ark-color-border-muted);
+  border-radius: 0.9rem;
+  color: var(--ark-color-text);
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.85rem;
+  text-decoration: none;
+}
+
+.arknest-dashboard-links a > svg {
+  color: var(--ark-color-brand);
+  flex: 0 0 auto;
+}
+.arknest-dashboard-links a span {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+.arknest-dashboard-links a small {
+  color: var(--ark-color-text-muted);
+  font-size: 0.72rem;
+}
+.arknest-dashboard-links a b {
+  color: var(--ark-color-text-muted);
+  font-size: 1.4rem;
+}
+

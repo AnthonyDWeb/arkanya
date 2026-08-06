@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import "./index.css";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --ark-color-surface: #ffffff;
+  --ark-color-surface-muted: var(--background);
+  --ark-color-surface-subtle: #f0fdfa;
+  --ark-color-text: var(--foreground);
+  --ark-color-text-muted: #475569;
+  --ark-color-border: #cbd5e1;
+  --ark-color-border-muted: #e2e8f0;
+  --ark-color-brand: #0f766e;
+  --ark-color-brand-hover: #115e59;
+  --ark-color-brand-contrast: #ffffff;
+  --ark-focus-ring: #14b8a6;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-arkcare), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-arkcare), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}

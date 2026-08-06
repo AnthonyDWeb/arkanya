@@ -1,0 +1,26 @@
+.arknest-custom-shares {
+  background: var(--ark-color-surface-subtle);
+  border-radius: 0.9rem;
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.9rem;
+}
+
+.arknest-custom-shares label {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.arknest-custom-share-input {
+  align-items: center;
+  display: flex;
+  gap: 0.4rem;
+  width: 8rem;
+}
+
+@media (max-width: 639px) {
+  .arknest-custom-shares label { align-items: stretch; flex-direction: column; gap: 0.35rem; }
+  .arknest-custom-share-input { width: 100%; }
+}

@@ -1,0 +1,46 @@
+/* NAVBAR */
+
+.navbar {
+  @apply sticky top-0 z-50;
+}
+
+/* container */
+
+.navbar-container {
+  @apply flex items-center w-full px-5;
+}
+
+/* navigation links */
+
+.navbar-links {
+  @apply flex justify-end items-center gap-10 ml-auto mr-20 transition-all duration-800;
+}
+
+/* logo */
+
+.navbar-logo {
+  @apply flex items-center cursor-pointer;
+  height: 45px;
+  width: 45px;
+}
+
+/* links */
+
+.navbar-link {
+  @apply relative text-neutral-300 transition cursor-pointer;
+}
+
+.navbar-link:hover {
+  @apply text-green-400;
+}
+
+/* underline animation */
+
+.navbar-link::after {
+  content: "";
+  @apply absolute left-0 -bottom-[4px] h-[2px] w-0 bg-green-400 transition-all duration-300;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}

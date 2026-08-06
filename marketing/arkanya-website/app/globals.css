@@ -1,0 +1,60 @@
+@import "tailwindcss";
+@import "../styles/index.css";
+
+/* ============================= */
+/* 🎨 ARKANYA — BASE CONTINUE TECH PREMIUM */
+/* ============================= */
+
+:root {
+  /* Fond principal premium */
+  --background: #f8fafc;
+
+  /* Texte principal */
+  --foreground: #08111f;
+
+  /* Couleurs profondes */
+  --color-deep: #0e1117;
+  --color-deep-soft: #171c25;
+
+  /* Accent doré discret */
+  --color-gold: #d9a326;
+  --color-gold-bright: #f2c75b;
+  --color-gold-deep: #9b6b12;
+  --color-gold-soft: #ebe4ca;
+  --color-card-gold: #bfa765;
+  --color-card-gold-hover-gradient: linear-gradient(
+    135deg,
+    rgba(235, 228, 202, 0.16),
+    rgba(191, 167, 101, 0.08)
+  );
+
+  /* Texte secondaire */
+  --color-text-medium: #3f4b5c;
+  --color-text-soft: #5c6878;
+
+  /* Surfaces */
+  --color-surface: rgba(255, 255, 255, 0.68);
+  --color-border-subtle: rgba(15, 23, 42, 0.075);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --ark-color-surface: #ffffff;
+  --ark-color-surface-muted: #f8fafc;
+  --ark-color-surface-subtle: #f1f5f9;
+  --ark-color-text: var(--foreground);
+  --ark-color-text-muted: var(--color-text-soft);
+  --ark-color-border: #cbd5e1;
+  --ark-color-border-muted: #e2e8f0;
+  --ark-color-brand: var(--color-deep);
+  --ark-color-brand-hover: var(--color-deep-soft);
+  --ark-color-brand-contrast: #ffffff;
+  --ark-focus-ring: var(--color-gold);
+}
+
+/* ============================= */
+/* 🌗 TAILWIND THEME INLINE */
+/* ============================= */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}

@@ -1,0 +1,234 @@
+[
+  {
+    "slug": "creation-site-web",
+    "hero": {
+      "image": "/services/creation-site-web/website.webp",
+      "title": "Création de sites web professionnels",
+      "subtitle": "Des plateformes modernes, performantes et structurées pour soutenir le développement de votre activité."
+    },
+    "intro": {
+      "title": "Un site web doit être un véritable outil pour votre entreprise",
+      "text": "Un site web professionnel ne se limite pas à une simple présence en ligne. Il doit renforcer votre crédibilité, améliorer votre visibilité et soutenir le développement de votre activité."
+    },
+    "sections": [
+      {
+        "title": "Landing page",
+        "description": "Une page unique conçue pour maximiser la conversion.",
+        "features": [
+          "Design orienté conversion",
+          "Structure SEO optimisée",
+          "Performance optimisée",
+          "Responsive mobile"
+        ],
+        "price": "À partir de 1000 €"
+      },
+      {
+        "title": "Site vitrine",
+        "description": "Un site professionnel pour présenter votre activité, vos services et votre expertise.",
+        "features": [
+          "Pages multiples",
+          "Présentation entreprise",
+          "Formulaire de contact",
+          "Navigation complète"
+        ],
+        "price": "À partir de 2000 €"
+      },
+      {
+        "title": "Site e-commerce",
+        "description": "Une plateforme de vente performante pour gérer vos produits et commandes.",
+        "features": [
+          "Catalogue produits",
+          "Paiement sécurisé",
+          "Gestion des commandes",
+          "Gestion du stock"
+        ],
+        "price": "À partir de 4000 €"
+      }
+    ],
+    "cta": {
+      "title": "Discutons de votre projet",
+      "button": "Planifier un échange"
+    }
+  },
+  {
+    "slug": "refonte-site-web",
+    "hero": {
+      "image": "/services/refonte-site-web/refonte.webp",
+      "title": "Refonte et modernisation de sites web",
+      "subtitle": "Transformez un site vieillissant en un outil moderne, rapide et performant."
+    },
+    "intro": {
+      "title": "Un site vieillissant peut freiner votre développement",
+      "text": "Technologies obsolètes, performances faibles ou expérience utilisateur dépassée peuvent nuire à votre crédibilité et limiter votre croissance."
+    },
+    "sections": [
+      {
+        "title": "Audit et analyse",
+        "description": "Analyse complète de votre site existant afin d’identifier les points bloquants.",
+        "features": ["Analyse technique", "Analyse SEO", "Analyse des performances", "Audit UX"],
+        "price": "À partir de 500 €"
+      },
+      {
+        "title": "Refonte visuelle",
+        "description": "Modernisation du design et amélioration de l’expérience utilisateur.",
+        "features": [
+          "Nouveau design",
+          "Amélioration UX",
+          "Responsive mobile",
+          "Interface modernisée"
+        ],
+        "price": "À partir de 1500 €"
+      },
+      {
+        "title": "Refonte technique",
+        "description": "Reconstruction du site afin d'améliorer performances et maintenabilité.",
+        "features": [
+          "Refonte du code",
+          "Optimisation performances",
+          "SEO technique",
+          "Sécurisation du site"
+        ],
+        "price": "À partir de 2500 €"
+      },
+      {
+        "title": "Migration et modernisation",
+        "description": "Migration vers des technologies modernes et évolutives.",
+        "features": [
+          "Migration vers un nouveau framework",
+          "Modernisation infrastructure",
+          "Optimisation performances",
+          "Amélioration maintenabilité"
+        ],
+        "price": "À partir de 3500 €"
+      }
+    ],
+    "cta": {
+      "title": "Modernisons votre site",
+      "button": "Discuter de votre projet"
+    }
+  },
+  {
+    "slug": "developpement-sur-mesure",
+    "hero": {
+      "image": "/services/developpement-sur-mesure/unique.webp",
+      "title": "Développement de solutions digitales sur mesure",
+      "subtitle": "Applications web et mobiles, outils métier et plateformes conçues pour répondre précisément aux besoins de votre organisation."
+    },
+    "intro": {
+      "title": "Des solutions conçues pour vos besoins spécifiques",
+      "text": "Certaines problématiques ne peuvent pas être résolues par un site classique ou un outil standard. Le développement sur mesure permet de concevoir des applications adaptées à vos processus."
+    },
+    "sections": [
+      {
+        "title": "Applications web et mobiles",
+        "description": "Applications accessibles via navigateur ou adaptées aux usages mobiles pour gérer données et processus.",
+        "features": [
+          "Tableaux de bord",
+          "Interfaces de gestion",
+          "Espaces clients",
+          "Applications mobiles sur mesure"
+        ],
+        "price": "À partir de 4000 €"
+      },
+      {
+        "title": "Outils métier",
+        "description": "Outils internes adaptés aux processus spécifiques de votre entreprise.",
+        "features": [
+          "Gestion interne",
+          "Automatisation de processus",
+          "Gestion de données",
+          "Interfaces d'administration"
+        ],
+        "price": "À partir de 5000 €"
+      },
+      {
+        "title": "Plateformes et services en ligne",
+        "description": "Plateformes permettant de connecter utilisateurs, données et services.",
+        "features": [
+          "Plateformes SaaS",
+          "Portails clients",
+          "Gestion multi-utilisateurs",
+          "Interfaces avancées"
+        ],
+        "price": "À partir de 8000 €"
+      },
+      {
+        "title": "Automatisation",
+        "description": "Automatisation de tâches et intégration de services.",
+        "features": [
+          "Automatisation de processus",
+          "Intégrations API",
+          "Synchronisation de données",
+          "Automatisation de tâches"
+        ],
+        "price": "À partir de 3000 €"
+      }
+    ],
+    "cta": {
+      "title": "Construisons votre solution",
+      "button": "Discuter de votre projet"
+    }
+  },
+  {
+    "slug": "accompagnement",
+    "hero": {
+      "image": "/services/accompagnements/suivi.webp",
+      "title": "Accompagnement et suivi technique",
+      "subtitle": "Un suivi durable pour maintenir la performance et l’évolution de vos outils digitaux."
+    },
+    "intro": {
+      "title": "Un projet digital évolue dans le temps",
+      "text": "Un site ou une application nécessite un suivi régulier pour rester performant, sécurisé et adapté à vos besoins."
+    },
+    "sections": [
+      {
+        "title": "Maintenance",
+        "description": "Suivi technique pour assurer stabilité et sécurité.",
+        "features": [
+          "Surveillance technique",
+          "Corrections de bugs",
+          "Mises à jour",
+          "Sécurisation"
+        ],
+        "price": "À partir de 250 € / mois"
+      },
+      {
+        "title": "Optimisation",
+        "description": "Amélioration continue des performances et de l’efficacité.",
+        "features": [
+          "Optimisation performances",
+          "Amélioration SEO",
+          "Optimisation UX",
+          "Amélioration technique"
+        ],
+        "price": "Selon besoin"
+      },
+      {
+        "title": "Support technique",
+        "description": "Assistance technique pour résoudre rapidement les problèmes.",
+        "features": [
+          "Assistance technique",
+          "Résolution de problèmes",
+          "Conseils techniques",
+          "Support prioritaire"
+        ],
+        "price": "Sur demande"
+      },
+      {
+        "title": "Évolution et amélioration",
+        "description": "Ajout de fonctionnalités et évolution du site ou de l'application.",
+        "features": [
+          "Ajout de fonctionnalités",
+          "Amélioration interface",
+          "Développement modules",
+          "Adaptation aux nouveaux besoins"
+        ],
+        "price": "Sur devis"
+      }
+    ],
+    "cta": {
+      "title": "Assurons la pérennité de votre projet",
+      "button": "Planifier un échange"
+    }
+  }
+]

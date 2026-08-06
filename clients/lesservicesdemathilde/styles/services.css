@@ -1,0 +1,41 @@
+/* ========================= */
+/* SERVICES PAGE */
+/* ========================= */
+
+/* TITRE */
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.title-anim {
+  opacity: 0;
+  animation: titleReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* CARDS */
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-anim {
+  opacity: 0;
+  animation: cardAppear 0.6s ease-out forwards;
+}

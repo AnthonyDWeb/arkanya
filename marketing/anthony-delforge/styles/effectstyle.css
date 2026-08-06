@@ -1,0 +1,92 @@
+/* ============================= */
+/* GOLDEN HOVER */
+/* ============================= */
+
+.goldenhover {
+  position: relative;
+  padding-bottom: 0.25rem;
+  transition: all 200ms ease;
+}
+
+.goldenhover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-gold);
+  transition: width 300ms ease;
+}
+
+.goldenhover:hover {
+  color: var(--color-gold);
+}
+
+.goldenhover:hover::after {
+  width: 100%;
+}
+
+.mobilegoldenhover:hover::after {
+  left: 5%;
+  width: 90%;
+  transition: width 300ms ease;
+  background-color: var(--color-gold);
+}
+
+/* ============================= */
+/* BUTTON SHINE EFFECT */
+/* ============================= */
+
+.shine-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-button::before {
+  content: "";
+  position: absolute;
+  top: 7%;
+  left: -50%;
+  width: 40%;
+  height: 86%;
+  opacity: 0;
+
+  background: white;
+  box-shadow: 0 0 40px 20px white;
+
+  transform: skewX(-20deg);
+}
+
+.shine-button:hover::before {
+  animation: shine 0.8s linear;
+}
+
+/* ============================= */
+/* HORIZON LINE */
+/* ============================= */
+
+.horizon-line {
+  position: relative;
+  width: 100%;
+  height: 1px;
+
+  background: linear-gradient(to right, transparent, #4ade80, transparent);
+
+  pointer-events: none;
+}
+
+.horizon-line-glow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  top: -1px;
+  width: 80px;
+  height: 3px;
+
+  background: linear-gradient(to right, transparent, #4ade80, transparent);
+
+  filter: blur(2px);
+  opacity: 0.9;
+}

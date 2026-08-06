@@ -1,0 +1,41 @@
+/* ========================= */
+/* CONTAINER */
+/* ========================= */
+
+.container-main {
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ========================= */
+/* SECTION SPACING */
+/* ========================= */
+
+/* espace entre sections */
+
+.section {
+  padding-top: 120px;
+}
+
+/* le hero n'a pas de taille fix */
+
+.section-hero {
+  padding-top: 140px;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: 60px;
+    padding-bottom: 50px;
+  }
+
+  .section-hero {
+    padding-top: 50px;
+  }
+}

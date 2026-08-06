@@ -1,0 +1,34 @@
+{
+  "name": "arkanya",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "check-types": "turbo check-types",
+    "test": "turbo test",
+    "ignore-build": "node scripts/ignore-build.mjs",
+    "ignore-build:list": "node scripts/ignore-build.mjs --list",
+    "ignore-build:platform": "node scripts/ignore-build.mjs platform",
+    "ignore-build:account": "node scripts/ignore-build.mjs account",
+    "ignore-build:worker": "node scripts/ignore-build.mjs worker",
+    "ignore-build:anthony-delforge": "node scripts/ignore-build.mjs anthony-delforge",
+    "ignore-build:arkanya-website": "node scripts/ignore-build.mjs arkanya-website",
+    "ignore-build:arknest": "node scripts/ignore-build.mjs arknest",
+    "ignore-build:arkcare": "node scripts/ignore-build.mjs arkcare",
+    "ignore-build:lesservicesdemathilde": "node scripts/ignore-build.mjs lesservicesdemathilde"
+  },
+  "devDependencies": {
+    "eslint": "^9.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "turbo": "^2.10.8",
+    "typescript": "^5.9.3",
+    "prettier": "^3.9.6"
+  }
+}

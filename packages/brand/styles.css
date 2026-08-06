@@ -1,0 +1,62 @@
+.arkanya-brand {
+  --arkanya-brand-accent: #d6a928;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: inherit;
+}
+
+.arkanya-brand__symbol {
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+  object-fit: contain;
+}
+
+.arkanya-brand__wordmark {
+  display: grid;
+  line-height: 1.05;
+}
+
+.arkanya-brand__wordmark strong {
+  font-size: 1rem;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.arkanya-brand__wordmark small {
+  margin-top: 0.28rem;
+  color: var(--arkanya-brand-accent);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.arkanya-brand.is-compact {
+  gap: 0.5rem;
+}
+
+.arkanya-brand.is-compact .arkanya-brand__symbol {
+  width: 2rem;
+  height: 2rem;
+}
+
+.arkanya-brand.is-compact .arkanya-brand__wordmark strong {
+  font-size: 0.82rem;
+}
+
+.arkanya-product-attribution {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: inherit;
+  font-size: 0.75rem;
+}
+
+.arkanya-product-attribution img {
+  width: 1.15rem;
+  height: 1.15rem;
+  object-fit: contain;
+}

@@ -1,0 +1,68 @@
+{
+  "id": "site-vitrine",
+  "name": "Site Vitrine",
+  "description": "Site multi-pages · Next.js 16 · Tailwind CSS 4 · navigation par routes",
+  "type": "client",
+  "pages": [
+    {
+      "id": "home",
+      "name": "Accueil",
+      "slug": "/",
+      "required": true,
+      "file": "app/page.tsx"
+    },
+    {
+      "id": "about",
+      "name": "À propos",
+      "slug": "a-propos",
+      "required": false,
+      "file": "app/a-propos/page.tsx"
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "slug": "services",
+      "required": false,
+      "file": "app/services/page.tsx"
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "slug": "contact",
+      "required": false,
+      "file": "app/contact/page.tsx"
+    }
+  ],
+  "config": [
+    {
+      "id": "site-name",
+      "label": "Nom du site",
+      "type": "text",
+      "required": true,
+      "default": "Mon Site"
+    },
+    {
+      "id": "site-tagline",
+      "label": "Accroche",
+      "type": "text",
+      "required": false,
+      "default": "Bienvenue sur notre site"
+    },
+    {
+      "id": "primary-color",
+      "label": "Couleur principale",
+      "type": "color",
+      "required": true,
+      "default": "#0f172a"
+    },
+    {
+      "id": "secondary-color",
+      "label": "Couleur secondaire",
+      "type": "color",
+      "required": false,
+      "default": "#6366f1"
+    }
+  ],
+  "features": ["navigation", "contact-form"],
+  "technologies": ["Next.js 16", "TypeScript", "Tailwind CSS 4"]
+}

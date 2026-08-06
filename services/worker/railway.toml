@@ -1,0 +1,11 @@
+[build]
+watchPatterns = [
+  "services/worker/**",
+  "packages/contracts/**",
+  "packages/config/**",
+  "templates/**",
+  "features/**",
+  "pnpm-lock.yaml",
+  "pnpm-workspace.yaml",
+  "package.json",
+]

@@ -1,0 +1,22 @@
+{
+  "name": "@arkanya/email",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.0"
+  },
+  "devDependencies": {
+    "@arkanya/config": "workspace:*",
+    "@types/nodemailer": "^6.4.17",
+    "typescript": "^5.9.3"
+  }
+}

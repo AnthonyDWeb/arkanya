@@ -1,0 +1,543 @@
+[
+  {
+    "slug": "anthony-delforge-landing",
+    "service": "creation-site-web",
+    "serviceType": "landing-page",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Anthony Delforge – Landing page d’expertise personnelle",
+    "description": "Conception d’une landing page personnelle orientée expertise et redirection stratégique vers Arkanya.",
+    "image": "/realisations/creation-site-web/landing-page/anthony-delforge.webp",
+    "site": "https://anthony-delforge.fr",
+    "type": "site",
+    "display": "image",
+    "context": "Dans le cadre du développement de la marque Arkanya, il était nécessaire de créer une présence personnelle capable de présenter l’expertise technique et la vision stratégique derrière les projets réalisés. L’objectif n’était pas simplement de créer un site personnel, mais de concevoir une landing page claire, structurée et orientée crédibilité. Cette page agit comme un point d’entrée permettant aux visiteurs de comprendre rapidement le positionnement professionnel et d’accéder ensuite au site principal Arkanya.",
+    "challenge": "Le défi consistait à créer une page à la fois minimaliste, moderne et efficace. Le design devait transmettre une image technique et professionnelle tout en restant simple et lisible. Il fallait également structurer le message afin de présenter clairement l’expertise sans créer de friction dans le parcours utilisateur. Enfin, la page devait s’intégrer dans une stratégie plus large reliant l’identité personnelle à la plateforme de services Arkanya.",
+    "approach": [
+      "Conception d’une landing page minimaliste orientée crédibilité",
+      "Structuration d’un message clair autour de l’expertise technique",
+      "Création d’un design moderne avec identité digitale marquée",
+      "Optimisation du parcours utilisateur vers le site Arkanya",
+      "Optimisation des performances et du SEO technique"
+    ],
+    "results": "La landing page offre désormais une présentation claire de l’expertise et agit comme un hub personnel reliant l’identité professionnelle à la plateforme Arkanya. Les visiteurs peuvent rapidement comprendre le positionnement et accéder aux services proposés. La page renforce la crédibilité globale et participe à la stratégie d’acquisition digitale.",
+    "conclusion": "Cette landing page constitue un point d’entrée stratégique permettant de connecter une identité personnelle forte avec une plateforme de services structurée.",
+    "metrics": [
+      {
+        "label": "Objectif",
+        "value": "Présentation d’expertise"
+      },
+      {
+        "label": "Stratégie",
+        "value": "Biwebsite"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Optimisation SEO"],
+    "gallery": {
+      "before": [],
+      "after": ["/realisations/creation-site-web/landing-page/anthony-delforge.webp"]
+    },
+    "seo": {
+      "title": "Landing page Anthony Delforge | Étude de cas | Arkanya",
+      "description": "Conception d’une landing personnelle orientée expertise et redirection vers Arkanya.",
+      "keywords": [
+        "landing page personnelle",
+        "site développeur",
+        "Next.js landing page",
+        "site développeur freelance"
+      ]
+    }
+  },
+  {
+    "slug": "app1",
+    "service": "developpement-sur-mesure",
+    "serviceType": "outils-metier",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Développement d’une application métier interne",
+    "description": "Conception d’un outil sur mesure pour structurer et automatiser les processus internes d’une PME.",
+    "image": "/realisations/developpement-sur-mesure/application-metier-interne/interne.webp",
+    "type": "application",
+    "display": "image",
+    "context": "L’entreprise gérait ses opérations quotidiennes via une multitude d’outils dispersés : tableurs, échanges d’emails, documents partagés et suivis manuels. Cette organisation fragmentée limitait la visibilité globale sur les processus et rendait difficile la prise de décision stratégique. Les équipes perdaient du temps dans des tâches répétitives ou dans la recherche d’informations. La direction souhaitait structurer ses opérations afin d’améliorer la coordination interne et d’optimiser la performance globale. L’objectif était de créer un outil centralisé capable de soutenir la croissance de l’entreprise et d’apporter plus de clarté dans la gestion quotidienne.",
+    "challenge": "Le principal défi consistait à concevoir une solution parfaitement adaptée aux besoins spécifiques de l’entreprise sans complexifier l’usage pour les équipes. L’outil devait être intuitif, évolutif et capable d’intégrer progressivement de nouvelles fonctionnalités. Il fallait également accompagner le changement auprès des utilisateurs afin d’assurer une adoption fluide. Enfin, l’architecture devait être suffisamment robuste pour supporter la montée en charge future tout en restant simple à maintenir.",
+    "approach": [
+      "Analyse détaillée des processus existants",
+      "Conception d’une architecture modulaire évolutive",
+      "Développement d’une interface intuitive adaptée aux équipes",
+      "Mise en place d’un système d’automatisation des tâches récurrentes",
+      "Déploiement progressif et accompagnement des utilisateurs"
+    ],
+    "results": "L’entreprise dispose désormais d’un outil centralisé facilitant la coordination entre les équipes et offrant une vision claire des opérations. Les tâches répétitives ont été automatisées, réduisant les erreurs humaines et les pertes de temps. La gestion des données est plus structurée et plus fiable. Les responsables peuvent prendre des décisions basées sur des informations consolidées. L’application est devenue un levier stratégique permettant d’optimiser l’organisation interne et de soutenir la croissance de l’activité.",
+    "conclusion": "Cette application métier constitue désormais un socle structurant pour l’organisation interne. Elle permet à l’entreprise de gagner en efficacité, en visibilité et en sérénité dans sa gestion quotidienne.",
+    "metrics": [
+      {
+        "label": "Processus",
+        "value": "Centralisés"
+      },
+      {
+        "label": "Productivité",
+        "value": "Optimisée"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
+    "gallery": {
+      "before": [],
+      "after": ["/realisations/developpement-sur-mesure/application-metier-interne/interne.webp"]
+    },
+    "seo": {
+      "title": "Application métier sur mesure | Arkanya",
+      "description": "Développement d’un outil interne personnalisé pour PME.",
+      "keywords": ["application métier", "outil interne", "développement sur mesure"]
+    }
+  },
+  {
+    "slug": "modernisation-site-pme",
+    "service": "refonte-site-web",
+    "serviceType": "refonte-technique",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Modernisation digitale d’un site PME",
+    "description": "Refonte technique et UX d’un site vieillissant afin d’améliorer performance, clarté et crédibilité.",
+    "image": "/realisations/refonte-site-web/modernisation/refonte.webp",
+    "type": "refonte",
+    "display": "image",
+    "context": "Le site existant présentait une architecture technique obsolète et une expérience utilisateur peu optimisée. Les temps de chargement étaient élevés et l’interface ne reflétait plus le niveau réel de professionnalisme de l’entreprise. Cette situation impactait la crédibilité perçue auprès des prospects et limitait l’efficacité commerciale du site. La direction souhaitait moderniser son image digitale et aligner sa présence en ligne avec la qualité de ses prestations. L’objectif était de renforcer la confiance des visiteurs tout en améliorant la performance technique globale.",
+    "challenge": "Il fallait moderniser l’architecture et l’expérience utilisateur sans perturber la visibilité existante ni affecter le référencement acquis. Le projet nécessitait une refonte progressive et maîtrisée afin d’éviter toute interruption de service. La simplification du message et la clarification de l’offre devaient également être réalisées sans perdre l’identité de l’entreprise. L’enjeu était d’améliorer à la fois la performance technique et la perception stratégique de la marque.",
+    "approach": [
+      "Audit technique et UX complet",
+      "Refonte de l’interface et simplification du message",
+      "Optimisation des performances et du SEO technique",
+      "Amélioration du responsive et de l’accessibilité"
+    ],
+    "results": "Le site bénéficie désormais d’une architecture plus moderne et plus performante. L’interface est plus claire et met davantage en valeur l’expertise de l’entreprise. Les temps de chargement ont été optimisés, améliorant l’expérience utilisateur globale. La structure du contenu facilite la compréhension de l’offre et renforce la crédibilité perçue. Le site devient un véritable outil d’acquisition et non plus simplement une vitrine informative.",
+    "conclusion": "La modernisation digitale a permis d’aligner la présence en ligne avec le niveau réel de l’entreprise, renforçant ainsi son image et son efficacité commerciale.",
+    "metrics": [
+      {
+        "label": "Performance",
+        "value": "Optimisée"
+      },
+      {
+        "label": "Crédibilité",
+        "value": "Renforcée"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "SEO technique"],
+    "gallery": {
+      "before": [],
+      "after": ["/realisations/refonte-site-web/modernisation/refonte.webp"]
+    },
+    "seo": {
+      "title": "Modernisation site PME | Arkanya",
+      "description": "Refonte technique et UX pour PME ambitieuse.",
+      "keywords": ["modernisation site", "refonte PME"]
+    }
+  },
+  {
+    "slug": "lesservicesdemathilde",
+    "service": "refonte-site-web",
+    "serviceType": "refonte-visuelle",
+    "visible": true,
+    "highlight": true,
+    "draft": false,
+    "title": "Les Services de Mathilde - Refonte stratégique d’un site d’aide à la personne",
+    "description": "Repositionnement complet d’un site initialement dédié au baby-sitting vers une plateforme multi-services d’aide à la personne, avec nouveau domaine, nouvelle identité et optimisation de la conversion.",
+    "image": "/realisations/refonte-site-web/lesservicesdemathilde/img.webp",
+    "site": "https://lesservicesdemathilde.fr",
+    "type": "refonte",
+    "display": "image",
+    "context": "La cliente proposait initialement des services de baby-sitting à travers un site vitrine simple, conçu à une période où son activité était encore ciblée et limitée. Avec le temps, son offre s’est naturellement élargie vers différents services d’aide à la personne : ménage, accompagnement quotidien, assistance administrative et garde ponctuelle. Le site existant ne reflétait plus cette évolution et continuait de véhiculer une image partielle de son expertise. Ce décalage entre la réalité de l’activité et sa présence digitale freinait la perception de professionnalisme et limitait l’élargissement de sa clientèle. L’objectif était donc de structurer une plateforme capable d’incarner cette montée en maturité, de clarifier l’offre multi-services et d’accompagner la croissance future de l’entreprise.",
+    "challenge": "Le projet impliquait un repositionnement stratégique complet sans perturber la clientèle existante. Il fallait redéfinir la proposition de valeur, clarifier les services et structurer un discours plus professionnel tout en restant accessible. Le changement de nom de domaine nécessitait une transition maîtrisée afin de préserver la visibilité et la cohérence de la communication. L’intégration du nouveau logo fourni par la cliente demandait une direction artistique cohérente et élégante, capable de renforcer la crédibilité perçue. Enfin, le site devait être plus lisible, plus rassurant et davantage orienté vers la génération de demandes qualifiées.",
+    "approach": [
+      "Analyse du positionnement initial et définition d’une nouvelle proposition de valeur",
+      "Restructuration complète de l’arborescence pour intégrer les différents services",
+      "Refonte du parcours utilisateur orienté clarté et conversion",
+      "Intégration du nouveau nom de domaine et optimisation SEO locale",
+      "Adaptation du design autour du nouveau logo avec une direction sobre et élégante",
+      "Optimisation des performances et de l’expérience mobile"
+    ],
+    "results": "La nouvelle plateforme reflète désormais une image plus professionnelle et cohérente avec l’évolution de l’activité. L’offre multi-services est clairement structurée, permettant aux visiteurs d’identifier rapidement le service correspondant à leur besoin. Le parcours utilisateur a été simplifié afin de faciliter la prise de contact et de réduire les frictions. La transition vers le nouveau domaine s’est effectuée sans rupture notable de visibilité. L’ensemble du site transmet une impression de sérieux et de fiabilité renforcée, contribuant à améliorer la qualité des demandes reçues. Le digital devient ainsi un véritable outil de développement commercial et non plus uniquement un support informatif.",
+    "conclusion": "Cette refonte a permis d’aligner la présence digitale avec la maturité réelle de l’activité. Le site constitue désormais un socle structurant pour le développement futur, capable d’évoluer avec l’entreprise et ses ambitions.",
+    "metrics": [
+      {
+        "label": "Positionnement",
+        "value": "Multi-services clarifié"
+      },
+      {
+        "label": "Image perçue",
+        "value": "Plus professionnelle"
+      },
+      {
+        "label": "Structure",
+        "value": "Optimisée pour conversion"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "Optimisation SEO locale", "Responsive Design"],
+    "gallery": {
+      "before": [
+        "/realisations/refonte-site-web/lesservicesdemathilde/before/homepage.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/before/services.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/before/pricings.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/before/contact.webp"
+      ],
+      "after": [
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/homepage.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/pricings.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/pricings2.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/reservation.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/contact.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/faq.webp",
+        "/realisations/refonte-site-web/lesservicesdemathilde/after/faq2.webp"
+      ]
+    },
+    "testimonial": {
+      "author": "Fondatrice",
+      "role": "Dirigeante",
+      "company": "Entreprise d’aide à la personne",
+      "content": "Le nouveau site reflète parfaitement l’évolution de mon activité. Il est plus clair, plus professionnel et correspond pleinement à l’image que je souhaitais transmettre."
+    },
+    "seo": {
+      "title": "Refonte site aide à la personne | Étude de cas | Arkanya",
+      "description": "Étude de cas d’une refonte stratégique avec repositionnement d’activité, nouveau domaine et optimisation de la conversion.",
+      "keywords": [
+        "refonte site web",
+        "aide à la personne",
+        "repositionnement digital",
+        "optimisation conversion"
+      ]
+    }
+  },
+  {
+    "slug": "site-ecommerce-boutique",
+    "service": "creation-site-web",
+    "serviceType": "site-e-commerce",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Création d’une boutique e-commerce spécialisée",
+    "description": "Développement d’une plateforme e-commerce moderne permettant la gestion complète des ventes en ligne.",
+    "type": "e-commerce",
+    "context": "L’entreprise souhaitait vendre ses produits en ligne tout en conservant une gestion simple et centralisée.",
+    "challenge": "Créer une boutique rapide, claire et adaptée à une évolution future du catalogue.",
+    "approach": [
+      "Création d’un catalogue dynamique",
+      "Intégration du paiement sécurisé",
+      "Optimisation SEO",
+      "Optimisation mobile"
+    ],
+    "results": "La boutique permet désormais une gestion simplifiée des commandes et une meilleure visibilité des produits.",
+    "conclusion": "La plateforme e-commerce devient un levier direct de développement commercial.",
+    "metrics": [
+      {
+        "label": "Plateforme",
+        "value": "E-commerce"
+      }
+    ],
+    "technologies": ["Next.js", "Stripe", "PostgreSQL"],
+    "display": "metrics"
+  },
+  {
+    "slug": "audit-refonte-entreprise",
+    "service": "refonte-site-web",
+    "serviceType": "audit-analyse",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Audit stratégique et analyse complète d’un site d’entreprise",
+    "description": "Analyse technique, UX et SEO d’un site existant afin d’identifier les freins à la performance.",
+    "type": "audit",
+    "context": "Le site présentait plusieurs problèmes de performances et un manque de clarté dans l’expérience utilisateur.",
+    "challenge": "Identifier précisément les problèmes sans perturber l’activité existante.",
+    "approach": ["Audit UX", "Analyse SEO", "Analyse des performances", "Analyse technique"],
+    "results": "Les points bloquants ont été clairement identifiés et priorisés.",
+    "conclusion": "L’audit a permis de préparer une refonte structurée et cohérente.",
+    "metrics": [
+      {
+        "label": "Audit",
+        "value": "Complet"
+      }
+    ],
+    "technologies": ["Lighthouse", "SEO Audit"],
+    "display": "metrics"
+  },
+  {
+    "slug": "migration-nextjs-modernisation",
+    "service": "refonte-site-web",
+    "serviceType": "migration-modernisation",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Migration vers une architecture Next.js moderne",
+    "description": "Migration d’un ancien site vers une architecture moderne afin d’améliorer performances et maintenabilité.",
+    "type": "migration",
+    "context": "L’ancien système limitait les évolutions et les performances.",
+    "challenge": "Migrer l’intégralité du projet sans perturber les utilisateurs.",
+    "approach": [
+      "Migration framework",
+      "Refonte architecture",
+      "Optimisation SEO",
+      "Optimisation performances"
+    ],
+    "results": "Le projet bénéficie désormais d’une architecture moderne et évolutive.",
+    "conclusion": "La migration permet de soutenir durablement les évolutions futures.",
+    "metrics": [
+      {
+        "label": "Architecture",
+        "value": "Modernisée"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "Vercel"],
+    "display": "metrics"
+  },
+  {
+    "slug": "application-web-gestion",
+    "service": "developpement-sur-mesure",
+    "serviceType": "applications-web",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Développement d’une application web de gestion",
+    "description": "Création d’une application web permettant la centralisation et la gestion de données métier.",
+    "type": "application-web",
+    "context": "L’entreprise gérait ses données sur plusieurs outils dispersés.",
+    "challenge": "Créer une plateforme simple à utiliser et évolutive.",
+    "approach": [
+      "Architecture modulaire",
+      "Interface de gestion",
+      "Tableaux de bord",
+      "Gestion centralisée"
+    ],
+    "results": "Les opérations sont désormais centralisées et plus efficaces.",
+    "conclusion": "L’application améliore visibilité et organisation interne.",
+    "metrics": [
+      {
+        "label": "Gestion",
+        "value": "Centralisée"
+      }
+    ],
+    "technologies": ["Next.js", "PostgreSQL"],
+    "display": "metrics"
+  },
+  {
+    "slug": "plateforme-client-saas",
+    "service": "developpement-sur-mesure",
+    "serviceType": "plateformes-services",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Développement d’une plateforme SaaS client",
+    "description": "Création d’une plateforme web multi-utilisateurs permettant la gestion centralisée de clients et services.",
+    "type": "saas",
+    "context": "L’entreprise souhaitait proposer un espace client moderne et évolutif.",
+    "challenge": "Créer une plateforme robuste capable de supporter une croissance importante.",
+    "approach": [
+      "Architecture SaaS",
+      "Gestion multi-utilisateurs",
+      "Espaces clients",
+      "Sécurisation"
+    ],
+    "results": "La plateforme permet désormais une gestion fluide des utilisateurs et services.",
+    "conclusion": "La solution soutient la croissance digitale de l’entreprise.",
+    "metrics": [
+      {
+        "label": "Utilisateurs",
+        "value": "Multi-comptes"
+      }
+    ],
+    "technologies": ["Next.js", "PostgreSQL", "Authentication"],
+    "display": "metrics"
+  },
+  {
+    "slug": "automatisation-processus-interne",
+    "service": "developpement-sur-mesure",
+    "serviceType": "automatisation",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Automatisation de processus internes",
+    "description": "Création d’un système automatisé permettant de réduire les tâches répétitives et les erreurs humaines.",
+    "type": "automatisation",
+    "context": "Les équipes perdaient du temps dans des opérations répétitives manuelles.",
+    "challenge": "Automatiser les flux sans perturber les habitudes de travail.",
+    "approach": [
+      "Analyse des flux",
+      "Automatisation des tâches",
+      "Synchronisation des données",
+      "Intégration API"
+    ],
+    "results": "Les opérations répétitives ont été largement réduites.",
+    "conclusion": "L’automatisation améliore productivité et fiabilité.",
+    "metrics": [
+      {
+        "label": "Automatisation",
+        "value": "Optimisée"
+      }
+    ],
+    "technologies": ["API", "Node.js", "Automation"],
+    "display": "icon"
+  },
+  {
+    "slug": "maintenance-evolution-plateforme",
+    "service": "accompagnement",
+    "serviceType": "maintenance",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Maintenance et évolution continue d’une plateforme",
+    "description": "Suivi technique et maintenance évolutive d’une plateforme digitale.",
+    "type": "maintenance",
+    "context": "La plateforme nécessitait un suivi régulier afin de rester stable et performante.",
+    "challenge": "Maintenir la stabilité tout en intégrant de nouvelles fonctionnalités.",
+    "approach": ["Corrections de bugs", "Mises à jour", "Surveillance", "Optimisations"],
+    "results": "La plateforme reste stable, performante et évolutive.",
+    "conclusion": "La maintenance garantit la pérennité du projet.",
+    "metrics": [
+      {
+        "label": "Disponibilité",
+        "value": "Stable"
+      }
+    ],
+    "technologies": ["Monitoring", "Maintenance"],
+    "display": "metrics"
+  },
+  {
+    "slug": "optimisation-performance-seo",
+    "service": "accompagnement",
+    "serviceType": "optimisation",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Optimisation des performances et du SEO technique",
+    "description": "Amélioration des performances et du référencement d’un site existant.",
+    "type": "optimisation",
+    "context": "Le site présentait des temps de chargement élevés et un référencement limité.",
+    "challenge": "Optimiser le site sans modifier son identité visuelle.",
+    "approach": [
+      "Optimisation Lighthouse",
+      "SEO technique",
+      "Optimisation images",
+      "Optimisation architecture"
+    ],
+    "results": "Le site est désormais plus rapide et mieux référencé.",
+    "conclusion": "Les optimisations renforcent visibilité et expérience utilisateur.",
+    "metrics": [
+      {
+        "label": "SEO",
+        "value": "Optimisé"
+      }
+    ],
+    "technologies": ["SEO", "Lighthouse", "Next.js"],
+    "display": "metrics"
+  },
+  {
+    "slug": "support-technique-entreprise",
+    "service": "accompagnement",
+    "serviceType": "support-technique",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Support technique et assistance continue",
+    "description": "Accompagnement technique réactif pour assurer la stabilité des outils digitaux.",
+    "type": "support",
+    "context": "L’entreprise rencontrait régulièrement des problèmes techniques bloquants.",
+    "challenge": "Assurer une assistance rapide et fiable.",
+    "approach": [
+      "Support prioritaire",
+      "Résolution incidents",
+      "Conseils techniques",
+      "Surveillance"
+    ],
+    "results": "Les interruptions et problèmes critiques ont été fortement réduits.",
+    "conclusion": "Le support technique apporte sérénité et continuité opérationnelle.",
+    "metrics": [
+      {
+        "label": "Support",
+        "value": "Réactif"
+      }
+    ],
+    "technologies": ["Support", "Maintenance", "Monitoring"],
+    "display": "icon"
+  },
+  {
+    "slug": "evolution-fonctionnelle-plateforme",
+    "service": "accompagnement",
+    "serviceType": "evolution-amelioration",
+    "visible": true,
+    "highlight": false,
+    "draft": false,
+    "title": "Évolution fonctionnelle d’une plateforme digitale",
+    "description": "Ajout progressif de nouvelles fonctionnalités afin d’accompagner la croissance d’une plateforme.",
+    "type": "evolution",
+    "context": "La plateforme devait évoluer afin de répondre à de nouveaux besoins métier.",
+    "challenge": "Ajouter des fonctionnalités sans complexifier l’expérience utilisateur.",
+    "approach": [
+      "Développement modulaire",
+      "Ajout de fonctionnalités",
+      "Optimisation UX",
+      "Amélioration continue"
+    ],
+    "results": "La plateforme évolue désormais plus facilement et plus rapidement.",
+    "conclusion": "Les évolutions permettent d’accompagner durablement la croissance.",
+    "metrics": [
+      {
+        "label": "Évolution",
+        "value": "Continue"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "Architecture modulaire"],
+    "display": "text",
+    "quote": "Accompagnement évolutif et amélioration continue sur le long terme."
+  },
+  {
+    "slug": "arkcare",
+    "service": "developpement-sur-mesure",
+    "serviceType": "applications-mobile",
+    "visible": true,
+    "highlight": true,
+    "draft": false,
+    "title": "ArkCare – Application mobile de suivi des traitements",
+    "description": "Développement d’une application dédiée au suivi des doses, traitements et rappels médicaux.",
+    "image": "/realisations/developpement-sur-mesure/arkcare/arkcare.webp",
+    "type": "application",
+    "display": "image",
+    "context": "Le besoin était de proposer une solution claire, fiable et accessible pour accompagner la gestion quotidienne des traitements, faciliter le suivi des doses et renforcer la régularité des prises. L’objectif était de transformer un suivi encore souvent manuel en une expérience digitale plus fluide, rassurante et adaptée aux usages réels des utilisateurs.",
+    "challenge": "Le défi consistait à créer une expérience intuitive, simple à utiliser au quotidien, tout en répondant à des besoins concrets de suivi, de mémorisation et d’organisation. Il fallait également intégrer des rappels efficaces et une navigation claire entre les différents éléments essentiels de l’application, afin d’en garantir une adoption naturelle.",
+    "approach": [
+      "Analyse des besoins autour du suivi des traitements",
+      "Conception d’une expérience utilisateur claire, ergonomique et rassurante",
+      "Développement d’un tableau de bord dédié au suivi des doses à venir",
+      "Mise en place d’un historique de prises et d’un système de rappels",
+      "Déploiement d’une solution numérique accessible et facilement intégrable au quotidien"
+    ],
+    "results": "Le projet offre aujourd’hui une expérience pratique et rassurante pour accompagner les utilisateurs dans la gestion de leurs traitements. Les informations essentielles sont visibles rapidement, le suivi est simplifié et les rappels contribuent à une meilleure régularité au quotidien.",
+    "conclusion": "ArkCare incarne une solution digitale pensée pour apporter simplicité, fiabilité et accompagnement au quotidien dans la gestion des traitements.",
+    "metrics": [
+      {
+        "label": "Usage",
+        "value": "Quotidien"
+      },
+      {
+        "label": "Valeur",
+        "value": "Simplicité et confiance"
+      }
+    ],
+    "technologies": ["Next.js", "TypeScript", "Capacitor", "PWA", "Notifications"],
+    "gallery": {
+      "before": [],
+      "after": ["/realisations/developpement-sur-mesure/arkcare/arkcare.webp"]
+    },
+    "seo": {
+      "title": "ArkCare | Application de suivi des traitements | Arkanya",
+      "description": "Développement d’une application mobile-first pour suivre les traitements, doses et rappels médicaux.",
+      "keywords": [
+        "application suivi traitement",
+        "application médicale",
+        "PWA santé",
+        "suivi doses"
+      ]
+    }
+  }
+]

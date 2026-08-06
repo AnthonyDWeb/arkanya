@@ -1,0 +1,32 @@
+{
+  "id": "navigation",
+  "name": "Navigation",
+  "description": "Header responsive avec liens vers les sections ou pages",
+  "files": [
+    {
+      "src": "components/navigation.tsx",
+      "dest": "components/navigation.tsx"
+    }
+  ],
+  "slots": [
+    {
+      "file": "app/layout.tsx",
+      "find": "// arkanya-slot:navigation-import",
+      "replace": "import { Navigation } from \"@/components/navigation\""
+    },
+    {
+      "template": "landing-page",
+      "file": "app/layout.tsx",
+      "find": "{/* arkanya-slot:navigation-component */}",
+      "replace": "<Navigation links={[\n          {{arkanya-nav-links}}\n        ]} />"
+    },
+    {
+      "template": "site-vitrine",
+      "file": "app/layout.tsx",
+      "find": "{/* arkanya-slot:navigation-component */}",
+      "replace": "<Navigation links={[\n          {{arkanya-nav-links}}\n        ]} />"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

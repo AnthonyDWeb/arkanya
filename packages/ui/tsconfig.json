@@ -1,0 +1,5 @@
+{
+  "extends": "@arkanya/config/react-library",
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

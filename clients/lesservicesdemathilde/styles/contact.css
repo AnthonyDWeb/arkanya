@@ -1,0 +1,145 @@
+/* ========================= */
+/* CONTACT PAGE */
+/* ========================= */
+
+/* ========================= */
+/* TITRE */
+/* ========================= */
+
+@keyframes contactTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.contact-title {
+  opacity: 0;
+  animation: contactTitle 0.5s ease-out forwards;
+}
+
+/* ========================= */
+/* TABS */
+/* ========================= */
+
+.tabs-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.tabs-inner {
+  display: flex;
+  width: 100%;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  background: white;
+  border: 1px solid #ededed;
+  transition: all 0.2s ease;
+}
+
+.tab-left-shape {
+  border-radius: 10px 0 0 10px;
+}
+
+.tab-right-shape {
+  border-radius: 0 10px 10px 0;
+}
+
+.tab-left {
+  transform: translateX(-120%);
+}
+
+.tab-right {
+  transform: translateX(120%);
+}
+
+@keyframes tabLeft {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes tabRight {
+  to {
+    transform: translateX(0);
+  }
+}
+
+.tab-left {
+  animation: tabLeft 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+.tab-right {
+  animation: tabRight 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+.tab-active {
+  background: #f9f9f9;
+  color: #809877;
+  box-shadow: inset 0 -3px 0 0 #809877;
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+@keyframes formUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(0.96);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.contact-form {
+  width: 100%;
+}
+
+.contact-form-init {
+  opacity: 0;
+  animation: formUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+/* ========================= */
+/* SWITCH CLEAN (SANS BUG) */
+/* ========================= */
+
+.switch-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.switch-layer {
+  width: 100%;
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+/* animation sortie */
+
+.slide-left {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+
+.slide-right {
+  transform: translateX(20px);
+  opacity: 0;
+}

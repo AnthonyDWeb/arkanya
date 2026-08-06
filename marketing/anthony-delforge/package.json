@@ -1,0 +1,32 @@
+{
+  "name": "@arkanya/marketing-anthony",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 6100",
+    "build": "next build",
+    "start": "next start --port 6100",
+    "lint": "eslint",
+    "check-types": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@arkanya/brand": "workspace:*",
+    "@arkanya/icons": "workspace:*",
+    "@arkanya/ui": "workspace:*",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "catalog:",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "catalog:",
+    "tailwindcss": "^4",
+    "typescript": "catalog:"
+  },
+  "engines": { "node": "24.x" }
+}

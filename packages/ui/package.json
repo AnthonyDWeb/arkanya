@@ -1,0 +1,41 @@
+{
+  "name": "@arkanya/ui",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./core": "./src/core/index.ts",
+    "./data": "./src/data/index.ts",
+    "./arkanya": "./src/arkanya/index.ts",
+    "./feedback": "./src/feedback/index.ts",
+    "./forms": "./src/forms/index.ts",
+    "./layout": "./src/layout/index.ts",
+    "./navigation": "./src/navigation/index.ts",
+    "./styles.css": {
+      "style": "./src/styles.css",
+      "import": "./src/styles.css",
+      "require": "./src/styles.css",
+      "default": "./src/styles.css"
+    }
+  },
+  "sideEffects": ["*.css"],
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.6.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@arkanya/config": "workspace:*",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.9.3"
+  }
+}

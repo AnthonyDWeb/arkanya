@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Création de site web",
+    "slug": "/services/creation-site-web",
+    "tagline": "Conception de sites modernes et performants.",
+    "description": "Un site professionnel qui renforce votre crédibilité, améliore votre visibilité et soutient le développement de votre activité.",
+    "price": "À partir de 1000 €"
+  },
+  {
+    "title": "Modernisation digitale",
+    "slug": "/services/refonte-site-web",
+    "tagline": "Refonte et transformation de plateformes existantes.",
+    "description": "Transformez un site vieillissant en un outil rapide, fiable et adapté aux standards actuels.",
+    "price": "À partir de 2500 €"
+  },
+  {
+    "title": "Développement sur mesure",
+    "slug": "/services/developpement-sur-mesure",
+    "tagline": "Création d’applications et d’outils digitaux adaptés.",
+    "description": "Des solutions conçues pour automatiser, structurer et faire évoluer vos processus internes.",
+    "price": "À partir de 4000 €"
+  },
+  {
+    "title": "Accompagnement technique",
+    "slug": "/services/accompagnement",
+    "tagline": "Suivi et optimisation continue de vos outils digitaux.",
+    "description": "Un accompagnement durable pour maintenir la performance et l’évolution de votre infrastructure.",
+    "price": "À partir de 250 € / mois"
+  }
+]

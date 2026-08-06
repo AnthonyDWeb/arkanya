@@ -1,0 +1,153 @@
+.ark-auth {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 32rem);
+  margin-inline: auto;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: 1rem;
+}
+
+.ark-auth form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 48rem) {
+  .ark-auth form label {
+    display: grid;
+    gap: 0.45rem;
+  }
+}
+
+.ark-auth input,
+.ark-auth button {
+  min-height: 2.75rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 0.7rem;
+  font: inherit;
+}
+
+.ark-auth button {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.ark-auth__eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ark-auth__link {
+  border: 0 !important;
+  background: transparent;
+  text-decoration: underline;
+}
+
+.ark-auth button.ark-auth__link {
+  justify-self: start;
+  min-height: auto;
+  padding: 0;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.ark-auth__message {
+  margin: 0;
+}
+
+.ark-auth-dialog-backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(15 23 42 / 55%);
+  backdrop-filter: blur(3px);
+}
+
+.ark-auth-dialog {
+  width: min(100%, 28rem);
+  background: Canvas;
+  color: CanvasText;
+  box-shadow: 0 1.25rem 3rem rgb(15 23 42 / 25%);
+}
+
+.ark-auth-loader {
+  display: flex;
+  width: fit-content;
+  margin: 1.5rem auto;
+  align-items: center;
+  gap: 0.65rem;
+  color: color-mix(in srgb, currentColor 72%, transparent);
+  font-size: 0.92rem;
+}
+
+.ark-auth-loader__spinner {
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 2px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: ark-auth-spin 0.75s linear infinite;
+}
+
+@keyframes ark-auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ark-auth-loader__spinner {
+    animation: none;
+  }
+}
+
+.ark-account__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+.ark-account__link,
+.ark-auth button.ark-account__link {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ark-account__link--danger,
+.ark-auth button.ark-account__link--danger {
+  color: #dc2626;
+}
+
+.ark-premium-gate {
+  text-align: center;
+}
+
+.ark-premium-gate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+}
+
+.ark-premium-gate__actions a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

@@ -1,0 +1,131 @@
+[
+  {
+    "slug": "entretien-domicile",
+    "title": "Entretien du domicile",
+    "image": "/images/femme_de_menage.jpg",
+    "description": "Profitez d’un intérieur propre, sain et agréable sans contrainte.",
+    "category": "sap",
+    "pricing": {
+      "base": "20€/h",
+      "reduced": "10€/h",
+      "options": ["+2€ si fourniture des produits", "+3€ produits écologiques"]
+    },
+    "details": [
+      "Ménage complet ou régulier",
+      "Nettoyage des surfaces",
+      "Entretien cuisine et salle de bain",
+      "Repassage possible"
+    ]
+  },
+
+  {
+    "slug": "aide-personne",
+    "title": "Aide à la personne",
+    "image": "/images/aide_personne.webp",
+    "description": "Accompagnement humain et bienveillant au quotidien.",
+    "category": "sap",
+    "pricing": {
+      "base": "22€/h",
+      "reduced": "11€/h"
+    },
+    "details": [
+      "Préparation des repas",
+      "Aide aux repas",
+      "Présence et compagnie",
+      "Surveillance du bien-être"
+    ]
+  },
+
+  {
+    "slug": "garde-enfants",
+    "title": "Garde d’enfants",
+    "image": "/images/garde_enfants.png",
+    "description": "Garde adaptée au rythme et aux besoins de l’enfant.",
+    "category": "sap",
+    "pricing": {
+      "base": "21€/h",
+      "reduced": "10,5€/h",
+      "options": ["+2,5€/h par enfant supplémentaire"]
+    },
+    "details": [
+      "Surveillance et sécurité",
+      "Activités adaptées",
+      "Accompagnement quotidien",
+      "Respect du rythme de l’enfant"
+    ]
+  },
+
+  {
+    "slug": "garde-animaux",
+    "title": "Garde d’animaux",
+    "image": "/images/animaux.webp",
+    "description": "Des visites adaptées pour le bien-être de vos animaux.",
+    "category": "hors-sap",
+    "pricing": {
+      "variants": [
+        {
+          "label": "Passage court",
+          "price": "12€",
+          "description": ["Repas", "Eau", "Petite sortie"]
+        },
+        {
+          "label": "Passage long",
+          "price": "15€/h",
+          "description": ["Repas", "Eau", "Balade", "Jeux"]
+        }
+      ]
+    },
+    "details": ["Visite à domicile", "Nourrissage", "Surveillance", "Adapté au rythme de l’animal"]
+  },
+
+  {
+    "slug": "surveillance-domicile",
+    "title": "Surveillance du domicile",
+    "image": "/images/surveillance.webp",
+    "description": "Surveillance et tranquillité pendant votre absence.",
+    "category": "hors-sap",
+    "pricing": {
+      "base": "15€/h"
+    },
+    "details": [
+      "Passage régulier",
+      "Relevé du courrier",
+      "Vérification du logement",
+      "Arrosage des plantes"
+    ]
+  },
+
+  {
+    "slug": "services-pratiques",
+    "title": "Services pratiques",
+    "image": "/images/services_pratique.webp",
+    "description": "Aide pour les tâches du quotidien et déplacements simples.",
+    "category": "hors-sap",
+    "pricing": {
+      "base": "15€/h"
+    },
+    "details": [
+      "Récupération de colis",
+      "Courses et pressing",
+      "Accompagnement extérieur",
+      "Aide aux tâches diverses"
+    ]
+  },
+
+  {
+    "slug": "conseil-organisation",
+    "title": "Conseil & organisation",
+    "image": "/images/conseils.webp",
+    "description": "Organisation et optimisation du quotidien.",
+    "category": "hors-sap",
+    "pricing": {
+      "base": "20€/h"
+    },
+    "details": [
+      "Audit organisation du domicile",
+      "Conseils personnalisés",
+      "Mise en place de routines",
+      "Optimisation du ménage"
+    ]
+  }
+]

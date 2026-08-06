@@ -1,0 +1,154 @@
+.arknest-shell {
+  min-height: 0;
+}
+
+.arknest-sidebar {
+  height: 100%;
+  width: 17rem;
+  border-right: 1px solid var(--ark-color-border-muted);
+  background: color-mix(in srgb, var(--ark-color-surface) 92%, transparent);
+  padding: 1rem;
+}
+
+.arknest-app-header {
+  align-items: center;
+  background: var(--ark-color-surface);
+  border-bottom: 1px solid var(--ark-color-border-muted);
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  min-height: 4rem;
+  padding: 0.7rem 1rem;
+}
+
+.arknest-app-header__brand {
+  align-items: center;
+  color: var(--ark-color-text);
+  display: inline-flex;
+  font-size: 1.15rem;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.arknest-app-header__brand img {
+  border-radius: 0.65rem;
+}
+
+.arknest-app-header__actions {
+  align-items: center;
+  display: flex;
+}
+
+.arknest-app-header__actions a {
+  color: var(--ark-color-text-muted);
+  display: grid;
+  height: 2.5rem;
+  place-items: center;
+  width: 2.5rem;
+}
+
+.arknest-app-header__actions a:hover {
+  color: var(--ark-color-brand);
+}
+
+.arknest-icon--dashboard { color: #2563eb; }
+.arknest-icon--simulation { color: #7c3aed; }
+.arknest-icon--stats { color: #0891b2; }
+.arknest-icon--goals { color: #d97706; }
+.arknest-icon--income { color: #16a34a; }
+.arknest-icon--expense { color: #dc2626; }
+.arknest-icon--members { color: #4f46e5; }
+.arknest-icon--privacy { color: #0f766e; }
+
+.ark-nav-link[data-active="true"] .arknest-nav-icon,
+.arknest-mobile-link[data-active="true"] .arknest-nav-icon {
+  color: inherit;
+}
+
+.arknest-brand {
+  align-items: center;
+  display: flex;
+  gap: 0.7rem;
+  padding: 0.5rem 0.625rem 1.25rem;
+}
+
+.arknest-brand__logo {
+  border-radius: 0.9rem;
+  box-shadow: 0 8px 20px rgb(15 23 42 / 0.18);
+  flex: 0 0 auto;
+}
+
+.arknest-brand__copy {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.arknest-brand__title {
+  color: var(--ark-color-text);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.arknest-brand__subtitle {
+  color: var(--ark-color-text-muted);
+  font-size: 0.75rem;
+}
+
+.arknest-content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  padding: 1rem;
+  padding-bottom: 5.5rem;
+}
+
+.arknest-mobile-nav {
+  border-top: 1px solid var(--ark-color-border-muted);
+  background: color-mix(in srgb, var(--ark-color-surface) 94%, transparent);
+  bottom: 0;
+  box-shadow: 0 -12px 32px rgb(23 32 51 / 0.08);
+  display: block;
+  left: 0;
+  padding: 0.5rem 0.5rem max(0.5rem, env(safe-area-inset-bottom));
+  position: fixed;
+  right: 0;
+  z-index: 50;
+}
+
+.arknest-mobile-nav__grid {
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.arknest-page-header {
+  position: relative;
+}
+
+.arknest-mobile-link {
+  align-items: center;
+  border-radius: 0.9rem;
+  color: var(--ark-color-text-muted);
+  display: flex;
+  flex-direction: column;
+  font-size: 0.68rem;
+  gap: 0.15rem;
+  justify-content: center;
+  min-height: 3.25rem;
+  text-decoration: none;
+}
+
+.arknest-mobile-link[data-active="true"] {
+  background: var(--ark-nav-link-active-bg);
+  color: var(--ark-nav-link-active-text);
+}
+
+.arknest-page {
+  margin-inline: auto;
+  max-width: 64rem;
+  min-width: 0;
+}
+
+.arknest-page--narrow {
+  max-width: 46rem;
+}

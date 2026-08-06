@@ -1,0 +1,39 @@
+{
+  "id": "contact-form",
+  "name": "Formulaire de contact",
+  "description": "Formulaire avec validation côté client",
+  "files": [
+    {
+      "src": "components/contact-form.tsx",
+      "dest": "components/contact-form.tsx"
+    }
+  ],
+  "slots": [
+    {
+      "template": "landing-page",
+      "file": "app/page.tsx",
+      "find": "// arkanya-slot:contact-form-import",
+      "replace": "import { ContactForm } from \"@/components/contact-form\""
+    },
+    {
+      "template": "landing-page",
+      "file": "app/page.tsx",
+      "find": "{/* arkanya-slot:contact-form-component */}",
+      "replace": "<ContactForm />"
+    },
+    {
+      "template": "site-vitrine",
+      "file": "app/contact/page.tsx",
+      "find": "// arkanya-slot:contact-form-import",
+      "replace": "import { ContactForm } from \"@/components/contact-form\""
+    },
+    {
+      "template": "site-vitrine",
+      "file": "app/contact/page.tsx",
+      "find": "{/* arkanya-slot:contact-form-component */}",
+      "replace": "<ContactForm />"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}

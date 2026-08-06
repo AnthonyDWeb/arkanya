@@ -1,0 +1,113 @@
+.arknest-goal-form {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.arknest-goal-card {
+  display: grid;
+  gap: 0.8rem;
+}
+.arknest-goal-card__link {
+  color: inherit;
+  display: grid;
+  gap: 0.8rem;
+  margin: -0.35rem;
+  padding: 0.35rem;
+  text-decoration: none;
+}
+.arknest-goal-card__link:hover h2,
+.arknest-goal-card__link:focus-visible h2 {
+  color: var(--ark-color-brand);
+}
+.arknest-goal-card__link:focus-visible {
+  border-radius: 0.65rem;
+  outline: 2px solid var(--ark-color-brand);
+  outline-offset: 2px;
+}
+.arknest-goal-card__open {
+  color: var(--ark-color-brand);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: right;
+}
+.arknest-goal-card__header,
+.arknest-goal-card__amounts {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.arknest-goal-card__header h2 {
+  font-weight: 750;
+}
+.arknest-goal-card__header p {
+  color: var(--ark-color-text-muted);
+  font-size: 0.75rem;
+}
+.arknest-goal-progress {
+  background: var(--ark-color-surface-subtle);
+  border-radius: 999px;
+  height: 0.65rem;
+  overflow: hidden;
+}
+.arknest-goal-progress span {
+  background: var(--ark-color-brand);
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+  transition: width 180ms ease;
+}
+.arknest-goal-progress span[data-danger="true"] {
+  background: #e11d48;
+}
+.arknest-goal-card__amounts {
+  color: var(--ark-color-text-muted);
+  font-size: 0.78rem;
+}
+.arknest-goal-card__amounts strong {
+  color: var(--ark-color-text);
+  display: block;
+  font-size: 0.9rem;
+}
+.arknest-goal-update,
+.arknest-savings-movement label {
+  display: grid;
+  font-size: 0.78rem;
+  font-weight: 700;
+  gap: 0.35rem;
+}
+.arknest-transfer-rule,
+.arknest-savings-movement {
+  background: var(--ark-color-surface-subtle);
+  border: 1px solid var(--ark-color-border-muted);
+  border-radius: 0.8rem;
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.8rem;
+}
+.arknest-goal-history > summary {
+  color: var(--ark-color-brand);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.arknest-goal-history ul {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+}
+.arknest-goal-history li {
+  align-items: center;
+  display: flex;
+  font-size: 0.75rem;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+.arknest-archived-goals > summary {
+  color: var(--ark-color-brand);
+  cursor: pointer;
+  font-weight: 700;
+}
+

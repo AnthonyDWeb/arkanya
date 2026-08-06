@@ -1,0 +1,68 @@
+{
+  "id": "landing-page",
+  "name": "Landing Page",
+  "description": "Site one-page · Next.js 16 · Tailwind CSS 4 · sections scrollables",
+  "type": "client",
+  "pages": [
+    {
+      "id": "hero",
+      "name": "Hero",
+      "slug": "hero",
+      "required": true,
+      "file": null
+    },
+    {
+      "id": "about",
+      "name": "À propos",
+      "slug": "a-propos",
+      "required": false,
+      "file": null
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "slug": "services",
+      "required": false,
+      "file": null
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "slug": "contact",
+      "required": false,
+      "file": null
+    }
+  ],
+  "config": [
+    {
+      "id": "site-name",
+      "label": "Nom du site",
+      "type": "text",
+      "required": true,
+      "default": "Mon Site"
+    },
+    {
+      "id": "site-tagline",
+      "label": "Accroche",
+      "type": "text",
+      "required": false,
+      "default": "Bienvenue sur notre site"
+    },
+    {
+      "id": "primary-color",
+      "label": "Couleur principale",
+      "type": "color",
+      "required": true,
+      "default": "#0f172a"
+    },
+    {
+      "id": "secondary-color",
+      "label": "Couleur secondaire",
+      "type": "color",
+      "required": false,
+      "default": "#6366f1"
+    }
+  ],
+  "features": ["navigation", "contact-form"],
+  "technologies": ["Next.js 16", "TypeScript", "Tailwind CSS 4"]
+}

@@ -1,0 +1,64 @@
+# Arkanya — Cursor Rules
+
+Lire CLAUDE.md en entier avant de commencer. Ces règles sont un résumé rapide.
+
+## Projet
+
+Monorepo pnpm + Turborepo. Node 24. Next.js 16 App Router. TypeScript 5.9 strict. Tailwind CSS 4. PostgreSQL + Prisma. Better Auth.
+
+Le Worker (`services/worker`) est un service HTTP Node.js pur sur `127.0.0.1:4000`. Il est le SEUL composant qui écrit sur le filesystem.
+
+Les types partagés vivent dans `packages/contracts`. Ne jamais redéfinir un type qui existe déjà là.
+
+## Règles de code
+
+- TypeScript strict. Zéro `any`. Zéro `as unknown`.
+- Exports nommés uniquement. `export default` réservé aux pages Next.js.
+- Props typées dans un type dédié en haut du fichier.
+- Un composant = un fichier. Pas de fichiers barrel (`index.ts`) qui ré-exportent tout.
+- Pas d'abstraction avant 3 duplications.
+- Pas de logique dans `page.tsx` — uniquement de la composition de composants.
+- Pas de fetch dans les composants React — données en props depuis Server Components.
+- Pas d'installation de librairie si 10 lignes de code natif suffisent.
+- Pas de commentaires évidents.
+
+## Règles de nommage
+
+- Composants : `PascalCase`
+- Fonctions / variables : `camelCase`
+- Fichiers composants : `kebab-case.tsx`
+- Fichiers utilitaires : `kebab-case.ts`
+- Variables d'env : `SCREAMING_SNAKE_CASE`
+
+## Règles de design
+
+- Pas d'interface générique. Chaque écran a un parti pris visuel assumé.
+- Pas de police Inter ou Roboto.
+- Animations : feedback bouton 100–160ms ease-out. Modal 200–300ms spring. Jamais `transition: all`.
+- Pas de `ease-in` sur une animation d'entrée.
+- Springs physiques pour les mouvements naturels (tension 200, friction 20).
+- Espacement sur multiples de 4px.
+
+## Règles Worker
+
+- Toujours valider le contrat (`validateBuilderContract`) avant d'exécuter un step.
+- Toujours vérifier les chemins avec `path.relative` pour prévenir le path traversal.
+- Importer les types depuis `@arkanya/contracts`.
+- Worker local : jamais exposé sur une interface publique (127.0.0.1 uniquement).
+- Worker remote : header `Authorization: Bearer WORKER_API_KEY` requis sur toutes les routes sauf `/health`. HTTPS obligatoire.
+- Mode remote : générer dans `os.tmpdir()`, push GitHub, nettoyer. Jamais de state persistant sur le serveur.
+- `WORKER_MODE` détermine le comportement. Ne jamais hardcoder le mode.
+
+## Règles base de données
+
+- Toujours créer une migration Prisma (`prisma migrate dev`) avant d'utiliser un nouveau modèle.
+- Ne jamais appeler Prisma depuis le Worker — il reçoit tout dans le payload.
+- Ne jamais appeler Prisma depuis un composant React client.
+
+## Interdictions absolues
+
+- Ne pas modifier le schéma Prisma sans migration.
+- Ne pas hardcoder de données utilisateur (nom, rôle, email) dans les composants.
+- Ne pas appeler le Worker depuis un Server Component — passer par une Server Action ou Route Handler.
+- Ne pas créer de projets générés dans `apps/` ou `packages/` — uniquement dans `clients/` ou `products/`.
+- Ne pas compresser le JSX sur une seule ligne si > 2 props.

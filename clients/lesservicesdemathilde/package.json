@@ -1,0 +1,38 @@
+{
+  "name": "@arkanya/client-lesservicesdemathilde",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 7000",
+    "build": "next build",
+    "start": "next start --port 7000",
+    "lint": "eslint",
+    "check-types": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@arkanya/email": "workspace:*",
+    "@arkanya/icons": "workspace:*",
+    "@arkanya/ui": "workspace:*",
+    "@heroui/react": "^2.8.10",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-visually-hidden": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vaul": "^1.1.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "catalog:",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "baseline-browser-mapping": "^2.10.0",
+    "eslint": "^9",
+    "eslint-config-next": "catalog:",
+    "tailwindcss": "^4",
+    "typescript": "catalog:"
+  },
+  "engines": { "node": "24.x" }
+}

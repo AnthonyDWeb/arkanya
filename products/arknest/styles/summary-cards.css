@@ -1,0 +1,66 @@
+.arknest-summary-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.arknest-summary-card {
+  align-items: center;
+  border-top: 0.2rem solid currentColor;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+  min-height: 4.6rem;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.arknest-summary-card__heading {
+  align-items: center;
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.arknest-summary-card__icon {
+  align-items: center;
+  background: color-mix(in srgb, currentColor 11%, transparent);
+  border-radius: 0.7rem;
+  display: inline-flex;
+  flex: 0 0 2rem;
+  height: 2rem;
+  justify-content: center;
+}
+
+.arknest-summary-card__icon svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+.arknest-summary-card__heading p {
+  color: var(--ark-color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.arknest-summary-card > strong {
+  color: currentColor;
+  font-size: 1rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.arknest-summary-card[data-kind="income"] { color: #15803d; }
+.arknest-summary-card[data-kind="expenses"] { color: #dc2626; }
+.arknest-summary-card[data-kind="remaining"] { color: #2563eb; }
+.arknest-summary-card[data-kind="usage"] { color: #64748b; }
+
+@media (min-width: 640px) {
+  .arknest-summary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .arknest-summary-card { min-height: 5.5rem; padding: 1rem; }
+  .arknest-summary-card__icon { flex-basis: 2.35rem; height: 2.35rem; }
+  .arknest-summary-card__icon svg { height: 1.2rem; width: 1.2rem; }
+  .arknest-summary-card__heading p { font-size: 0.8rem; }
+  .arknest-summary-card > strong { font-size: 1.15rem; }
+}

@@ -1,0 +1,108 @@
+@media (max-width: 639px) {
+  .arknest-goal-detail-grid,
+  .arknest-goal-detail-metrics {
+    grid-template-columns: 1fr;
+  }
+  .arknest-table-title-short {
+    display: inline;
+  }
+
+  .arknest-table-title-full {
+    display: none;
+  }
+
+  .arknest-mobile-only {
+    display: block;
+  }
+
+  .arknest-desktop-only {
+    display: none;
+  }
+
+  .arknest-content {
+    padding-inline: 0.75rem;
+  }
+
+  .arknest-page-header .ark-page-header__title {
+    font-size: 1.55rem;
+  }
+
+  .arknest-mobile-full-button {
+    width: 100%;
+  }
+
+  .arknest-settings-page .ark-panel {
+    border-radius: 1rem;
+  }
+
+  .arknest-settings-page .ark-card {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .arknest-settings-page .ark-card .ark-input,
+  .arknest-settings-page .ark-card .ark-button {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .arknest-repartition-option {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .arknest-repartition-option .ark-button {
+    width: 100%;
+  }
+
+  .arknest-table-wrap::after {
+    color: var(--ark-color-text-muted);
+    content: "Fais glisser pour voir la suite â†’";
+    display: block;
+    font-size: 0.72rem;
+    padding: 0.5rem 0.75rem;
+    text-align: right;
+  }
+
+  .arknest-comparison-cards {
+    display: grid;
+  }
+
+  .arknest-stat-controls,
+  .arknest-goal-form,
+  .arknest-dashboard-links {
+    grid-template-columns: 1fr;
+  }
+
+  .arknest-demo-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .arknest-chart-card {
+    padding: 0.75rem;
+  }
+}
+
+.arknest-muted {
+  color: var(--ark-color-text-muted);
+}
+
+.arknest-positive {
+  color: #147a5c;
+}
+
+.arknest-negative {
+  color: #c2414b;
+}
+
+@media (min-width: 768px) {
+  .arknest-content {
+    padding: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .arknest-mobile-nav {
+    display: none;
+  }
+}

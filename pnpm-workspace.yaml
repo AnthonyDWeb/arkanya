@@ -1,0 +1,16 @@
+packages:
+  - "apps/*"
+  - "services/*"
+  - "packages/*"
+  - "clients/lesservicesdemathilde"
+  - "products/arknest"
+  - "products/arkcare"
+  - "marketing/*"
+
+catalog:
+  next: "^16.0.0"
+  react: "^19.0.0"
+  react-dom: "^19.0.0"
+  "@types/node": "^24.0.0"
+  eslint-config-next: "^16.0.0"
+  typescript: "^5.9.3"
