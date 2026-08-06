@@ -1,7 +1,8 @@
 # Context = racine du monorepo (Railway Root Directory = vide / ".")
 FROM node:24-bookworm-slim
 
-RUN corepack enable && corepack prepare pnpm@10.28.2 --activate
+# corepack est souvent cassé/flaky sur Railway — install pnpm via npm
+RUN npm install -g pnpm@10.28.2
 
 WORKDIR /app
 
