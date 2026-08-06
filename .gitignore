@@ -38,8 +38,7 @@ pnpm-debug.log*
 **/ios/build/
 
 # Prisma generated (régénéré au postinstall)
-packages/database/node_modules/.prisma/
-packages/database/src/generated/
+**/node_modules/.prisma/
 
 # Local scratch
 *.local

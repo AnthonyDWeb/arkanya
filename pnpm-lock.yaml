@@ -90,6 +90,9 @@ importers:
       '@arkanya/database':
         specifier: workspace:*
         version: link:../../packages/database
+      '@prisma/client':
+        specifier: ^6.0.0
+        version: 6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3)
       lucide-react:
         specifier: ^0.500.0
         version: 0.500.0(react@19.2.8)
@@ -444,6 +447,9 @@ importers:
       '@prisma/client':
         specifier: ^6.0.0
         version: 6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3)
+      prisma:
+        specifier: ^6.0.0
+        version: 6.19.3(typescript@5.9.3)
     devDependencies:
       '@arkanya/config':
         specifier: workspace:*
@@ -451,9 +457,6 @@ importers:
       '@types/node':
         specifier: ^24.0.0
         version: 24.13.3
-      prisma:
-        specifier: ^6.0.0
-        version: 6.19.3(typescript@5.9.3)
       tsx:
         specifier: ^4.0.0
         version: 4.23.7

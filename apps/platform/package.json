@@ -17,6 +17,7 @@
     "@arkanya/better-auth": "workspace:*",
     "@arkanya/database": "workspace:*",
     "@arkanya/contracts": "workspace:*",
+    "@prisma/client": "^6.0.0",
     "lucide-react": "^0.500.0"
   },
   "devDependencies": {

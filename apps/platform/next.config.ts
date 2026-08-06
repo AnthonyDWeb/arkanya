@@ -1,19 +1,22 @@
 import type { NextConfig } from "next"
 import path from "node:path"
-import { fileURLToPath } from "node:url"
-
-const monorepoRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), "../..")
-const prismaClientPath = path.join(
-  monorepoRoot,
-  "packages/database/src/generated/client/**/*",
-)
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: monorepoRoot,
+  // Monorepo : inclure le moteur Prisma dans les fonctions Vercel
+  outputFileTracingRoot: path.join(process.cwd(), "../.."),
   outputFileTracingIncludes: {
-    "/**": [prismaClientPath],
+    "/**": [
+      "./node_modules/.prisma/client/**/*",
+      "./node_modules/@prisma/client/**/*",
+      "../../node_modules/.prisma/client/**/*",
+      "../../node_modules/@prisma/client/**/*",
+      "../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/**/*",
+      "../../node_modules/.pnpm/@prisma+client@*/node_modules/@prisma/client/**/*",
+      "../../packages/database/node_modules/.prisma/client/**/*",
+      "../../packages/database/node_modules/@prisma/client/**/*",
+    ],
   },
-  serverExternalPackages: ["@prisma/client", "prisma"],
+  serverExternalPackages: ["@prisma/client"],
 }
 
 export default nextConfig

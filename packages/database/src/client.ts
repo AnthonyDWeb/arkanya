@@ -1,4 +1,4 @@
-import { PrismaClient } from "./generated/client"
+import { PrismaClient } from "@prisma/client"
 
 type GlobalWithPrisma = typeof globalThis & {
   _prisma?: PrismaClient
@@ -21,4 +21,4 @@ export type {
   Project,
   ProjectStatus,
   Prisma,
-} from "./generated/client"
+} from "@prisma/client"

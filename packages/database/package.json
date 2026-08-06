@@ -17,12 +17,12 @@
     "db:studio": "tsx scripts/with-env.ts prisma studio"
   },
   "dependencies": {
-    "@prisma/client": "^6.0.0"
+    "@prisma/client": "^6.0.0",
+    "prisma": "^6.0.0"
   },
   "devDependencies": {
     "@arkanya/config": "workspace:*",
     "@types/node": "^24.0.0",
-    "prisma": "^6.0.0",
     "tsx": "^4.0.0",
     "typescript": "^5.9.3"
   }
