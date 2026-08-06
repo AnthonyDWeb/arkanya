@@ -1,5 +1,9 @@
+"use client"
+
 import type { Project } from "@arkanya/database"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import { ProjectStatusSelect } from "./project-status-select"
 
 type ProjectCardProps = {
   project: Project
@@ -7,14 +11,14 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className="block p-4 bg-zinc-800/50 hover:bg-zinc-800 active:scale-[0.99] border border-zinc-700/50 hover:border-zinc-600 rounded-lg transition-[colors,transform] duration-[120ms] ease-out group"
-    >
-      <div className="flex items-start justify-between gap-2 mb-2">
-        <span className="text-sm font-medium text-zinc-100 group-hover:text-white leading-tight">
+    <div className="p-4 bg-zinc-800/50 border border-zinc-700/50 rounded-lg space-y-3">
+      <div className="flex items-start justify-between gap-2">
+        <Link
+          href={`/projects/${project.slug}`}
+          className="text-sm font-medium text-zinc-100 hover:text-white leading-tight cursor-pointer transition-colors duration-[120ms] ease-out"
+        >
           {project.name}
-        </span>
+        </Link>
         <span
           className={[
             "shrink-0 text-[10px] font-medium px-1.5 py-0.5 rounded",
@@ -28,11 +32,11 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {project.description && (
-        <p className="text-xs text-zinc-500 line-clamp-2 mb-3">{project.description}</p>
+        <p className="text-xs text-zinc-500 line-clamp-2">{project.description}</p>
       )}
 
       {(project.url || project.nextAction) && (
-        <div className="mb-3 space-y-1">
+        <div className="space-y-1">
           {project.url && (
             <p className="text-[11px] text-brand truncate font-mono">{project.url}</p>
           )}
@@ -42,23 +46,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
       )}
 
-      {project.technologies.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {project.technologies.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="text-[10px] px-1.5 py-0.5 bg-zinc-700/60 text-zinc-400 rounded font-mono"
-            >
-              {tech}
-            </span>
-          ))}
-          {project.technologies.length > 3 && (
-            <span className="text-[10px] text-zinc-600">
-              +{project.technologies.length - 3}
-            </span>
-          )}
-        </div>
-      )}
-    </Link>
+      <div className="flex items-center justify-between gap-2 pt-1">
+        <ProjectStatusSelect slug={project.slug} value={project.status} />
+        <Link
+          href={`/projects/${project.slug}`}
+          title="Ouvrir"
+          aria-label="Ouvrir"
+          className="p-1 text-zinc-500 hover:text-zinc-300 cursor-pointer"
+        >
+          <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
+        </Link>
+      </div>
+    </div>
   )
 }

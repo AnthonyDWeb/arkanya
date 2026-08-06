@@ -1,9 +1,13 @@
 "use client"
 
 import type { Client, Job, JobEvent, JobTiming, Project } from "@arkanya/database"
-import { useState, type ReactNode } from "react"
+import { ExternalLink, Wand2 } from "lucide-react"
 import Link from "next/link"
+import { useState, type ReactNode } from "react"
 import { DeleteProjectButton } from "./delete-project-button"
+import { ProjectEditForm } from "./project-edit-form"
+import { ProjectRedeployButton } from "./project-redeploy-button"
+import { ProjectBusinessPanel } from "./project-business-panel"
 import { buildRepoName } from "@/lib/repo-name"
 
 function formatMsVerbose(ms: number): string {
@@ -91,9 +95,11 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs px-2 py-1 bg-brand/20 text-brand-light rounded hover:opacity-90 transition-opacity duration-[120ms] ease-out"
+                title="Ouvrir le site"
+                aria-label="Ouvrir le site"
+                className="p-1.5 bg-brand/20 text-brand-light rounded cursor-pointer hover:opacity-90 transition-opacity duration-[120ms] ease-out"
               >
-                Ouvrir →
+                <ExternalLink className="w-3.5 h-3.5" strokeWidth={2} />
               </a>
             )}
             <span className="text-xs px-2 py-1 bg-zinc-800 text-zinc-400 rounded">
@@ -125,6 +131,23 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
       <div className="p-4 lg:p-6">
         {activeTab === "overview" && (
           <div className="space-y-6 max-w-2xl">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
+                Fiche projet
+              </h2>
+              <ProjectEditForm
+                slug={project.slug}
+                initial={{
+                  name: project.name,
+                  description: project.description,
+                  nextAction: project.nextAction,
+                  url: project.url,
+                  port: project.port,
+                  status: project.status,
+                }}
+              />
+            </div>
+
             {project.description ? (
               <div>
                 <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
@@ -251,9 +274,11 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
 
             <Link
               href="/builder"
-              className="inline-flex text-sm text-brand hover:underline"
+              title="Ouvrir le Builder"
+              aria-label="Ouvrir le Builder"
+              className="inline-flex items-center gap-1.5 p-1.5 text-brand cursor-pointer hover:opacity-80 transition-opacity duration-[120ms] ease-out"
             >
-              Ouvrir le Builder →
+              <Wand2 className="w-4 h-4" strokeWidth={2} />
             </Link>
           </div>
         )}
@@ -322,24 +347,32 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
               </div>
             )}
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap items-start gap-2">
+              <ProjectRedeployButton slug={project.slug} />
               <Link
                 href="/builder"
-                className="px-4 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out hover:opacity-90"
+                title="Via Builder"
+                aria-label="Via Builder"
+                className="inline-flex items-center justify-center p-2.5 border border-zinc-700 text-zinc-300 rounded-lg cursor-pointer transition-colors duration-[120ms] ease-out hover:border-zinc-500"
               >
-                Relancer via Builder
+                <Wand2 className="w-4 h-4" strokeWidth={2} />
               </Link>
               {project.url && (
                 <a
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 border border-zinc-700 text-zinc-300 rounded-lg text-sm transition-colors duration-[120ms] ease-out hover:border-zinc-500"
+                  title="Voir le site"
+                  aria-label="Voir le site"
+                  className="inline-flex items-center justify-center p-2.5 border border-zinc-700 text-zinc-300 rounded-lg cursor-pointer transition-colors duration-[120ms] ease-out hover:border-zinc-500"
                 >
-                  Voir le site
+                  <ExternalLink className="w-4 h-4" strokeWidth={2} />
                 </a>
               )}
             </div>
+            <p className="text-[11px] text-zinc-600">
+              Redéployer reconstruit depuis le template (pages toutes activées) et relance le worker.
+            </p>
           </div>
         )}
 
@@ -466,28 +499,25 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
         )}
 
         {activeTab === "business" && (
-          <div className="max-w-2xl space-y-4">
-            <div className="bg-zinc-800/40 rounded-lg border border-zinc-700/40 px-4">
+          <div className="space-y-5">
+            <div className="bg-zinc-800/40 rounded-lg border border-zinc-700/40 px-4 max-w-2xl">
               <MetaRow label="Client">
                 {project.client ? project.client.company || project.client.name : "Produit interne"}
               </MetaRow>
               {project.client && (
                 <>
-                  <MetaRow label="Contact">
-                    {project.client.contact || "—"}
-                  </MetaRow>
-                  <MetaRow label="Statut client">
-                    {project.client.status || "—"}
-                  </MetaRow>
+                  <MetaRow label="Contact">{project.client.contact || "—"}</MetaRow>
+                  <MetaRow label="Statut client">{project.client.status || "—"}</MetaRow>
                 </>
               )}
               <MetaRow label="Créé le">
                 {new Date(project.createdAt).toLocaleDateString("fr-FR")}
               </MetaRow>
             </div>
-            <p className="text-xs text-zinc-600">
-              Devis, facturation et suivi commercial arriveront quand le modèle métier sera cadré.
-            </p>
+            <ProjectBusinessPanel
+              templateId={project.type}
+              clientCompany={project.client?.company ?? null}
+            />
           </div>
         )}
       </div>

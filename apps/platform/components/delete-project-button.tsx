@@ -1,7 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 type DeleteProjectButtonProps = {
   slug: string
@@ -43,23 +44,23 @@ export function DeleteProjectButton({ slug, name, variant = "icon" }: DeleteProj
     <>
       {variant === "icon" ? (
         <button
+          type="button"
           onClick={() => setOpen(true)}
           title={`Supprimer ${name}`}
-          className="p-1.5 text-red-400 cursor-pointer rounded"
+          aria-label={`Supprimer ${name}`}
+          className="p-1.5 text-red-400 cursor-pointer rounded hover:text-red-300 transition-colors duration-[120ms] ease-out"
         >
-          <svg viewBox="0 0 16 16" width={18} height={18} fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M2 4h12M5 4V2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5V4M6 7v5M10 7v5M3 4l.8 9.2a.8.8 0 0 0 .8.8h6.8a.8.8 0 0 0 .8-.8L13 4" />
-          </svg>
+          <Trash2 className="w-4 h-4" strokeWidth={2} />
         </button>
       ) : (
         <button
+          type="button"
           onClick={() => setOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 text-sm text-red-400 border border-red-900/40 rounded-lg cursor-pointer"
+          title="Supprimer le projet"
+          aria-label="Supprimer le projet"
+          className="inline-flex items-center justify-center p-2.5 text-red-400 border border-red-900/40 rounded-lg cursor-pointer hover:text-red-300 transition-colors duration-[120ms] ease-out"
         >
-          <svg viewBox="0 0 16 16" width={18} height={18} fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M2 4h12M5 4V2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5V4M6 7v5M10 7v5M3 4l.8 9.2a.8.8 0 0 0 .8.8h6.8a.8.8 0 0 0 .8-.8L13 4" />
-          </svg>
-          Supprimer le projet
+          <Trash2 className="w-4 h-4" strokeWidth={2} />
         </button>
       )}
 

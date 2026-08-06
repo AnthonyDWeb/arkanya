@@ -3,8 +3,11 @@ import path from "node:path"
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@arkanya/database/client"
+import type { ProjectStatus } from "@arkanya/database"
 import { auth } from "@/lib/auth"
 import { buildRepoName } from "@/lib/repo-name"
+
+const PROJECT_STATUSES = new Set<ProjectStatus>(["TO_QUALIFY", "IN_PROGRESS", "IN_REVIEW"])
 
 const MONOREPO_ROOT = path.resolve(process.cwd(), "../..")
 const GITHUB_TOKEN = process.env["GITHUB_TOKEN"] ?? ""
@@ -69,6 +72,75 @@ function deleteLocalDir(destination: string): DeletionResult {
     return { step: "local", ok: true }
   } catch (e) {
     return { step: "local", ok: false, error: e instanceof Error ? e.message : String(e) }
+  }
+}
+
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> },
+) {
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session) return NextResponse.json({ error: "Non autorisé" }, { status: 401 })
+
+  const { slug } = await params
+  const body = (await req.json()) as {
+    name?: string
+    description?: string
+    nextAction?: string | null
+    url?: string | null
+    port?: number | null
+    status?: string
+    clientId?: string | null
+  }
+
+  const data: {
+    name?: string
+    description?: string
+    nextAction?: string | null
+    url?: string | null
+    port?: number | null
+    status?: ProjectStatus
+    clientId?: string | null
+  } = {}
+
+  if (typeof body.name === "string" && body.name.trim()) data.name = body.name.trim()
+  if (typeof body.description === "string") data.description = body.description.trim()
+  if (body.nextAction === null || typeof body.nextAction === "string") {
+    data.nextAction = body.nextAction === null ? null : body.nextAction.trim() || null
+  }
+  if (body.url === null || typeof body.url === "string") {
+    data.url = body.url === null ? null : body.url.trim() || null
+  }
+  if (body.port === null) data.port = null
+  else if (typeof body.port === "number" && Number.isFinite(body.port)) data.port = body.port
+  if (typeof body.status === "string" && PROJECT_STATUSES.has(body.status as ProjectStatus)) {
+    data.status = body.status as ProjectStatus
+  }
+  if (body.clientId === null) data.clientId = null
+  else if (typeof body.clientId === "string") data.clientId = body.clientId || null
+
+  if (Object.keys(data).length === 0) {
+    return NextResponse.json({ error: "Aucun champ à mettre à jour" }, { status: 400 })
+  }
+
+  try {
+    const project = await prisma.project.update({
+      where: { slug },
+      data,
+      select: {
+        slug: true,
+        name: true,
+        description: true,
+        nextAction: true,
+        url: true,
+        port: true,
+        status: true,
+        clientId: true,
+      },
+    })
+    return NextResponse.json(project)
+  } catch {
+    return NextResponse.json({ error: "Projet introuvable" }, { status: 404 })
   }
 }
 

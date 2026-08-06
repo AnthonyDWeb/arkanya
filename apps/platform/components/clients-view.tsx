@@ -1,5 +1,7 @@
 "use client"
 
+import { Eye, Pencil, Trash2 } from "lucide-react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -74,6 +76,26 @@ export function ClientsView({ clients }: ClientsViewProps) {
     setEditingId(null)
     setDraft(EMPTY_DRAFT)
     setError(null)
+  }
+
+  async function remove(client: ClientRow) {
+    if (client.projectCount > 0) {
+      setError(`Impossible de supprimer : ${client.projectCount} projet(s) liés`)
+      return
+    }
+    if (!window.confirm(`Supprimer ${client.name} ?`)) return
+    setError(null)
+    try {
+      const res = await fetch(`/api/clients/${client.id}`, { method: "DELETE" })
+      const data = (await res.json()) as { error?: string }
+      if (!res.ok) {
+        setError(data.error ?? "Erreur")
+        return
+      }
+      router.refresh()
+    } catch {
+      setError("Erreur réseau")
+    }
   }
 
   async function save() {
@@ -216,7 +238,12 @@ export function ClientsView({ clients }: ClientsViewProps) {
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <p className="text-sm font-medium text-zinc-100">{client.name}</p>
+                    <Link
+                      href={`/clients/${client.id}`}
+                      className="text-sm font-medium text-zinc-100 hover:text-white cursor-pointer"
+                    >
+                      {client.name}
+                    </Link>
                     <span
                       className={`text-[10px] px-1.5 py-0.5 rounded ${STATUS_STYLES[client.status] ?? STATUS_STYLES["prospect"]}`}
                     >
@@ -232,12 +259,31 @@ export function ClientsView({ clients }: ClientsViewProps) {
                   <span className="text-xs text-zinc-600 font-mono">
                     {client.projectCount} projets
                   </span>
+                  <Link
+                    href={`/clients/${client.id}`}
+                    title="Voir"
+                    aria-label="Voir"
+                    className="p-1 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-[120ms] ease-out"
+                  >
+                    <Eye className="w-3.5 h-3.5" strokeWidth={2} />
+                  </Link>
                   <button
                     type="button"
                     onClick={() => startEdit(client)}
-                    className="text-xs text-zinc-400 hover:text-zinc-200 transition-colors duration-[120ms] ease-out"
+                    title="Modifier"
+                    aria-label="Modifier"
+                    className="p-1 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-[120ms] ease-out"
                   >
-                    Éditer
+                    <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => void remove(client)}
+                    title="Supprimer"
+                    aria-label="Supprimer"
+                    className="p-1 text-red-400/80 hover:text-red-400 cursor-pointer transition-colors duration-[120ms] ease-out"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" strokeWidth={2} />
                   </button>
                 </div>
               </div>

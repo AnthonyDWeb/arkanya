@@ -3,23 +3,12 @@
 import type { Client, Project } from "@arkanya/database"
 import Link from "next/link"
 import { DeleteProjectButton } from "./delete-project-button"
+import { ProjectStatusSelect } from "./project-status-select"
 
 type ProjectWithClient = Project & { client: Client | null }
 
 type ProjectsTableProps = {
   projects: ProjectWithClient[]
-}
-
-const STATUS_LABELS: Record<string, string> = {
-  TO_QUALIFY: "À qualifier",
-  IN_PROGRESS: "En cours",
-  IN_REVIEW: "En validation",
-}
-
-const STATUS_COLORS: Record<string, string> = {
-  TO_QUALIFY: "bg-zinc-700/60 text-zinc-400",
-  IN_PROGRESS: "bg-blue-500/15 text-blue-400",
-  IN_REVIEW: "bg-amber-500/15 text-amber-400",
 }
 
 export function ProjectsTable({ projects }: ProjectsTableProps) {
@@ -62,11 +51,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
               )}
             </Link>
             <div className="flex items-center gap-1.5 ml-3 mt-0.5 shrink-0">
-              <span
-                className={`text-xs font-medium px-2 py-0.5 rounded ${STATUS_COLORS[project.status] ?? ""}`}
-              >
-                {STATUS_LABELS[project.status] ?? project.status}
-              </span>
+              <ProjectStatusSelect slug={project.slug} value={project.status} />
               <DeleteProjectButton slug={project.slug} name={project.name} variant="icon" />
             </div>
           </div>
@@ -107,11 +92,7 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
                   <span className="text-xs text-zinc-500">{project.type}</span>
                 </td>
                 <td className="py-3 pr-4">
-                  <span
-                    className={`text-xs font-medium px-2 py-0.5 rounded ${STATUS_COLORS[project.status] ?? ""}`}
-                  >
-                    {STATUS_LABELS[project.status] ?? project.status}
-                  </span>
+                  <ProjectStatusSelect slug={project.slug} value={project.status} />
                 </td>
                 <td className="py-3">
                   <div className="flex flex-wrap gap-1">

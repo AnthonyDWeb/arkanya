@@ -53,3 +53,27 @@ export async function PATCH(
     return NextResponse.json({ error: "Client introuvable" }, { status: 404 })
   }
 }
+
+export async function DELETE(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const session = await auth.api.getSession({ headers: await headers() })
+  if (!session) return NextResponse.json({ error: "Non autorisé" }, { status: 401 })
+
+  const { id } = await params
+  const projectCount = await prisma.project.count({ where: { clientId: id } })
+  if (projectCount > 0) {
+    return NextResponse.json(
+      { error: `Impossible : ${projectCount} projet(s) encore liés` },
+      { status: 409 },
+    )
+  }
+
+  try {
+    await prisma.client.delete({ where: { id } })
+    return NextResponse.json({ ok: true })
+  } catch {
+    return NextResponse.json({ error: "Client introuvable" }, { status: 404 })
+  }
+}

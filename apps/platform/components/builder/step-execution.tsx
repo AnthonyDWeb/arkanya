@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
 import type { WorkerReport, WorkerStepReport } from "@arkanya/contracts/worker"
+import { ArrowRight, RefreshCw } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
 
 type StepExecutionProps = {
   running: boolean
@@ -284,9 +285,11 @@ export function StepExecution({
             </p>
             <a
               href={`/projects/${report.projectSlug}`}
-              className="text-xs text-brand hover:underline shrink-0"
+              title="Voir le projet"
+              aria-label="Voir le projet"
+              className="p-1 text-brand shrink-0 cursor-pointer hover:opacity-80"
             >
-              Voir le projet →
+              <ArrowRight className="w-4 h-4" strokeWidth={2} />
             </a>
           </div>
           <StepDurationBreakdown steps={report.steps} />
@@ -299,9 +302,11 @@ export function StepExecution({
             <button
               type="button"
               onClick={onRetry}
-              className="px-5 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out hover:opacity-90"
+              title="Redéployer"
+              aria-label="Redéployer"
+              className="inline-flex items-center justify-center p-2.5 bg-brand text-white rounded-lg cursor-pointer transition-opacity duration-[120ms] ease-out hover:opacity-90"
             >
-              Redéployer
+              <RefreshCw className="w-4 h-4" strokeWidth={2} />
             </button>
           )}
           <button

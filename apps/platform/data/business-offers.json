@@ -1,0 +1,42 @@
+{
+  "solutions": [
+    {
+      "title": "Création de site web",
+      "slug": "creation-site-web",
+      "tagline": "Conception de sites modernes et performants.",
+      "price": "À partir de 1000 €"
+    },
+    {
+      "title": "Modernisation digitale",
+      "slug": "refonte-site-web",
+      "tagline": "Refonte et transformation de plateformes existantes.",
+      "price": "À partir de 2500 €"
+    },
+    {
+      "title": "Développement sur mesure",
+      "slug": "developpement-sur-mesure",
+      "tagline": "Création d’applications et d’outils digitaux adaptés.",
+      "price": "À partir de 4000 €"
+    },
+    {
+      "title": "Accompagnement technique",
+      "slug": "accompagnement",
+      "tagline": "Suivi et optimisation continue de vos outils digitaux.",
+      "price": "À partir de 250 € / mois"
+    }
+  ],
+  "templateOffers": {
+    "landing-page": {
+      "title": "Landing page",
+      "price": "À partir de 1000 €",
+      "serviceSlug": "creation-site-web",
+      "description": "Une page unique conçue pour maximiser la conversion."
+    },
+    "site-vitrine": {
+      "title": "Site vitrine",
+      "price": "À partir de 2000 €",
+      "serviceSlug": "creation-site-web",
+      "description": "Un site professionnel pour présenter votre activité et vos services."
+    }
+  }
+}
