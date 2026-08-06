@@ -6,14 +6,8 @@
  *   node scripts/ignore-build.mjs <target>
  *   node scripts/ignore-build.mjs --list
  *
- * Targets:
- *   platform | account | worker | anthony-delforge | arkanya-website
- *   arknest | arkcare | lesservicesdemathilde
- *   product:<slug>   (tous les produits internes)
- *   client:<slug>    (tous les clients, y compris Arkanya)
- *
  * Exit codes (convention Vercel):
- *   0 → skip build (aucun changement pertinent)
+ *   0 → skip build
  *   1 → proceed with build
  */
 
@@ -39,23 +33,26 @@ function findMonorepoRoot(startDir) {
 
 function resolveTarget(name) {
   if (projects[name]) return projects[name]
-  const dynamic = resolveDynamicTarget(name)
-  if (dynamic) return dynamic
-  return null
+  return resolveDynamicTarget(name)
 }
 
-function gitDiffHasChanges(root, fromSha, toSha, watchPaths) {
+function listChangedPaths(root, fromSha, toSha, watchPaths) {
   const existing = watchPaths.filter((p) => fs.existsSync(path.join(root, p)))
-  if (existing.length === 0) return true
+  if (existing.length === 0) return ["(aucun chemin watché sur le disque)"]
 
   try {
-    execFileSync("git", ["diff", "--quiet", fromSha, toSha, "--", ...existing], {
-      cwd: root,
-      stdio: "ignore",
-    })
-    return false
+    const out = execFileSync(
+      "git",
+      ["diff", "--name-only", fromSha, toSha, "--", ...existing],
+      { cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
+    )
+    return out
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean)
   } catch {
-    return true
+    // Diff impossible (force-push, historique manquant) → builder par sécurité
+    return ["(diff git indisponible)"]
   }
 }
 
@@ -68,8 +65,6 @@ function printList() {
     if (cfg.note) console.log(`    note: ${cfg.note}`)
     console.log()
   }
-  console.log("  product:<slug>  → products/<slug> + packages")
-  console.log("  client:<slug>   → clients/<slug> + packages")
 }
 
 function main() {
@@ -89,7 +84,6 @@ function main() {
   const target = resolveTarget(arg)
   if (!target) {
     console.error(`Cible inconnue: ${arg}`)
-    console.error("Utilise --list pour voir les cibles disponibles.")
     process.exit(1)
   }
 
@@ -97,20 +91,27 @@ function main() {
   const prev = process.env["VERCEL_GIT_PREVIOUS_SHA"]
   const curr = process.env["VERCEL_GIT_COMMIT_SHA"] ?? "HEAD"
 
-  // Premier déploiement ou SHA précédent absent → toujours builder
   if (!prev) {
     console.log(`[ignore-build:${arg}] Pas de commit précédent → build`)
     process.exit(1)
   }
 
-  const changed = gitDiffHasChanges(root, prev, curr, target.paths)
+  if (prev === curr) {
+    console.log(`[ignore-build:${arg}] SHA inchangé → skip`)
+    process.exit(0)
+  }
 
-  if (changed) {
-    console.log(`[ignore-build:${arg}] Changements détectés → build`)
+  const changed = listChangedPaths(root, prev, curr, target.paths)
+
+  if (changed.length > 0) {
+    console.log(`[ignore-build:${arg}] Changements → build`)
+    for (const file of changed.slice(0, 20)) {
+      console.log(`  - ${file}`)
+    }
     process.exit(1)
   }
 
-  console.log(`[ignore-build:${arg}] Aucun changement pertinent → skip`)
+  console.log(`[ignore-build:${arg}] Aucun chemin pertinent modifié → skip`)
   process.exit(0)
 }
 

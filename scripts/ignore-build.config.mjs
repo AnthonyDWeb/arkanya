@@ -2,11 +2,10 @@
  * Chemins surveillés pour l'Ignored Build Step (Vercel / Railway).
  * Exit 0 = skip deploy · Exit 1 = build
  *
- * Chaque projet ne regarde que ses deps packages réelles (pas tout packages/).
+ * Important : ne PAS surveiller pnpm-lock.yaml / package.json racine.
+ * Un changement de lockfile rebuildait TOUS les projets Vercel.
+ * Si une dep partagée change vraiment, le dossier packages/<name> change aussi.
  */
-
-const LOCKFILES = ["pnpm-lock.yaml", "pnpm-workspace.yaml", "package.json"]
-const SHARED = ["packages/config", ...LOCKFILES]
 
 /** @type {Record<string, { paths: string[]; root?: string; note?: string }>} */
 export const projects = {
@@ -18,12 +17,12 @@ export const projects = {
       "packages/better-auth",
       "packages/contracts",
       "packages/ui",
-      ...SHARED,
+      "packages/config",
     ],
   },
   account: {
     root: "apps/account",
-    paths: ["apps/account", ...SHARED],
+    paths: ["apps/account", "packages/config"],
   },
   worker: {
     root: "services/worker",
@@ -31,9 +30,9 @@ export const projects = {
     paths: [
       "services/worker",
       "packages/contracts",
+      "packages/config",
       "templates",
       "features",
-      ...SHARED,
     ],
   },
   "anthony-delforge": {
@@ -43,7 +42,7 @@ export const projects = {
       "packages/brand",
       "packages/icons",
       "packages/ui",
-      ...SHARED,
+      "packages/config",
     ],
   },
   "arkanya-website": {
@@ -54,7 +53,7 @@ export const projects = {
       "packages/email",
       "packages/icons",
       "packages/ui",
-      ...SHARED,
+      "packages/config",
     ],
   },
   arknest: {
@@ -65,7 +64,7 @@ export const projects = {
       "packages/codes",
       "packages/icons",
       "packages/ui",
-      ...SHARED,
+      "packages/config",
     ],
   },
   arkcare: {
@@ -77,7 +76,7 @@ export const projects = {
       "packages/codes",
       "packages/icons",
       "packages/ui",
-      ...SHARED,
+      "packages/config",
     ],
   },
   lesservicesdemathilde: {
@@ -87,7 +86,7 @@ export const projects = {
       "packages/email",
       "packages/icons",
       "packages/ui",
-      ...SHARED,
+      "packages/config",
     ],
   },
 }
@@ -102,7 +101,7 @@ export function resolveDynamicTarget(target) {
     const slug = productMatch[1]
     return {
       root: `products/${slug}`,
-      paths: [`products/${slug}`, "packages", ...LOCKFILES],
+      paths: [`products/${slug}`, "packages"],
     }
   }
 
@@ -111,7 +110,7 @@ export function resolveDynamicTarget(target) {
     const slug = clientMatch[1]
     return {
       root: `clients/${slug}`,
-      paths: [`clients/${slug}`, "packages", ...LOCKFILES],
+      paths: [`clients/${slug}`, "packages"],
     }
   }
 
