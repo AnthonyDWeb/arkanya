@@ -22,6 +22,8 @@ export function createArkanyaAuth(options: ArkanyaAuthOptions = {}) {
     emailAndPassword: {
       enabled: true,
       autoSignIn: true,
+      // Platform = outil perso : jamais d’inscription (compte via script admin)
+      disableSignUp: true,
     },
     session: {
       expiresIn: 60 * 60 * 24 * 7,
