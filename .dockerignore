@@ -1,0 +1,14 @@
+# Utilisé par le build Docker du worker (context = racine monorepo)
+node_modules
+**/node_modules
+.git
+apps
+clients
+products
+marketing
+parking
+**/.env
+**/.env.*
+.turbo
+**/dist
+.cursor

@@ -28,7 +28,8 @@ if (mode === "remote" && !apiKey) {
 }
 
 export const config = {
-  port: parseInt(process.env["WORKER_PORT"] ?? "4000", 10),
+  /** Railway injecte PORT ; en local on garde WORKER_PORT (défaut 4000). */
+  port: parseInt(process.env["PORT"] ?? process.env["WORKER_PORT"] ?? "4000", 10),
   /** Localhost en local ; 0.0.0.0 sur Railway pour accepter le trafic entrant. */
   host: mode === "remote" ? "0.0.0.0" : "127.0.0.1",
   mode: mode as "local" | "remote",

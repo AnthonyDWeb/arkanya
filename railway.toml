@@ -1,5 +1,5 @@
-# Voir aussi /railway.toml (racine) — Root Directory Railway = monorepo, PAS ce dossier.
-# Si le service pointe Config-as-code ici, ce fichier suffit.
+# Service Railway worker — Root Directory du service = racine du monorepo (vide).
+# Config path (si demandé) : railway.toml à la racine.
 
 [build]
 builder = "DOCKERFILE"

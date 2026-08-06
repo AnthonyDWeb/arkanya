@@ -51,7 +51,7 @@ const server = http.createServer(async (req, res) => {
     return
   }
 
-  if (req.method === "GET" && req.url === "/health") {
+  if (req.method === "GET" && (req.url === "/health" || req.url === "/")) {
     json(res, req, 200, { status: "ok", mode: config.mode })
     return
   }
