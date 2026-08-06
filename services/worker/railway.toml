@@ -1,9 +1,9 @@
-# Voir aussi /railway.toml (racine) — Root Directory Railway = monorepo, PAS ce dossier.
-# Si le service pointe Config-as-code ici, ce fichier suffit.
+# Si Config-as-code pointe ici : Root Directory doit quand même être la racine monorepo.
+# Sinon les chemins start/build ci-dessous sont faux.
 
 [build]
-builder = "DOCKERFILE"
-dockerfilePath = "services/worker/Dockerfile"
+builder = "RAILPACK"
+buildCommand = "pnpm --filter @arkanya/worker build"
 watchPatterns = [
   "services/worker/**",
   "packages/contracts/**",
@@ -16,6 +16,7 @@ watchPatterns = [
 ]
 
 [deploy]
+startCommand = "node services/worker/dist/server.js"
 healthcheckPath = "/health"
 healthcheckTimeout = 100
 restartPolicyType = "on_failure"

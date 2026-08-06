@@ -1,9 +1,8 @@
-# Service Railway worker — Root Directory du service = racine du monorepo (vide).
-# Config path (si demandé) : railway.toml à la racine.
+# Root Directory Railway = vide (racine monorepo), PAS /services/worker
 
 [build]
-builder = "DOCKERFILE"
-dockerfilePath = "services/worker/Dockerfile"
+builder = "RAILPACK"
+buildCommand = "pnpm --filter @arkanya/worker build"
 watchPatterns = [
   "services/worker/**",
   "packages/contracts/**",
@@ -16,6 +15,7 @@ watchPatterns = [
 ]
 
 [deploy]
+startCommand = "node services/worker/dist/server.js"
 healthcheckPath = "/health"
 healthcheckTimeout = 100
 restartPolicyType = "on_failure"
