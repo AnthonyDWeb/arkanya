@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className="min-h-screen">
+      {/* @arkanya-section begin:hero */}
       <section
         id="hero"
         className="flex flex-col items-center justify-center min-h-screen px-6 text-center bg-white"
@@ -17,6 +18,7 @@ export default function HomePage() {
           {{site-name}}
         </h1>
         <p className="text-xl text-gray-500 max-w-2xl mb-10">{{site-tagline}}</p>
+        {/* @arkanya-hero-cta begin */}
         <a
           href="#a-propos"
           className="px-6 py-3 rounded-lg text-white text-sm font-medium transition-opacity duration-150 ease-out hover:opacity-80"
@@ -24,8 +26,11 @@ export default function HomePage() {
         >
           En savoir plus
         </a>
+        {/* @arkanya-hero-cta end */}
       </section>
+      {/* @arkanya-section end:hero */}
 
+      {/* @arkanya-section begin:about */}
       <section
         id="a-propos"
         className="py-24 px-6 bg-gray-50"
@@ -43,7 +48,9 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+      {/* @arkanya-section end:about */}
 
+      {/* @arkanya-section begin:services */}
       <section
         id="services"
         className="py-24 px-6 bg-white"
@@ -74,7 +81,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      {/* @arkanya-section end:services */}
 
+      {/* @arkanya-section begin:contact */}
       <section
         id="contact"
         className="py-24 px-6 bg-gray-50"
@@ -92,6 +101,7 @@ export default function HomePage() {
           {/* arkanya-slot:contact-form-component */}
         </div>
       </section>
+      {/* @arkanya-section end:contact */}
     </main>
   )
 }

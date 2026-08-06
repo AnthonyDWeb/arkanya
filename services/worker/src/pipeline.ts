@@ -4,7 +4,7 @@ import { runScaffold } from "./steps/scaffold.js"
 import { runFeature } from "./steps/feature.js"
 import { runDelivery } from "./steps/delivery.js"
 import { runValidate } from "./steps/validate.js"
-import { jobStore } from "./job-store.js"
+import { jobStore, setJobMessage } from "./job-store.js"
 
 export async function runPipeline(payload: WorkerProjectPayload): Promise<WorkerReport> {
   const start = Date.now()
@@ -14,7 +14,7 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
 
   function push(step: WorkerStepReport) {
     steps.push(step)
-    jobStore.set(payload.jobId, { steps: [...steps], state: "RUNNING" })
+    jobStore.set(payload.jobId, { steps: [...steps], state: "RUNNING", currentMessage: undefined })
   }
 
   const projectDir = getProjectDir(payload)
@@ -83,7 +83,10 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
     return result
   }
 
-  const deliveryReport = await runDelivery(payload, projectDir)
+  setJobMessage(payload.jobId, "Livraison — démarrage")
+  const deliveryReport = await runDelivery(payload, projectDir, (message) => {
+    setJobMessage(payload.jobId, message)
+  })
   push(deliveryReport)
 
   const finalState = deliveryReport.state === "ERROR" ? "ERROR" : "SUCCESS"

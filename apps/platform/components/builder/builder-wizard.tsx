@@ -72,6 +72,7 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
   const [execError, setExecError] = useState<string | null>(null)
   const [running, setRunning] = useState(false)
   const [liveSteps, setLiveSteps] = useState<WorkerReport["steps"]>([])
+  const [liveMessage, setLiveMessage] = useState<string | null>(null)
 
   function patch(partial: Partial<BuilderState>) {
     setState((prev) => ({ ...prev, ...partial }))
@@ -97,6 +98,7 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
     setExecError(null)
     setRunning(false)
     setLiveSteps([])
+    setLiveMessage(null)
     setCurrentStep("project")
   }
 
@@ -106,6 +108,7 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
     setReport(null)
     setExecError(null)
     setLiveSteps([])
+    setLiveMessage(null)
 
     const jobId = crypto.randomUUID()
 
@@ -114,8 +117,12 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
         .then((r) => r.json())
         .then((data: unknown) => {
           if (data && typeof data === "object" && "steps" in data) {
-            const progress = data as { steps: WorkerReport["steps"] }
+            const progress = data as {
+              steps: WorkerReport["steps"]
+              currentMessage?: string
+            }
             setLiveSteps(progress.steps)
+            setLiveMessage(progress.currentMessage ?? null)
           }
         })
         .catch(() => undefined)
@@ -228,9 +235,11 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
             <StepExecution
               running={running}
               liveSteps={liveSteps}
+              liveMessage={liveMessage}
               report={report}
               error={execError}
               onReset={reset}
+              onRetry={() => void launch()}
             />
           )}
           </div>

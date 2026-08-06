@@ -106,6 +106,14 @@ export async function runFeature(
   try {
     for (const featureId of payload.features) {
       const featureStart = Date.now()
+
+      if (
+        featureId === "contact-form" &&
+        !payload.pages.some((p) => p.id === "contact" && p.enabled)
+      ) {
+        continue
+      }
+
       const featureDir = path.join(FEATURES_DIR, featureId)
       const manifestPath = path.join(featureDir, "feature.json")
 

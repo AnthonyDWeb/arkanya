@@ -37,6 +37,59 @@ function replaceTokens(content: string, config: Record<string, string>): string 
   return content.replace(/\{\{([\w-]+)\}\}/g, (_, key: string) => config[key] ?? "")
 }
 
+/** Retire les sections landing désactivées et ajuste le CTA hero. */
+function applyLandingPageSections(
+  content: string,
+  enabledPageIds: Set<string>,
+  pages: WorkerProjectPayload["pages"],
+): string {
+  let next = content
+
+  const sectionIds = ["hero", "about", "services", "contact"] as const
+  for (const id of sectionIds) {
+    if (enabledPageIds.has(id)) continue
+    const pattern = new RegExp(
+      `\\s*/\\*\\s*@arkanya-section begin:${id}\\s*\\*/[\\s\\S]*?/\\*\\s*@arkanya-section end:${id}\\s*\\*/`,
+      "g",
+    )
+    next = next.replace(pattern, "\n")
+  }
+
+  const firstTarget = pages.find(
+    (p) => p.enabled && p.id !== "hero" && !p.id.startsWith("custom-"),
+  )
+  const ctaPattern =
+    /\/\*\s*@arkanya-hero-cta begin\s*\*\/[\s\S]*?\/\*\s*@arkanya-hero-cta end\s*\*\//
+
+  if (!firstTarget) {
+    next = next.replace(ctaPattern, "")
+  } else {
+    const href = `#${firstTarget.slug.replace(/^\//, "")}`
+    next = next.replace(ctaPattern, (block) =>
+      block.replace(/href="#[^"]*"/, `href="${href}"`),
+    )
+  }
+
+  return next
+}
+
+function applySiteVitrineHomeCta(
+  content: string,
+  pages: WorkerProjectPayload["pages"],
+): string {
+  const first = pages.find(
+    (p) => p.enabled && p.slug !== "/" && p.slug !== "" && !p.id.startsWith("custom-"),
+  )
+  if (!first) {
+    return content.replace(
+      /<Link[\s\S]*?>[\s\S]*?En savoir plus[\s\S]*?<\/Link>/,
+      "",
+    )
+  }
+  const href = `/${first.slug.replace(/^\//, "")}`
+  return content.replace(/href="\/[^"]*"/, `href="${href}"`)
+}
+
 function toComponentName(id: string): string {
   return id
     .split(/[^a-zA-Z0-9]+/)
@@ -256,6 +309,25 @@ export async function runScaffold(
 
     const tCopy = Date.now()
     copyDir(filesDir, projectDir, config, skippedFiles)
+
+    const homePagePath = path.join(projectDir, "app", "page.tsx")
+    if (fs.existsSync(homePagePath)) {
+      const homeRaw = fs.readFileSync(homePagePath, "utf-8")
+      if (payload.template === "landing-page") {
+        fs.writeFileSync(
+          homePagePath,
+          applyLandingPageSections(homeRaw, enabledPageIds, payload.pages),
+          "utf-8",
+        )
+      } else if (payload.template === "site-vitrine") {
+        fs.writeFileSync(
+          homePagePath,
+          applySiteVitrineHomeCta(homeRaw, payload.pages),
+          "utf-8",
+        )
+      }
+    }
+
     timings.push({
       key: `scaffold:${payload.template}:copy-files`,
       label: `Copie fichiers (${payload.template})`,

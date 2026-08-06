@@ -6,9 +6,11 @@ import type { WorkerReport, WorkerStepReport } from "@arkanya/contracts/worker"
 type StepExecutionProps = {
   running: boolean
   liveSteps: WorkerStepReport[]
+  liveMessage: string | null
   report: WorkerReport | null
   error: string | null
   onReset: () => void
+  onRetry: () => void
 }
 
 const PIPELINE_STEPS: Array<{ id: string; label: string }> = [
@@ -46,69 +48,76 @@ type StepRowProps = {
   label: string
   stepReport: WorkerStepReport | undefined
   isNext: boolean
+  detail?: string | null
 }
 
-function StepRow({ label, stepReport, isNext }: StepRowProps) {
+function StepRow({ label, stepReport, isNext, detail }: StepRowProps) {
   const state = stepReport?.state
 
   return (
-    <div className="flex items-center gap-3 py-3 border-b border-zinc-800 last:border-0">
-      <div className="shrink-0">
-        {state === "SUCCESS" && (
-          <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <svg viewBox="0 0 10 8" className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 4l3 3 5-6" />
-            </svg>
-          </div>
-        )}
-        {state === "ERROR" && (
-          <div className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center">
-            <svg viewBox="0 0 8 8" className="w-2.5 h-2.5 text-red-400" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M1 1l6 6M7 1l-6 6" />
-            </svg>
-          </div>
-        )}
-        {state === "SKIPPED" && (
-          <div className="w-5 h-5 rounded-full border border-zinc-700 flex items-center justify-center">
-            <div className="w-1 h-1 rounded-full bg-zinc-600" />
-          </div>
-        )}
-        {!state && isNext && (
-          <div className="w-5 h-5 flex items-center justify-center">
-            <div className="w-4 h-4 border-2 border-brand border-t-transparent rounded-full animate-spin" />
-          </div>
-        )}
-        {!state && !isNext && (
-          <div className="w-5 h-5 rounded-full border border-zinc-800" />
-        )}
+    <div className="py-3 border-b border-zinc-800 last:border-0">
+      <div className="flex items-center gap-3">
+        <div className="shrink-0">
+          {state === "SUCCESS" && (
+            <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <svg viewBox="0 0 10 8" className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M1 4l3 3 5-6" />
+              </svg>
+            </div>
+          )}
+          {state === "ERROR" && (
+            <div className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center">
+              <svg viewBox="0 0 8 8" className="w-2.5 h-2.5 text-red-400" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M1 1l6 6M7 1l-6 6" />
+              </svg>
+            </div>
+          )}
+          {state === "SKIPPED" && (
+            <div className="w-5 h-5 rounded-full border border-zinc-700 flex items-center justify-center">
+              <div className="w-1 h-1 rounded-full bg-zinc-600" />
+            </div>
+          )}
+          {!state && isNext && (
+            <div className="w-5 h-5 flex items-center justify-center">
+              <div className="w-4 h-4 border-2 border-brand border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+          {!state && !isNext && (
+            <div className="w-5 h-5 rounded-full border border-zinc-800" />
+          )}
+        </div>
+
+        <span
+          className={[
+            "flex-1 text-sm transition-colors duration-300",
+            state === "SUCCESS"
+              ? "text-zinc-200"
+              : state === "ERROR"
+                ? "text-red-400"
+                : isNext
+                  ? "text-zinc-300"
+                  : "text-zinc-600",
+          ].join(" ")}
+        >
+          {label}
+        </span>
+
+        <span className="text-xs tabular-nums shrink-0 w-16 text-right">
+          {state && stepReport?.durationMs !== undefined && stepReport.durationMs !== null ? (
+            <span className={state === "SUCCESS" ? "text-zinc-400" : "text-red-500"}>
+              {formatMs(stepReport.durationMs)}
+            </span>
+          ) : isNext ? (
+            <span className="text-zinc-600 animate-pulse">…</span>
+          ) : (
+            <span className="text-zinc-800">—</span>
+          )}
+        </span>
       </div>
 
-      <span
-        className={[
-          "flex-1 text-sm transition-colors duration-300",
-          state === "SUCCESS"
-            ? "text-zinc-200"
-            : state === "ERROR"
-              ? "text-red-400"
-              : isNext
-                ? "text-zinc-300"
-                : "text-zinc-600",
-        ].join(" ")}
-      >
-        {label}
-      </span>
-
-      <span className="text-xs tabular-nums shrink-0 w-16 text-right">
-        {state && stepReport?.durationMs !== undefined && stepReport.durationMs !== null ? (
-          <span className={state === "SUCCESS" ? "text-zinc-400" : "text-red-500"}>
-            {formatMs(stepReport.durationMs)}
-          </span>
-        ) : isNext ? (
-          <span className="text-zinc-600 animate-pulse">…</span>
-        ) : (
-          <span className="text-zinc-800">—</span>
-        )}
-      </span>
+      {detail && (isNext || state === "ERROR") && (
+        <p className="mt-1.5 ml-8 text-xs text-zinc-500 font-mono truncate">{detail}</p>
+      )}
     </div>
   )
 }
@@ -151,7 +160,15 @@ function StepDurationBreakdown({ steps }: { steps: WorkerStepReport[] }) {
   )
 }
 
-export function StepExecution({ running, liveSteps, report, error, onReset }: StepExecutionProps) {
+export function StepExecution({
+  running,
+  liveSteps,
+  liveMessage,
+  report,
+  error,
+  onReset,
+  onRetry,
+}: StepExecutionProps) {
   const [elapsed, setElapsed] = useState(0)
   const startRef = useRef<number | null>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -177,6 +194,7 @@ export function StepExecution({ running, liveSteps, report, error, onReset }: St
   }, [running])
 
   const totalMs = report?.durationMs ?? null
+  const failed = Boolean(error || report?.state === "ERROR")
 
   const stepMap = new Map<string, WorkerStepReport>()
   const sourceSteps = report ? report.steps : liveSteps
@@ -224,12 +242,20 @@ export function StepExecution({ running, liveSteps, report, error, onReset }: St
           const done = stepMap.has(step.id)
           const prevDone = i === 0 || stepMap.has(PIPELINE_STEPS[i - 1]!.id)
           const isNext = running && !done && prevDone
+          const stepReport = stepMap.get(step.id)
+          const detail =
+            step.id === "delivery"
+              ? (isNext ? liveMessage : stepReport?.message) ?? null
+              : stepReport?.state === "ERROR"
+                ? (stepReport.message ?? null)
+                : null
           return (
             <StepRow
               key={step.id}
               label={step.label}
-              stepReport={stepMap.get(step.id)}
+              stepReport={stepReport}
               isNext={isNext}
+              detail={detail}
             />
           )
         })}
@@ -268,12 +294,24 @@ export function StepExecution({ running, liveSteps, report, error, onReset }: St
       )}
 
       {!running && (report ?? error) && (
-        <button
-          onClick={onReset}
-          className="px-5 py-2 text-zinc-400 hover:text-zinc-200 rounded-lg text-sm transition-colors duration-[120ms] ease-out"
-        >
-          ← Nouveau projet
-        </button>
+        <div className="flex items-center gap-3">
+          {failed && (
+            <button
+              type="button"
+              onClick={onRetry}
+              className="px-5 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out hover:opacity-90"
+            >
+              Redéployer
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onReset}
+            className="px-5 py-2 text-zinc-400 hover:text-zinc-200 rounded-lg text-sm transition-colors duration-[120ms] ease-out"
+          >
+            ← Nouveau projet
+          </button>
+        </div>
       )}
     </div>
   )
