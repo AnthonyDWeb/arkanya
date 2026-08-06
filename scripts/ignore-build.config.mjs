@@ -2,13 +2,11 @@
  * Chemins surveillés pour l'Ignored Build Step (Vercel / Railway).
  * Exit 0 = skip deploy · Exit 1 = build
  *
- * Cibles dynamiques :
- *   product:<slug>  → products/<slug> + packages
- *   client:<slug>   → clients/<slug> + packages
+ * Chaque projet ne regarde que ses deps packages réelles (pas tout packages/).
  */
 
-const PACKAGES = ["packages"]
 const LOCKFILES = ["pnpm-lock.yaml", "pnpm-workspace.yaml", "package.json"]
+const SHARED = ["packages/config", ...LOCKFILES]
 
 /** @type {Record<string, { paths: string[]; root?: string; note?: string }>} */
 export const projects = {
@@ -20,13 +18,12 @@ export const projects = {
       "packages/better-auth",
       "packages/contracts",
       "packages/ui",
-      "packages/config",
-      ...LOCKFILES,
+      ...SHARED,
     ],
   },
   account: {
     root: "apps/account",
-    paths: ["apps/account", "packages/config", ...LOCKFILES],
+    paths: ["apps/account", ...SHARED],
   },
   worker: {
     root: "services/worker",
@@ -34,31 +31,64 @@ export const projects = {
     paths: [
       "services/worker",
       "packages/contracts",
-      "packages/config",
       "templates",
       "features",
-      ...LOCKFILES,
+      ...SHARED,
     ],
   },
   "anthony-delforge": {
     root: "marketing/anthony-delforge",
-    paths: ["marketing/anthony-delforge", ...PACKAGES, ...LOCKFILES],
+    paths: [
+      "marketing/anthony-delforge",
+      "packages/brand",
+      "packages/icons",
+      "packages/ui",
+      ...SHARED,
+    ],
   },
   "arkanya-website": {
     root: "marketing/arkanya-website",
-    paths: ["marketing/arkanya-website", ...PACKAGES, ...LOCKFILES],
+    paths: [
+      "marketing/arkanya-website",
+      "packages/brand",
+      "packages/email",
+      "packages/icons",
+      "packages/ui",
+      ...SHARED,
+    ],
   },
   arknest: {
     root: "products/arknest",
-    paths: ["products/arknest", ...PACKAGES, ...LOCKFILES],
+    paths: [
+      "products/arknest",
+      "packages/auth-client",
+      "packages/codes",
+      "packages/icons",
+      "packages/ui",
+      ...SHARED,
+    ],
   },
   arkcare: {
     root: "products/arkcare",
-    paths: ["products/arkcare", ...PACKAGES, ...LOCKFILES],
+    paths: [
+      "products/arkcare",
+      "packages/auth-client",
+      "packages/capacitor",
+      "packages/codes",
+      "packages/icons",
+      "packages/ui",
+      ...SHARED,
+    ],
   },
   lesservicesdemathilde: {
     root: "clients/lesservicesdemathilde",
-    paths: ["clients/lesservicesdemathilde", ...PACKAGES, ...LOCKFILES],
+    paths: [
+      "clients/lesservicesdemathilde",
+      "packages/email",
+      "packages/icons",
+      "packages/ui",
+      ...SHARED,
+    ],
   },
 }
 
@@ -72,7 +102,7 @@ export function resolveDynamicTarget(target) {
     const slug = productMatch[1]
     return {
       root: `products/${slug}`,
-      paths: [`products/${slug}`, ...PACKAGES, ...LOCKFILES],
+      paths: [`products/${slug}`, "packages", ...LOCKFILES],
     }
   }
 
@@ -81,7 +111,7 @@ export function resolveDynamicTarget(target) {
     const slug = clientMatch[1]
     return {
       root: `clients/${slug}`,
-      paths: [`clients/${slug}`, ...PACKAGES, ...LOCKFILES],
+      paths: [`clients/${slug}`, "packages", ...LOCKFILES],
     }
   }
 
