@@ -86,8 +86,12 @@ function buildRepoName(project: {
       .slice(0, 40)
   }
   if (project.client) {
+    // `ac` = arkanya-client — ne pas rajouter le segment "client"
     const company = slugify(project.client.company || project.client.name)
-    return `ac-${company}-${project.slug}`
+    if (company && company !== "client") {
+      return `ac-${company}-${project.slug}`
+    }
+    return `ac-${project.slug}`
   }
   return `ap-${project.slug}`
 }

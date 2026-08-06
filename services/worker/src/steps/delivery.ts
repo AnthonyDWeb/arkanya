@@ -21,8 +21,12 @@ function slugify(str: string): string {
 
 function buildRepoName(payload: WorkerProjectPayload): string {
   if (payload.projectKind === "client") {
-    const company = slugify(payload.clientCompany ?? payload.clientId ?? "client")
-    return `ac-${company}-${payload.projectSlug}`
+    // `ac` = arkanya-client — ne pas rajouter le segment "client"
+    const company = slugify(payload.clientCompany ?? "")
+    if (company && company !== "client") {
+      return `ac-${company}-${payload.projectSlug}`
+    }
+    return `ac-${payload.projectSlug}`
   }
   return `ap-${payload.projectSlug}`
 }
