@@ -18,17 +18,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <span
           className={[
             "shrink-0 text-[10px] font-medium px-1.5 py-0.5 rounded",
-            project.type === "client"
+            project.destination.startsWith("clients/")
               ? "bg-violet-500/15 text-violet-400"
               : "bg-sky-500/15 text-sky-400",
           ].join(" ")}
         >
-          {project.type}
+          {project.destination.startsWith("clients/") ? "client" : "product"}
         </span>
       </div>
 
       {project.description && (
         <p className="text-xs text-zinc-500 line-clamp-2 mb-3">{project.description}</p>
+      )}
+
+      {(project.url || project.nextAction) && (
+        <div className="mb-3 space-y-1">
+          {project.url && (
+            <p className="text-[11px] text-brand truncate font-mono">{project.url}</p>
+          )}
+          {project.nextAction && (
+            <p className="text-[11px] text-zinc-500 truncate">→ {project.nextAction}</p>
+          )}
+        </div>
       )}
 
       {project.technologies.length > 0 && (

@@ -38,5 +38,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   // JSON.parse/stringify les convertit en ISO strings.
   const serialized = JSON.parse(JSON.stringify(project)) as typeof project
 
-  return <ProjectDetail project={serialized} />
+  return (
+    <ProjectDetail
+      project={serialized}
+      githubOwner={process.env["GITHUB_OWNER"] ?? "AnthonyDWeb"}
+    />
+  )
 }

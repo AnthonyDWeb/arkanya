@@ -9,7 +9,7 @@ export async function GET() {
       cache: "no-store",
       signal: AbortSignal.timeout(3000),
     })
-    const data = (await res.json()) as { status: string }
+    const data = (await res.json()) as { status: string; mode?: string }
     return NextResponse.json(data, { status: res.status })
   } catch {
     return NextResponse.json({ status: "offline" }, { status: 503 })

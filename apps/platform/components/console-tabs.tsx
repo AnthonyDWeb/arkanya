@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import type { Job, Project } from "@arkanya/database"
+import { MaintenancePanel } from "./maintenance-panel"
 
 type JobWithProject = Job & { project: Project }
 
@@ -80,9 +81,7 @@ export function ConsoleTabs({ jobs }: ConsoleTabsProps) {
           </>
         )}
 
-        {tab === "maintenance" && (
-          <p className="text-sm text-zinc-600">Disponible prochainement</p>
-        )}
+        {tab === "maintenance" && <MaintenancePanel />}
       </div>
     </div>
   )

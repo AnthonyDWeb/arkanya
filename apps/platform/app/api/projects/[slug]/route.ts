@@ -4,6 +4,7 @@ import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@arkanya/database/client"
 import { auth } from "@/lib/auth"
+import { buildRepoName } from "@/lib/repo-name"
 
 const MONOREPO_ROOT = path.resolve(process.cwd(), "../..")
 const GITHUB_TOKEN = process.env["GITHUB_TOKEN"] ?? ""
@@ -69,31 +70,6 @@ function deleteLocalDir(destination: string): DeletionResult {
   } catch (e) {
     return { step: "local", ok: false, error: e instanceof Error ? e.message : String(e) }
   }
-}
-
-function buildRepoName(project: {
-  type: string
-  slug: string
-  client: { company: string; name: string } | null
-}): string {
-  function slugify(str: string): string {
-    return str
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 40)
-  }
-  if (project.client) {
-    // `ac` = arkanya-client — ne pas rajouter le segment "client"
-    const company = slugify(project.client.company || project.client.name)
-    if (company && company !== "client") {
-      return `ac-${company}-${project.slug}`
-    }
-    return `ac-${project.slug}`
-  }
-  return `ap-${project.slug}`
 }
 
 export async function DELETE(

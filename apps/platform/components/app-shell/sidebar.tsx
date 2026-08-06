@@ -17,7 +17,7 @@ const NAV_ITEMS = [
   { href: "/", label: "Vue d'ensemble", icon: LayoutDashboard },
   { href: "/clients", label: "Clients", icon: Users },
   { href: "/projects", label: "Projets", icon: FolderOpen },
-  { href: "/catalog", label: "Catalogue", icon: BookOpen },
+  { href: "/catalogue", label: "Catalogue", icon: BookOpen },
   { href: "/builder", label: "Builder", icon: Wand2 },
   { href: "/console", label: "Console", icon: Terminal },
   { href: "/settings", label: "Paramètres", icon: Settings },

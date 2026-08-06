@@ -11,7 +11,7 @@ const LEFT_ITEMS = [
 ] as const
 
 const RIGHT_ITEMS = [
-  { href: "/catalog", label: "Catalogue", icon: BookOpen },
+  { href: "/catalogue", label: "Catalogue", icon: BookOpen },
   { href: "/console", label: "Console", icon: Terminal },
 ] as const
 

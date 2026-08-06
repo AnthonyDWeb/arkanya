@@ -1,8 +1,10 @@
 "use client"
 
 import type { Client, Job, JobEvent, JobTiming, Project } from "@arkanya/database"
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
+import Link from "next/link"
 import { DeleteProjectButton } from "./delete-project-button"
+import { buildRepoName } from "@/lib/repo-name"
 
 function formatMsVerbose(ms: number): string {
   const min = Math.floor(ms / 60_000)
@@ -20,6 +22,7 @@ type ProjectWithRelations = Project & {
 
 type ProjectDetailProps = {
   project: ProjectWithRelations
+  githubOwner: string
 }
 
 type Tab = "overview" | "development" | "deployment" | "activity" | "timings" | "business"
@@ -54,8 +57,23 @@ const STEP_LABELS: Record<string, string> = {
   validate: "Validation",
 }
 
-export function ProjectDetail({ project }: ProjectDetailProps) {
+function MetaRow({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4 py-2.5 border-b border-zinc-800/80 last:border-0">
+      <span className="text-xs text-zinc-500 w-32 shrink-0">{label}</span>
+      <div className="text-sm text-zinc-300 min-w-0 break-all">{children}</div>
+    </div>
+  )
+}
+
+export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
   const [activeTab, setActiveTab] = useState<Tab>("overview")
+  const repoName = buildRepoName(project)
+  const githubUrl = `https://github.com/${githubOwner}/${repoName}`
+  const vercelUrl = `https://vercel.com/${githubOwner}/${repoName}`
+  const lastJob = project.jobs[0]
+  const deliveryEvent = lastJob?.events.find((e) => e.stepType === "delivery")
+  const kind = project.destination.startsWith("clients/") ? "client" : "product"
 
   return (
     <div>
@@ -68,6 +86,16 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             </p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs px-2 py-1 bg-brand/20 text-brand-light rounded hover:opacity-90 transition-opacity duration-[120ms] ease-out"
+              >
+                Ouvrir →
+              </a>
+            )}
             <span className="text-xs px-2 py-1 bg-zinc-800 text-zinc-400 rounded">
               {STATUS_LABELS[project.status] ?? project.status}
             </span>
@@ -80,6 +108,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
         {TABS.map((tab) => (
           <button
             key={tab.id}
+            type="button"
             onClick={() => setActiveTab(tab.id)}
             className={[
               "px-3 lg:px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors duration-[120ms] ease-out shrink-0",
@@ -96,36 +125,220 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
       <div className="p-4 lg:p-6">
         {activeTab === "overview" && (
           <div className="space-y-6 max-w-2xl">
-            {project.description && (
+            {project.description ? (
               <div>
                 <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
                   Description
                 </h2>
                 <p className="text-sm text-zinc-300">{project.description}</p>
               </div>
+            ) : (
+              <p className="text-sm text-zinc-600">Aucune description</p>
             )}
+
+            <div className="bg-zinc-800/40 rounded-lg border border-zinc-700/40 px-4">
+              <MetaRow label="Slug">
+                <code className="text-xs font-mono text-zinc-400">{project.slug}</code>
+              </MetaRow>
+              <MetaRow label="Statut">
+                {STATUS_LABELS[project.status] ?? project.status}
+              </MetaRow>
+              <MetaRow label="Généré">
+                {project.generated ? "Oui" : "Non"}
+              </MetaRow>
+              {project.url && (
+                <MetaRow label="URL">
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand hover:underline"
+                  >
+                    {project.url}
+                  </a>
+                </MetaRow>
+              )}
+              {project.nextAction && (
+                <MetaRow label="Prochaine action">{project.nextAction}</MetaRow>
+              )}
+              {project.port != null && (
+                <MetaRow label="Port">
+                  <code className="text-xs font-mono">{project.port}</code>
+                </MetaRow>
+              )}
+            </div>
+
             <div>
               <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
                 Technologies
               </h2>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs px-2 py-1 bg-zinc-800 text-zinc-300 rounded font-mono"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              {project.technologies.length === 0 ? (
+                <p className="text-sm text-zinc-600">Aucune pour l’instant</p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 bg-zinc-800 text-zinc-300 rounded font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
+          </div>
+        )}
+
+        {activeTab === "development" && (
+          <div className="space-y-6 max-w-2xl">
+            <div className="bg-zinc-800/40 rounded-lg border border-zinc-700/40 px-4">
+              <MetaRow label="Kind">{kind}</MetaRow>
+              <MetaRow label="Template">
+                <code className="text-xs font-mono text-zinc-400">{project.type}</code>
+              </MetaRow>
+              <MetaRow label="Destination">
+                <code className="text-xs font-mono text-zinc-400">{project.destination}</code>
+              </MetaRow>
+              <MetaRow label="Owner">{project.owner}</MetaRow>
+              {project.port != null && (
+                <MetaRow label="Port local">
+                  <code className="text-xs font-mono">{project.port}</code>
+                </MetaRow>
+              )}
+            </div>
+
             <div>
               <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
-                Destination
+                Stack
               </h2>
-              <code className="text-xs text-zinc-400 font-mono bg-zinc-800/60 px-2 py-1 rounded">
-                {project.destination}
-              </code>
+              {project.technologies.length === 0 ? (
+                <p className="text-sm text-zinc-600">
+                  Remplie après une génération réussie.
+                </p>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 bg-zinc-800 text-zinc-300 rounded font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {lastJob && (
+              <div>
+                <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
+                  Dernier job
+                </h2>
+                <div className="p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm text-zinc-300">{lastJob.action}</p>
+                    <p className="text-xs text-zinc-600 font-mono truncate">{lastJob.externalId}</p>
+                  </div>
+                  <span
+                    className={`text-xs px-2 py-0.5 rounded shrink-0 ${JOB_STATE_COLORS[lastJob.state] ?? "bg-zinc-700 text-zinc-400"}`}
+                  >
+                    {lastJob.state}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <Link
+              href="/builder"
+              className="inline-flex text-sm text-brand hover:underline"
+            >
+              Ouvrir le Builder →
+            </Link>
+          </div>
+        )}
+
+        {activeTab === "deployment" && (
+          <div className="space-y-6 max-w-2xl">
+            <div className="bg-zinc-800/40 rounded-lg border border-zinc-700/40 px-4">
+              <MetaRow label="Repo GitHub">
+                {project.generated ? (
+                  <a
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand hover:underline font-mono text-xs"
+                  >
+                    {githubOwner}/{repoName}
+                  </a>
+                ) : (
+                  <span className="text-zinc-600">Pas encore généré</span>
+                )}
+              </MetaRow>
+              <MetaRow label="Vercel">
+                {project.generated ? (
+                  <a
+                    href={vercelUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand hover:underline font-mono text-xs"
+                  >
+                    {repoName}
+                  </a>
+                ) : (
+                  <span className="text-zinc-600">Pas encore déployé</span>
+                )}
+              </MetaRow>
+              <MetaRow label="URL prod">
+                {project.url ? (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand hover:underline"
+                  >
+                    {project.url}
+                  </a>
+                ) : (
+                  <span className="text-zinc-600">—</span>
+                )}
+              </MetaRow>
+              {deliveryEvent?.message && (
+                <MetaRow label="Dernière livraison">{deliveryEvent.message}</MetaRow>
+              )}
+            </div>
+
+            {lastJob && (
+              <div className="p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs text-zinc-500 mb-1">Dernier job</p>
+                  <p className="text-sm text-zinc-300">{lastJob.action}</p>
+                </div>
+                <span
+                  className={`text-xs px-2 py-0.5 rounded ${JOB_STATE_COLORS[lastJob.state] ?? "bg-zinc-700 text-zinc-400"}`}
+                >
+                  {lastJob.state}
+                </span>
+              </div>
+            )}
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/builder"
+                className="px-4 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out hover:opacity-90"
+              >
+                Relancer via Builder
+              </Link>
+              {project.url && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 border border-zinc-700 text-zinc-300 rounded-lg text-sm transition-colors duration-[120ms] ease-out hover:border-zinc-500"
+                >
+                  Voir le site
+                </a>
+              )}
             </div>
           </div>
         )}
@@ -252,10 +465,30 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
           </div>
         )}
 
-        {(activeTab === "development" ||
-          activeTab === "deployment" ||
-          activeTab === "business") && (
-          <p className="text-sm text-zinc-600">Disponible en Phase 2</p>
+        {activeTab === "business" && (
+          <div className="max-w-2xl space-y-4">
+            <div className="bg-zinc-800/40 rounded-lg border border-zinc-700/40 px-4">
+              <MetaRow label="Client">
+                {project.client ? project.client.company || project.client.name : "Produit interne"}
+              </MetaRow>
+              {project.client && (
+                <>
+                  <MetaRow label="Contact">
+                    {project.client.contact || "—"}
+                  </MetaRow>
+                  <MetaRow label="Statut client">
+                    {project.client.status || "—"}
+                  </MetaRow>
+                </>
+              )}
+              <MetaRow label="Créé le">
+                {new Date(project.createdAt).toLocaleDateString("fr-FR")}
+              </MetaRow>
+            </div>
+            <p className="text-xs text-zinc-600">
+              Devis, facturation et suivi commercial arriveront quand le modèle métier sera cadré.
+            </p>
+          </div>
         )}
       </div>
     </div>
