@@ -1,5 +1,19 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalPassThroughEnv": [
+    "ENABLE_EXPERIMENTAL_COREPACK",
+    "DATABASE_URL",
+    "BETTER_AUTH_SECRET",
+    "BETTER_AUTH_URL",
+    "NEXT_PUBLIC_APP_URL",
+    "NEXT_PUBLIC_ARKANYA_API_URL",
+    "NEXT_PUBLIC_BETTER_AUTH_URL",
+    "WORKER_URL",
+    "WORKER_API_KEY",
+    "RESEND_API_KEY",
+    "CONTACT_FROM_EMAIL",
+    "CONTACT_TO_EMAIL"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

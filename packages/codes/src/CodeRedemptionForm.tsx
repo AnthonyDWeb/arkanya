@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type FormEvent } from 'react';
-import { isCodeFormatValid, normalizeCode } from './normalize-code.mjs';
+import { isCodeFormatValid, normalizeCode } from './normalize-code';
 import type { CodeProduct, CodeRedemptionResult, RedeemCode } from './types';
 
 interface CodeRedemptionFormProps {

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { isCodeFormatValid, normalizeCode } from '../src/normalize-code.mjs';
+import { isCodeFormatValid, normalizeCode } from '../src/normalize-code.ts';
 
 test('normalise les espaces, tirets bas et minuscules', () => {
   assert.equal(normalizeCode('  ark_nest premium  '), 'ARK-NEST-PREMIUM');

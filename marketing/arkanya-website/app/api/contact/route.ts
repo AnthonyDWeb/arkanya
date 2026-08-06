@@ -80,6 +80,16 @@ export async function POST(request: Request) {
     to: contactToEmail,
     replyTo: email,
     subject: `Nouvelle demande Arkanya - ${name}`,
+    text: [
+      "Nouvelle demande de contact",
+      `Nom : ${name}`,
+      `Email : ${email}`,
+      `Type de projet : ${projectType || "Non precise"}`,
+      `Budget : ${budget || "Non precise"}`,
+      "",
+      "Message :",
+      message,
+    ].join("\n"),
     html: `
       <h2>Nouvelle demande de contact</h2>
       <p><strong>Nom :</strong> ${safeName}</p>
@@ -97,7 +107,7 @@ export async function POST(request: Request) {
 
   console.log("[Contact API] Resend response:", resendResponse);
 
-  if (resendResponse.error) {
+  if (!resendResponse.ok) {
     console.error("[Contact API] Resend error:", resendResponse.error);
 
     return NextResponse.json({ message: "L'envoi du message a echoue." }, { status: 502 });

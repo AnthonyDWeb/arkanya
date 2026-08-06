@@ -1,9 +1,8 @@
 {
-    "include":  [
-                    "src"
-                ],
-    "exclude":  [
-                    "node_modules"
-                ],
-    "extends":  "@arkanya/config/react-library"
+  "extends": "@arkanya/config/react-library",
+  "compilerOptions": {
+    "allowArbitraryExtensions": true
+  },
+  "include": ["src", "assets"],
+  "exclude": ["node_modules"]
 }
