@@ -1,9 +1,10 @@
 "use client"
 
-import { Eye, Pencil, Trash2 } from "lucide-react"
+import { Eye, Pencil, Search, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useMemo, useState } from "react"
+import { ConfirmActionModal } from "./confirm-action-modal"
 
 type ClientRow = {
   id: string
@@ -25,9 +26,9 @@ const STATUS_OPTIONS = [
 ] as const
 
 const STATUS_STYLES: Record<string, string> = {
-  prospect: "bg-amber-500/15 text-amber-400",
-  active: "bg-emerald-500/15 text-emerald-400",
-  archived: "bg-zinc-700 text-zinc-400",
+  prospect: "text-warning",
+  active: "text-success",
+  archived: "text-zinc-500",
 }
 
 type Draft = {
@@ -51,6 +52,24 @@ export function ClientsView({ clients }: ClientsViewProps) {
   const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<ClientRow | null>(null)
+  const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
+  const [query, setQuery] = useState("")
+  const [statusFilter, setStatusFilter] = useState<string>("all")
+
+  const filteredClients = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return clients.filter((client) => {
+      if (statusFilter !== "all" && client.status !== statusFilter) return false
+      if (!q) return true
+      return (
+        client.name.toLowerCase().includes(q) ||
+        client.company.toLowerCase().includes(q) ||
+        client.contact.toLowerCase().includes(q)
+      )
+    })
+  }, [clients, query, statusFilter])
 
   function startCreate() {
     setEditingId(null)
@@ -78,23 +97,32 @@ export function ClientsView({ clients }: ClientsViewProps) {
     setError(null)
   }
 
-  async function remove(client: ClientRow) {
+  function requestRemove(client: ClientRow) {
     if (client.projectCount > 0) {
       setError(`Impossible de supprimer : ${client.projectCount} projet(s) liés`)
       return
     }
-    if (!window.confirm(`Supprimer ${client.name} ?`)) return
-    setError(null)
+    setDeleteError(null)
+    setDeleteTarget(client)
+  }
+
+  async function confirmRemove() {
+    if (!deleteTarget) return
+    setDeleting(true)
+    setDeleteError(null)
     try {
-      const res = await fetch(`/api/clients/${client.id}`, { method: "DELETE" })
+      const res = await fetch(`/api/clients/${deleteTarget.id}`, { method: "DELETE" })
       const data = (await res.json()) as { error?: string }
       if (!res.ok) {
-        setError(data.error ?? "Erreur")
+        setDeleteError(data.error ?? "Erreur")
         return
       }
+      setDeleteTarget(null)
       router.refresh()
     } catch {
-      setError("Erreur réseau")
+      setDeleteError("Erreur réseau")
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -133,61 +161,59 @@ export function ClientsView({ clients }: ClientsViewProps) {
   }
 
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-16 flex items-center justify-between border-b border-zinc-800">
-        <div>
-          <h1 className="text-xl font-semibold text-zinc-100">Clients</h1>
-          <p className="text-xs text-zinc-500 mt-0.5">{clients.length} clients</p>
+    <div className="min-h-full animate-page-in">
+      <header className="page-head">
+        <div className="flex items-baseline gap-3 min-w-0">
+          <h1 className="page-title">Clients</h1>
+          <span className="metric text-xs text-brand tabular-nums">
+            {String(clients.length).padStart(2, "0")}
+          </span>
         </div>
         {!creating && !editingId && (
-          <button
-            type="button"
-            onClick={startCreate}
-            className="px-3 py-1.5 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out hover:opacity-90"
-          >
+          <button type="button" onClick={startCreate} className="slab shrink-0">
             + Nouveau
           </button>
         )}
-      </div>
+      </header>
 
-      <div className="p-4 lg:p-6 space-y-3 max-w-2xl">
+      <div className="px-4 lg:px-6 pb-8 space-y-3">
         {(creating || editingId) && (
-          <div className="p-4 bg-zinc-800/60 border border-zinc-700 rounded-lg space-y-3">
-            <p className="text-sm font-medium text-zinc-200">
+          <div className="max-w-2xl p-4 chassis trim-gold space-y-3">
+            <p className="heading text-sm text-white">
               {editingId ? "Modifier le client" : "Nouveau client"}
             </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <label className="block space-y-1">
-                <span className="text-xs text-zinc-500">Nom</span>
+            <div className="grid gap-2.5 sm:grid-cols-2">
+              <label className="block">
+                <span className="field-label">Nom</span>
                 <input
                   value={draft.name}
                   onChange={(e) => setDraft((d) => ({ ...d, name: e.target.value }))}
-                  className="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-sm text-zinc-100 outline-none focus:border-brand"
+                  className="well w-full"
                 />
               </label>
-              <label className="block space-y-1">
-                <span className="text-xs text-zinc-500">Société</span>
+              <label className="block">
+                <span className="field-label">Société</span>
                 <input
                   value={draft.company}
                   onChange={(e) => setDraft((d) => ({ ...d, company: e.target.value }))}
-                  className="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-sm text-zinc-100 outline-none focus:border-brand"
+                  className="well w-full"
                 />
               </label>
-              <label className="block space-y-1 sm:col-span-2">
-                <span className="text-xs text-zinc-500">Contact</span>
+              <label className="block sm:col-span-2">
+                <span className="field-label">Contact</span>
                 <input
                   value={draft.contact}
                   onChange={(e) => setDraft((d) => ({ ...d, contact: e.target.value }))}
                   placeholder="email ou téléphone"
-                  className="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-sm text-zinc-100 outline-none focus:border-brand"
+                  className="well w-full"
                 />
               </label>
-              <label className="block space-y-1">
-                <span className="text-xs text-zinc-500">Statut</span>
+              <label className="block">
+                <span className="field-label">Statut</span>
                 <select
                   value={draft.status}
                   onChange={(e) => setDraft((d) => ({ ...d, status: e.target.value }))}
-                  className="w-full px-3 py-2 bg-zinc-900 border border-zinc-700 rounded-lg text-sm text-zinc-100 outline-none focus:border-brand"
+                  className="well w-full"
                 >
                   {STATUS_OPTIONS.map((opt) => (
                     <option key={opt.id} value={opt.id}>
@@ -197,20 +223,20 @@ export function ClientsView({ clients }: ClientsViewProps) {
                 </select>
               </label>
             </div>
-            {error && <p className="text-xs text-red-400">{error}</p>}
-            <div className="flex gap-2">
+            {error && <p className="metric text-xs text-danger">{error}</p>}
+            <div className="flex gap-2 pt-1">
               <button
                 type="button"
                 disabled={saving}
                 onClick={() => void save()}
-                className="px-4 py-2 bg-brand text-white rounded-lg text-sm font-medium disabled:opacity-50 transition-opacity duration-[120ms] ease-out"
+                className="slab"
               >
                 {saving ? "Enregistrement…" : "Enregistrer"}
               </button>
               <button
                 type="button"
                 onClick={cancel}
-                className="px-4 py-2 text-zinc-400 hover:text-zinc-200 text-sm transition-colors duration-[120ms] ease-out"
+                className="px-4 py-2.5 text-zinc-400 hover:text-zinc-200 text-sm transition-colors duration-140"
               >
                 Annuler
               </button>
@@ -219,78 +245,142 @@ export function ClientsView({ clients }: ClientsViewProps) {
         )}
 
         {clients.length === 0 && !creating ? (
-          <div className="p-8 text-center border border-dashed border-zinc-800 rounded-lg">
-            <p className="text-sm text-zinc-500 mb-3">Aucun client pour l’instant</p>
-            <button
-              type="button"
-              onClick={startCreate}
-              className="text-sm text-brand hover:underline"
-            >
+          <div className="flex flex-col items-start justify-center py-14 gap-2.5">
+            <p className="heading text-xl text-white">Aucun client.</p>
+            <p className="text-sm text-zinc-500">Vos clients apparaîtront ici une fois créés.</p>
+            <button type="button" onClick={startCreate} className="slab mt-1">
               Créer le premier client
             </button>
           </div>
         ) : (
-          clients.map((client) => (
-            <div
-              key={client.id}
-              className="p-4 bg-zinc-800/40 border border-zinc-700/40 rounded-lg"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
+          <>
+            {clients.length > 5 && (
+              <div className="flex items-center gap-2">
+                <label className="relative min-w-0 flex-1">
+                  <Search
+                    className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-500"
+                    strokeWidth={2}
+                  />
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Rechercher un client…"
+                    className="well well-search w-full"
+                  />
+                </label>
+                <select
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="well shrink-0 w-[10.5rem] metric"
+                >
+                  <option value="all">Tous les statuts</option>
+                  {STATUS_OPTIONS.map((opt) => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {filteredClients.length === 0 && (
+              <div className="flex items-center justify-center h-20">
+                <p className="metric text-xs tracking-wide text-zinc-500 uppercase">
+                  Aucun résultat
+                </p>
+              </div>
+            )}
+
+            <div className="border-t border-white/[0.04] divide-y divide-white/[0.04] -mx-4 lg:-mx-6">
+              {filteredClients.map((client) => (
+                <div
+                  key={client.id}
+                  className="group grid grid-cols-[1fr_auto] lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto_auto] gap-x-3 gap-y-1 items-center px-4 lg:px-6 py-2.5 hover:bg-brand/[0.04] transition-colors duration-140"
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span
+                        className={`status-dot ${STATUS_STYLES[client.status] ?? STATUS_STYLES["prospect"]}`}
+                      />
+                      <span
+                        className={`metric text-[10px] tracking-[0.12em] uppercase ${STATUS_STYLES[client.status] ?? STATUS_STYLES["prospect"]}`}
+                      >
+                        {STATUS_OPTIONS.find((s) => s.id === client.status)?.label ??
+                          client.status}
+                      </span>
+                    </div>
                     <Link
                       href={`/clients/${client.id}`}
-                      className="text-sm font-medium text-zinc-100 hover:text-white cursor-pointer"
+                      className="text-sm font-semibold text-zinc-100 hover:text-brand truncate block transition-colors duration-140"
                     >
                       {client.name}
                     </Link>
-                    <span
-                      className={`text-[10px] px-1.5 py-0.5 rounded ${STATUS_STYLES[client.status] ?? STATUS_STYLES["prospect"]}`}
-                    >
-                      {STATUS_OPTIONS.find((s) => s.id === client.status)?.label ?? client.status}
-                    </span>
                   </div>
-                  <p className="text-xs text-zinc-500 mt-0.5">{client.company}</p>
-                  {client.contact && (
-                    <p className="text-xs text-zinc-600 mt-1">{client.contact}</p>
-                  )}
-                </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs text-zinc-600 font-mono">
-                    {client.projectCount} projets
+
+                  <div className="hidden lg:block min-w-0">
+                    <p className="text-xs text-zinc-500 truncate">{client.company}</p>
+                    {client.contact && (
+                      <p className="metric text-[11px] text-zinc-600 truncate mt-0.5">
+                        {client.contact}
+                      </p>
+                    )}
+                  </div>
+
+                  <span className="metric text-xs text-zinc-600 justify-self-end">
+                    {String(client.projectCount).padStart(2, "0")} proj.
                   </span>
-                  <Link
-                    href={`/clients/${client.id}`}
-                    title="Voir"
-                    aria-label="Voir"
-                    className="p-1 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-[120ms] ease-out"
-                  >
-                    <Eye className="w-3.5 h-3.5" strokeWidth={2} />
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => startEdit(client)}
-                    title="Modifier"
-                    aria-label="Modifier"
-                    className="p-1 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-[120ms] ease-out"
-                  >
-                    <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => void remove(client)}
-                    title="Supprimer"
-                    aria-label="Supprimer"
-                    className="p-1 text-red-400/80 hover:text-red-400 cursor-pointer transition-colors duration-[120ms] ease-out"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" strokeWidth={2} />
-                  </button>
+
+                  <div className="justify-self-end flex items-center gap-0.5 opacity-60 group-hover:opacity-100 transition-opacity duration-140">
+                    <Link
+                      href={`/clients/${client.id}`}
+                      title="Voir"
+                      aria-label="Voir"
+                      className="p-1.5 text-zinc-400 hover:text-zinc-200 transition-colors duration-140"
+                    >
+                      <Eye className="w-3.5 h-3.5" strokeWidth={2} />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => startEdit(client)}
+                      title="Modifier"
+                      aria-label="Modifier"
+                      className="p-1.5 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-140"
+                    >
+                      <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => requestRemove(client)}
+                      title="Supprimer"
+                      aria-label="Supprimer"
+                      className="p-1.5 text-danger/80 hover:text-danger cursor-pointer transition-colors duration-140"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" strokeWidth={2} />
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))
+          </>
         )}
       </div>
+
+      <ConfirmActionModal
+        open={deleteTarget !== null}
+        onClose={() => !deleting && setDeleteTarget(null)}
+        onConfirm={() => void confirmRemove()}
+        tone="danger"
+        title="Supprimer le client"
+        description="Cette action est irréversible."
+        target={
+          deleteTarget ? { label: "Client concerné", value: deleteTarget.name } : undefined
+        }
+        confirmLabel="Supprimer définitivement"
+        confirmingLabel="Suppression…"
+        pending={deleting}
+        error={deleteError}
+      />
     </div>
   )
 }

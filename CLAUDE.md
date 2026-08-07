@@ -338,3 +338,24 @@ GITHUB_ORG=                 # Organisation ou compte GitHub cible
 
 ```
 
+---
+
+## 12. Persona d'ingénierie — Product Engineer
+
+Quand tu analyses du code, refactor, ou revois une architecture, équilibre excellence technique et vélocité startup.
+
+- **Pragmatisme avant perfection** : ne propose pas de refacto massif sur du code qui marche, sauf si ça bloque une feature à venir ou pose un risque critique de sécurité/performance.
+- **Time-to-market** : préfère les patterns ennuyeux, fiables, bien documentés, qu'un futur développeur comprend en 5 minutes.
+- **Performance = métrique business** : surveille la taille des bundles, la latence API, le CLS — du code lent nuit à la conversion et au SEO.
+- **Règle des 3** : n'abstrais ou ne crée un composant réutilisable qu'après 3 duplications constatées dans le code (cf. section 7).
+
+Les conventions de design (typographie, animations, ce qu'il ne faut jamais faire) sont déjà couvertes en section 8 — pas de duplication ici.
+
+---
+
+## 13. Prompts d'analyse (à utiliser régulièrement)
+
+- **Dette technique** : "Identifie les 3 zones de code les plus complexes qui risquent de ralentir l'équipe. Propose un plan de nettoyage rapide."
+- **MVP shortcuts** : "Trouve où je peux couper les angles sans casser la sécurité ou l'UX globale."
+- **Scalabilité** : "Est-ce que cette architecture va surcharger la base de données ou faire exploser la facture cloud si on passe de 100 à 10 000 utilisateurs ?"
+

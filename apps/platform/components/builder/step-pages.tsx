@@ -128,17 +128,17 @@ export function StepPages({ state, onChange, onNext, onBack }: StepPagesProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div>
-        <h2 className="text-sm font-semibold text-zinc-100 mb-1">Pages du projet</h2>
-        <p className="text-xs text-zinc-500">
+        <h2 className="text-[13px] font-semibold text-white">Pages du projet</h2>
+        <p className="text-[11px] text-zinc-400 mt-0.5">
           {isLanding
-            ? "Sélectionnez les sections à afficher. Vous pouvez aussi ajouter des pages (routes) supplémentaires."
-            : "Sélectionnez les pages à générer, ou ajoutez-en de nouvelles. Les pages obligatoires ne peuvent pas être désactivées."}
+            ? "Sections à afficher — vous pouvez aussi ajouter des routes."
+            : "Pages à générer. Les obligatoires restent actives."}
         </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-2">
         {state.pages.map((page) => {
           const isRequired = required.includes(page.id)
           const isCustom = page.source === "custom"
@@ -146,57 +146,74 @@ export function StepPages({ state, onChange, onNext, onBack }: StepPagesProps) {
             isLanding && !isCustom
               ? `#${page.slug || page.id}`
               : `/${page.slug === "/" ? "" : page.slug.replace(/^\//, "")}`
+          const isHash = displayPath.startsWith("#")
 
           return (
             <div
               key={page.id}
               className={[
-                "flex items-center justify-between p-3 rounded-lg border transition-colors duration-[120ms] ease-out",
-                page.enabled ? "border-zinc-700 bg-zinc-800/40" : "border-zinc-800 bg-zinc-900/40",
+                "flex items-start gap-2 rounded-xl border px-2.5 py-2 min-w-0",
+                page.enabled
+                  ? "border-brand/50 bg-brand/10"
+                  : "border-white/[0.08] bg-well/40",
               ].join(" ")}
             >
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => !isRequired && togglePage(page.id)}
-                  disabled={isRequired}
-                  aria-checked={page.enabled}
-                  role="checkbox"
+              <button
+                type="button"
+                onClick={() => !isRequired && togglePage(page.id)}
+                disabled={isRequired}
+                aria-checked={page.enabled}
+                role="checkbox"
+                className={[
+                  "w-3.5 h-3.5 rounded-[2px] border flex items-center justify-center shrink-0 mt-0.5",
+                  page.enabled ? "border-brand bg-brand" : "border-zinc-600",
+                  isRequired ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+                ].join(" ")}
+              >
+                {page.enabled && (
+                  <svg
+                    viewBox="0 0 10 8"
+                    className="w-2 h-2 text-ink-on-brand"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M1 4l3 3 5-6" />
+                  </svg>
+                )}
+              </button>
+              <div className="min-w-0 flex-1">
+                <p
                   className={[
-                    "w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 transition-colors duration-[120ms] ease-out",
-                    page.enabled
-                      ? "border-brand bg-brand"
-                      : "border-zinc-600 bg-transparent",
-                    isRequired ? "opacity-50 cursor-not-allowed" : "cursor-pointer",
+                    "text-[12px] font-medium truncate",
+                    page.enabled ? "text-white" : "text-zinc-500",
                   ].join(" ")}
                 >
-                  {page.enabled && (
-                    <svg viewBox="0 0 10 8" className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M1 4l3 3 5-6" />
-                    </svg>
+                  {page.name}
+                  {isCustom && (
+                    <span className="ml-1 metric text-[9px] text-brand">custom</span>
                   )}
-                </button>
-                <div>
-                  <p className={`text-sm ${page.enabled ? "text-zinc-200" : "text-zinc-600"}`}>
-                    {page.name}
-                    {isCustom && (
-                      <span className="ml-2 text-[10px] uppercase tracking-wide text-blue-400">
-                        custom
-                      </span>
-                    )}
-                  </p>
-                  <p className="text-xs text-zinc-600 font-mono">
-                    {displayPath}
-                    {isRequired && <span className="ml-2 text-zinc-700">obligatoire</span>}
-                  </p>
-                </div>
+                </p>
+                <p
+                  className={[
+                    "metric text-[11px] truncate",
+                    isHash ? "text-gold" : "text-zinc-400",
+                  ].join(" ")}
+                >
+                  {displayPath}
+                  {isRequired && (
+                    <span className="ml-1 text-zinc-500">· req.</span>
+                  )}
+                </p>
               </div>
               {isCustom && (
                 <button
+                  type="button"
                   onClick={() => removeCustomPage(page.id)}
-                  className="text-xs text-red-400 cursor-pointer px-2 py-1"
-                  title="Retirer cette page"
+                  className="metric text-[9px] text-danger shrink-0"
+                  title="Retirer"
                 >
-                  Retirer
+                  ×
                 </button>
               )}
             </div>
@@ -204,16 +221,11 @@ export function StepPages({ state, onChange, onNext, onBack }: StepPagesProps) {
         })}
       </div>
 
-      <div className="border border-zinc-800 rounded-lg p-4 space-y-3">
-        <div>
-          <p className="text-xs font-medium text-zinc-400">Ajouter une page</p>
-          <p className="text-[11px] text-zinc-600 mt-0.5 font-mono">
-            blog · test/detail · test/[slug] · docs/[...slug]
-          </p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="rounded-xl border border-white/[0.08] bg-well/30 p-2.5 space-y-2">
+        <p className="metric text-[10px] text-zinc-400">Ajouter une page</p>
+        <div className="grid grid-cols-2 gap-2">
           <div>
-            <label className="block text-xs text-zinc-500 mb-1">Nom</label>
+            <label className="field-label">Nom</label>
             <input
               type="text"
               value={newName}
@@ -222,14 +234,14 @@ export function StepPages({ state, onChange, onNext, onBack }: StepPagesProps) {
                 setNewName(value)
                 if (!slugTouched) setNewSlug(slugifyName(value))
               }}
-              placeholder="Ex. Détail article"
-              className="w-full px-3 py-2 text-sm bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500"
+              placeholder="Détail article"
+              className="well w-full"
             />
           </div>
           <div>
-            <label className="block text-xs text-zinc-500 mb-1">Route</label>
-            <div className="flex items-center gap-1">
-              <span className="text-xs text-zinc-600 font-mono">/</span>
+            <label className="field-label">Route</label>
+            <div className="well flex items-center gap-1 !py-0 !px-0 overflow-hidden">
+              <span className="metric text-[10px] text-zinc-500 pl-2.5 shrink-0">/</span>
               <input
                 type="text"
                 value={newSlug}
@@ -238,32 +250,34 @@ export function StepPages({ state, onChange, onNext, onBack }: StepPagesProps) {
                   setNewSlug(sanitizeRouteInput(e.target.value))
                 }}
                 placeholder="test/[slug]"
-                className="w-full px-3 py-2 text-sm bg-zinc-950 border border-zinc-700 rounded-lg text-zinc-100 font-mono placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500"
+                className="min-w-0 flex-1 bg-transparent px-1.5 py-2 metric text-[12px] outline-none"
               />
             </div>
           </div>
         </div>
-        {formError && <p className="text-xs text-red-400">{formError}</p>}
+        {formError && <p className="metric text-[11px] text-danger">{formError}</p>}
         <button
           type="button"
           onClick={addCustomPage}
-          className="px-4 py-2 text-sm text-blue-400 border border-blue-900/40 rounded-lg cursor-pointer hover:bg-blue-950/20 transition-colors duration-[120ms] ease-out"
+          className="text-[11px] text-brand hover:text-brand-light transition-colors duration-140"
         >
-          + Ajouter la page
+          + Ajouter
         </button>
       </div>
 
-      <div className="flex justify-between pt-2">
+      <div className="flex justify-between pt-1">
         <button
+          type="button"
           onClick={onBack}
-          className="px-5 py-2 text-zinc-400 hover:text-zinc-200 rounded-lg text-sm transition-colors duration-[120ms] ease-out cursor-pointer"
+          className="text-[12px] text-zinc-400 hover:text-zinc-200 transition-colors duration-140"
         >
           ← Retour
         </button>
         <button
+          type="button"
           onClick={onNext}
           disabled={!canContinue}
-          className="px-5 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out disabled:opacity-40 hover:opacity-90 cursor-pointer"
+          className="slab"
         >
           Suivant →
         </button>

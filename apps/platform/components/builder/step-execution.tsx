@@ -14,13 +14,19 @@ type StepExecutionProps = {
   onRetry: () => void
 }
 
-const PIPELINE_STEPS: Array<{ id: string; label: string }> = [
-  { id: "initialize", label: "Initialisation" },
-  { id: "scaffold", label: "Scaffold template" },
-  { id: "feature", label: "Installation features" },
-  { id: "validate", label: "Validation (npm + build)" },
-  { id: "delivery", label: "Livraison" },
+const PIPELINE_STEPS: Array<{ id: string; label: string; code: string }> = [
+  { id: "initialize", label: "Initialisation", code: "INIT" },
+  { id: "scaffold", label: "Scaffold du modèle", code: "ARCH" },
+  { id: "feature", label: "Fonctionnalités", code: "FEAT" },
+  { id: "validate", label: "Validation", code: "VAL" },
+  { id: "delivery", label: "Livraison", code: "SHIP" },
 ]
+
+const STATE_LABELS: Record<string, string> = {
+  SUCCESS: "OK",
+  ERROR: "Erreur",
+  SKIPPED: "Ignoré",
+}
 
 function formatMs(ms: number): string {
   if (ms < 1000) return `${ms}ms`
@@ -34,90 +40,124 @@ function formatMsVerbose(ms: number): string {
   const min = Math.floor(ms / 60_000)
   const sec = Math.floor((ms % 60_000) / 1000)
   const rem = ms % 1000
-  if (min > 0) return `${min}m ${sec}s ${rem}ms`
-  if (sec > 0) return `${sec}s ${rem}ms`
+  if (min > 0) return `${min}m ${sec}s ${String(rem).padStart(3, "0")}ms`
+  if (sec > 0) return `${sec}s ${String(rem).padStart(3, "0")}ms`
   return `${rem}ms`
 }
 
-function formatClock(totalSeconds: number): string {
+function formatClock(totalMs: number): string {
+  const totalSeconds = Math.floor(totalMs / 1000)
   const m = Math.floor(totalSeconds / 60)
   const s = totalSeconds % 60
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`
+  const ms = totalMs % 1000
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(ms).padStart(3, "0")}`
 }
 
 type StepRowProps = {
   label: string
+  code: string
   stepReport: WorkerStepReport | undefined
   isNext: boolean
   detail?: string | null
 }
 
-function StepRow({ label, stepReport, isNext, detail }: StepRowProps) {
+function StepRow({ label, code, stepReport, isNext, detail }: StepRowProps) {
   const state = stepReport?.state
+  const isProcessing = !state && isNext
 
   return (
-    <div className="py-3 border-b border-zinc-800 last:border-0">
-      <div className="flex items-center gap-3">
-        <div className="shrink-0">
-          {state === "SUCCESS" && (
-            <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center">
-              <svg viewBox="0 0 10 8" className="w-3 h-3 text-emerald-400" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M1 4l3 3 5-6" />
-              </svg>
-            </div>
+    <div
+      className={[
+        "relative px-2.5 py-1.5 border-b border-white/[0.05] last:border-0",
+        isProcessing ? "bg-brand/5" : "",
+      ].join(" ")}
+    >
+      {isProcessing && (
+        <div className="progress-shimmer absolute inset-x-0 bottom-0 h-[2px]" />
+      )}
+      <div className="grid grid-cols-[2.25rem_auto_minmax(0,1fr)_auto_2.75rem] gap-x-2 items-center">
+        <span
+          className={[
+            "metric text-[9px] tracking-[0.08em]",
+            isProcessing
+              ? "text-brand"
+              : state === "SUCCESS"
+                ? "text-zinc-500"
+                : state === "ERROR"
+                  ? "text-danger"
+                  : "text-zinc-600",
+          ].join(" ")}
+        >
+          {code}
+        </span>
+
+        <span className="flex justify-center w-2.5">
+          {state === "SUCCESS" && <span className="status-dot text-success" />}
+          {state === "ERROR" && <span className="status-dot text-danger" />}
+          {state === "SKIPPED" && <span className="status-dot text-zinc-600" />}
+          {isProcessing && (
+            <span
+              className="status-dot text-brand animate-glow-pulse"
+              style={{
+                boxShadow:
+                  "0 0 8px 1px color-mix(in oklch, var(--color-arc) 50%, transparent)",
+              }}
+            />
           )}
-          {state === "ERROR" && (
-            <div className="w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center">
-              <svg viewBox="0 0 8 8" className="w-2.5 h-2.5 text-red-400" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M1 1l6 6M7 1l-6 6" />
-              </svg>
-            </div>
-          )}
-          {state === "SKIPPED" && (
-            <div className="w-5 h-5 rounded-full border border-zinc-700 flex items-center justify-center">
-              <div className="w-1 h-1 rounded-full bg-zinc-600" />
-            </div>
-          )}
-          {!state && isNext && (
-            <div className="w-5 h-5 flex items-center justify-center">
-              <div className="w-4 h-4 border-2 border-brand border-t-transparent rounded-full animate-spin" />
-            </div>
-          )}
-          {!state && !isNext && (
-            <div className="w-5 h-5 rounded-full border border-zinc-800" />
-          )}
-        </div>
+          {!state && !isNext && <span className="status-dot text-zinc-700" />}
+        </span>
 
         <span
           className={[
-            "flex-1 text-sm transition-colors duration-300",
+            "text-[12px] truncate",
             state === "SUCCESS"
               ? "text-zinc-200"
               : state === "ERROR"
-                ? "text-red-400"
+                ? "text-danger"
                 : isNext
-                  ? "text-zinc-300"
-                  : "text-zinc-600",
+                  ? "text-white font-medium"
+                  : "text-zinc-500",
           ].join(" ")}
         >
           {label}
         </span>
 
-        <span className="text-xs tabular-nums shrink-0 w-16 text-right">
-          {state && stepReport?.durationMs !== undefined && stepReport.durationMs !== null ? (
-            <span className={state === "SUCCESS" ? "text-zinc-400" : "text-red-500"}>
+        <span
+          className={[
+            "metric text-[9px] shrink-0",
+            state === "SUCCESS"
+              ? "text-success"
+              : state === "ERROR"
+                ? "text-danger"
+                : isProcessing
+                  ? "text-brand"
+                  : "text-zinc-600",
+          ].join(" ")}
+        >
+          {state
+            ? (STATE_LABELS[state] ?? state)
+            : isProcessing
+              ? "En cours"
+              : "Attente"}
+        </span>
+
+        <span className="metric text-[10px] tabular-nums text-right shrink-0">
+          {state &&
+          stepReport?.durationMs !== undefined &&
+          stepReport.durationMs !== null ? (
+            <span className={state === "SUCCESS" ? "text-zinc-400" : "text-danger"}>
               {formatMs(stepReport.durationMs)}
             </span>
           ) : isNext ? (
-            <span className="text-zinc-600 animate-pulse">…</span>
+            <span className="text-brand/70 animate-pulse">…</span>
           ) : (
-            <span className="text-zinc-800">—</span>
+            <span className="text-zinc-700">—</span>
           )}
         </span>
       </div>
 
       {detail && (isNext || state === "ERROR") && (
-        <p className="mt-1.5 ml-8 text-xs text-zinc-500 font-mono truncate">{detail}</p>
+        <p className="mt-1 pl-9 text-[10px] text-zinc-500 metric truncate">{detail}</p>
       )}
     </div>
   )
@@ -140,22 +180,22 @@ function StepDurationBreakdown({ steps }: { steps: WorkerStepReport[] }) {
   const totalMs = genMs + delivMs + valMs
 
   return (
-    <div className="flex gap-4 text-xs">
+    <div className="grid grid-cols-2 gap-x-3 gap-y-2">
       <div>
-        <span className="text-zinc-600">Génération</span>
-        <p className="text-zinc-400 font-mono mt-0.5">{formatMsVerbose(genMs)}</p>
+        <span className="metric text-[9px] text-zinc-500">Génération</span>
+        <p className="metric text-[11px] text-zinc-300 mt-0.5">{formatMsVerbose(genMs)}</p>
       </div>
       <div>
-        <span className="text-zinc-600">Livraison</span>
-        <p className="text-zinc-400 font-mono mt-0.5">{formatMsVerbose(delivMs)}</p>
+        <span className="metric text-[9px] text-zinc-500">Livraison</span>
+        <p className="metric text-[11px] text-zinc-300 mt-0.5">{formatMsVerbose(delivMs)}</p>
       </div>
       <div>
-        <span className="text-zinc-600">Validation</span>
-        <p className="text-zinc-400 font-mono mt-0.5">{formatMsVerbose(valMs)}</p>
+        <span className="metric text-[9px] text-zinc-500">Validation</span>
+        <p className="metric text-[11px] text-zinc-300 mt-0.5">{formatMsVerbose(valMs)}</p>
       </div>
-      <div className="ml-2 pl-3 border-l border-zinc-700/60">
-        <span className="text-zinc-500">Total</span>
-        <p className="text-zinc-200 font-mono font-medium mt-0.5">{formatMsVerbose(totalMs)}</p>
+      <div>
+        <span className="metric text-[9px] text-zinc-500">Total</span>
+        <p className="metric text-sm text-brand mt-0.5">{formatMsVerbose(totalMs)}</p>
       </div>
     </div>
   )
@@ -170,24 +210,22 @@ export function StepExecution({
   onReset,
   onRetry,
 }: StepExecutionProps) {
-  const [elapsed, setElapsed] = useState(0)
+  const [elapsedMs, setElapsedMs] = useState(0)
   const startRef = useRef<number | null>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (running) {
       startRef.current = Date.now()
-      setElapsed(0)
+      setElapsedMs(0)
       intervalRef.current = setInterval(() => {
         if (startRef.current !== null) {
-          setElapsed(Math.floor((Date.now() - startRef.current) / 1000))
+          setElapsedMs(Date.now() - startRef.current)
         }
-      }, 1000)
-    } else {
-      if (intervalRef.current !== null) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-      }
+      }, 47)
+    } else if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
     }
     return () => {
       if (intervalRef.current !== null) clearInterval(intervalRef.current)
@@ -196,6 +234,7 @@ export function StepExecution({
 
   const totalMs = report?.durationMs ?? null
   const failed = Boolean(error || report?.state === "ERROR")
+  const ready = Boolean(report?.state === "SUCCESS")
 
   const stepMap = new Map<string, WorkerStepReport>()
   const sourceSteps = report ? report.steps : liveSteps
@@ -204,41 +243,53 @@ export function StepExecution({
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          {running ? (
-            <>
-              <div className="w-2 h-2 rounded-full bg-brand animate-pulse" />
-              <span className="text-sm font-medium text-zinc-300">Génération en cours…</span>
-            </>
-          ) : report ? (
-            <>
-              <div className={`w-2 h-2 rounded-full ${report.state === "SUCCESS" ? "bg-emerald-400" : "bg-red-400"}`} />
-              <span className={`text-sm font-semibold ${report.state === "SUCCESS" ? "text-emerald-400" : "text-red-400"}`}>
-                {report.state === "SUCCESS" ? "Génération réussie" : "La génération a échoué"}
-              </span>
-            </>
-          ) : error ? (
-            <>
-              <div className="w-2 h-2 rounded-full bg-red-400" />
-              <span className="text-sm font-semibold text-red-400">Erreur</span>
-            </>
-          ) : null}
+    <div className="w-full max-w-md mx-auto space-y-3">
+      <div className="flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <p className="metric text-[10px] text-zinc-400 mb-1">Pipeline</p>
+          <h2
+            className={[
+              "heading text-xl leading-none",
+              failed ? "text-danger" : "text-white",
+            ].join(" ")}
+          >
+            {running ? "Génération" : ready ? "Prêt" : failed ? "Échec" : "Génération"}
+          </h2>
+          <div className="flex items-center gap-1.5 mt-1.5">
+            {running && (
+              <>
+                <span className="status-dot text-brand animate-glow-pulse" />
+                <span className="metric text-[10px] text-brand">En production</span>
+              </>
+            )}
+            {ready && (
+              <>
+                <span className="status-dot text-success" />
+                <span className="metric text-[10px] text-success">Terminé</span>
+              </>
+            )}
+            {failed && !running && (
+              <>
+                <span className="status-dot text-danger" />
+                <span className="metric text-[10px] text-danger">Interrompu</span>
+              </>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center gap-1.5 font-mono">
-          <svg viewBox="0 0 12 12" className="w-3 h-3 text-zinc-600" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="6" cy="6" r="5" />
-            <path d="M6 3v3l2 1.5" />
-          </svg>
-          <span className={`text-sm tabular-nums ${running ? "text-zinc-300" : "text-zinc-500"}`}>
-            {totalMs !== null ? formatMs(totalMs) : formatClock(elapsed)}
-          </span>
-        </div>
+        <span
+          className={[
+            "metric text-xl tabular-nums leading-none shrink-0",
+            running ? "text-brand" : ready ? "text-zinc-300" : "text-zinc-500",
+          ].join(" ")}
+        >
+          {totalMs !== null ? formatClock(totalMs) : formatClock(elapsedMs)}
+        </span>
       </div>
 
-      <div className="bg-zinc-900 rounded-xl border border-zinc-800 px-5">
+      {running && <div className="h-px pipeline-energy bg-elevated" />}
+
+      <div className="rounded-xl border border-white/[0.08] bg-surface/80 overflow-hidden">
         {PIPELINE_STEPS.map((step, i) => {
           const done = stepMap.has(step.id)
           const prevDone = i === 0 || stepMap.has(PIPELINE_STEPS[i - 1]!.id)
@@ -254,6 +305,7 @@ export function StepExecution({
             <StepRow
               key={step.id}
               label={step.label}
+              code={step.code}
               stepReport={stepReport}
               isNext={isNext}
               detail={detail}
@@ -263,31 +315,31 @@ export function StepExecution({
       </div>
 
       {!running && error && (
-        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-          <p className="text-xs text-red-300/80 font-mono break-all">{error}</p>
+        <div className="p-2.5 bg-danger/10 border border-danger/20 rounded-xl">
+          <p className="metric text-[11px] text-danger/90 break-all">{error}</p>
         </div>
       )}
 
       {!running && report?.error && (
-        <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
-          <p className="text-xs font-medium text-red-400 mb-1">Erreur pipeline</p>
-          <p className="text-xs text-red-300/70 font-mono break-all">{report.error}</p>
+        <div className="p-2.5 bg-danger/10 border border-danger/20 rounded-xl">
+          <p className="metric text-[10px] text-danger mb-0.5">Erreur pipeline</p>
+          <p className="metric text-[11px] text-danger/70 break-all">{report.error}</p>
         </div>
       )}
 
       {!running && report?.state === "SUCCESS" && (
-        <div className="p-4 bg-zinc-800/40 rounded-lg border border-zinc-700/40 space-y-3">
-          <div className="flex items-center justify-between">
-            <p className="text-xs text-zinc-400">
+        <div className="rounded-xl border border-white/[0.08] bg-surface/80 p-3 space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[12px] text-zinc-400 truncate">
               Projet{" "}
-              <code className="text-zinc-200 font-mono">{report.projectSlug}</code>{" "}
-              généré avec succès.
+              <code className="metric text-zinc-100">{report.projectSlug}</code>{" "}
+              généré.
             </p>
             <a
               href={`/projects/${report.projectSlug}`}
               title="Voir le projet"
               aria-label="Voir le projet"
-              className="p-1 text-brand shrink-0 cursor-pointer hover:opacity-80"
+              className="p-1.5 text-brand hover:opacity-80 transition-opacity shrink-0"
             >
               <ArrowRight className="w-4 h-4" strokeWidth={2} />
             </a>
@@ -297,22 +349,22 @@ export function StepExecution({
       )}
 
       {!running && (report ?? error) && (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 pt-0.5">
           {failed && (
             <button
               type="button"
               onClick={onRetry}
               title="Redéployer"
               aria-label="Redéployer"
-              className="inline-flex items-center justify-center p-2.5 bg-brand text-white rounded-lg cursor-pointer transition-opacity duration-[120ms] ease-out hover:opacity-90"
+              className="slab !p-2"
             >
-              <RefreshCw className="w-4 h-4" strokeWidth={2} />
+              <RefreshCw className="w-3.5 h-3.5" strokeWidth={2} />
             </button>
           )}
           <button
             type="button"
             onClick={onReset}
-            className="px-5 py-2 text-zinc-400 hover:text-zinc-200 rounded-lg text-sm transition-colors duration-[120ms] ease-out"
+            className="text-[12px] text-zinc-400 hover:text-zinc-200 transition-colors duration-140"
           >
             ← Nouveau projet
           </button>

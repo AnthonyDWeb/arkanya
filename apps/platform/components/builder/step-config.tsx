@@ -21,23 +21,25 @@ export function StepConfig({ state, onChange, onNext, onBack }: StepConfigProps)
     .some((f) => !(state.config[f.id] ?? f.default))
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div>
-        <h2 className="text-sm font-semibold text-zinc-100 mb-1">Configuration du template</h2>
-        <p className="text-xs text-zinc-500">Ces valeurs seront injectées comme tokens dans les fichiers générés.</p>
+        <h2 className="text-[13px] font-semibold text-white">Configuration</h2>
+        <p className="text-[11px] text-zinc-400 mt-0.5">
+          Tokens injectés dans les fichiers générés.
+        </p>
       </div>
 
       {fields.length === 0 ? (
-        <p className="text-sm text-zinc-600">Ce template n'a pas de champs de configuration.</p>
+        <p className="text-[12px] text-zinc-500">Pas de champs de configuration.</p>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-2.5">
           {fields.map((field) => {
             const value = state.config[field.id] ?? field.default
             return (
               <div key={field.id}>
-                <label className="flex items-center gap-2 text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2">
+                <label className="field-label flex items-center gap-2">
                   {field.label}
-                  {field.required && <span className="text-red-400">*</span>}
+                  {field.required && <span className="text-danger">*</span>}
                 </label>
 
                 {field.type === "color" ? (
@@ -46,16 +48,16 @@ export function StepConfig({ state, onChange, onNext, onBack }: StepConfigProps)
                       type="color"
                       value={value}
                       onChange={(e) => updateConfig(field.id, e.target.value)}
-                      className="w-10 h-10 rounded border border-zinc-700 cursor-pointer bg-transparent"
+                      className="w-10 h-10 rounded-[3px] border border-white/[0.06] cursor-pointer bg-transparent"
                     />
                     <input
                       type="text"
                       value={value}
                       onChange={(e) => updateConfig(field.id, e.target.value)}
-                      className="flex-1 bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-brand"
+                      className="well w-full metric"
                     />
                     <div
-                      className="w-10 h-10 rounded border border-zinc-700 shrink-0"
+                      className="w-10 h-10 rounded-[3px] border border-white/[0.06] shrink-0"
                       style={{ backgroundColor: value }}
                     />
                   </div>
@@ -63,7 +65,7 @@ export function StepConfig({ state, onChange, onNext, onBack }: StepConfigProps)
                   <select
                     value={value}
                     onChange={(e) => updateConfig(field.id, e.target.value)}
-                    className="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand"
+                    className="well w-full"
                   >
                     {field.options.map((opt) => (
                       <option key={opt} value={opt}>
@@ -77,7 +79,7 @@ export function StepConfig({ state, onChange, onNext, onBack }: StepConfigProps)
                     value={value}
                     onChange={(e) => updateConfig(field.id, e.target.value)}
                     placeholder={field.default}
-                    className="w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand placeholder:text-zinc-600"
+                    className="well w-full"
                   />
                 )}
               </div>
@@ -86,17 +88,19 @@ export function StepConfig({ state, onChange, onNext, onBack }: StepConfigProps)
         </div>
       )}
 
-      <div className="flex justify-between pt-2">
+      <div className="flex justify-between pt-1">
         <button
+          type="button"
           onClick={onBack}
-          className="px-5 py-2 text-zinc-400 hover:text-zinc-200 rounded-lg text-sm transition-colors duration-[120ms] ease-out"
+          className="text-[12px] text-zinc-400 hover:text-zinc-200 transition-colors duration-140"
         >
           ← Retour
         </button>
         <button
+          type="button"
           onClick={onNext}
           disabled={requiredMissing}
-          className="px-5 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out disabled:opacity-40 hover:opacity-90"
+          className="slab"
         >
           Suivant →
         </button>

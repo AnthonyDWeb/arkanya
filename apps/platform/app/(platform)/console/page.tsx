@@ -5,20 +5,32 @@ import { ConsoleTabs } from "@/components/console-tabs"
 export const metadata: Metadata = { title: "Console" }
 export const dynamic = "force-dynamic"
 
-export default async function ConsolePage() {
-  const jobs = await prisma.job.findMany({
-    include: { project: true },
-    orderBy: { createdAt: "desc" },
-    take: 50,
-  })
+type ConsolePageProps = {
+  searchParams: Promise<{ tab?: string }>
+}
+
+export default async function ConsolePage({ searchParams }: ConsolePageProps) {
+  const [jobs, { tab }] = await Promise.all([
+    prisma.job.findMany({
+      include: { project: true },
+      orderBy: { createdAt: "desc" },
+      take: 50,
+    }),
+    searchParams,
+  ])
+  const initialTab = tab === "maintenance" ? "maintenance" : "jobs"
 
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-16 flex flex-col justify-center border-b border-zinc-800">
-        <h1 className="text-xl font-semibold text-zinc-100">Console</h1>
-        <p className="text-xs text-zinc-500 mt-0.5">Jobs · Maintenance</p>
-      </div>
-      <ConsoleTabs jobs={jobs} />
+    <div className="min-h-full animate-page-in">
+      <header className="page-head">
+        <div className="flex items-baseline gap-3 min-w-0">
+          <h1 className="page-title">Console</h1>
+          <span className="metric text-xs text-brand tabular-nums">
+            {String(jobs.length).padStart(2, "0")}
+          </span>
+        </div>
+      </header>
+      <ConsoleTabs jobs={jobs} initialTab={initialTab} />
     </div>
   )
 }

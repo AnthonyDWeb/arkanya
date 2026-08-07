@@ -46,26 +46,27 @@ export function CatalogueView({ templates, features, benchmarkMap }: CatalogueVi
 
   return (
     <div>
-      <div className="flex border-b border-zinc-800 px-4 lg:px-6">
-        {(["templates", "features"] as Tab[]).map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={[
-              "px-4 py-3 text-sm font-medium border-b-2 -mb-px transition-colors duration-[120ms] ease-out capitalize",
-              tab === t
-                ? "border-brand text-white"
-                : "border-transparent text-zinc-500 hover:text-zinc-300",
-            ].join(" ")}
-          >
-            {t === "templates" ? `Templates (${templates.length})` : `Features (${features.length})`}
-          </button>
-        ))}
+      <div className="px-4 lg:px-6">
+        <div className="segment-group segment-group-fit">
+          {(["templates", "features"] as Tab[]).map((t) => (
+            <button
+              key={t}
+              type="button"
+              data-active={tab === t}
+              onClick={() => setTab(t)}
+              className="segment"
+            >
+              {t === "templates"
+                ? `Modèles (${templates.length})`
+                : `Fonctionnalités (${features.length})`}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="p-4 lg:p-6">
+      <div className="px-4 lg:px-6 py-4">
         {tab === "templates" && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 max-w-5xl">
             {templates.map((t) => {
               const scaffoldBench = benchmarkMap[`scaffold:${t.id}:copy-files`]
               const installBench = benchmarkMap["validate:npm-install"]
@@ -83,135 +84,145 @@ export function CatalogueView({ templates, features, benchmarkMap }: CatalogueVi
                   : null
 
               return (
-                <div
+                <article
                   key={t.id}
-                  className="bg-zinc-800/40 border border-zinc-700/40 rounded-xl p-5 space-y-4"
+                  className="rounded-xl border border-white/[0.08] bg-surface/80 px-3 py-2.5 space-y-2 min-w-0"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h2 className="text-sm font-semibold text-zinc-100">{t.name}</h2>
-                      <p className="text-xs text-zinc-500 mt-0.5">{t.description}</p>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h2 className="text-[14px] font-semibold text-white truncate">
+                        {t.name}
+                      </h2>
+                      <p className="text-[11px] text-zinc-400 mt-0.5 line-clamp-2">
+                        {t.description}
+                      </p>
                     </div>
                     {totalAvg !== null && (
                       <div className="shrink-0 text-right">
-                        <p className="text-xs text-zinc-600">Temps estimé</p>
-                        <p className="text-sm font-mono text-zinc-300 font-medium">
+                        <p className="metric text-[10px] text-zinc-400">Estimé</p>
+                        <p className="metric text-[13px] text-brand tabular-nums">
                           {formatAvg(totalAvg)}
                         </p>
                       </div>
                     )}
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5">
-                    {t.technologies.map((tech) => (
+                  <div className="flex flex-wrap gap-1">
+                    {t.technologies.slice(0, 4).map((tech) => (
                       <span
                         key={tech}
-                        className="text-xs px-2 py-0.5 bg-zinc-700/60 text-zinc-300 rounded font-mono"
+                        className="metric text-[10px] px-1.5 py-0.5 rounded-md text-zinc-300 bg-elevated border border-white/[0.05]"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div className="pt-1.5 border-t border-white/[0.06] space-y-1.5">
                     <div>
-                      <p className="text-zinc-600 mb-1">Pages</p>
-                      <div className="space-y-0.5">
+                      <p className="metric text-[10px] text-zinc-400 mb-1">Pages</p>
+                      <div className="flex flex-wrap gap-1">
                         {t.pages.map((p) => (
-                          <div key={p.id} className="flex items-center gap-1.5 text-zinc-400">
-                            <span
-                              className={`w-1.5 h-1.5 rounded-full shrink-0 ${p.required ? "bg-brand" : "bg-zinc-600"}`}
-                            />
+                          <span
+                            key={p.id}
+                            className={[
+                              "inline-flex items-center gap-1 text-[11px] px-1.5 py-0.5 rounded-md border",
+                              p.required
+                                ? "text-zinc-200 border-brand/30 bg-brand/10"
+                                : "text-zinc-400 border-white/[0.06] bg-well/40",
+                            ].join(" ")}
+                          >
                             {p.name}
                             {p.required && (
-                              <span className="text-zinc-600 text-[10px]">requis</span>
+                              <span className="metric text-[9px] text-brand">req.</span>
                             )}
-                          </div>
+                          </span>
                         ))}
                       </div>
                     </div>
+
                     <div>
-                      <p className="text-zinc-600 mb-1">Features incluses</p>
-                      <div className="space-y-0.5">
-                        {t.features.length === 0 ? (
-                          <span className="text-zinc-600">Aucune</span>
-                        ) : (
-                          t.features.map((f) => {
+                      <p className="metric text-[10px] text-zinc-400 mb-1">Fonctionnalités</p>
+                      {t.features.length === 0 ? (
+                        <p className="text-[11px] text-zinc-500">Aucune</p>
+                      ) : (
+                        <div className="flex flex-wrap gap-1">
+                          {t.features.map((f) => {
                             const bench = benchmarkMap[`feature:${f}`]
                             return (
-                              <div key={f} className="flex items-center justify-between text-zinc-400">
-                                <span>{f}</span>
-                                {bench && (
-                                  <span className="text-zinc-600 font-mono">
-                                    {formatAvg(bench.avgMs)}
-                                  </span>
-                                )}
-                              </div>
+                              <span
+                                key={f}
+                                className="metric text-[10px] px-1.5 py-0.5 rounded-md text-zinc-300 bg-well/50 border border-white/[0.05]"
+                                title={bench ? formatAvg(bench.avgMs) : undefined}
+                              >
+                                {f}
+                                {bench ? ` · ${formatAvg(bench.avgMs)}` : ""}
+                              </span>
                             )
-                          })
-                        )}
-                      </div>
+                          })}
+                        </div>
+                      )}
                     </div>
                   </div>
-                </div>
+                </article>
               )
             })}
           </div>
         )}
 
         {tab === "features" && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 max-w-5xl">
             {features.map((f) => {
               const bench = benchmarkMap[`feature:${f.id}`]
-              const depCount = Object.keys(f.dependencies ?? {}).length
+              const deps = Object.entries(f.dependencies ?? {})
 
               return (
-                <div
+                <article
                   key={f.id}
-                  className="bg-zinc-800/40 border border-zinc-700/40 rounded-xl p-5 space-y-3"
+                  className="rounded-xl border border-white/[0.08] bg-surface/80 px-3 py-2.5 space-y-2 min-w-0"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h2 className="text-sm font-semibold text-zinc-100">{f.name}</h2>
-                        <code className="text-xs text-zinc-600 font-mono">{f.id}</code>
-                      </div>
-                      <p className="text-xs text-zinc-500 mt-0.5">{f.description}</p>
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="min-w-0">
+                      <h2 className="text-[14px] font-semibold text-white truncate">
+                        {f.name}
+                      </h2>
+                      <p className="metric text-[10px] text-zinc-500 mt-0.5 truncate">
+                        {f.id}
+                      </p>
                     </div>
                     {bench && (
                       <div className="shrink-0 text-right">
-                        <p className="text-xs text-zinc-600">
-                          Moy. ({bench.sampleCount} run{bench.sampleCount > 1 ? "s" : ""})
+                        <p className="metric text-[10px] text-zinc-400">
+                          Moy. · {bench.sampleCount}
                         </p>
-                        <p className="text-sm font-mono text-zinc-300 font-medium">
+                        <p className="metric text-[13px] text-brand tabular-nums">
                           {formatAvg(bench.avgMs)}
                         </p>
                       </div>
                     )}
                   </div>
 
-                  {depCount > 0 && (
-                    <div>
-                      <p className="text-xs text-zinc-600 mb-1">Dépendances</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {Object.entries(f.dependencies ?? {}).map(([pkg, ver]) => (
-                          <span
-                            key={pkg}
-                            className="text-xs px-2 py-0.5 bg-zinc-700/60 text-zinc-400 rounded font-mono"
-                          >
-                            {pkg}@{ver}
-                          </span>
-                        ))}
-                      </div>
+                  <p className="text-[11px] text-zinc-400 line-clamp-2">{f.description}</p>
+
+                  {deps.length > 0 && (
+                    <div className="flex flex-wrap gap-1 pt-1 border-t border-white/[0.06]">
+                      {deps.map(([pkg, ver]) => (
+                        <span
+                          key={pkg}
+                          className="metric text-[10px] px-1.5 py-0.5 rounded-md text-zinc-400 bg-well/50 border border-white/[0.05]"
+                        >
+                          {pkg}@{ver}
+                        </span>
+                      ))}
                     </div>
                   )}
 
                   {!bench && (
-                    <p className="text-xs text-zinc-700">
-                      Aucune donnée de timing — lancez une génération pour collecter.
+                    <p className="text-[11px] text-zinc-500">
+                      Pas encore de timing mesuré.
                     </p>
                   )}
-                </div>
+                </article>
               )
             })}
           </div>

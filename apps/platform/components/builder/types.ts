@@ -53,11 +53,11 @@ export type BuilderStep =
 
 export const BUILDER_STEPS: Array<{ id: BuilderStep; label: string }> = [
   { id: "project", label: "Projet" },
-  { id: "template", label: "Template" },
+  { id: "template", label: "Modèle" },
   { id: "pages", label: "Pages" },
-  { id: "config", label: "Configuration" },
-  { id: "features", label: "Fonctionnalités" },
+  { id: "config", label: "Config" },
+  { id: "features", label: "Fonct." },
   { id: "delivery", label: "Livraison" },
   { id: "summary", label: "Résumé" },
-  { id: "execution", label: "Exécution" },
+  { id: "execution", label: "Lancement" },
 ]

@@ -88,7 +88,7 @@ export function ProjectEditForm({ slug, initial }: ProjectEditFormProps) {
         onClick={() => setOpen(true)}
         title="Modifier"
         aria-label="Modifier"
-        className="p-1 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-[120ms] ease-out"
+        className="p-1.5 text-zinc-400 hover:text-zinc-200 cursor-pointer transition-colors duration-140"
       >
         <Pencil className="w-3.5 h-3.5" strokeWidth={2} />
       </button>
@@ -96,31 +96,33 @@ export function ProjectEditForm({ slug, initial }: ProjectEditFormProps) {
   }
 
   return (
-    <div className="p-3 bg-zinc-900/60 border border-zinc-700 rounded-lg space-y-3">
-      <div className="grid gap-2 sm:grid-cols-2">
-        <label className="block space-y-1 sm:col-span-2">
-          <span className="text-[11px] text-zinc-500">Nom</span>
+    <div className="p-4 chassis trim-gold space-y-3">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <label className="block sm:col-span-2">
+          <span className="field-label">Nom</span>
           <input
             value={draft.name}
             onChange={(e) => setDraft((d) => ({ ...d, name: e.target.value }))}
-            className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-700 rounded text-sm text-zinc-100 outline-none focus:border-brand"
+            className="well w-full"
           />
         </label>
-        <label className="block space-y-1 sm:col-span-2">
-          <span className="text-[11px] text-zinc-500">Description</span>
+        <label className="block sm:col-span-2">
+          <span className="field-label">Description</span>
           <textarea
             value={draft.description}
             onChange={(e) => setDraft((d) => ({ ...d, description: e.target.value }))}
             rows={2}
-            className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-700 rounded text-sm text-zinc-100 outline-none focus:border-brand resize-y"
+            className="well w-full"
           />
         </label>
-        <label className="block space-y-1">
-          <span className="text-[11px] text-zinc-500">Statut</span>
+        <label className="block">
+          <span className="field-label">Statut</span>
           <select
             value={draft.status}
-            onChange={(e) => setDraft((d) => ({ ...d, status: e.target.value as ProjectStatus }))}
-            className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-700 rounded text-sm text-zinc-100 outline-none focus:border-brand cursor-pointer"
+            onChange={(e) =>
+              setDraft((d) => ({ ...d, status: e.target.value as ProjectStatus }))
+            }
+            className="well w-full"
           >
             {STATUSES.map((s) => (
               <option key={s.id} value={s.id}>
@@ -129,45 +131,45 @@ export function ProjectEditForm({ slug, initial }: ProjectEditFormProps) {
             ))}
           </select>
         </label>
-        <label className="block space-y-1">
-          <span className="text-[11px] text-zinc-500">Port</span>
+        <label className="block">
+          <span className="field-label">Port</span>
           <input
             value={draft.port}
             onChange={(e) => setDraft((d) => ({ ...d, port: e.target.value }))}
-            className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-700 rounded text-sm text-zinc-100 outline-none focus:border-brand font-mono"
+            className="well w-full metric"
           />
         </label>
-        <label className="block space-y-1 sm:col-span-2">
-          <span className="text-[11px] text-zinc-500">URL</span>
+        <label className="block sm:col-span-2">
+          <span className="field-label">URL</span>
           <input
             value={draft.url}
             onChange={(e) => setDraft((d) => ({ ...d, url: e.target.value }))}
-            className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-700 rounded text-sm text-zinc-100 outline-none focus:border-brand font-mono"
+            className="well w-full metric"
           />
         </label>
-        <label className="block space-y-1 sm:col-span-2">
-          <span className="text-[11px] text-zinc-500">Prochaine action</span>
+        <label className="block sm:col-span-2">
+          <span className="field-label">Prochaine action</span>
           <input
             value={draft.nextAction}
             onChange={(e) => setDraft((d) => ({ ...d, nextAction: e.target.value }))}
-            className="w-full px-2.5 py-1.5 bg-zinc-950 border border-zinc-700 rounded text-sm text-zinc-100 outline-none focus:border-brand"
+            className="well w-full"
           />
         </label>
       </div>
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && <p className="metric text-xs text-danger">{error}</p>}
       <div className="flex gap-2">
         <button
           type="button"
           disabled={saving}
           onClick={() => void save()}
-          className="px-3 py-1.5 bg-brand text-white rounded text-xs font-medium cursor-pointer disabled:opacity-50"
+          className="slab text-xs px-4 py-2"
         >
           {saving ? "…" : "Enregistrer"}
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="px-3 py-1.5 text-zinc-400 hover:text-zinc-200 text-xs cursor-pointer"
+          className="px-4 py-2 text-zinc-400 hover:text-zinc-200 text-xs cursor-pointer transition-colors duration-140"
         >
           Annuler
         </button>

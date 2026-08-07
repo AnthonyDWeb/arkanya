@@ -29,24 +29,53 @@ type SidebarProps = {
 
 export function Sidebar({ userName }: SidebarProps) {
   return (
-    <aside className="w-[220px] shrink-0 hidden lg:flex flex-col border-r border-zinc-800 bg-zinc-950 h-screen sticky top-0">
-      <div className="h-16 flex items-center px-4 border-b border-zinc-800/60 shrink-0">
-        <div className="flex items-center gap-2.5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.webp" alt="Arkanya" width={28} height={28} className="rounded-sm w-7 h-7 object-contain" />
-          <span className="text-base font-semibold tracking-tight text-white">Arkanya Platform</span>
+    <aside className="w-[212px] shrink-0 hidden lg:flex flex-col h-full bg-base/85 border-r border-white/[0.05] relative">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-brand/25 to-transparent"
+      />
+      <div className="h-14 flex items-center px-3.5 shrink-0">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="relative shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.webp"
+              alt="Arkanya"
+              width={26}
+              height={26}
+              className="w-[26px] h-[26px] object-contain relative z-10"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 rounded-full blur-md bg-gold/30 animate-logo-glow"
+            />
+          </div>
+          <div className="min-w-0">
+            <span className="heading text-[14px] text-white block leading-tight">
+              Arkanya
+            </span>
+            <span className="metric text-[9px] uppercase tracking-[0.16em] text-gold">
+              Platform
+            </span>
+          </div>
         </div>
       </div>
-      <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
+
+      <nav className="flex-1 px-2.5 py-1.5 space-y-0.5 overflow-y-auto">
         {NAV_ITEMS.map((item) => (
-          <NavItem key={item.href} href={item.href} label={item.label} icon={item.icon} />
+          <NavItem
+            key={item.href}
+            href={item.href}
+            label={item.label}
+            icon={item.icon}
+          />
         ))}
       </nav>
 
-      <div className="border-t border-zinc-800/60 p-2 space-y-1">
+      <div className="border-t border-white/[0.06] p-2.5 space-y-2">
         <WorkerStatus />
-        <div className="flex items-center justify-between px-3 py-2">
-          <span className="text-xs text-zinc-400 truncate">{userName}</span>
+        <div className="flex items-center justify-between px-2.5 py-2">
+          <span className="text-xs text-zinc-500 truncate metric">{userName}</span>
           <SignOutButton />
         </div>
       </div>

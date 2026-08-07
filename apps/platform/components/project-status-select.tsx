@@ -46,7 +46,8 @@ export function ProjectStatusSelect({ slug, value }: ProjectStatusSelectProps) {
       disabled={saving}
       onClick={(e) => e.stopPropagation()}
       onChange={(e) => void changeStatus(e.target.value as ProjectStatus)}
-      className="text-[11px] bg-zinc-900 border border-zinc-700 rounded px-1.5 py-1 text-zinc-300 cursor-pointer outline-none focus:border-brand disabled:opacity-50"
+      className="status-chip"
+      aria-label="Statut du projet"
     >
       {STATUSES.map((s) => (
         <option key={s.id} value={s.id}>

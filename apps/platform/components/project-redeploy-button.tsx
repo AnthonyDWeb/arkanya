@@ -3,6 +3,7 @@
 import { Loader2, RefreshCw } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { ConfirmActionModal } from "./confirm-action-modal"
 
 type ProjectRedeployButtonProps = {
   slug: string
@@ -10,6 +11,7 @@ type ProjectRedeployButtonProps = {
 
 export function ProjectRedeployButton({ slug }: ProjectRedeployButtonProps) {
   const router = useRouter()
+  const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [ok, setOk] = useState(false)
@@ -27,6 +29,7 @@ export function ProjectRedeployButton({ slug }: ProjectRedeployButtonProps) {
       }
       setOk(data.state === "SUCCESS")
       if (data.state !== "SUCCESS" && data.error) setError(data.error)
+      setOpen(false)
       router.refresh()
     } catch {
       setError("Erreur réseau")
@@ -40,10 +43,10 @@ export function ProjectRedeployButton({ slug }: ProjectRedeployButtonProps) {
       <button
         type="button"
         disabled={loading}
-        onClick={() => void redeploy()}
+        onClick={() => setOpen(true)}
         title="Redéployer"
         aria-label="Redéployer"
-        className="inline-flex items-center justify-center p-2.5 bg-brand text-white rounded-lg cursor-pointer transition-opacity duration-[120ms] ease-out hover:opacity-90 disabled:opacity-50"
+        className="slab !p-2.5"
       >
         {loading ? (
           <Loader2 className="w-4 h-4 animate-spin" strokeWidth={2} />
@@ -51,8 +54,25 @@ export function ProjectRedeployButton({ slug }: ProjectRedeployButtonProps) {
           <RefreshCw className="w-4 h-4" strokeWidth={2} />
         )}
       </button>
-      {ok && <p className="text-xs text-emerald-400">Génération terminée avec succès</p>}
-      {error && <p className="text-xs text-red-400 max-w-md break-all">{error}</p>}
+      {ok && (
+        <p className="metric text-xs text-success">Génération terminée avec succès</p>
+      )}
+      {error && !open && (
+        <p className="metric text-xs text-danger max-w-md break-all">{error}</p>
+      )}
+
+      <ConfirmActionModal
+        open={open}
+        onClose={() => !loading && setOpen(false)}
+        onConfirm={() => void redeploy()}
+        tone="warning"
+        title="Redéployer le projet"
+        description="Reconstruit le projet depuis le template (toutes les pages seront réactivées) et relance le worker. La sélection de pages personnalisée sera perdue."
+        confirmLabel="Redéployer"
+        confirmingLabel="Redéploiement…"
+        pending={loading}
+        error={error}
+      />
     </div>
   )
 }

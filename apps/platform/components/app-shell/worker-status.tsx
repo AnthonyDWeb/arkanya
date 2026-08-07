@@ -22,20 +22,41 @@ export function WorkerStatus() {
     return () => clearInterval(interval)
   }, [])
 
-  const dot =
+  const tone =
     status === "online"
-      ? "bg-emerald-500"
+      ? "text-brand"
       : status === "offline"
-        ? "bg-red-500"
-        : "bg-zinc-600 animate-pulse"
+        ? "text-danger"
+        : "text-zinc-600"
 
   const label =
-    status === "online" ? "Worker actif" : status === "offline" ? "Worker hors ligne" : "…"
+    status === "online"
+      ? "WORKER LIVE"
+      : status === "offline"
+        ? "WORKER OFF"
+        : "CONNECTING"
 
   return (
-    <div className="flex items-center gap-2 px-3 py-2">
-      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${dot}`} />
-      <span className="text-xs text-zinc-500">{label}</span>
+    <div className="chassis flex items-center gap-2.5 px-3 py-2.5">
+      <span
+        className={`status-dot shrink-0 ${tone} ${status === "online" ? "animate-glow-pulse" : status === "checking" ? "animate-pulse" : ""}`}
+        style={
+          status === "online"
+            ? {
+                boxShadow:
+                  "0 0 10px 1px color-mix(in oklch, var(--color-arc) 55%, transparent)",
+              }
+            : undefined
+        }
+      />
+      <span className={`metric text-[10px] tracking-[0.14em] ${tone}`}>
+        {label}
+      </span>
+      {status === "online" && (
+        <span className="ml-auto metric text-[9px] text-gold/60 tracking-wider">
+          ARC
+        </span>
+      )}
     </div>
   )
 }

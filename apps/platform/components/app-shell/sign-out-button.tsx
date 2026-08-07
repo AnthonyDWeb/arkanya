@@ -15,9 +15,11 @@ export function SignOutButton() {
 
   return (
     <button
+      type="button"
       onClick={() => void handleSignOut()}
-      className="p-1.5 text-zinc-500 hover:text-zinc-300 rounded transition-colors duration-[120ms] ease-out"
+      className="p-1.5 text-zinc-500 hover:text-zinc-200 rounded-[4px] transition-colors duration-140"
       title="Se déconnecter"
+      aria-label="Se déconnecter"
     >
       <LogOut size={14} />
     </button>

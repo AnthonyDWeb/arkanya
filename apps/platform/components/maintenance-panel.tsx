@@ -8,6 +8,12 @@ type WorkerHealth = {
   mode?: string
 }
 
+const SHORTCUTS = [
+  { href: "/console", label: "Console jobs" },
+  { href: "/builder", label: "Builder" },
+  { href: "/catalogue", label: "Catalogue" },
+] as const
+
 export function MaintenancePanel() {
   const [health, setHealth] = useState<WorkerHealth | null>(null)
   const [checking, setChecking] = useState(true)
@@ -33,52 +39,56 @@ export function MaintenancePanel() {
   const online = health?.status === "ok"
 
   return (
-    <div className="space-y-4 max-w-xl">
-      <div className="p-4 bg-zinc-800/40 border border-zinc-700/40 rounded-lg space-y-3">
-        <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
-          Worker
-        </h2>
-        <div className="flex items-center gap-2">
+    <div className="w-full max-w-md space-y-2.5">
+      <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-3 py-2.5">
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="metric text-[10px] text-zinc-400 mb-0.5">Worker</p>
+            <p className="text-[13px] font-semibold text-white">
+              {checking
+                ? "Vérification…"
+                : online
+                  ? `En ligne${health?.mode ? ` · ${health.mode}` : ""}`
+                  : "Hors ligne"}
+            </p>
+            <p className="metric text-[10px] text-zinc-500 mt-1">
+              /api/worker/health
+            </p>
+          </div>
           <span
             className={[
-              "w-2 h-2 rounded-full",
-              checking ? "bg-zinc-600 animate-pulse" : online ? "bg-emerald-500" : "bg-red-500",
+              "status-dot shrink-0",
+              checking
+                ? "text-zinc-600 animate-pulse"
+                : online
+                  ? "text-success animate-glow-pulse"
+                  : "text-danger",
             ].join(" ")}
+            style={
+              online
+                ? {
+                    boxShadow:
+                      "0 0 6px 1px color-mix(in oklch, var(--color-success) 70%, transparent)",
+                  }
+                : undefined
+            }
           />
-          <span className="text-sm text-zinc-300">
-            {checking
-              ? "Vérification…"
-              : online
-                ? `En ligne${health?.mode ? ` · mode ${health.mode}` : ""}`
-                : "Hors ligne"}
-          </span>
         </div>
-        <p className="text-xs text-zinc-600">
-          Healthcheck via <code className="text-zinc-500">/api/worker/health</code>
-        </p>
       </div>
 
-      <div className="p-4 bg-zinc-800/40 border border-zinc-700/40 rounded-lg space-y-2">
-        <h2 className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
-          Raccourcis
-        </h2>
-        <ul className="space-y-1.5 text-sm">
-          <li>
-            <Link href="/console" className="text-zinc-300 hover:text-white transition-colors duration-[120ms] ease-out">
-              Console jobs →
+      <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-3 py-2.5">
+        <p className="metric text-[10px] text-zinc-400 mb-2">Raccourcis</p>
+        <div className="flex flex-wrap gap-1.5">
+          {SHORTCUTS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="metric text-[11px] px-2 py-1 rounded-lg border border-white/[0.08] bg-well/50 text-zinc-300 hover:text-brand hover:border-brand/35 transition-[color,border-color] duration-140"
+            >
+              {item.label}
             </Link>
-          </li>
-          <li>
-            <Link href="/builder" className="text-zinc-300 hover:text-white transition-colors duration-[120ms] ease-out">
-              Nouveau projet (Builder) →
-            </Link>
-          </li>
-          <li>
-            <Link href="/catalogue" className="text-zinc-300 hover:text-white transition-colors duration-[120ms] ease-out">
-              Catalogue templates / features →
-            </Link>
-          </li>
-        </ul>
+          ))}
+        </div>
       </div>
     </div>
   )

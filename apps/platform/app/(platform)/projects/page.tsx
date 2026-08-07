@@ -12,11 +12,18 @@ export default async function ProjectsPage() {
   })
 
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-16 flex flex-col justify-center border-b border-zinc-800">
-        <h1 className="text-xl font-semibold text-zinc-100">Projets</h1>
-        <p className="text-xs text-zinc-500 mt-0.5">{projects.length} projets</p>
-      </div>
+    <div className="animate-page-in">
+      <header className="px-4 lg:px-6 pt-4 pb-3">
+        <p className="metric text-[10px] tracking-[0.14em] text-gold uppercase mb-1.5">
+          Inventaire
+        </p>
+        <div className="flex items-baseline gap-3">
+          <h1 className="page-title">Projets</h1>
+          <span className="metric text-xs text-brand tabular-nums">
+            {String(projects.length).padStart(2, "0")}
+          </span>
+        </div>
+      </header>
       <ProjectsTable projects={projects} />
     </div>
   )

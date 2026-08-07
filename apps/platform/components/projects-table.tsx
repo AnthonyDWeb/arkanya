@@ -1,7 +1,9 @@
 "use client"
 
-import type { Client, Project } from "@arkanya/database"
+import type { Client, Project, ProjectStatus } from "@arkanya/database"
+import { Search, Wand2 } from "lucide-react"
 import Link from "next/link"
+import { useMemo, useState } from "react"
 import { DeleteProjectButton } from "./delete-project-button"
 import { ProjectStatusSelect } from "./project-status-select"
 
@@ -11,109 +13,149 @@ type ProjectsTableProps = {
   projects: ProjectWithClient[]
 }
 
+const STATUS_FILTERS: { id: ProjectStatus | "all"; label: string }[] = [
+  { id: "all", label: "Tous" },
+  { id: "TO_QUALIFY", label: "À qualifier" },
+  { id: "IN_PROGRESS", label: "En cours" },
+  { id: "IN_REVIEW", label: "En validation" },
+]
+
 export function ProjectsTable({ projects }: ProjectsTableProps) {
+  const [query, setQuery] = useState("")
+  const [status, setStatus] = useState<ProjectStatus | "all">("all")
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return projects.filter((project) => {
+      if (status !== "all" && project.status !== status) return false
+      if (!q) return true
+      return (
+        project.name.toLowerCase().includes(q) ||
+        (project.client?.company.toLowerCase().includes(q) ?? false) ||
+        project.type.toLowerCase().includes(q) ||
+        project.technologies.some((tech) => tech.toLowerCase().includes(q))
+      )
+    })
+  }, [projects, query, status])
+
   if (projects.length === 0) {
     return (
-      <div className="flex items-center justify-center h-48">
-        <p className="text-sm text-zinc-600">Aucun projet</p>
+      <div className="flex flex-col items-start justify-center px-4 lg:px-6 py-16 gap-3">
+        <p className="heading text-2xl text-white">Aucun projet.</p>
+        <p className="text-sm text-zinc-400">L&apos;environnement de production est vide.</p>
+        <Link href="/builder" className="slab mt-1">
+          Créer un projet
+        </Link>
       </div>
     )
   }
 
   return (
-    <>
-      {/* Mobile — cartes */}
-      <div className="lg:hidden p-4 space-y-2">
-        {projects.map((project) => (
-          <div
-            key={project.id}
-            className="flex items-start justify-between p-4 bg-zinc-800/40 border border-zinc-700/40 rounded-xl"
-          >
-            <Link
-              href={`/projects/${project.slug}`}
-              className="flex-1 min-w-0 active:opacity-70 transition-opacity duration-100"
-            >
-              <p className="text-sm font-medium text-zinc-100 truncate">{project.name}</p>
-              <p className="text-xs text-zinc-500 mt-0.5 truncate">
-                {project.client?.company ?? "Interne"} · {project.type}
-              </p>
-              {project.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-2">
-                  {project.technologies.slice(0, 2).map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[10px] px-1.5 py-0.5 bg-zinc-700/60 text-zinc-400 rounded font-mono"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </Link>
-            <div className="flex items-center gap-1.5 ml-3 mt-0.5 shrink-0">
-              <ProjectStatusSelect slug={project.slug} value={project.status} />
-              <DeleteProjectButton slug={project.slug} name={project.name} variant="icon" />
-            </div>
-          </div>
-        ))}
+    <div className="px-4 lg:px-6 pb-6 space-y-3">
+      <div className="flex items-center gap-2">
+        <label className="relative min-w-0 flex-1">
+          <Search
+            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-brand/80 z-[1]"
+            strokeWidth={2}
+            aria-hidden
+          />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Rechercher…"
+            className="well well-search w-full"
+          />
+        </label>
+        <select
+          value={status}
+          onChange={(e) => setStatus(e.target.value as ProjectStatus | "all")}
+          className="well shrink-0 w-[9.5rem] metric text-xs"
+        >
+          {STATUS_FILTERS.map((opt) => (
+            <option key={opt.id} value={opt.id}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <Link href="/builder" className="slab shrink-0 !px-3" title="Builder">
+          <Wand2 className="w-3.5 h-3.5" strokeWidth={2} />
+          <span className="hidden sm:inline">Builder</span>
+        </Link>
       </div>
 
-      {/* Desktop — table */}
-      <div className="hidden lg:block px-6 py-4">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-zinc-800">
-              <th className="text-left text-xs font-medium text-zinc-500 pb-3 pr-4">Projet</th>
-              <th className="text-left text-xs font-medium text-zinc-500 pb-3 pr-4">Client</th>
-              <th className="text-left text-xs font-medium text-zinc-500 pb-3 pr-4">Type</th>
-              <th className="text-left text-xs font-medium text-zinc-500 pb-3 pr-4">Statut</th>
-              <th className="text-left text-xs font-medium text-zinc-500 pb-3">Technologies</th>
-              <th className="pb-3 w-8" />
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-zinc-800/60">
-            {projects.map((project) => (
-              <tr
+      {filtered.length === 0 ? (
+        <div className="flex items-center justify-center h-20">
+          <p className="metric text-xs tracking-wide text-zinc-400">Aucun résultat</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2">
+          {filtered.map((project) => {
+            const kind = project.destination.startsWith("clients/") ? "Client" : "Produit"
+            const owner = project.client?.company ?? "Interne"
+            const tech = project.technologies[0]
+
+            return (
+              <article
                 key={project.id}
-                className="group hover:bg-zinc-800/30 transition-colors duration-[120ms]"
+                className="group relative rounded-xl border border-white/[0.08] bg-surface/80 hover:border-brand/35 hover:bg-elevated/80 px-2.5 py-2 transition-[background-color,border-color] duration-140 min-w-0"
               >
-                <td className="py-3 pr-4">
+                <div className="flex items-start justify-between gap-2 mb-1.5">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span
+                      className={[
+                        "metric text-[11px]",
+                        kind === "Client" ? "text-category-client" : "text-category-product",
+                      ].join(" ")}
+                    >
+                      {kind}
+                    </span>
+                    {project.generated && (
+                      <span className="metric text-[11px] text-brand">· En ligne</span>
+                    )}
+                  </div>
+                  <div className="opacity-40 group-hover:opacity-100 transition-opacity duration-140 shrink-0">
+                    <DeleteProjectButton
+                      slug={project.slug}
+                      name={project.name}
+                      variant="icon"
+                    />
+                  </div>
+                </div>
+
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="text-[13px] font-semibold text-white hover:text-brand leading-snug block truncate transition-colors duration-140"
+                >
+                  {project.name}
+                </Link>
+
+                <p className="mt-0.5 text-[11px] text-zinc-400 truncate">
+                  {owner}
+                  <span className="text-zinc-600"> · </span>
+                  {project.type}
+                  {tech && (
+                    <>
+                      <span className="text-zinc-600"> · </span>
+                      {tech}
+                    </>
+                  )}
+                </p>
+
+                <div className="mt-2 pt-1.5 border-t border-white/[0.06] flex items-center justify-between gap-1.5">
+                  <ProjectStatusSelect slug={project.slug} value={project.status} />
                   <Link
                     href={`/projects/${project.slug}`}
-                    className="font-medium text-zinc-100 hover:text-white"
+                    className="metric text-[10px] text-zinc-400 hover:text-brand transition-colors duration-140 shrink-0"
                   >
-                    {project.name}
+                    Ouvrir
                   </Link>
-                </td>
-                <td className="py-3 pr-4 text-zinc-500">
-                  {project.client?.company ?? "—"}
-                </td>
-                <td className="py-3 pr-4">
-                  <span className="text-xs text-zinc-500">{project.type}</span>
-                </td>
-                <td className="py-3 pr-4">
-                  <ProjectStatusSelect slug={project.slug} value={project.status} />
-                </td>
-                <td className="py-3">
-                  <div className="flex flex-wrap gap-1">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[10px] px-1.5 py-0.5 bg-zinc-700/60 text-zinc-400 rounded font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </td>
-                <td className="py-3 text-right">
-                  <DeleteProjectButton slug={project.slug} name={project.name} variant="icon" />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+                </div>
+              </article>
+            )
+          })}
+        </div>
+      )}
+    </div>
   )
 }

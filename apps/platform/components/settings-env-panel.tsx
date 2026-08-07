@@ -48,50 +48,54 @@ function CopyEnvButton({ envKey, disabled }: { envKey: string; disabled?: boolea
       disabled={disabled || state === "loading"}
       onClick={() => void copy()}
       aria-label="Copier"
-      title={
-        state === "copied" ? "Copié" : state === "error" ? "Erreur" : "Copier"
-      }
-      className="p-1 rounded text-zinc-500 hover:text-zinc-200 cursor-pointer transition-colors duration-[120ms] ease-out disabled:opacity-30 disabled:cursor-not-allowed"
+      title={state === "copied" ? "Copié" : state === "error" ? "Erreur" : "Copier"}
+      className="p-1 text-zinc-500 hover:text-zinc-200 cursor-pointer transition-colors duration-140 disabled:opacity-30 disabled:cursor-not-allowed"
     >
       {state === "loading" ? (
-        <span className="block w-3.5 h-3.5 border border-zinc-500 border-t-transparent rounded-full animate-spin" />
+        <span className="block w-3 h-3 border border-white/20 border-t-transparent rounded-full animate-spin" />
       ) : state === "copied" ? (
-        <Check className="w-3.5 h-3.5 text-emerald-400" strokeWidth={2} />
+        <Check className="w-3 h-3 text-success" strokeWidth={2} />
       ) : state === "error" ? (
-        <X className="w-3.5 h-3.5 text-red-400" strokeWidth={2} />
+        <X className="w-3 h-3 text-danger" strokeWidth={2} />
       ) : (
-        <Copy className="w-3.5 h-3.5" strokeWidth={2} />
+        <Copy className="w-3 h-3" strokeWidth={2} />
       )}
     </button>
   )
 }
 
 export function SettingsEnvPanel({ entries }: SettingsEnvPanelProps) {
+  const ready = entries.filter((e) => e.configured).length
+
   return (
-    <div>
-      <p className="text-[11px] text-zinc-600 mb-2">
-        Valeurs jamais affichées — copie uniquement.
-      </p>
-      <div className="rounded-lg border border-zinc-800 divide-y divide-zinc-800/80 overflow-hidden">
+    <div className="rounded-xl border border-white/[0.08] bg-surface/80 overflow-hidden">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.06]">
+        <p className="metric text-[10px] text-zinc-400">Variables d&apos;environnement</p>
+        <p className="metric text-[10px] text-brand tabular-nums">
+          {ready}/{entries.length}
+        </p>
+      </div>
+      <div className="divide-y divide-white/[0.05]">
         {entries.map((entry) => (
           <div
             key={entry.key}
-            className="h-8 px-2.5 flex items-center justify-between gap-2 bg-zinc-900/40"
+            className="grid grid-cols-[auto_minmax(0,1fr)_auto] gap-2 items-center px-2.5 py-1.5 hover:bg-brand/[0.05] transition-colors duration-140"
           >
-            <code className="text-[11px] text-zinc-400 font-mono truncate">{entry.key}</code>
-            <div className="flex items-center gap-1.5 shrink-0">
-              <span
-                className={[
-                  "w-1.5 h-1.5 rounded-full",
-                  entry.configured ? "bg-emerald-500" : "bg-red-500",
-                ].join(" ")}
-                title={entry.configured ? "Configurée" : "Manquante"}
-              />
-              <CopyEnvButton envKey={entry.key} disabled={!entry.configured} />
-            </div>
+            <span
+              className={[
+                "status-dot shrink-0",
+                entry.configured ? "text-success" : "text-danger",
+              ].join(" ")}
+              title={entry.configured ? "Configurée" : "Manquante"}
+            />
+            <code className="metric text-[11px] text-zinc-200 truncate">{entry.key}</code>
+            <CopyEnvButton envKey={entry.key} disabled={!entry.configured} />
           </div>
         ))}
       </div>
+      <p className="px-3 py-1.5 metric text-[9px] text-zinc-600 border-t border-white/[0.05]">
+        Valeurs jamais affichées — copie uniquement.
+      </p>
     </div>
   )
 }

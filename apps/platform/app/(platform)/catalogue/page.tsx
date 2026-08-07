@@ -85,10 +85,17 @@ export default async function CataloguePage() {
   const benchmarkMap = Object.fromEntries(benchmarks.map((b) => [b.key, b]))
 
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-16 flex flex-col justify-center border-b border-zinc-800">
-        <h1 className="text-xl font-semibold text-zinc-100">Catalogue</h1>
-      </div>
+    <div className="min-h-full animate-page-in">
+      <header className="page-head">
+        <div className="flex items-baseline gap-3 min-w-0">
+          <h1 className="page-title">Catalogue</h1>
+          <span className="metric text-xs text-brand tabular-nums">
+            {String(templates.length).padStart(2, "0")}
+            <span className="text-zinc-700 mx-1">·</span>
+            {String(features.length).padStart(2, "0")}
+          </span>
+        </div>
+      </header>
       <CatalogueView
         templates={templates}
         features={features}

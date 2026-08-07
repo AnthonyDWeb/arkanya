@@ -23,19 +23,27 @@ export default function SettingsPage() {
     { key: "VERCEL_ORG_ID", configured: configured("VERCEL_ORG_ID") },
   ]
 
+  const ready = entries.filter((e) => e.configured).length
+
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-14 flex flex-col justify-center border-b border-zinc-800">
-        <h1 className="text-lg font-semibold text-zinc-100">Paramètres</h1>
-      </div>
+    <div className="animate-page-in">
+      <header className="px-4 lg:px-6 pt-4 pb-3">
+        <p className="metric text-[10px] tracking-[0.14em] text-gold uppercase mb-1.5">
+          Système
+        </p>
+        <div className="flex items-baseline gap-3">
+          <h1 className="page-title">Paramètres</h1>
+          <span className="metric text-xs text-brand tabular-nums">
+            {ready}/{entries.length} env
+          </span>
+        </div>
+      </header>
 
-      <div className="p-4 lg:p-6 space-y-6 max-w-lg">
-        <SettingsEnvPanel entries={entries} />
-
-        <div>
-          <h2 className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider mb-2">
-            Santé
-          </h2>
+      <div className="px-4 lg:px-6 pb-6">
+        <div className="flex flex-wrap justify-around lg:justify-start items-start gap-3 max-w-3xl">
+          <div className="w-full max-w-md">
+            <SettingsEnvPanel entries={entries} />
+          </div>
           <MaintenancePanel />
         </div>
       </div>

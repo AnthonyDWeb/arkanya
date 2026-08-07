@@ -12,6 +12,7 @@ import { StepFeatures } from "./step-features"
 import { StepDelivery } from "./step-delivery"
 import { StepSummary } from "./step-summary"
 import { StepExecution } from "./step-execution"
+import { formatEstimateMs, useBuilderEstimate } from "./use-builder-estimate"
 
 type BuilderWizardProps = {
   templates: TemplateSummary[]
@@ -29,24 +30,38 @@ function StepIndicator({
   const currentIndex = steps.findIndex((s) => s.id === current)
 
   return (
-    <ol className="flex items-center justify-between w-full">
+    <ol className="flex items-center justify-center gap-1 w-fit max-w-full mx-auto overflow-x-auto">
       {steps.map((step, i) => {
         const done = i < currentIndex
         const active = step.id === current
         return (
-          <li key={step.id} className="flex items-center gap-1.5 min-w-0">
+          <li key={step.id} className="flex items-center gap-1.5 shrink-0">
+            {i > 0 && (
+              <span
+                className={[
+                  "w-3 h-px mx-0.5 rounded-full",
+                  done || active ? "bg-brand/50" : "bg-white/10",
+                ].join(" ")}
+              />
+            )}
             <div
               className={[
-                "w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium shrink-0",
+                "w-6 h-6 rounded-full flex items-center justify-center metric text-[10px] shrink-0 transition-colors duration-140",
                 done
-                  ? "bg-brand text-white"
+                  ? "bg-brand text-[var(--color-ink-on-brand)]"
                   : active
-                    ? "bg-brand-muted border border-brand text-brand-light"
-                    : "bg-zinc-800 border border-zinc-700 text-zinc-600",
+                    ? "bg-brand/15 text-brand ring-1 ring-brand/50"
+                    : "bg-elevated text-zinc-600",
               ].join(" ")}
             >
               {done ? (
-                <svg viewBox="0 0 10 8" className="w-2.5 h-2.5" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  viewBox="0 0 10 8"
+                  className="w-2.5 h-2.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <path d="M1 4l3 3 5-6" />
                 </svg>
               ) : (
@@ -54,7 +69,14 @@ function StepIndicator({
               )}
             </div>
             <span
-              className={`text-xs hidden sm:inline truncate ${active ? "text-zinc-200" : "text-zinc-600"}`}
+              className={[
+                "text-[11px] hidden xl:inline",
+                active
+                  ? "text-zinc-100 font-medium"
+                  : done
+                    ? "text-zinc-500"
+                    : "text-zinc-600",
+              ].join(" ")}
             >
               {step.label}
             </span>
@@ -165,157 +187,210 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
     }
   }
 
-  return (
-    <div>
-      <div className="mb-6">
-        <StepIndicator steps={BUILDER_STEPS} current={currentStep} />
-      </div>
+  const isExecution = currentStep === "execution"
+  const estimate = useBuilderEstimate(state)
 
-      <div className="flex gap-8 max-w-3xl mx-auto">
-        <div className="flex-1 min-w-0">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-          {currentStep === "project" && (
-            <StepProject
-              state={state}
-              clients={clients}
-              onChange={patch}
-              onNext={next}
-            />
-          )}
-          {currentStep === "template" && (
-            <StepTemplate
-              state={state}
-              templates={templates}
-              onChange={patch}
-              onNext={next}
-              onBack={back}
-            />
-          )}
-          {currentStep === "pages" && (
-            <StepPages
-              state={state}
-              onChange={patch}
-              onNext={next}
-              onBack={back}
-            />
-          )}
-          {currentStep === "config" && (
-            <StepConfig
-              state={state}
-              onChange={patch}
-              onNext={next}
-              onBack={back}
-            />
-          )}
-          {currentStep === "features" && (
-            <StepFeatures
-              state={state}
-              features={features}
-              onChange={patch}
-              onNext={next}
-              onBack={back}
-            />
-          )}
-          {currentStep === "delivery" && (
-            <StepDelivery
-              state={state}
-              onChange={patch}
-              onNext={next}
-              onBack={back}
-            />
-          )}
-          {currentStep === "summary" && (
-            <StepSummary
-              state={state}
-              onLaunch={() => void launch()}
-              onBack={back}
-            />
-          )}
-          {currentStep === "execution" && (
-            <StepExecution
-              running={running}
-              liveSteps={liveSteps}
-              liveMessage={liveMessage}
-              report={report}
-              error={execError}
-              onReset={reset}
-              onRetry={() => void launch()}
-            />
-          )}
+  return (
+    <div className="h-full flex flex-col min-h-0 gap-3">
+      {!isExecution && (
+        <div className="shrink-0 flex justify-center">
+          <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-3 py-2 w-fit max-w-full">
+            <StepIndicator steps={BUILDER_STEPS} current={currentStep} />
+          </div>
+        </div>
+      )}
+
+      <div
+        className={[
+          "flex-1 min-h-0",
+          isExecution
+            ? "flex justify-center items-start overflow-y-auto pt-2"
+            : "flex flex-wrap justify-around items-start content-start gap-4 pt-2",
+        ].join(" ")}
+      >
+        <div
+          className={[
+            "min-w-0",
+            isExecution ? "w-full" : "w-full max-w-xl h-fit chassis",
+          ].join(" ")}
+        >
+          <div className={isExecution ? "" : "p-3"}>
+            {currentStep === "project" && (
+              <StepProject
+                state={state}
+                clients={clients}
+                onChange={patch}
+                onNext={next}
+              />
+            )}
+            {currentStep === "template" && (
+              <StepTemplate
+                state={state}
+                templates={templates}
+                onChange={patch}
+                onNext={next}
+                onBack={back}
+              />
+            )}
+            {currentStep === "pages" && (
+              <StepPages
+                state={state}
+                onChange={patch}
+                onNext={next}
+                onBack={back}
+              />
+            )}
+            {currentStep === "config" && (
+              <StepConfig
+                state={state}
+                onChange={patch}
+                onNext={next}
+                onBack={back}
+              />
+            )}
+            {currentStep === "features" && (
+              <StepFeatures
+                state={state}
+                features={features}
+                onChange={patch}
+                onNext={next}
+                onBack={back}
+              />
+            )}
+            {currentStep === "delivery" && (
+              <StepDelivery
+                state={state}
+                onChange={patch}
+                onNext={next}
+                onBack={back}
+              />
+            )}
+            {currentStep === "summary" && (
+              <StepSummary
+                state={state}
+                onLaunch={() => void launch()}
+                onBack={back}
+              />
+            )}
+            {currentStep === "execution" && (
+              <StepExecution
+                running={running}
+                liveSteps={liveSteps}
+                liveMessage={liveMessage}
+                report={report}
+                error={execError}
+                onReset={reset}
+                onRetry={() => void launch()}
+              />
+            )}
           </div>
         </div>
 
-        {currentStep !== "execution" && (
-        <aside className="w-52 shrink-0 hidden lg:block">
-          <p className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-3">
-            Résumé en direct
-          </p>
-          <div className="space-y-2 text-xs">
-            {state.name && (
-              <div>
-                <span className="text-zinc-600">Projet</span>
-                <p className="text-zinc-300 font-medium mt-0.5 truncate">{state.name}</p>
+        {!isExecution && (
+          <aside className="w-full max-w-[14rem] shrink-0 hidden lg:flex flex-col gap-2 h-fit">
+            <div className="rounded-xl border border-white/[0.08] bg-surface/80 p-3">
+              <p className="metric text-[10px] text-gold mb-2">Résumé en direct</p>
+              <div className="space-y-2 text-[11px]">
+                {state.name ? (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Projet</span>
+                    <p className="text-zinc-100 font-medium mt-0.5 truncate">{state.name}</p>
+                  </div>
+                ) : (
+                  <p className="text-zinc-500">Configure le pipeline…</p>
+                )}
+                {state.slug && (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Slug</span>
+                    <p className="metric text-gold/90 mt-0.5 truncate">
+                      {state.kind === "client" ? "clients/" : "products/"}
+                      {state.slug}
+                    </p>
+                  </div>
+                )}
+                {state.template && (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Modèle</span>
+                    <p className="text-zinc-300 mt-0.5 truncate">
+                      {state.templateData?.name ?? state.template}
+                    </p>
+                  </div>
+                )}
+                {state.pages.filter((p) => p.enabled).length > 0 && (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Pages</span>
+                    <div className="mt-0.5 space-y-px">
+                      {state.pages
+                        .filter((p) => p.enabled)
+                        .map((p) => (
+                          <p key={p.id} className="metric text-gold/80 truncate">
+                            {state.template === "landing-page" && p.source !== "custom"
+                              ? `#${p.slug || p.id}`
+                              : `/${p.slug || ""}`}
+                          </p>
+                        ))}
+                    </div>
+                  </div>
+                )}
+                {(state.config["primary-color"] ?? state.config["secondary-color"]) && (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Couleurs</span>
+                    <div className="flex gap-1.5 mt-1">
+                      {state.config["primary-color"] && (
+                        <div
+                          className="w-4 h-4 rounded-full border border-white/10"
+                          style={{ backgroundColor: state.config["primary-color"] }}
+                          title={state.config["primary-color"]}
+                        />
+                      )}
+                      {state.config["secondary-color"] && (
+                        <div
+                          className="w-4 h-4 rounded-full border border-white/10"
+                          style={{ backgroundColor: state.config["secondary-color"] }}
+                          title={state.config["secondary-color"]}
+                        />
+                      )}
+                    </div>
+                  </div>
+                )}
+                {state.features.length > 0 && (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Fonctionnalités</span>
+                    <div className="mt-0.5 space-y-px">
+                      {state.features.map((f) => (
+                        <p key={f} className="text-zinc-400 truncate">
+                          {f}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {state.delivery.targets.length > 0 && (
+                  <div>
+                    <span className="metric text-[10px] text-zinc-500">Livraison</span>
+                    <p className="text-zinc-400 mt-0.5 truncate">
+                      {state.delivery.targets.join(" · ")}
+                    </p>
+                  </div>
+                )}
               </div>
-            )}
-            {state.slug && (
-              <div>
-                <span className="text-zinc-600">Slug</span>
-                <p className="text-zinc-400 font-mono mt-0.5 truncate">{state.slug}</p>
-              </div>
-            )}
-            {state.template && (
-              <div>
-                <span className="text-zinc-600">Template</span>
-                <p className="text-zinc-300 mt-0.5">{state.templateData?.name ?? state.template}</p>
-              </div>
-            )}
-            {state.pages.filter((p) => p.enabled).length > 0 && (
-              <div>
-                <span className="text-zinc-600">Pages</span>
-                <div className="mt-0.5 space-y-0.5">
-                  {state.pages
-                    .filter((p) => p.enabled)
-                    .map((p) => (
-                      <p key={p.id} className="text-zinc-400">
-                        /{p.slug || ""}
-                      </p>
-                    ))}
-                </div>
-              </div>
-            )}
-            {(state.config["primary-color"] ?? state.config["secondary-color"]) && (
-              <div>
-                <span className="text-zinc-600">Couleurs</span>
-                <div className="flex gap-1.5 mt-1">
-                  {state.config["primary-color"] && (
-                    <div
-                      className="w-5 h-5 rounded border border-zinc-700"
-                      style={{ backgroundColor: state.config["primary-color"] }}
-                      title={state.config["primary-color"]}
-                    />
-                  )}
-                  {state.config["secondary-color"] && (
-                    <div
-                      className="w-5 h-5 rounded border border-zinc-700"
-                      style={{ backgroundColor: state.config["secondary-color"] }}
-                      title={state.config["secondary-color"]}
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-            {state.features.length > 0 && (
-              <div>
-                <span className="text-zinc-600">Features</span>
-                <div className="mt-0.5 space-y-0.5">
-                  {state.features.map((f) => (
-                    <p key={f} className="text-zinc-400">{f}</p>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </aside>
+            </div>
+
+            <div className="rounded-xl border border-white/[0.08] bg-surface/80 p-3">
+              <p className="metric text-[10px] text-zinc-400 mb-1">Temps estimé</p>
+              {!state.template ? (
+                <p className="text-[11px] text-zinc-500">Choisissez un modèle</p>
+              ) : estimate.loading ? (
+                <p className="text-[11px] text-zinc-500">Calcul…</p>
+              ) : estimate.known === 0 ? (
+                <p className="text-[11px] text-zinc-500">Pas encore de données</p>
+              ) : (
+                <p className="heading text-lg text-brand tabular-nums leading-none">
+                  ~{formatEstimateMs(Math.round(estimate.totalAvgMs))}
+                </p>
+              )}
+            </div>
+          </aside>
         )}
       </div>
     </div>

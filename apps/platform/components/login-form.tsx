@@ -36,17 +36,41 @@ export function LoginForm() {
 
   return (
     <div className="w-full max-w-sm">
-      <div className="mb-8">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-xl font-semibold tracking-tight text-white">arkanya</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-brand" />
+      <div className="mb-6">
+        <div className="flex items-center gap-2.5 mb-4">
+          <div className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.webp"
+              alt="Arkanya"
+              width={32}
+              height={32}
+              className="w-8 h-8 object-contain relative z-10"
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 rounded-full blur-lg bg-gold/35 animate-logo-glow"
+            />
+          </div>
+          <span className="metric text-[9px] tracking-[0.18em] text-gold uppercase">
+            Production OS
+          </span>
         </div>
-        <p className="text-sm text-zinc-500">Cockpit privé</p>
+        <h1 className="heading text-4xl sm:text-[2.75rem] text-white leading-[0.9] mb-2">
+          arkanya
+        </h1>
+        <p className="text-xs text-zinc-500 max-w-xs">
+          Cockpit privé. Configure. Génère. Déploie.
+        </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form
+        onSubmit={handleSubmit}
+        method="post"
+        className="chassis trim-gold p-4 sm:p-5 space-y-3.5"
+      >
         <div>
-          <label htmlFor="email" className="block text-xs font-medium text-zinc-400 mb-1.5">
+          <label htmlFor="email" className="field-label">
             Email
           </label>
           <input
@@ -55,12 +79,12 @@ export function LoginForm() {
             type="email"
             autoComplete="email"
             required
-            className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition-colors duration-100"
+            className="well w-full"
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-xs font-medium text-zinc-400 mb-1.5">
+          <label htmlFor="password" className="field-label">
             Mot de passe
           </label>
           <input
@@ -69,18 +93,20 @@ export function LoginForm() {
             type="password"
             autoComplete="current-password"
             required
-            className="w-full px-3 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-sm text-zinc-100 placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition-colors duration-100"
+            className="well w-full"
           />
         </div>
 
-        {error !== null && <p className="text-xs text-red-400 pt-1">{error}</p>}
+        {error !== null && (
+          <p className="metric text-xs text-danger tracking-wide">{error}</p>
+        )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-2 px-4 bg-brand hover:bg-brand-light disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors duration-[120ms] ease-out mt-2"
-        >
-          {loading ? "Connexion…" : "Se connecter"}
+        <button type="submit" disabled={loading} className="slab w-full mt-0.5">
+          {loading ? (
+            <span className="metric tracking-[0.14em]">CONNECTING…</span>
+          ) : (
+            "Entrer"
+          )}
         </button>
       </form>
     </div>

@@ -22,44 +22,58 @@ export function StepFeatures({ state, features, onChange, onNext, onBack }: Step
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       <div>
-        <h2 className="text-sm font-semibold text-zinc-100 mb-1">Fonctionnalités</h2>
-        <p className="text-xs text-zinc-500">
-          Features compatibles avec le template <span className="text-zinc-400">{state.templateData?.name ?? state.template}</span>.
+        <h2 className="text-[13px] font-semibold text-white">Fonctionnalités</h2>
+        <p className="text-[11px] text-zinc-400 mt-0.5">
+          Compatibles avec{" "}
+          <span className="text-zinc-300">{state.templateData?.name ?? state.template}</span>.
         </p>
       </div>
 
       {compatibleFeatures.length === 0 ? (
-        <p className="text-sm text-zinc-600">Aucune feature compatible avec ce template.</p>
+        <p className="text-[12px] text-zinc-500">
+          Aucune fonctionnalité compatible avec ce modèle.
+        </p>
       ) : (
-        <div className="space-y-2">
+        <div className="grid grid-cols-2 gap-2">
           {compatibleFeatures.map((feature) => {
             const selected = state.features.includes(feature.id)
             return (
               <button
                 key={feature.id}
+                type="button"
                 onClick={() => toggleFeature(feature.id)}
                 className={[
-                  "w-full text-left p-4 rounded-lg border transition-all duration-[120ms] ease-out",
+                  "text-left rounded-xl border px-2.5 py-2 transition-[background-color,border-color] duration-140 min-w-0",
                   selected
-                    ? "border-brand bg-brand-muted"
-                    : "border-zinc-700 bg-zinc-800/40 hover:border-zinc-600",
+                    ? "border-brand/50 bg-brand/10"
+                    : "border-white/[0.08] bg-well/40 hover:border-brand/30",
                 ].join(" ")}
               >
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-sm font-medium text-zinc-100">{feature.name}</p>
-                    <p className="text-xs text-zinc-500 mt-0.5">{feature.description}</p>
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-[12px] font-semibold text-white truncate">
+                      {feature.name}
+                    </p>
+                    <p className="text-[10px] text-zinc-400 mt-0.5 line-clamp-2">
+                      {feature.description}
+                    </p>
                   </div>
                   <div
                     className={[
-                      "w-4 h-4 rounded border-2 flex items-center justify-center shrink-0",
+                      "w-3.5 h-3.5 rounded-[2px] border flex items-center justify-center shrink-0 mt-0.5",
                       selected ? "border-brand bg-brand" : "border-zinc-600",
                     ].join(" ")}
                   >
                     {selected && (
-                      <svg viewBox="0 0 10 8" className="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg
+                        viewBox="0 0 10 8"
+                        className="w-2 h-2 text-ink-on-brand"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
                         <path d="M1 4l3 3 5-6" />
                       </svg>
                     )}
@@ -71,17 +85,15 @@ export function StepFeatures({ state, features, onChange, onNext, onBack }: Step
         </div>
       )}
 
-      <div className="flex justify-between pt-2">
+      <div className="flex justify-between pt-1">
         <button
+          type="button"
           onClick={onBack}
-          className="px-5 py-2 text-zinc-400 hover:text-zinc-200 rounded-lg text-sm transition-colors duration-[120ms] ease-out"
+          className="text-[12px] text-zinc-400 hover:text-zinc-200 transition-colors duration-140"
         >
           ← Retour
         </button>
-        <button
-          onClick={onNext}
-          className="px-5 py-2 bg-brand text-white rounded-lg text-sm font-medium transition-opacity duration-[120ms] ease-out hover:opacity-90"
-        >
+        <button type="button" onClick={onNext} className="slab">
           Suivant →
         </button>
       </div>

@@ -21,6 +21,12 @@ const STATUS_LABELS: Record<string, string> = {
   archived: "Archivé",
 }
 
+const STATUS_STYLES: Record<string, string> = {
+  prospect: "text-warning",
+  active: "text-success",
+  archived: "text-zinc-500",
+}
+
 export default async function ClientDetailPage({ params }: ClientPageProps) {
   const { id } = await params
   const client = await prisma.client.findUnique({
@@ -33,53 +39,69 @@ export default async function ClientDetailPage({ params }: ClientPageProps) {
   if (!client) notFound()
 
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-16 flex items-center justify-between border-b border-zinc-800">
-        <div>
-          <Link href="/clients" className="text-[11px] text-zinc-500 hover:text-zinc-300 cursor-pointer">
-            ← Clients
-          </Link>
-          <h1 className="text-xl font-semibold text-zinc-100 leading-tight mt-0.5">{client.name}</h1>
-          <p className="text-xs text-zinc-500">{client.company}</p>
+    <div className="min-h-full animate-page-in">
+      <div className="px-4 lg:px-8 pt-8 pb-6 lg:pt-10 border-b border-white/[0.04]">
+        <Link
+          href="/clients"
+          className="metric text-[10px] tracking-[0.14em] uppercase text-zinc-600 hover:text-zinc-300 transition-colors duration-140"
+        >
+          ← Clients
+        </Link>
+        <div className="flex items-end justify-between gap-4 mt-3">
+          <div className="min-w-0">
+            <h1 className="heading text-4xl sm:text-5xl text-white leading-none truncate">
+              {client.name}
+            </h1>
+            <p className="text-sm text-zinc-500 mt-3">{client.company}</p>
+          </div>
+          <span
+            className={`metric text-[11px] tracking-[0.12em] uppercase shrink-0 ${STATUS_STYLES[client.status] ?? "text-zinc-500"}`}
+          >
+            <span className={`status-dot inline-block mr-1.5 align-middle ${STATUS_STYLES[client.status] ?? "text-zinc-500"}`} />
+            {STATUS_LABELS[client.status] ?? client.status}
+          </span>
         </div>
-        <span className="text-xs px-2 py-1 bg-zinc-800 text-zinc-400 rounded">
-          {STATUS_LABELS[client.status] ?? client.status}
-        </span>
       </div>
 
-      <div className="p-4 lg:p-6 space-y-6 max-w-2xl">
-        <div className="rounded-lg border border-zinc-800 divide-y divide-zinc-800/80 overflow-hidden text-sm">
-          <div className="px-3 py-2 flex justify-between gap-4 bg-zinc-900/40">
-            <span className="text-zinc-500">Contact</span>
-            <span className="text-zinc-300">{client.contact || "—"}</span>
+      <div className="p-4 lg:p-8 space-y-8 max-w-2xl">
+        <div className="module border border-white/[0.04] px-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6 py-3 border-b border-white/[0.04]">
+            <span className="metric text-[10px] tracking-[0.14em] uppercase text-zinc-600 w-36 shrink-0">
+              Contact
+            </span>
+            <span className="text-sm text-zinc-300">{client.contact || "—"}</span>
           </div>
-          <div className="px-3 py-2 flex justify-between gap-4 bg-zinc-900/40">
-            <span className="text-zinc-500">Créé le</span>
-            <span className="text-zinc-300">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-6 py-3">
+            <span className="metric text-[10px] tracking-[0.14em] uppercase text-zinc-600 w-36 shrink-0">
+              Créé le
+            </span>
+            <span className="metric text-sm text-zinc-300">
               {new Date(client.createdAt).toLocaleDateString("fr-FR")}
             </span>
           </div>
         </div>
 
         <div>
-          <h2 className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider mb-2">
-            Projets ({client.projects.length})
+          <h2 className="metric text-[10px] tracking-[0.16em] text-zinc-600 uppercase mb-3">
+            Projets · {String(client.projects.length).padStart(2, "0")}
           </h2>
           {client.projects.length === 0 ? (
             <p className="text-sm text-zinc-600">Aucun projet</p>
           ) : (
-            <div className="rounded-lg border border-zinc-800 divide-y divide-zinc-800/80 overflow-hidden">
+            <div className="border-t border-white/[0.04] divide-y divide-white/[0.04]">
               {client.projects.map((p) => (
                 <Link
                   key={p.id}
                   href={`/projects/${p.slug}`}
-                  className="px-3 py-2.5 flex items-center justify-between gap-3 bg-zinc-900/40 hover:bg-zinc-800/60 cursor-pointer transition-colors duration-[120ms] ease-out"
+                  className="py-3.5 flex items-center justify-between gap-3 hover:bg-elevated/60 -mx-1 px-1 transition-colors duration-140"
                 >
                   <div className="min-w-0">
-                    <p className="text-sm text-zinc-200 truncate">{p.name}</p>
-                    <p className="text-[11px] text-zinc-600 font-mono">{p.slug}</p>
+                    <p className="heading text-sm text-zinc-100 truncate">{p.name}</p>
+                    <p className="metric text-[11px] text-zinc-600 mt-0.5">{p.slug}</p>
                   </div>
-                  <span className="text-[11px] text-zinc-500 shrink-0">{p.status}</span>
+                  <span className="metric text-[10px] tracking-[0.12em] uppercase text-zinc-500 shrink-0">
+                    {p.status}
+                  </span>
                 </Link>
               ))}
             </div>

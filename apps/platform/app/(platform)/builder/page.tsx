@@ -51,15 +51,16 @@ export default async function BuilderPage() {
   ])
 
   return (
-    <div>
-      <div className="px-4 lg:px-6 h-16 flex flex-col justify-center border-b border-zinc-800">
-        <h1 className="text-xl font-semibold text-zinc-100">Builder</h1>
-        <p className="text-xs text-zinc-500 mt-0.5">
-          {templates.length} template{templates.length !== 1 ? "s" : ""} ·{" "}
-          {features.length} feature{features.length !== 1 ? "s" : ""}
+    <div className="h-full flex flex-col overflow-hidden animate-page-in">
+      <div className="shrink-0 px-4 lg:px-6 pt-3 pb-2 flex items-baseline gap-3">
+        <h1 className="page-title">Builder</h1>
+        <p className="metric text-[11px] text-zinc-400">
+          {String(templates.length).padStart(2, "0")} modèles
+          <span className="mx-1 text-zinc-600">·</span>
+          {String(features.length).padStart(2, "0")} fonctionnalités
         </p>
       </div>
-      <div className="p-4 lg:p-6">
+      <div className="flex-1 min-h-0 px-4 lg:px-6 pb-3">
         <BuilderWizard
           templates={templates}
           features={features}
