@@ -3,13 +3,14 @@
 import { Eye, Pencil, Search, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useMemo, useState } from "react"
+import { useMemo, useState, type ReactNode } from "react"
 import { createClient, deleteClient, updateClient } from "@/lib/actions/clients"
 import { ConfirmActionModal } from "./confirm-action-modal"
 import type { ClientDraft, ClientRow } from "@/types/clients"
 
 type ClientsViewProps = {
   clients: ClientRow[]
+  insights?: ReactNode
 }
 
 const STATUS_OPTIONS = [
@@ -33,7 +34,7 @@ const EMPTY_DRAFT: Draft = {
   status: "prospect",
 }
 
-export function ClientsView({ clients }: ClientsViewProps) {
+export function ClientsView({ clients, insights }: ClientsViewProps) {
   const router = useRouter()
   const [creating, setCreating] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -153,6 +154,8 @@ export function ClientsView({ clients }: ClientsViewProps) {
           </button>
         )}
       </header>
+
+      {insights}
 
       <div className="px-4 lg:px-6 pb-8 space-y-3">
         {(creating || editingId) && (

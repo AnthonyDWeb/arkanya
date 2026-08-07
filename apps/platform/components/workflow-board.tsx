@@ -3,6 +3,7 @@
 import { useState, type CSSProperties } from "react"
 import type { Project, ProjectStatus } from "@arkanya/database"
 import { ChevronDown } from "lucide-react"
+import Link from "next/link"
 import { ProjectCard } from "./project-card"
 
 type Column = {
@@ -65,12 +66,11 @@ export function WorkflowBoard({ projects }: WorkflowBoardProps) {
             className="lane self-start w-full"
             style={{ "--lane-accent": col.accent } as CSSProperties}
           >
-            <button
-              type="button"
-              onClick={() => toggle(col.status)}
-              className="flex items-center justify-between w-full text-left pl-4 pr-3 pt-2.5 pb-2"
-            >
-              <div className="flex items-baseline gap-2.5 min-w-0">
+            <div className="flex items-center justify-between w-full pl-4 pr-2 pt-2.5 pb-2 gap-1">
+              <Link
+                href="/projects"
+                className="flex items-baseline gap-2.5 min-w-0 flex-1 text-left hover:opacity-90 transition-opacity duration-140"
+              >
                 <span
                   className="heading text-xl leading-none tabular-nums shrink-0"
                   style={{ color: col.accent }}
@@ -81,17 +81,26 @@ export function WorkflowBoard({ projects }: WorkflowBoardProps) {
                   <p className="metric text-[11px] tracking-[0.04em] text-zinc-300 leading-none mb-0.5">
                     {col.code}
                   </p>
-                  <p className="text-[13px] text-white font-medium truncate">{col.label}</p>
+                  <p className="text-[13px] text-white font-medium truncate">
+                    {col.label}
+                  </p>
                 </div>
-              </div>
-              <ChevronDown
-                size={14}
-                className={[
-                  "text-zinc-400 transition-transform duration-200 ease-out shrink-0 lg:hidden",
-                  isCollapsed ? "-rotate-90" : "",
-                ].join(" ")}
-              />
-            </button>
+              </Link>
+              <button
+                type="button"
+                onClick={() => toggle(col.status)}
+                aria-label={isCollapsed ? "Déplier" : "Replier"}
+                className="p-2 min-h-11 min-w-11 inline-flex items-center justify-center lg:hidden touch-manipulation"
+              >
+                <ChevronDown
+                  size={14}
+                  className={[
+                    "text-zinc-400 transition-transform duration-200 ease-out",
+                    isCollapsed ? "-rotate-90" : "",
+                  ].join(" ")}
+                />
+              </button>
+            </div>
 
             {!isCollapsed && (
               <div

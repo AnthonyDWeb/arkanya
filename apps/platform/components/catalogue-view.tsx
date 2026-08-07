@@ -27,28 +27,26 @@ export function CatalogueView({ templates, features, benchmarkMap }: CatalogueVi
   const [tab, setTab] = useState<Tab>("templates")
 
   return (
-    <div>
-      <div className="px-4 lg:px-6">
-        <div className="segment-group segment-group-fit">
-          {(["templates", "features"] as Tab[]).map((t) => (
-            <button
-              key={t}
-              type="button"
-              data-active={tab === t}
-              onClick={() => setTab(t)}
-              className="segment"
-            >
-              {t === "templates"
-                ? `Modèles (${templates.length})`
-                : `Fonctionnalités (${features.length})`}
-            </button>
-          ))}
-        </div>
+    <div className="w-full min-w-0 space-y-4">
+      <div className="segment-group segment-group-fit mx-auto lg:mx-0">
+        {(["templates", "features"] as Tab[]).map((t) => (
+          <button
+            key={t}
+            type="button"
+            data-active={tab === t}
+            onClick={() => setTab(t)}
+            className="segment"
+          >
+            {t === "templates"
+              ? `Modèles (${templates.length})`
+              : `Fonctionnalités (${features.length})`}
+          </button>
+        ))}
       </div>
 
-      <div className="px-4 lg:px-6 py-4">
+      <div>
         {tab === "templates" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 max-w-5xl">
+          <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-2 xl:grid-cols-3">
             {templates.map((t) => {
               const scaffoldBench = benchmarkMap[`scaffold:${t.id}:copy-files`]
               const installBench = benchmarkMap["validate:npm-install"]
@@ -153,7 +151,7 @@ export function CatalogueView({ templates, features, benchmarkMap }: CatalogueVi
         )}
 
         {tab === "features" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5 max-w-5xl">
+          <div className="grid grid-cols-1 gap-2.5 lg:grid-cols-2 xl:grid-cols-3">
             {features.map((f) => {
               const bench = benchmarkMap[`feature:${f.id}`]
               const deps = Object.entries(f.dependencies ?? {})
