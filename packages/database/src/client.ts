@@ -19,6 +19,7 @@ export type {
   JobEvent,
   JobTiming,
   Project,
+  ProjectEnvironment,
   ProjectStatus,
   Prisma,
 } from "@prisma/client"

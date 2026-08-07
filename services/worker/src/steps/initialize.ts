@@ -2,6 +2,7 @@ import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import type { WorkerProjectPayload, WorkerStepReport } from "@arkanya/contracts/worker"
+import { resolveUnderRoot } from "../lib/path-safe.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const MONOREPO_ROOT = path.resolve(__dirname, "../../../..")
@@ -9,14 +10,7 @@ const MONOREPO_ROOT = path.resolve(__dirname, "../../../..")
 export function getProjectDir(payload: WorkerProjectPayload): string {
   const base = payload.projectKind === "client" ? "clients" : "products"
   const root = path.resolve(MONOREPO_ROOT, base)
-  const resolved = path.resolve(root, payload.projectSlug)
-
-  const rel = path.relative(root, resolved)
-  if (rel.startsWith("..") || path.isAbsolute(rel)) {
-    throw new Error("Path traversal detected in projectSlug")
-  }
-
-  return resolved
+  return resolveUnderRoot(root, payload.projectSlug, "projectSlug")
 }
 
 export async function runInitialize(payload: WorkerProjectPayload): Promise<WorkerStepReport> {

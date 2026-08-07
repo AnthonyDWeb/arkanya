@@ -1,0 +1,114 @@
+/* Compact page chrome */
+.page-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1rem 0.75rem;
+}
+
+@media (min-width: 1024px) {
+  .page-head {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Thin scan-line sheen for HUD panels */
+.scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 3px,
+    rgba(77, 159, 255, 0.015) 3px,
+    rgba(77, 159, 255, 0.015) 4px
+  );
+  opacity: 0.7;
+}
+
+/* Scrollbars — thin, only when needed; hide track clutter & arrow buttons */
+.platform-scroll {
+  overflow-y: auto;
+  scrollbar-gutter: auto;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--color-arc) 35%, transparent) transparent;
+}
+
+.platform-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.platform-scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.platform-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.platform-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--color-arc) 28%, transparent);
+  border-radius: 999px;
+}
+
+.platform-scroll::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--color-arc) 45%, transparent);
+}
+
+/* Horizontal tab rail — swipeable, no visible scrollbar / arrows */
+.tabs-rail {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs-rail::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.tabs-rail::-webkit-scrollbar-button {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .tabs-rail {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+

@@ -17,7 +17,7 @@ const TARGETS: Array<{
   {
     id: "github",
     label: "GitHub",
-    description: `Repo privé · ${process.env["NEXT_PUBLIC_GITHUB_OWNER"] ?? "AnthonyDWeb"}`,
+    description: `Repo privé · ${process.env["NEXT_PUBLIC_GITHUB_OWNER"] ?? "owner non configuré"}`,
   },
   {
     id: "vercel",

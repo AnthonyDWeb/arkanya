@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { createClient } from "@/lib/actions/clients"
 import type { BuilderState, ClientOption } from "./types"
 
 type StepProjectProps = {
@@ -41,15 +42,13 @@ export function StepProject({
     setCreatingLoading(true)
     setCreateError(null)
     try {
-      const res = await fetch("/api/clients", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, company: newCompany.trim() || name }),
+      const result = await createClient({
+        name,
+        company: newCompany.trim() || name,
       })
-      if (!res.ok) throw new Error("Erreur création client")
-      const client = (await res.json()) as ClientOption
-      setClients((prev) => [...prev, client])
-      onChange({ clientId: client.id })
+      if (!result.ok) throw new Error(result.error)
+      setClients((prev) => [...prev, result.data])
+      onChange({ clientId: result.data.id })
       setCreating(false)
       setNewName("")
       setNewCompany("")

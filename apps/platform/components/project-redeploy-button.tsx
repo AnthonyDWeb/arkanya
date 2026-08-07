@@ -3,6 +3,7 @@
 import { Loader2, RefreshCw } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { redeployProject } from "@/lib/actions/worker-run"
 import { ConfirmActionModal } from "./confirm-action-modal"
 
 type ProjectRedeployButtonProps = {
@@ -21,14 +22,15 @@ export function ProjectRedeployButton({ slug }: ProjectRedeployButtonProps) {
     setError(null)
     setOk(false)
     try {
-      const res = await fetch(`/api/projects/${slug}/redeploy`, { method: "POST" })
-      const data = (await res.json()) as { error?: string; state?: string }
-      if (!res.ok) {
-        setError(data.error ?? "Échec du redéploiement")
+      const result = await redeployProject(slug)
+      if (!result.ok) {
+        setError(result.error)
         return
       }
-      setOk(data.state === "SUCCESS")
-      if (data.state !== "SUCCESS" && data.error) setError(data.error)
+      setOk(result.data.state === "SUCCESS")
+      if (result.data.state !== "SUCCESS" && result.data.error) {
+        setError(result.data.error)
+      }
       setOpen(false)
       router.refresh()
     } catch {

@@ -19,12 +19,13 @@ model Client {
 }
 
 model Project {
-  id           String        @id @default(cuid())
-  slug         String        @unique
+  id           String             @id @default(cuid())
+  slug         String             @unique
   name         String
   owner        String
   type         String
-  status       ProjectStatus @default(TO_QUALIFY)
+  status       ProjectStatus      @default(TO_QUALIFY)
+  environment  ProjectEnvironment @default(LOCAL)
   port         Int?
   url          String?
   nextAction   String?
@@ -32,12 +33,12 @@ model Project {
   destination  String
   description  String
   technologies String[]
-  generated    Boolean       @default(false)
+  generated    Boolean            @default(false)
   clientId     String?
-  client       Client?       @relation(fields: [clientId], references: [id])
+  client       Client?            @relation(fields: [clientId], references: [id])
   jobs         Job[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
 }
 
 model Job {
@@ -120,6 +121,12 @@ enum ProjectStatus {
   TO_QUALIFY
   IN_PROGRESS
   IN_REVIEW
+}
+
+enum ProjectEnvironment {
+  LOCAL
+  ONLINE
+  PRODUCTION
 }
 
 enum JobState {

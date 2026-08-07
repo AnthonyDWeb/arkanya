@@ -3,12 +3,13 @@
 import { Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { deleteProject } from "@/lib/actions/projects"
 import { ConfirmActionModal } from "./confirm-action-modal"
 
 type DeleteProjectButtonProps = {
   slug: string
   name: string
-  variant?: "icon" | "full"
+  variant?: "icon" | "full" | "label"
 }
 
 export function DeleteProjectButton({ slug, name, variant = "icon" }: DeleteProjectButtonProps) {
@@ -22,16 +23,14 @@ export function DeleteProjectButton({ slug, name, variant = "icon" }: DeleteProj
     setDeleting(true)
     setError(null)
     try {
-      const res = await fetch(`/api/projects/${slug}`, { method: "DELETE" })
-      const data = (await res.json()) as { ok?: boolean; error?: string; warnings?: string[] }
-
-      if (!res.ok) {
-        setError(data.error ?? "Erreur lors de la suppression")
+      const result = await deleteProject(slug)
+      if (!result.ok) {
+        setError(result.error)
         setDeleting(false)
         return
       }
 
-      if (data.warnings?.length) setWarnings(data.warnings)
+      if (result.data.warnings?.length) setWarnings(result.data.warnings)
       setOpen(false)
       router.push("/")
       router.refresh()
@@ -52,6 +51,15 @@ export function DeleteProjectButton({ slug, name, variant = "icon" }: DeleteProj
           className="p-1.5 text-danger cursor-pointer hover:bg-danger/10 transition-colors duration-140"
         >
           <Trash2 className="w-4 h-4" strokeWidth={2} />
+        </button>
+      ) : variant === "label" ? (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-1.5 rounded-lg border border-danger/40 bg-danger/10 px-3 py-2.5 min-h-11 text-[12px] font-medium text-danger cursor-pointer touch-manipulation transition-[background-color,border-color,box-shadow,color] duration-140 ease-out hover:bg-danger/30 hover:border-danger hover:text-red-200 hover:shadow-[0_0_24px_rgba(239,68,68,0.28)]"
+        >
+          <Trash2 className="w-3.5 h-3.5" strokeWidth={2} />
+          Supprimer le projet
         </button>
       ) : (
         <button

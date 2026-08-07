@@ -1,0 +1,205 @@
+/* ── Chassis Instrument ───────────────────────────────────────────── */
+
+.heading {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-gradient-identity {
+  color: var(--color-arc);
+}
+
+/* Gold structural trim — identity, not energy */
+.trim-gold {
+  position: relative;
+}
+
+.trim-gold::before {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--color-gold) 55%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Soft floating panel — compact high-tech */
+.chassis,
+.card,
+.module {
+  position: relative;
+  background: color-mix(in oklch, var(--color-surface) 88%, var(--color-arc) 5%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow:
+    0 4px 20px -8px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(77, 159, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  transition:
+    background-color 140ms ease-out,
+    box-shadow 140ms ease-out,
+    border-color 140ms ease-out;
+}
+
+.chassis-lift:hover,
+.card:hover {
+  background: var(--color-elevated);
+  border-color: color-mix(in oklch, var(--color-arc) 22%, rgba(255, 255, 255, 0.08));
+  box-shadow:
+    0 8px 28px -10px rgba(0, 0, 0, 0.5),
+    0 0 24px -12px color-mix(in oklch, var(--color-arc) 28%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.chassis-active,
+.card-active {
+  position: relative;
+  background: var(--color-interactive);
+  border: 1px solid color-mix(in oklch, var(--color-arc) 45%, transparent);
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--color-arc) 18%, transparent),
+    0 0 32px -6px color-mix(in oklch, var(--color-arc) 50%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.chassis-active::before,
+.card-active::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--color-arc);
+  box-shadow: 0 0 12px color-mix(in oklch, var(--color-arc) 60%, transparent);
+  pointer-events: none;
+}
+
+/* HUD metric chip — compact high-tech readout */
+.hud {
+  position: relative;
+  background: color-mix(in oklch, var(--color-surface) 82%, var(--color-arc) 8%);
+  border: 1px solid color-mix(in oklch, var(--color-arc) 22%, rgba(255, 255, 255, 0.08));
+  border-radius: 12px;
+  box-shadow:
+    0 0 20px -10px color-mix(in oklch, var(--color-arc) 40%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.hud::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--color-arc) 55%, transparent),
+    color-mix(in oklch, var(--color-gold) 35%, transparent),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Inline signal strip — metrics without bulky cards */
+.signal-strip {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: 12px;
+  background: color-mix(in oklch, var(--color-surface) 80%, var(--color-arc) 10%);
+  border: 1px solid color-mix(in oklch, var(--color-arc) 20%, rgba(255, 255, 255, 0.08));
+  box-shadow:
+    0 0 28px -12px color-mix(in oklch, var(--color-arc) 35%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.signal-cell {
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 640px) {
+  .signal-cell {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.65rem;
+  }
+}
+
+.signal-cell:last-child {
+  border-right: none;
+}
+
+/* Lane panel — workflow column, content-height */
+.lane {
+  position: relative;
+  border-radius: 14px;
+  background: color-mix(in oklch, var(--color-surface) 78%, var(--color-arc) 6%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 24px -14px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.lane::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--lane-accent, var(--color-arc));
+  box-shadow: 0 0 12px color-mix(in oklch, var(--lane-accent, var(--color-arc)) 55%, transparent);
+  pointer-events: none;
+}
+
+/* Indexed console row */
+.console-row {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 140ms ease-out;
+}
+
+.console-row:last-child {
+  border-bottom: none;
+}
+
+.console-row:hover {
+  background: color-mix(in oklch, var(--color-arc) 8%, transparent);
+}

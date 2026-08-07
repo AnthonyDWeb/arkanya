@@ -43,7 +43,7 @@ The durable mechanism neighboring tools cannot honestly copy: Platform never ask
 - Internal business-offer catalog exists for ops reference; it is not Platform SaaS pricing.
 
 **Constraints**
-- Single admin in Phase 1 — no roles, orgs, or tenant isolation.
+- Single admin — no roles, orgs, or tenant isolation.
 - Platform must not invent testimonials, public marketing claims, or multi-tenant product framing.
 - NL → AI → manifest is product direction, not a claimed current UI feature.
 - Capacitor for Platform is intentional product scope (adaptive), not yet the incumbent shipped shell.

@@ -7,13 +7,38 @@ export type JobProgress = {
   currentMessage?: string
 }
 
+type Listener = (progress: JobProgress) => void
+
 export const jobStore = new Map<string, JobProgress>()
+const listeners = new Map<string, Set<Listener>>()
+
+export function setJobProgress(jobId: string, progress: JobProgress): void {
+  jobStore.set(jobId, progress)
+  const set = listeners.get(jobId)
+  if (!set) return
+  for (const listener of set) listener(progress)
+}
 
 export function setJobMessage(jobId: string, message: string): void {
   const current = jobStore.get(jobId)
-  if (!current) {
-    jobStore.set(jobId, { steps: [], state: "RUNNING", currentMessage: message })
-    return
+  const next: JobProgress = current
+    ? { ...current, currentMessage: message }
+    : { steps: [], state: "RUNNING", currentMessage: message }
+  setJobProgress(jobId, next)
+}
+
+export function subscribeJob(
+  jobId: string,
+  listener: Listener,
+): () => void {
+  let set = listeners.get(jobId)
+  if (!set) {
+    set = new Set()
+    listeners.set(jobId, set)
   }
-  jobStore.set(jobId, { ...current, currentMessage: message })
+  set.add(listener)
+  return () => {
+    set!.delete(listener)
+    if (set!.size === 0) listeners.delete(jobId)
+  }
 }

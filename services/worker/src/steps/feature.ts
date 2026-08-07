@@ -2,6 +2,7 @@ import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import type { WorkerProjectPayload, WorkerStepReport, TimingEntry } from "@arkanya/contracts/worker"
+import { resolveUnderRoot } from "../lib/path-safe.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const MONOREPO_ROOT = path.resolve(__dirname, "../../../..")
@@ -114,7 +115,7 @@ export async function runFeature(
         continue
       }
 
-      const featureDir = path.join(FEATURES_DIR, featureId)
+      const featureDir = resolveUnderRoot(FEATURES_DIR, featureId, `feature:${featureId}`)
       const manifestPath = path.join(featureDir, "feature.json")
 
       if (!fs.existsSync(manifestPath)) {
@@ -125,8 +126,16 @@ export async function runFeature(
       const manifest: FeatureManifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"))
 
       for (const fileEntry of manifest.files) {
-        const src = path.join(featureDir, "files", fileEntry.src)
-        const dest = path.join(projectDir, fileEntry.dest)
+        const src = resolveUnderRoot(
+          path.join(featureDir, "files"),
+          fileEntry.src.split(/[/\\]/),
+          `feature:${featureId}:src`,
+        )
+        const dest = resolveUnderRoot(
+          projectDir,
+          fileEntry.dest.split(/[/\\]/),
+          `feature:${featureId}:dest`,
+        )
 
         if (!fs.existsSync(src)) {
           errors.push(`Fichier manquant dans feature ${featureId} : ${fileEntry.src}`)
@@ -149,7 +158,11 @@ export async function runFeature(
       for (const slot of manifest.slots ?? []) {
         if (slot.template && slot.template !== payload.template) continue
 
-        const targetPath = path.join(projectDir, slot.file)
+        const targetPath = resolveUnderRoot(
+          projectDir,
+          slot.file.split(/[/\\]/),
+          `feature:${featureId}:slot`,
+        )
         if (!fs.existsSync(targetPath)) {
           errors.push(`Slot cible introuvable (${featureId}) : ${slot.file}`)
           continue

@@ -1,34 +1,16 @@
 "use client"
 
 import { useState } from "react"
-
-type TemplateManifest = {
-  id: string
-  name: string
-  description: string
-  type: string
-  pages: { id: string; name: string; required: boolean }[]
-  config: { id: string; label: string; type: string; required: boolean }[]
-  features: string[]
-  technologies: string[]
-}
-
-type FeatureManifest = {
-  id: string
-  name: string
-  description: string
-  dependencies?: Record<string, string>
-}
-
-type BenchmarkEntry = {
-  avgMs: number
-  sampleCount: number
-}
+import type {
+  CatalogueBenchmark,
+  CatalogueFeature,
+  CatalogueTemplate,
+} from "@/types/catalogue"
 
 type CatalogueViewProps = {
-  templates: TemplateManifest[]
-  features: FeatureManifest[]
-  benchmarkMap: Record<string, BenchmarkEntry>
+  templates: CatalogueTemplate[]
+  features: CatalogueFeature[]
+  benchmarkMap: Record<string, CatalogueBenchmark>
 }
 
 type Tab = "templates" | "features"
@@ -73,7 +55,7 @@ export function CatalogueView({ templates, features, benchmarkMap }: CatalogueVi
               const buildBench = benchmarkMap["validate:next-build"]
               const featureBenches = t.features
                 .map((f) => benchmarkMap[`feature:${f}`])
-                .filter(Boolean) as BenchmarkEntry[]
+                .filter(Boolean) as CatalogueBenchmark[]
               const featureAvg = featureBenches.reduce((s, b) => s + b.avgMs, 0)
               const totalAvg =
                 scaffoldBench || installBench || buildBench || featureAvg > 0

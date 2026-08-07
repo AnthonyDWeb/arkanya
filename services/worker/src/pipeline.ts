@@ -4,17 +4,21 @@ import { runScaffold } from "./steps/scaffold.js"
 import { runFeature } from "./steps/feature.js"
 import { runDelivery } from "./steps/delivery.js"
 import { runValidate } from "./steps/validate.js"
-import { jobStore, setJobMessage } from "./job-store.js"
+import { jobStore, setJobMessage, setJobProgress } from "./job-store.js"
 
 export async function runPipeline(payload: WorkerProjectPayload): Promise<WorkerReport> {
   const start = Date.now()
   const steps: WorkerStepReport[] = []
 
-  jobStore.set(payload.jobId, { steps: [], state: "RUNNING" })
+  setJobProgress(payload.jobId, { steps: [], state: "RUNNING" })
 
   function push(step: WorkerStepReport) {
     steps.push(step)
-    jobStore.set(payload.jobId, { steps: [...steps], state: "RUNNING", currentMessage: undefined })
+    setJobProgress(payload.jobId, {
+      steps: [...steps],
+      state: "RUNNING",
+      currentMessage: undefined,
+    })
   }
 
   const projectDir = getProjectDir(payload)
@@ -31,7 +35,7 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
       durationMs: Date.now() - start,
       error: initReport.message,
     }
-    jobStore.set(payload.jobId, { steps, state: "ERROR" })
+    setJobProgress(payload.jobId, { steps, state: "ERROR" })
     return result
   }
 
@@ -47,7 +51,7 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
       durationMs: Date.now() - start,
       error: scaffoldReport.message,
     }
-    jobStore.set(payload.jobId, { steps, state: "ERROR" })
+    setJobProgress(payload.jobId, { steps, state: "ERROR" })
     return result
   }
 
@@ -63,7 +67,7 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
       durationMs: Date.now() - start,
       error: featureReport.message,
     }
-    jobStore.set(payload.jobId, { steps, state: "ERROR" })
+    setJobProgress(payload.jobId, { steps, state: "ERROR" })
     return result
   }
 
@@ -79,7 +83,7 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
       durationMs: Date.now() - start,
       error: validateReport.message,
     }
-    jobStore.set(payload.jobId, { steps, state: "ERROR" })
+    setJobProgress(payload.jobId, { steps, state: "ERROR" })
     return result
   }
 
@@ -100,7 +104,7 @@ export async function runPipeline(payload: WorkerProjectPayload): Promise<Worker
     error: finalState === "ERROR" ? deliveryReport.message : undefined,
   }
 
-  jobStore.set(payload.jobId, { steps, state: finalState })
+  setJobProgress(payload.jobId, { steps, state: finalState })
 
   setTimeout(() => jobStore.delete(payload.jobId), 60_000)
 

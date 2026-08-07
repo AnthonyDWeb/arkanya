@@ -1,11 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-
-type Status = "checking" | "online" | "offline"
+import type { WorkerUiStatus } from "@/types/settings"
 
 export function WorkerStatus() {
-  const [status, setStatus] = useState<Status>("checking")
+  const [status, setStatus] = useState<WorkerUiStatus>("checking")
 
   useEffect(() => {
     const check = async () => {

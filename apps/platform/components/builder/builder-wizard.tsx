@@ -4,6 +4,7 @@ import { useState } from "react"
 import type { TemplateSummary, FeatureSummary, ClientOption, BuilderState, BuilderStep } from "./types"
 import { INITIAL_STATE, BUILDER_STEPS } from "./types"
 import type { WorkerReport } from "@arkanya/contracts/worker"
+import { runWorkerJob } from "@/lib/actions/worker-run"
 import { StepProject } from "./step-project"
 import { StepTemplate } from "./step-template"
 import { StepPages } from "./step-pages"
@@ -13,6 +14,7 @@ import { StepDelivery } from "./step-delivery"
 import { StepSummary } from "./step-summary"
 import { StepExecution } from "./step-execution"
 import { formatEstimateMs, useBuilderEstimate } from "./use-builder-estimate"
+import { buildWorkerPayload } from "@/lib/builder/payload"
 
 type BuilderWizardProps = {
   templates: TemplateSummary[]
@@ -134,55 +136,66 @@ export function BuilderWizard({ templates, features, clients }: BuilderWizardPro
 
     const jobId = crypto.randomUUID()
 
-    const pollInterval = setInterval(() => {
-      void fetch(`/api/worker/progress/${jobId}`)
-        .then((r) => r.json())
-        .then((data: unknown) => {
-          if (data && typeof data === "object" && "steps" in data) {
-            const progress = data as {
-              steps: WorkerReport["steps"]
-              currentMessage?: string
-            }
-            setLiveSteps(progress.steps)
-            setLiveMessage(progress.currentMessage ?? null)
-          }
-        })
-        .catch(() => undefined)
-    }, 800)
+    let pollInterval: ReturnType<typeof setInterval> | null = null
+    let eventSource: EventSource | null = null
 
-    const payload = {
-      jobId,
-      projectSlug: state.slug,
-      projectName: state.name,
-      projectKind: state.kind,
-      clientId: state.clientId || undefined,
-      description: state.description,
-      objective: state.objective,
-      template: state.template,
-      pages: state.pages,
-      config: state.config,
-      features: state.features,
-      delivery: state.delivery,
+    function applyProgress(data: unknown) {
+      if (data && typeof data === "object" && "steps" in data) {
+        const progress = data as {
+          steps: WorkerReport["steps"]
+          currentMessage?: string
+        }
+        setLiveSteps(progress.steps)
+        setLiveMessage(progress.currentMessage ?? null)
+      }
+    }
+
+    function startPollFallback() {
+      if (pollInterval) return
+      pollInterval = setInterval(() => {
+        void fetch(`/api/worker/progress/${jobId}`)
+          .then((r) => r.json())
+          .then(applyProgress)
+          .catch(() => undefined)
+      }, 800)
     }
 
     try {
-      const res = await fetch("/api/worker/run", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+      eventSource = new EventSource(`/api/worker/events/${jobId}`)
+      eventSource.addEventListener("progress", (event) => {
+        try {
+          applyProgress(JSON.parse(event.data) as unknown)
+        } catch {
+          /* ignore malformed */
+        }
       })
+      eventSource.onerror = () => {
+        eventSource?.close()
+        eventSource = null
+        startPollFallback()
+      }
+    } catch {
+      startPollFallback()
+    }
 
-      const data = (await res.json()) as WorkerReport | { error: string }
+    const payload = buildWorkerPayload(state, jobId)
 
-      if ("error" in data) {
-        setExecError(data.error ?? "Erreur inconnue")
+    try {
+      const result = await runWorkerJob(payload)
+
+      if (!result.ok) {
+        setExecError(result.error)
+      } else if (result.data.state !== "SUCCESS") {
+        setExecError(result.data.error ?? "Génération échouée")
+        setReport(result.data)
       } else {
-        setReport(data)
+        setReport(result.data)
       }
     } catch (err) {
       setExecError(err instanceof Error ? err.message : "Erreur réseau")
     } finally {
-      clearInterval(pollInterval)
+      eventSource?.close()
+      if (pollInterval) clearInterval(pollInterval)
       setRunning(false)
     }
   }

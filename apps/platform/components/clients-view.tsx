@@ -4,16 +4,9 @@ import { Eye, Pencil, Search, Trash2 } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useMemo, useState } from "react"
+import { createClient, deleteClient, updateClient } from "@/lib/actions/clients"
 import { ConfirmActionModal } from "./confirm-action-modal"
-
-type ClientRow = {
-  id: string
-  name: string
-  company: string
-  contact: string
-  status: string
-  projectCount: number
-}
+import type { ClientDraft, ClientRow } from "@/types/clients"
 
 type ClientsViewProps = {
   clients: ClientRow[]
@@ -31,12 +24,7 @@ const STATUS_STYLES: Record<string, string> = {
   archived: "text-zinc-500",
 }
 
-type Draft = {
-  name: string
-  company: string
-  contact: string
-  status: string
-}
+type Draft = ClientDraft
 
 const EMPTY_DRAFT: Draft = {
   name: "",
@@ -111,10 +99,9 @@ export function ClientsView({ clients }: ClientsViewProps) {
     setDeleting(true)
     setDeleteError(null)
     try {
-      const res = await fetch(`/api/clients/${deleteTarget.id}`, { method: "DELETE" })
-      const data = (await res.json()) as { error?: string }
-      if (!res.ok) {
-        setDeleteError(data.error ?? "Erreur")
+      const result = await deleteClient(deleteTarget.id)
+      if (!result.ok) {
+        setDeleteError(result.error)
         return
       }
       setDeleteTarget(null)
@@ -134,21 +121,12 @@ export function ClientsView({ clients }: ClientsViewProps) {
     setSaving(true)
     setError(null)
     try {
-      const res = editingId
-        ? await fetch(`/api/clients/${editingId}`, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(draft),
-          })
-        : await fetch("/api/clients", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(draft),
-          })
+      const result = editingId
+        ? await updateClient(editingId, draft)
+        : await createClient(draft)
 
-      const data = (await res.json()) as { error?: string }
-      if (!res.ok) {
-        setError(data.error ?? "Erreur")
+      if (!result.ok) {
+        setError(result.error)
         return
       }
       cancel()

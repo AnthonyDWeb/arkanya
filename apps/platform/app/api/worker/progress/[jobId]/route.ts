@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import type { JobProgress } from "@/app/api/worker/progress/types"
+import type { JobProgress } from "@/types/projects"
 import { getWorkerUrl, workerHeaders } from "@/lib/worker"
 
 const WORKER_URL = getWorkerUrl()

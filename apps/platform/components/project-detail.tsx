@@ -1,145 +1,97 @@
 "use client"
 
-import type { Client, Job, JobEvent, JobTiming, Project } from "@arkanya/database"
 import { ExternalLink, Wand2 } from "lucide-react"
 import Link from "next/link"
-import { useState, type ReactNode } from "react"
+import { useState } from "react"
 import { DeleteProjectButton } from "./delete-project-button"
-import { ProjectEditForm } from "./project-edit-form"
 import { ProjectRedeployButton } from "./project-redeploy-button"
 import { ProjectBusinessPanel } from "./project-business-panel"
+import { ProjectFiche } from "./project-fiche"
+import { EmptyState } from "@/components/ui/empty-state"
+import { MetaRow } from "@/components/ui/meta-row"
+import { SurfacePanel } from "@/components/ui/surface-panel"
 import { buildRepoName } from "@/lib/repo-name"
-
-type ProjectWithRelations = Project & {
-  client: Client | null
-  jobs: (Job & { events: JobEvent[]; timings: JobTiming[] })[]
-}
+import {
+  formatDurationShort,
+  jobActionLabel,
+  JOB_STATE_COLORS,
+  JOB_STATE_LABELS_LONG,
+  shortId,
+  STEP_LABELS,
+  TIMING_CATEGORY_LABELS,
+} from "@/lib/jobs/labels"
+import { PROJECT_ENVIRONMENT_LABELS } from "@/lib/projects/environment"
+import { PROJECT_STATUS_LABELS } from "@/lib/projects/status"
+import type { ProjectDetailTab, ProjectWithRelations } from "@/types/projects"
 
 type ProjectDetailProps = {
   project: ProjectWithRelations
   githubOwner: string
 }
 
-type Tab = "overview" | "development" | "deployment" | "activity" | "timings" | "business"
-
-const TABS: { id: Tab; label: string }[] = [
-  { id: "overview", label: "Vue générale" },
-  { id: "development", label: "Développement" },
-  { id: "deployment", label: "Déploiement" },
-  { id: "activity", label: "Activité" },
-  { id: "timings", label: "Timings" },
-  { id: "business", label: "Business" },
+const TABS: { id: ProjectDetailTab; label: string }[] = [
+  { id: "fiche", label: "Fiche" },
+  { id: "livraison", label: "Livraison" },
+  { id: "pipeline", label: "Suivi" },
+  { id: "offre", label: "Offre" },
 ]
 
-const STATUS_LABELS: Record<string, string> = {
-  TO_QUALIFY: "À QUALIFIER",
-  IN_PROGRESS: "EN COURS",
-  IN_REVIEW: "EN VALIDATION",
-}
-
-const JOB_STATE_COLORS: Record<string, string> = {
-  SUCCESS: "text-success",
-  ERROR: "text-danger",
-  RUNNING: "text-brand",
-  PENDING: "text-zinc-500",
-}
-
-const JOB_STATE_LABELS: Record<string, string> = {
-  SUCCESS: "Succès",
-  ERROR: "Erreur",
-  RUNNING: "En cours",
-  PENDING: "En attente",
-}
-
-const STEP_LABELS: Record<string, string> = {
-  initialize: "Initialisation",
-  scaffold: "Scaffold du modèle",
-  feature: "Installation des fonctionnalités",
-  delivery: "Livraison",
-  validate: "Validation",
-}
-
-const TIMING_CATEGORY_LABELS: Record<string, string> = {
-  scaffold: "Scaffold",
-  feature: "Fonctionnalité",
-  validate: "Validation",
-  delivery: "Livraison",
-  initialize: "Initialisation",
-}
-
-function shortId(id: string): string {
-  return id.length > 12 ? `${id.slice(0, 8)}…` : id
-}
-
-function formatDurationShort(ms: number): string {
-  if (ms < 1000) return `${ms}ms`
-  if (ms < 60_000) return `${(ms / 1000).toFixed(1)}s`
-  const m = Math.floor(ms / 60_000)
-  const s = Math.round((ms % 60_000) / 1000)
-  return `${m}m ${s}s`
-}
-
-function MetaRow({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <div className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-x-2 items-baseline py-1 border-b border-white/[0.05] last:border-0">
-      <span className="metric text-[10px] text-zinc-400">{label}</span>
-      <div className="text-[12px] text-zinc-200 min-w-0 break-all">{children}</div>
-    </div>
-  )
-}
-
 export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
-  const [activeTab, setActiveTab] = useState<Tab>("overview")
+  const [activeTab, setActiveTab] = useState<ProjectDetailTab>("fiche")
   const repoName = buildRepoName(project)
   const githubUrl = `https://github.com/${githubOwner}/${repoName}`
   const vercelUrl = `https://vercel.com/${githubOwner}/${repoName}`
   const lastJob = project.jobs[0]
   const deliveryEvent = lastJob?.events.find((e) => e.stepType === "delivery")
   const kind = project.destination.startsWith("clients/") ? "client" : "product"
-  const isLive = Boolean(project.url && project.generated)
+  const envTone =
+    project.environment === "PRODUCTION"
+      ? "text-gold bg-gold/10"
+      : project.environment === "ONLINE"
+        ? "text-brand bg-brand/10"
+        : "text-zinc-400 bg-white/[0.04]"
+
+  const jobsWithTimings = project.jobs.filter((j) => j.timings.length > 0)
 
   return (
     <div>
       <div className="px-4 lg:px-6 pt-4 pb-3 border-b border-white/[0.04]">
         <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <div className="flex items-center gap-2 mb-1.5">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2 mb-1.5">
               <span className="metric text-[9px] tracking-[0.14em] text-zinc-500 uppercase">
                 Projet
               </span>
-              {isLive && (
-                <span className="metric text-[9px] tracking-[0.12em] text-gold uppercase px-1.5 py-px rounded-full bg-gold/10">
-                  En ligne
-                </span>
-              )}
+              <span
+                className={`metric text-[9px] tracking-[0.12em] uppercase px-1.5 py-px rounded-full ${envTone}`}
+              >
+                {PROJECT_ENVIRONMENT_LABELS[project.environment]}
+              </span>
             </div>
-            <h1 className="page-title truncate">{project.name}</h1>
+            <h1 className="page-title break-words">{project.name}</h1>
             {project.description && (
-              <p className="text-xs text-zinc-500 mt-1.5 max-w-xl line-clamp-2">
+              <p className="text-xs text-zinc-500 mt-1.5 max-w-xl line-clamp-1 sm:line-clamp-2">
                 {project.description}
               </p>
             )}
           </div>
-          <div className="flex items-center gap-1.5 shrink-0">
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Ouvrir le site"
-                aria-label="Ouvrir le site"
-                className="p-2 rounded-full bg-brand/12 text-brand hover:bg-brand/22 transition-colors duration-140"
-              >
-                <ExternalLink className="w-3.5 h-3.5" strokeWidth={2} />
-              </a>
-            )}
-            <DeleteProjectButton slug={project.slug} name={project.name} variant="icon" />
-          </div>
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Ouvrir le site"
+              aria-label="Ouvrir le site"
+              className="p-2.5 min-h-11 min-w-11 inline-flex items-center justify-center rounded-full bg-brand/12 text-brand hover:bg-brand/22 transition-colors duration-140 shrink-0 touch-manipulation"
+            >
+              <ExternalLink className="w-3.5 h-3.5" strokeWidth={2} />
+            </a>
+          )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 mt-2.5">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 mt-2">
           <span className="metric text-[10px] tracking-[0.12em] text-brand">
-            {STATUS_LABELS[project.status] ?? project.status}
+            {PROJECT_STATUS_LABELS[project.status] ?? project.status}
           </span>
           <span className="text-zinc-700">·</span>
           <span className="metric text-[10px] tracking-[0.12em] text-zinc-500 uppercase">
@@ -158,14 +110,14 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
         </div>
       </div>
 
-      <div className="flex border-b border-white/[0.04] px-4 lg:px-6 overflow-x-auto">
+      <div className="tabs-rail border-b border-white/[0.04] px-2 sm:px-4 lg:px-6">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id)}
             className={[
-              "px-2.5 lg:px-3 py-2.5 text-xs font-medium border-b-2 -mb-px transition-colors duration-140 shrink-0",
+              "px-2.5 sm:px-3 min-h-11 py-2.5 text-[11px] sm:text-xs font-medium border-b-2 -mb-px transition-colors duration-140 shrink-0 touch-manipulation",
               activeTab === tab.id
                 ? "border-brand text-white font-display font-semibold"
                 : "border-transparent text-zinc-500 hover:text-zinc-300",
@@ -176,141 +128,102 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
         ))}
       </div>
 
-      <div className="p-3 lg:p-4">
-        {activeTab === "overview" && (
-          <div className="space-y-3 max-w-md">
-            <div className="flex items-center justify-between gap-2">
-              <h2 className="metric text-[10px] text-zinc-400">Fiche</h2>
-              <ProjectEditForm
-                slug={project.slug}
-                initial={{
-                  name: project.name,
-                  description: project.description,
-                  nextAction: project.nextAction,
-                  url: project.url,
-                  port: project.port,
-                  status: project.status,
-                }}
-              />
-            </div>
+      <div className="p-3 sm:p-4 lg:p-4">
+        {activeTab === "fiche" && (
+          <div className="max-w-4xl space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:items-stretch">
+              <div className="min-w-0 lg:h-full">
+                <ProjectFiche project={project} />
+              </div>
 
-            {project.description ? (
-              <p className="text-[12px] text-zinc-300 leading-snug">{project.description}</p>
-            ) : (
-              <p className="text-[12px] text-zinc-500">Aucune description</p>
-            )}
+              <div className="flex flex-col gap-2.5 min-w-0 lg:h-full">
+                <SurfacePanel padded>
+                  <MetaRow label="Type">
+                    {kind === "client" ? "Client" : "Produit"}
+                  </MetaRow>
+                  <MetaRow label="Modèle">
+                    <code className="metric text-[11px] text-zinc-300">{project.type}</code>
+                  </MetaRow>
+                  <MetaRow label="Chemin">
+                    <code className="metric text-[11px] text-zinc-300">{project.destination}</code>
+                  </MetaRow>
+                  <MetaRow label="Proprio">{project.owner}</MetaRow>
+                  {project.port != null && (
+                    <MetaRow label="Port">
+                      <code className="metric text-[11px]">{project.port}</code>
+                    </MetaRow>
+                  )}
+                </SurfacePanel>
 
-            <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-2.5 py-1">
-              <MetaRow label="Slug">
-                <code className="metric text-[11px] text-zinc-300">{project.slug}</code>
-              </MetaRow>
-              <MetaRow label="Statut">
-                {STATUS_LABELS[project.status] ?? project.status}
-              </MetaRow>
-              <MetaRow label="Généré">
-                {project.generated ? (
-                  <span className="text-brand">Oui</span>
-                ) : (
-                  "Non"
-                )}
-              </MetaRow>
-              {project.url && (
-                <MetaRow label="URL">
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-brand hover:underline break-all"
-                  >
-                    {project.url}
-                  </a>
-                </MetaRow>
-              )}
-              {project.nextAction && (
-                <MetaRow label="Suite">{project.nextAction}</MetaRow>
-              )}
-              {project.port != null && (
-                <MetaRow label="Port">
-                  <code className="metric text-[11px]">{project.port}</code>
-                </MetaRow>
-              )}
-            </div>
-
-            <div>
-              <h2 className="metric text-[10px] text-zinc-400 mb-1.5">Stack</h2>
-              {project.technologies.length === 0 ? (
-                <p className="text-[12px] text-zinc-500">Aucune pour l’instant</p>
-              ) : (
-                <div className="flex flex-wrap gap-1">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="metric text-[10px] px-1.5 py-0.5 rounded-md bg-elevated text-zinc-300 border border-white/[0.05]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div>
+                  <h2 className="metric text-[10px] text-zinc-400 mb-1">Technos</h2>
+                  {project.technologies.length === 0 ? (
+                    <p className="text-[12px] text-zinc-500">Aucune pour l’instant</p>
+                  ) : (
+                    <div className="flex flex-wrap gap-1">
+                      {project.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="metric text-[10px] px-1.5 py-0.5 rounded-md bg-elevated text-zinc-300 border border-white/[0.05]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
-        )}
 
-        {activeTab === "development" && (
-          <div className="space-y-3 max-w-md">
-            <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-2.5 py-1">
-              <MetaRow label="Type">
-                {kind === "client" ? "Client" : "Produit"}
-              </MetaRow>
-              <MetaRow label="Modèle">
-                <code className="metric text-[11px] text-zinc-300">{project.type}</code>
-              </MetaRow>
-              <MetaRow label="Chemin">
-                <code className="metric text-[11px] text-zinc-300">{project.destination}</code>
-              </MetaRow>
-              <MetaRow label="Proprio">{project.owner}</MetaRow>
-              {project.port != null && (
-                <MetaRow label="Port">
-                  <code className="metric text-[11px]">{project.port}</code>
-                </MetaRow>
-              )}
-            </div>
-
-            {lastJob && (
-              <div>
-                <h2 className="metric text-[10px] text-zinc-400 mb-1.5">Dernier job</h2>
-                <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-2.5 py-2 flex items-center justify-between gap-2">
-                  <div className="min-w-0">
-                    <p className="text-[12px] text-zinc-200">{lastJob.action}</p>
-                    <p
-                      className="metric text-[10px] text-zinc-500 truncate"
-                      title={lastJob.externalId}
-                    >
-                      {shortId(lastJob.externalId)}
-                    </p>
+                {lastJob && (
+                  <div>
+                    <h2 className="metric text-[10px] text-zinc-400 mb-1">Dernier job</h2>
+                    <SurfacePanel className="!divide-y-0">
+                      <div className="px-2.5 py-1.5 flex items-center justify-between gap-2">
+                        <div className="min-w-0">
+                          <p className="text-[12px] text-zinc-200">
+                            {jobActionLabel(lastJob.action)}
+                          </p>
+                          <p
+                            className="metric text-[10px] text-zinc-500 truncate"
+                            title={lastJob.externalId}
+                          >
+                            {shortId(lastJob.externalId)}
+                          </p>
+                        </div>
+                        <span
+                          className={`metric text-[10px] shrink-0 ${JOB_STATE_COLORS[lastJob.state] ?? "text-zinc-500"}`}
+                        >
+                          {JOB_STATE_LABELS_LONG[lastJob.state] ?? lastJob.state}
+                        </span>
+                      </div>
+                    </SurfacePanel>
                   </div>
-                  <span
-                    className={`metric text-[10px] shrink-0 ${JOB_STATE_COLORS[lastJob.state] ?? "text-zinc-500"}`}
+                )}
+
+                <div className="flex justify-center lg:mt-auto lg:pt-6 pt-1">
+                  <Link
+                    href="/builder"
+                    className="slab inline-flex w-full sm:w-auto items-center justify-center gap-1.5 !px-3 !py-2.5 text-[12px] touch-manipulation"
                   >
-                    {JOB_STATE_LABELS[lastJob.state] ?? lastJob.state}
-                  </span>
+                    <Wand2 className="w-3.5 h-3.5" strokeWidth={2} />
+                    Ouvrir le Builder
+                  </Link>
                 </div>
               </div>
-            )}
+            </div>
 
-            <Link
-              href="/builder"
-              className="inline-flex items-center gap-1.5 text-brand hover:opacity-80 transition-opacity duration-140"
-            >
-              <Wand2 className="w-3.5 h-3.5" strokeWidth={2} />
-              <span className="text-[12px] font-medium">Ouvrir le Builder</span>
-            </Link>
+            <div className="flex justify-center">
+              <DeleteProjectButton
+                slug={project.slug}
+                name={project.name}
+                variant="label"
+              />
+            </div>
           </div>
         )}
 
-        {activeTab === "deployment" && (
+        {activeTab === "livraison" && (
           <div className="space-y-3 max-w-md">
-            <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-2.5 py-1">
+            <SurfacePanel padded>
               <MetaRow label="GitHub">
                 {project.generated ? (
                   <a
@@ -356,7 +269,7 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
               {deliveryEvent?.message && (
                 <MetaRow label="Livraison">{deliveryEvent.message}</MetaRow>
               )}
-            </div>
+            </SurfacePanel>
 
             <div className="flex flex-wrap items-start gap-2">
               <ProjectRedeployButton slug={project.slug} />
@@ -384,107 +297,106 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
           </div>
         )}
 
-        {activeTab === "activity" && (
-          <div>
-            {project.jobs.length === 0 ? (
-              <p className="text-sm text-zinc-500">Aucun job pour ce projet</p>
-            ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-4xl">
-                {project.jobs.map((job) => (
-                  <div
-                    key={job.id}
-                    className="rounded-xl border border-white/[0.08] bg-surface/80 overflow-hidden min-w-0"
-                  >
-                    <div className="flex items-center justify-between gap-2 px-2.5 py-1.5 border-b border-white/[0.06]">
-                      <div className="min-w-0">
-                        <span className="text-[12px] font-medium text-zinc-100">
-                          {job.action}
-                        </span>
-                        <p
-                          className="metric text-[10px] text-zinc-500 truncate"
-                          title={job.externalId}
-                        >
-                          {shortId(job.externalId)}
-                        </p>
-                      </div>
-                      <span
-                        className={`metric text-[10px] shrink-0 ${JOB_STATE_COLORS[job.state] ?? "text-zinc-500"}`}
-                      >
-                        {JOB_STATE_LABELS[job.state] ?? job.state}
-                      </span>
-                    </div>
-
-                    {job.events.length > 0 && (
-                      <div className="px-2 py-1 space-y-0.5">
-                        {job.events.map((event) => (
-                          <div
-                            key={event.id}
-                            className="grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-2 items-center py-0.5"
+        {activeTab === "pipeline" && (
+          <div className="space-y-4 max-w-4xl">
+            <div>
+              <h2 className="metric text-[10px] text-zinc-400 mb-2">Activité</h2>
+              {project.jobs.length === 0 ? (
+                <EmptyState
+                  title="Aucun job"
+                  description="Lance une génération pour voir l’activité ici."
+                  actionHref="/builder"
+                  actionLabel="Ouvrir le Builder →"
+                />
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                  {project.jobs.map((job) => (
+                    <SurfacePanel key={job.id} className="min-w-0 !divide-y-0">
+                      <div className="flex items-center justify-between gap-2 px-2.5 py-1.5 border-b border-white/[0.06]">
+                        <div className="min-w-0">
+                          <span className="text-[12px] font-medium text-zinc-100">
+                            {jobActionLabel(job.action)}
+                          </span>
+                          <p
+                            className="metric text-[10px] text-zinc-500 truncate"
+                            title={job.externalId}
                           >
-                            <span
-                              className={[
-                                "status-dot shrink-0",
-                                event.state === "SUCCESS"
-                                  ? "text-success"
-                                  : event.state === "ERROR"
-                                    ? "text-danger"
-                                    : "text-zinc-600",
-                              ].join(" ")}
-                            />
-                            <div className="min-w-0">
-                              <p className="text-[11px] text-zinc-200 truncate">
-                                {STEP_LABELS[event.stepType] ?? event.stepType}
-                              </p>
-                              {event.message && (
-                                <p
-                                  className="text-[10px] text-zinc-500 truncate"
-                                  title={event.message}
-                                >
-                                  {event.message}
+                            {shortId(job.externalId)}
+                          </p>
+                        </div>
+                        <span
+                          className={`metric text-[10px] shrink-0 ${JOB_STATE_COLORS[job.state] ?? "text-zinc-500"}`}
+                        >
+                          {JOB_STATE_LABELS_LONG[job.state] ?? job.state}
+                        </span>
+                      </div>
+
+                      {job.events.length > 0 && (
+                        <div className="px-2 py-1 space-y-0.5">
+                          {job.events.map((event) => (
+                            <div
+                              key={event.id}
+                              className="grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-2 items-center py-0.5"
+                            >
+                              <span
+                                className={[
+                                  "status-dot shrink-0",
+                                  event.state === "SUCCESS"
+                                    ? "text-success"
+                                    : event.state === "ERROR"
+                                      ? "text-danger"
+                                      : "text-zinc-600",
+                                ].join(" ")}
+                              />
+                              <div className="min-w-0">
+                                <p className="text-[11px] text-zinc-200 truncate">
+                                  {STEP_LABELS[event.stepType] ?? event.stepType}
                                 </p>
+                                {event.message && (
+                                  <p
+                                    className="text-[10px] text-zinc-500 truncate"
+                                    title={event.message}
+                                  >
+                                    {event.message}
+                                  </p>
+                                )}
+                              </div>
+                              {event.durationMs !== null && (
+                                <span className="metric text-[10px] text-zinc-400 tabular-nums shrink-0">
+                                  {formatDurationShort(event.durationMs)}
+                                </span>
                               )}
                             </div>
-                            {event.durationMs !== null && (
-                              <span className="metric text-[10px] text-zinc-400 tabular-nums shrink-0">
-                                {formatDurationShort(event.durationMs)}
-                              </span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+                          ))}
+                        </div>
+                      )}
+                    </SurfacePanel>
+                  ))}
+                </div>
+              )}
+            </div>
 
-        {activeTab === "timings" && (
-          <div>
-            {project.jobs.filter((j) => j.timings.length > 0).length === 0 ? (
-              <p className="text-sm text-zinc-500">
-                Aucun timing. Lancez une génération pour collecter des données.
-              </p>
-            ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 max-w-4xl">
-                {project.jobs
-                  .filter((j) => j.timings.length > 0)
-                  .map((job) => {
+            <div>
+              <h2 className="metric text-[10px] text-zinc-400 mb-2">Mesures</h2>
+              {jobsWithTimings.length === 0 ? (
+                <EmptyState
+                  title="Aucune mesure"
+                  description="Les timings apparaissent après une génération."
+                />
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                  {jobsWithTimings.map((job) => {
                     const totalMs = job.timings.reduce((s, t) => s + t.durationMs, 0)
                     const byCategory: Record<string, typeof job.timings> = {}
                     for (const t of job.timings) {
                       byCategory[t.category] = [...(byCategory[t.category] ?? []), t]
                     }
                     return (
-                      <div
-                        key={job.id}
-                        className="rounded-xl border border-white/[0.08] bg-surface/80 overflow-hidden min-w-0"
-                      >
+                      <SurfacePanel key={job.id} className="min-w-0 !divide-y-0">
                         <div className="flex items-center justify-between gap-2 px-2.5 py-1.5 border-b border-white/[0.06]">
                           <div className="min-w-0">
                             <span className="text-[12px] font-medium text-zinc-100">
-                              {job.action}
+                              {jobActionLabel(job.action)}
                             </span>
                             <p
                               className="metric text-[10px] text-zinc-500 truncate"
@@ -519,17 +431,18 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
                             </div>
                           ))}
                         </div>
-                      </div>
+                      </SurfacePanel>
                     )
                   })}
-              </div>
-            )}
+                </div>
+              )}
+            </div>
           </div>
         )}
 
-        {activeTab === "business" && (
+        {activeTab === "offre" && (
           <div className="space-y-3 max-w-md">
-            <div className="rounded-xl border border-white/[0.08] bg-surface/80 px-2.5 py-1">
+            <SurfacePanel padded>
               <MetaRow label="Client">
                 {project.client
                   ? project.client.company || project.client.name
@@ -548,7 +461,7 @@ export function ProjectDetail({ project, githubOwner }: ProjectDetailProps) {
               <MetaRow label="Créé">
                 {new Date(project.createdAt).toLocaleDateString("fr-FR")}
               </MetaRow>
-            </div>
+            </SurfacePanel>
             <ProjectBusinessPanel
               templateId={project.type}
               clientCompany={project.client?.company ?? null}

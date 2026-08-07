@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   return (
     <ProjectDetail
       project={serialized}
-      githubOwner={process.env["GITHUB_OWNER"] ?? "AnthonyDWeb"}
+      githubOwner={process.env["GITHUB_OWNER"] ?? ""}
     />
   )
 }

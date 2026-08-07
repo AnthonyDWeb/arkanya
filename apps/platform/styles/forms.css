@@ -1,0 +1,97 @@
+/* Well — denser recessed input; do NOT force width (use w-full where needed) */
+.well {
+  display: block;
+  padding-block: 0.55rem;
+  padding-inline-start: 0.85rem;
+  padding-inline-end: 0.85rem;
+  background: var(--color-well);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: #e8eaef;
+  font-size: 0.8125rem;
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(77, 159, 255, 0.02);
+  outline: none;
+  transition:
+    border-color 140ms ease-out,
+    box-shadow 140ms ease-out;
+}
+
+/* Search / icon-leading inputs — beats utility order issues */
+.well-search {
+  padding-inline-start: 2.75rem;
+}
+
+.well::placeholder {
+  color: #52525b;
+}
+
+.well:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.well:focus {
+  border-color: color-mix(in oklch, var(--color-arc) 55%, transparent);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.4),
+    0 0 0 3px color-mix(in oklch, var(--color-arc) 20%, transparent),
+    0 0 16px -4px color-mix(in oklch, var(--color-arc) 40%, transparent);
+}
+
+select.well {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2371717a' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+textarea.well {
+  resize: none;
+}
+
+/* Compact status chip select */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  appearance: none;
+  max-width: 7.5rem;
+  padding: 0.15rem 1.25rem 0.15rem 0.45rem;
+  background: color-mix(in oklch, var(--color-elevated) 88%, var(--color-arc) 6%);
+  border: 1px solid color-mix(in oklch, var(--color-arc) 22%, rgba(255, 255, 255, 0.08));
+  border-radius: 999px;
+  color: #d4d8e0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  cursor: pointer;
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23c4c9d4' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.4rem center;
+  background-color: color-mix(in oklch, var(--color-elevated) 88%, var(--color-arc) 6%);
+  outline: none;
+  transition:
+    border-color 140ms ease-out,
+    background-color 140ms ease-out,
+    color 140ms ease-out;
+}
+
+.status-chip:hover:not(:disabled) {
+  border-color: color-mix(in oklch, var(--color-arc) 40%, transparent);
+  color: #f4f6fa;
+}
+
+.status-chip:focus {
+  border-color: color-mix(in oklch, var(--color-arc) 55%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in oklch, var(--color-arc) 18%, transparent);
+}
+
+.status-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

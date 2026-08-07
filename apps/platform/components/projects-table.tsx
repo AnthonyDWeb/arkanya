@@ -1,13 +1,12 @@
 "use client"
 
-import type { Client, Project, ProjectStatus } from "@arkanya/database"
+import type { ProjectStatus } from "@arkanya/database"
 import { Search, Wand2 } from "lucide-react"
 import Link from "next/link"
 import { useMemo, useState } from "react"
-import { DeleteProjectButton } from "./delete-project-button"
-import { ProjectStatusSelect } from "./project-status-select"
-
-type ProjectWithClient = Project & { client: Client | null }
+import { PROJECT_ENVIRONMENT_LABELS } from "@/lib/projects/environment"
+import { PROJECT_STATUS_LABELS, PROJECT_STATUSES } from "@/lib/projects/status"
+import type { ProjectWithClient } from "@/types/projects"
 
 type ProjectsTableProps = {
   projects: ProjectWithClient[]
@@ -15,10 +14,14 @@ type ProjectsTableProps = {
 
 const STATUS_FILTERS: { id: ProjectStatus | "all"; label: string }[] = [
   { id: "all", label: "Tous" },
-  { id: "TO_QUALIFY", label: "À qualifier" },
-  { id: "IN_PROGRESS", label: "En cours" },
-  { id: "IN_REVIEW", label: "En validation" },
+  ...PROJECT_STATUSES,
 ]
+
+function environmentTone(environment: ProjectWithClient["environment"]): string {
+  if (environment === "PRODUCTION") return "text-gold"
+  if (environment === "ONLINE") return "text-brand"
+  return "text-zinc-500"
+}
 
 export function ProjectsTable({ projects }: ProjectsTableProps) {
   const [query, setQuery] = useState("")
@@ -33,7 +36,8 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
         project.name.toLowerCase().includes(q) ||
         (project.client?.company.toLowerCase().includes(q) ?? false) ||
         project.type.toLowerCase().includes(q) ||
-        project.technologies.some((tech) => tech.toLowerCase().includes(q))
+        project.technologies.some((tech) => tech.toLowerCase().includes(q)) ||
+        PROJECT_ENVIRONMENT_LABELS[project.environment].toLowerCase().includes(q)
       )
     })
   }, [projects, query, status])
@@ -100,27 +104,21 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
                 key={project.id}
                 className="group relative rounded-xl border border-white/[0.08] bg-surface/80 hover:border-brand/35 hover:bg-elevated/80 px-2.5 py-2 transition-[background-color,border-color] duration-140 min-w-0"
               >
-                <div className="flex items-start justify-between gap-2 mb-1.5">
-                  <div className="flex items-center gap-1.5 min-w-0">
-                    <span
-                      className={[
-                        "metric text-[11px]",
-                        kind === "Client" ? "text-category-client" : "text-category-product",
-                      ].join(" ")}
-                    >
-                      {kind}
-                    </span>
-                    {project.generated && (
-                      <span className="metric text-[11px] text-brand">· En ligne</span>
-                    )}
-                  </div>
-                  <div className="opacity-40 group-hover:opacity-100 transition-opacity duration-140 shrink-0">
-                    <DeleteProjectButton
-                      slug={project.slug}
-                      name={project.name}
-                      variant="icon"
-                    />
-                  </div>
+                <div className="flex items-center gap-1.5 min-w-0 mb-1.5">
+                  <span
+                    className={[
+                      "metric text-[11px]",
+                      kind === "Client" ? "text-category-client" : "text-category-product",
+                    ].join(" ")}
+                  >
+                    {kind}
+                  </span>
+                  <span className="metric text-[11px] text-zinc-600">·</span>
+                  <span
+                    className={`metric text-[11px] ${environmentTone(project.environment)}`}
+                  >
+                    {PROJECT_ENVIRONMENT_LABELS[project.environment]}
+                  </span>
                 </div>
 
                 <Link
@@ -143,7 +141,9 @@ export function ProjectsTable({ projects }: ProjectsTableProps) {
                 </p>
 
                 <div className="mt-2 pt-1.5 border-t border-white/[0.06] flex items-center justify-between gap-1.5">
-                  <ProjectStatusSelect slug={project.slug} value={project.status} />
+                  <span className="metric text-[10px] text-zinc-400">
+                    {PROJECT_STATUS_LABELS[project.status] ?? project.status}
+                  </span>
                   <Link
                     href={`/projects/${project.slug}`}
                     className="metric text-[10px] text-zinc-400 hover:text-brand transition-colors duration-140 shrink-0"

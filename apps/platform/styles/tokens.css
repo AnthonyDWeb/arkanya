@@ -1,0 +1,54 @@
+@theme {
+  --font-display: var(--font-unbounded), "Unbounded", sans-serif;
+  --font-sans: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+
+  --color-base: #101522;
+  --color-workspace: #161c2c;
+  --color-surface: #1e2640;
+  --color-elevated: #283250;
+  --color-interactive: #334062;
+  --color-well: #12182a;
+
+  --color-arc: #4d9fff;
+  --color-arc-light: #a8d4ff;
+  --color-arc-deep: #1a5fbf;
+  --color-brand: var(--color-arc);
+  --color-brand-light: var(--color-arc-light);
+  --color-brand-muted: color-mix(in oklch, var(--color-arc) 18%, black);
+  --color-accent: var(--color-arc);
+  --color-accent-deep: var(--color-arc-deep);
+
+  --color-gold-light: #f2cf7e;
+  --color-gold: #d8a94a;
+  --color-gold-deep: #8a6220;
+
+  --color-category-client: #af7c62;
+  --color-category-product: #6d8aa3;
+
+  --color-success: #3dd68c;
+  --color-danger: #f07178;
+  --color-danger-deep: #b91c1c;
+  --color-warning: #e0a23c;
+  --color-warning-deep: color-mix(in oklch, var(--color-warning) 55%, black);
+  --color-info: #6d8aa3;
+
+  --color-ink-on-brand: #061018;
+  --color-ink-on-gold: #18130a;
+
+  --gradient-identity: linear-gradient(90deg, transparent, var(--color-arc), transparent);
+  --gradient-energy: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--color-arc) 40%, transparent) 40%,
+    color-mix(in oklch, var(--color-gold) 45%, transparent) 55%,
+    color-mix(in oklch, var(--color-arc) 40%, transparent) 70%,
+    transparent 100%
+  );
+  --gradient-slab: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--color-arc-light) 35%, var(--color-arc)) 0%,
+    var(--color-arc) 45%,
+    color-mix(in oklch, var(--color-arc-deep) 40%, var(--color-arc)) 100%
+  );
+}

@@ -2,6 +2,7 @@ import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import type { WorkerProjectPayload, WorkerStepReport, TimingEntry } from "@arkanya/contracts/worker"
+import { assertWithinRoot, resolveUnderRoot } from "../lib/path-safe.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const MONOREPO_ROOT = path.resolve(__dirname, "../../../..")
@@ -275,7 +276,7 @@ export async function runScaffold(
   const start = Date.now()
 
   try {
-    const templateDir = path.join(TEMPLATES_DIR, payload.template)
+    const templateDir = resolveUnderRoot(TEMPLATES_DIR, payload.template, "template")
     const filesDir = path.join(templateDir, "files")
     const manifestPath = path.join(templateDir, "template.json")
 
@@ -292,7 +293,9 @@ export async function runScaffold(
     const skippedFiles = new Set<string>(
       manifest.pages
         .filter((p: TemplatePage) => !p.required && !enabledPageIds.has(p.id) && p.file !== null)
-        .map((p: TemplatePage) => path.join(filesDir, p.file as string)),
+        .map((p: TemplatePage) =>
+          assertWithinRoot(filesDir, path.join(filesDir, p.file as string), "template page file"),
+        ),
     )
 
     const config = {
@@ -343,11 +346,12 @@ export async function runScaffold(
       if (!routePath) continue
 
       const segments = routePath.split("/")
-      const pageDir = path.join(projectDir, "app", ...segments)
+      const pageDir = resolveUnderRoot(projectDir, ["app", ...segments], "custom page")
       const pageFile = path.join(pageDir, "page.tsx")
       if (fs.existsSync(pageFile)) continue
 
       fs.mkdirSync(pageDir, { recursive: true })
+      assertWithinRoot(projectDir, pageFile, "custom page file")
       fs.writeFileSync(
         pageFile,
         buildCustomPageSource(page.id, page.name, routePath, config),
